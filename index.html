@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Messaggistica Privata — Prototipo</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- SCHERMATA AUTH -->
+<div id="auth-screen" class="screen">
+  <div class="auth-card">
+    <h1>🔒 Messaggistica Privata</h1>
+    <p class="subtitle">Prototipo — nessuna crittografia reale, solo demo funzionale</p>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="login">Ho un codice</button>
+      <button class="tab-btn" data-tab="register">Registrati</button>
+    </div>
+
+    <div id="tab-login" class="tab-panel active">
+      <label>Codice di accesso</label>
+      <input id="login-code" type="text" placeholder="Es. 483920" maxlength="6" autocomplete="off" />
+      <button id="btn-login" class="primary">Entra</button>
+      <p class="hint">Ogni codice apre automaticamente il profilo associato. Nessuna schermata di scelta.</p>
+      <p id="login-error" class="error"></p>
+    </div>
+
+    <div id="tab-register" class="tab-panel">
+      <label>Email</label>
+      <input id="reg-email" type="email" placeholder="tuaemail@esempio.it" autocomplete="off" />
+      <label>Username</label>
+      <input id="reg-username" type="text" placeholder="es. mario_r" autocomplete="off" />
+      <label class="checkbox-row">
+        <input id="reg-cover" type="checkbox" />
+        Crea come profilo di copertura (innocuo)
+      </label>
+      <button id="btn-register" class="primary">Crea profilo</button>
+      <p id="register-error" class="error"></p>
+    </div>
+  </div>
+</div>
+
+<!-- MODALE CREDENZIALI (mostrate una sola volta) -->
+<div id="credentials-modal" class="modal hidden">
+  <div class="modal-card">
+    <h2>⚠️ Salva queste informazioni ora</h2>
+    <p>Non verranno mostrate di nuovo. Perderle significa perdere l'accesso al profilo.</p>
+    <div class="cred-row"><span>Codice di accesso</span><strong id="cred-code"></strong></div>
+    <div class="cred-row"><span>ID pubblico</span><strong id="cred-publicid"></strong></div>
+    <div class="cred-row"><span>Combinazione chat nascoste</span><strong id="cred-combo"></strong></div>
+    <button id="btn-cred-ok" class="primary">Ho salvato, continua</button>
+  </div>
+</div>
+
+<!-- APP PRINCIPALE -->
+<div id="app-screen" class="screen hidden">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div>
+        <strong id="me-username"></strong>
+        <div class="me-publicid" id="me-publicid"></div>
+      </div>
+      <button id="btn-logout" title="Blocca / Esci">🔓</button>
+    </div>
+
+    <input id="search-box" type="text" placeholder="Cerca... (o combinazione segreta)" autocomplete="off" />
+    <div id="combo-status" class="combo-status hidden">🔓 Chat nascoste sbloccate</div>
+
+    <div class="sidebar-actions">
+      <button id="btn-add-contact">+ Aggiungi contatto</button>
+      <button id="btn-settings">⚙️</button>
+    </div>
+
+    <div id="chat-list" class="chat-list"></div>
+  </aside>
+
+  <main class="chat-main">
+    <div id="chat-empty" class="chat-empty">Seleziona una chat oppure aggiungi un contatto per iniziare</div>
+
+    <div id="chat-view" class="chat-view hidden">
+      <div class="chat-header">
+        <strong id="chat-with-name"></strong>
+        <div class="chat-header-actions">
+          <button id="btn-toggle-hide" title="Nascondi/mostra questa chat">🙈</button>
+        </div>
+      </div>
+      <div id="messages" class="messages"></div>
+      <div id="reply-preview" class="reply-preview hidden">
+        <span id="reply-preview-text"></span>
+        <button id="btn-cancel-reply">✕</button>
+      </div>
+      <form id="message-form" class="message-form">
+        <select id="destruct-select">
+          <option value="">Normale</option>
+          <option value="30">Autodistrutto 30s</option>
+          <option value="300">Autodistrutto 5m</option>
+          <option value="3600">Autodistrutto 1h</option>
+        </select>
+        <input id="message-input" type="text" placeholder="Scrivi un messaggio..." autocomplete="off" />
+        <button type="submit" class="primary">Invia</button>
+      </form>
+    </div>
+  </main>
+</div>
+
+<!-- MODALE AGGIUNGI CONTATTO -->
+<div id="add-contact-modal" class="modal hidden">
+  <div class="modal-card">
+    <h2>Aggiungi contatto</h2>
+    <label>ID pubblico del contatto</label>
+    <input id="add-contact-publicid" type="text" placeholder="Es. AB12CD34" autocomplete="off" />
+    <p id="add-contact-error" class="error"></p>
+    <div class="modal-actions">
+      <button id="btn-add-contact-cancel">Annulla</button>
+      <button id="btn-add-contact-confirm" class="primary">Aggiungi</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODALE IMPOSTAZIONI -->
+<div id="settings-modal" class="modal hidden">
+  <div class="modal-card">
+    <h2>Impostazioni profilo</h2>
+    <label>Notifiche</label>
+    <select id="settings-notifications">
+      <option value="normal">Normale</option>
+      <option value="no-content">Senza contenuto</option>
+      <option value="alert-only">Solo avviso</option>
+      <option value="off">Disattivate</option>
+    </select>
+    <div class="modal-actions">
+      <button id="btn-settings-cancel">Chiudi</button>
+      <button id="btn-settings-save" class="primary">Salva</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
