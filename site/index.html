@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Messaggistica Privata — Chat con profili multipli e chat nascoste</title>
+<meta name="description" content="Prototipo di messaggistica privata: accesso per codice, profili multipli, chat nascoste e profilo di copertura. Nessun numero di telefono richiesto." />
+<link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
+<link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
+<link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/" />
+<link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Messaggistica Privata — Prototipo" />
+<meta property="og:description" content="Accesso per codice, profili multipli, chat nascoste e profilo di copertura. Un prototipo di messaggistica pensato per la privacy." />
+<meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand"><span class="lock">🔒</span> Messaggistica Privata</a>
+    <div class="header-actions">
+      <nav class="lang-switch" aria-label="Lingua">
+        <a href="/" aria-current="true">IT</a>
+        <a href="/en/">EN</a>
+      </nav>
+      <a href="/app/" class="btn btn-primary btn-sm">Apri l'app</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="container">
+      <span class="badge">Prototipo / demo funzionale</span>
+      <h1>Una chat dove il codice è la tua identità</h1>
+      <p class="lead">Niente numero di telefono. Un codice di accesso apre il tuo profilo, un altro codice ne apre uno diverso. Chat nascoste, profilo di copertura, messaggi che si autodistruggono.</p>
+      <div class="hero-actions">
+        <a href="/app/" class="btn btn-primary">Apri l'app →</a>
+        <a href="#come-funziona" class="btn btn-ghost">Scopri come funziona</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="funzionalita">
+    <div class="container">
+      <h2>Cosa puoi fare</h2>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="icon">🔑</div>
+          <h3>Accesso per codice</h3>
+          <p>Ogni codice apre automaticamente il profilo associato. Nessuna schermata di scelta: il codice <em>è</em> l'identità.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🪪</div>
+          <h3>Profili multipli</h3>
+          <p>Più profili sullo stesso dispositivo, ciascuno con contatti, chat e impostazioni indipendenti.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🙈</div>
+          <h3>Chat nascoste</h3>
+          <p>Nascondi una conversazione dalla lista principale. Torna visibile solo digitando una combinazione segreta nella ricerca.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🎭</div>
+          <h3>Profilo di copertura</h3>
+          <p>Crea un profilo innocuo da mostrare in caso di controlli, senza indizi sull'esistenza di altri profili.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">💣</div>
+          <h3>Messaggi a tempo</h3>
+          <p>Invia messaggi che si autodistruggono dopo 30 secondi, 5 minuti o un'ora.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">📵</div>
+          <h3>Nessun numero di telefono</h3>
+          <p>Registrazione via email, ID pubblico separato dall'indirizzo: la tua email non è mai visibile agli altri.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="how" id="come-funziona">
+    <div class="container">
+      <h2>Come funziona</h2>
+      <div class="steps">
+        <div class="step">
+          <h3>Registrati</h3>
+          <p>Email e username: ricevi un codice di accesso, un ID pubblico e una combinazione segreta. Salvali: non vengono mostrati di nuovo.</p>
+        </div>
+        <div class="step">
+          <h3>Accedi col codice</h3>
+          <p>A ogni apertura inserisci il codice: il profilo corrispondente si apre automaticamente.</p>
+        </div>
+        <div class="step">
+          <h3>Aggiungi contatti</h3>
+          <p>Cerca una persona tramite il suo ID pubblico e inizia a scrivere in tempo reale.</p>
+        </div>
+        <div class="step">
+          <h3>Nascondi se vuoi</h3>
+          <p>Digita la combinazione segreta nella barra di ricerca per rivelare le chat nascoste quando serve.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="disclaimer">
+    <div class="container">
+      <h2>Cosa è, cosa non è</h2>
+      <div class="disclaimer-box">
+        <p><strong>Questo è un prototipo dimostrativo</strong>, pensato per validare il concetto prima di un eventuale sviluppo nativo. I messaggi sono salvati in chiaro lato server: <strong>non c'è ancora crittografia end-to-end reale</strong> (niente X3DH/Double Ratchet/LibSignal), non c'è invio email per il magic link, e non c'è biometria (è una funzione nativa mobile, non simulabile in webapp). Utile per provare l'esperienza d'uso, non per conversazioni sensibili.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container">
+      <h2>Prova il prototipo</h2>
+      <p>Bastano un'email e uno username per creare il tuo primo profilo.</p>
+      <a href="/app/" class="btn btn-primary">Apri l'app →</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">Powered by <a href="https://www.simonescaffidi.it" target="_blank" rel="noopener noreferrer">www.simonescaffidi.it</a></p>
+    <nav class="footer-links" aria-label="Legale">
+      <a href="/privacy-policy.html">Privacy Policy</a>
+      <a href="/cookie-policy.html">Cookie Policy</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="cookie-banner.js"></script>
+</body>
+</html>
