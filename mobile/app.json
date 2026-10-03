@@ -1,0 +1,34 @@
+{
+  "expo": {
+    "name": "Messaggistica Privata",
+    "slug": "messaggistica-privata",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "backgroundColor": "#0f1115"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "it.simonescaffidi.messaggistica",
+      "infoPlist": {
+        "NSFaceIDUsageDescription": "Usa Face ID per sbloccare rapidamente i tuoi profili di Messaggistica Privata."
+      }
+    },
+    "android": {
+      "package": "it.simonescaffidi.messaggistica",
+      "permissions": ["USE_BIOMETRIC", "USE_FINGERPRINT"],
+      "adaptiveIcon": {
+        "backgroundColor": "#0f1115"
+      }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "DA-IMPOSTARE-DOPO-EAS-INIT"
+      }
+    },
+    "plugins": ["expo-local-authentication"]
+  }
+}
