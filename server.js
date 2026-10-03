@@ -12,7 +12,12 @@ const store = require("./db");
 
 const app = express();
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "public")));
+
+// Sito di presentazione (landing IT/EN) servito sulla root.
+app.use(express.static(path.join(__dirname, "site")));
+
+// App funzionante (prototipo chat) servita sotto /app.
+app.use("/app", express.static(path.join(__dirname, "public")));
 
 const server = http.createServer(app);
 const wss = new WebSocketServer({ server });
