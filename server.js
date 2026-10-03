@@ -1,7 +1,8 @@
 // Prototipo webapp di messaggistica privata.
 // Dimostra il meccanismo chiave del progetto: CODICE = PROFILO, chat nascoste,
-// contatti, messaggistica realtime. NON contiene crittografia E2E reale
-// (vedi README per cosa manca prima della produzione).
+// contatti, messaggistica realtime, crittografia E2E reale (ECDH + AES-GCM)
+// e sblocco biometrico via WebAuthn (passkey di piattaforma).
+// Vedi README.md e site/*.html per cosa manca ancora prima della produzione.
 
 const express = require("express");
 const http = require("http");
@@ -9,6 +10,12 @@ const { WebSocketServer } = require("ws");
 const { v4: uuidv4 } = require("uuid");
 const path = require("path");
 const store = require("./db");
+const {
+  generateRegistrationOptions,
+  verifyRegistrationResponse,
+  generateAuthenticationOptions,
+  verifyAuthenticationResponse
+} = require("@simplewebauthn/server");
 
 const app = express();
 app.use(express.json());
@@ -52,7 +59,15 @@ function requireAuth(req, res, next) {
 }
 
 function publicProfile(p) {
-  return { id: p.id, username: p.username, publicId: p.publicId, isCover: p.isCover, settings: p.settings };
+  return {
+    id: p.id,
+    username: p.username,
+    publicId: p.publicId,
+    isCover: p.isCover,
+    settings: p.settings,
+    publicKey: p.publicKey || null,
+    hasBiometric: !!(p.webauthnCredentials && p.webauthnCredentials.length)
+  };
 }
 
 function broadcastToProfile(profileId, payload) {
@@ -61,6 +76,17 @@ function broadcastToProfile(profileId, payload) {
   for (const ws of set) {
     if (ws.readyState === ws.OPEN) ws.send(JSON.stringify(payload));
   }
+}
+
+// Origin/RP ID dinamici: funzionano sia su localhost (dev) sia su Railway (prod).
+function rpInfo(req) {
+  const host = req.hostname; // es. "localhost" o "messaging-app-prototype-production-ecb3.up.railway.app"
+  const proto = req.headers["x-forwarded-proto"] || req.protocol;
+  return {
+    rpID: host,
+    origin: `${proto}://${req.headers.host}`,
+    rpName: "Messaggistica Privata"
+  };
 }
 
 // ---------- REGISTRAZIONE / LOGIN ----------
@@ -79,7 +105,9 @@ app.post("/api/register", (req, res) => {
     secretCombo: randomSecretCombo(),
     isCover: !!isCover,
     settings: { notifications: "normal" },
-    createdAt: Date.now()
+    createdAt: Date.now(),
+    publicKey: null,
+    webauthnCredentials: []
   };
   db.profiles.push(profile);
   store.save(db);
@@ -111,6 +139,30 @@ app.get("/api/me", requireAuth, (req, res) => {
   res.json(publicProfile(profile));
 });
 
+// ---------- CHIAVE PUBBLICA E2E ----------
+// Il client genera una coppia di chiavi ECDH (P-256) con la Web Crypto API
+// e carica QUI solo la chiave pubblica. La chiave privata non lascia mai
+// il browser (vedi public/crypto.js).
+
+app.post("/api/me/publickey", requireAuth, (req, res) => {
+  const { publicKeyJwk } = req.body;
+  if (!publicKeyJwk || publicKeyJwk.kty !== "EC") {
+    return res.status(400).json({ error: "chiave pubblica JWK (EC) non valida" });
+  }
+  const db = store.load();
+  const profile = db.profiles.find((p) => p.id === req.profileId);
+  profile.publicKey = publicKeyJwk;
+  store.save(db);
+  res.json({ ok: true });
+});
+
+app.get("/api/profile/:profileId/publickey", requireAuth, (req, res) => {
+  const db = store.load();
+  const profile = db.profiles.find((p) => p.id === req.params.profileId);
+  if (!profile) return res.status(404).json({ error: "profilo non trovato" });
+  res.json({ publicKey: profile.publicKey || null });
+});
+
 // ---------- CONTATTI ----------
 
 app.get("/api/contacts", requireAuth, (req, res) => {
@@ -118,7 +170,7 @@ app.get("/api/contacts", requireAuth, (req, res) => {
   const mine = db.contacts.filter((c) => c.profileId === req.profileId);
   const result = mine.map((c) => {
     const p = db.profiles.find((pr) => pr.id === c.contactProfileId);
-    return { profileId: p.id, username: p.username, publicId: p.publicId, blocked: c.blocked, muted: c.muted };
+    return { profileId: p.id, username: p.username, publicId: p.publicId, publicKey: p.publicKey || null, blocked: c.blocked, muted: c.muted };
   });
   res.json(result);
 });
@@ -148,7 +200,10 @@ app.post("/api/contacts/add", requireAuth, (req, res) => {
     db.chats.push(chat);
   }
   store.save(db);
-  res.json({ contact: { profileId: target.id, username: target.username, publicId: target.publicId }, chatId: chat.id });
+  res.json({
+    contact: { profileId: target.id, username: target.username, publicId: target.publicId, publicKey: target.publicKey || null },
+    chatId: chat.id
+  });
 });
 
 app.post("/api/contacts/:contactProfileId/block", requireAuth, (req, res) => {
@@ -190,9 +245,9 @@ app.get("/api/chats", requireAuth, (req, res) => {
     const last = msgs[msgs.length - 1];
     return {
       id: c.id,
-      with: { profileId: other.id, username: other.username, publicId: other.publicId },
+      with: { profileId: other.id, username: other.username, publicId: other.publicId, publicKey: other.publicKey || null },
       hidden: !!c.hiddenFor[req.profileId],
-      lastMessage: last ? { text: last.text, createdAt: last.createdAt } : null
+      lastMessage: last ? { iv: last.iv, ciphertext: last.ciphertext, createdAt: last.createdAt } : null
     };
   });
   res.json({ chats: result, comboUnlocked: !!comboUnlocked });
@@ -218,20 +273,24 @@ app.get("/api/chats/:chatId/messages", requireAuth, (req, res) => {
   res.json({ messages: msgs });
 });
 
-// ---------- MESSAGGI ----------
+// ---------- MESSAGGI (cifrati E2E) ----------
+// Il server riceve e salva solo { iv, ciphertext }: non vede mai il testo
+// in chiaro dei messaggi. iv e ciphertext sono stringhe base64 prodotte da
+// AES-GCM lato client con la chiave derivata via ECDH (vedi crypto.js).
 
 app.post("/api/messages", requireAuth, (req, res) => {
-  const { chatId, text, replyTo, selfDestructSeconds } = req.body;
+  const { chatId, iv, ciphertext, replyTo, selfDestructSeconds } = req.body;
   const db = store.load();
   const chat = db.chats.find((c) => c.id === chatId && c.memberIds.includes(req.profileId));
   if (!chat) return res.status(404).json({ error: "chat non trovata" });
-  if (!text || !text.trim()) return res.status(400).json({ error: "messaggio vuoto" });
+  if (!iv || !ciphertext) return res.status(400).json({ error: "messaggio cifrato mancante (iv/ciphertext)" });
 
   const msg = {
     id: uuidv4(),
     chatId,
     senderProfileId: req.profileId,
-    text,
+    iv,
+    ciphertext,
     replyTo: replyTo || null,
     reactions: {},
     createdAt: Date.now(),
@@ -271,6 +330,139 @@ app.post("/api/settings/notifications", requireAuth, (req, res) => {
   const db = store.load();
   const profile = db.profiles.find((p) => p.id === req.profileId);
   profile.settings.notifications = mode;
+  store.save(db);
+  res.json({ ok: true });
+});
+
+// ---------- SBLOCCO BIOMETRICO (WebAuthn / passkey di piattaforma) ----------
+// Flusso reale FIDO2/WebAuthn tramite @simplewebauthn/server:
+// 1) il profilo, gia' autenticato col codice, registra una passkey legata
+//    a Face ID / Touch ID / impronta del dispositivo;
+// 2) alle aperture successive, l'app prova prima la passkey (navigator
+//    .credentials.get) ed effettua il login senza digitare il codice.
+// Il server non riceve MAI dati biometrici: solo chiave pubblica e firme.
+
+app.post("/api/webauthn/register-options", requireAuth, async (req, res) => {
+  const db = store.load();
+  const profile = db.profiles.find((p) => p.id === req.profileId);
+  const { rpID, rpName } = rpInfo(req);
+
+  const options = await generateRegistrationOptions({
+    rpName,
+    rpID,
+    userID: Buffer.from(profile.id),
+    userName: profile.username,
+    userDisplayName: profile.username,
+    attestationType: "none",
+    excludeCredentials: (profile.webauthnCredentials || []).map((c) => ({ id: c.id })),
+    authenticatorSelection: {
+      authenticatorAttachment: "platform",
+      userVerification: "required",
+      residentKey: "preferred"
+    }
+  });
+
+  db.webauthnChallenges[profile.id] = { challenge: options.challenge, type: "registration", createdAt: Date.now() };
+  store.save(db);
+  res.json(options);
+});
+
+app.post("/api/webauthn/register-verify", requireAuth, async (req, res) => {
+  const db = store.load();
+  const profile = db.profiles.find((p) => p.id === req.profileId);
+  const pending = db.webauthnChallenges[profile.id];
+  const { rpID, origin } = rpInfo(req);
+  if (!pending || pending.type !== "registration") {
+    return res.status(400).json({ error: "nessuna registrazione biometrica in corso" });
+  }
+
+  try {
+    const verification = await verifyRegistrationResponse({
+      response: req.body,
+      expectedChallenge: pending.challenge,
+      expectedOrigin: origin,
+      expectedRPID: rpID
+    });
+    if (!verification.verified || !verification.registrationInfo) {
+      return res.status(400).json({ error: "verifica passkey fallita" });
+    }
+    const { credential } = verification.registrationInfo;
+    profile.webauthnCredentials.push({
+      id: credential.id,
+      publicKey: Buffer.from(credential.publicKey).toString("base64"),
+      counter: credential.counter,
+      transports: credential.transports || [],
+      deviceLabel: req.body.deviceLabel || "Questo dispositivo",
+      createdAt: Date.now()
+    });
+    delete db.webauthnChallenges[profile.id];
+    store.save(db);
+    res.json({ ok: true });
+  } catch (err) {
+    res.status(400).json({ error: "registrazione passkey non valida: " + err.message });
+  }
+});
+
+app.post("/api/webauthn/login-options", async (req, res) => {
+  const { rpID } = rpInfo(req);
+  const db = store.load();
+
+  const options = await generateAuthenticationOptions({
+    rpID,
+    userVerification: "required"
+  });
+
+  // Challenge temporanea non legata ancora a un profilo: verra' risolta
+  // dal credential id restituito dal dispositivo in fase di verifica.
+  db.webauthnChallenges["__anonymous__"] = { challenge: options.challenge, type: "authentication", createdAt: Date.now() };
+  store.save(db);
+  res.json(options);
+});
+
+app.post("/api/webauthn/login-verify", async (req, res) => {
+  const db = store.load();
+  const pending = db.webauthnChallenges["__anonymous__"];
+  const { rpID, origin } = rpInfo(req);
+  if (!pending || pending.type !== "authentication") {
+    return res.status(400).json({ error: "nessun login biometrico in corso" });
+  }
+
+  const credentialId = req.body.id;
+  const profile = db.profiles.find((p) => (p.webauthnCredentials || []).some((c) => c.id === credentialId));
+  if (!profile) return res.status(404).json({ error: "passkey non riconosciuta su questo server" });
+  const savedCred = profile.webauthnCredentials.find((c) => c.id === credentialId);
+
+  try {
+    const verification = await verifyAuthenticationResponse({
+      response: req.body,
+      expectedChallenge: pending.challenge,
+      expectedOrigin: origin,
+      expectedRPID: rpID,
+      credential: {
+        id: savedCred.id,
+        publicKey: Buffer.from(savedCred.publicKey, "base64"),
+        counter: savedCred.counter,
+        transports: savedCred.transports || []
+      }
+    });
+    if (!verification.verified) return res.status(400).json({ error: "verifica biometrica fallita" });
+
+    savedCred.counter = verification.authenticationInfo.newCounter;
+    delete db.webauthnChallenges["__anonymous__"];
+    store.save(db);
+
+    const token = uuidv4();
+    sessions.set(token, profile.id);
+    res.json({ token, profile: publicProfile(profile) });
+  } catch (err) {
+    res.status(400).json({ error: "login biometrico non valido: " + err.message });
+  }
+});
+
+app.post("/api/webauthn/disable", requireAuth, (req, res) => {
+  const db = store.load();
+  const profile = db.profiles.find((p) => p.id === req.profileId);
+  profile.webauthnCredentials = [];
   store.save(db);
   res.json({ ok: true });
 });
