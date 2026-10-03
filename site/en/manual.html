@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>User manual — Private Messaging</title>
+<meta name="description" content="Complete guide to Private Messaging: sign-up, code-based login, hidden chats, end-to-end encryption, biometric unlock and available languages." />
+<link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/manual.html" />
+<link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
+<link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/manual.html" />
+<link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="User manual — Private Messaging" />
+<meta property="og:description" content="Complete guide: sign-up, code-based login, hidden chats, end-to-end encryption, biometric unlock and available languages." />
+<meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/en/manual.html" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="stylesheet" href="../style.css" />
+<style>
+  .manual main { max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+  .manual h2 { margin-top: 2.5rem; }
+  .manual h3 { margin-top: 1.5rem; }
+  .manual ol, .manual ul { padding-left: 1.3rem; }
+  .manual li { margin-bottom: 0.5rem; }
+  .manual .toc { background: var(--panel-2); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+  .manual .toc a { color: var(--accent); text-decoration: none; }
+  .manual .warn { border-left: 3px solid var(--danger); padding-left: 0.9rem; color: var(--text-dim); }
+</style>
+</head>
+<body class="manual">
+
+<header class="site-header">
+  <div class="container">
+    <a href="/en/" class="brand"><span class="lock">🔒</span> Private Messaging</a>
+    <div class="header-actions">
+      <nav class="lang-switch" aria-label="Language">
+        <a href="/manuale.html">IT</a>
+        <a href="/en/manual.html" aria-current="true">EN</a>
+      </nav>
+      <a href="/app/" class="btn btn-primary btn-sm">Open the app</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <h1>User manual</h1>
+  <p class="lead">A complete guide to Private Messaging: how to sign up, log in, use the privacy features, and understand what this prototype really protects — and what it doesn't.</p>
+
+  <nav class="toc" aria-label="Table of contents">
+    <strong>Contents</strong>
+    <ol>
+      <li><a href="#signup">Sign-up and first login</a></li>
+      <li><a href="#profiles">Multiple profiles on the same device</a></li>
+      <li><a href="#contacts">Adding contacts and chatting</a></li>
+      <li><a href="#hidden">Hidden chats and the secret combination</a></li>
+      <li><a href="#cover">Cover profile</a></li>
+      <li><a href="#timed">Timed (self-destructing) messages</a></li>
+      <li><a href="#encryption">End-to-end encryption: how it actually works</a></li>
+      <li><a href="#biometric">Biometric unlock (Face ID / Touch ID / fingerprint)</a></li>
+      <li><a href="#languages">Changing language</a></li>
+      <li><a href="#mobile">Native mobile apps (iOS/Android)</a></li>
+      <li><a href="#limits">Stated security limits</a></li>
+      <li><a href="#troubleshooting">Troubleshooting</a></li>
+    </ol>
+  </nav>
+
+  <section id="signup">
+    <h2>1. Sign-up and first login</h2>
+    <p>On the start screen, tap "Sign up" and enter your email and a username. No phone number is required.</p>
+    <p>After signing up you'll see three pieces of information only once — save them right away somewhere safe (a password manager, for instance):</p>
+    <ul>
+      <li><strong>Access code</strong>: this is your "password" — every time you open the app you enter it, and your profile opens automatically.</li>
+      <li><strong>Public ID</strong>: this is what you share with people you want to add as contacts. It never reveals your email.</li>
+      <li><strong>Secret combination</strong>: used to reveal hidden chats (see the dedicated section).</li>
+    </ul>
+    <p class="warn">If you lose your access code, you lose access to that profile: there's no real email-based recovery yet (see "Stated security limits").</p>
+  </section>
+
+  <section id="profiles">
+    <h2>2. Multiple profiles on the same device</h2>
+    <p>You can create several profiles (for example a personal one and a cover one), all reachable from the same device. Each profile has its own access code: when you open the app and enter a code, the matching profile opens automatically — there's no selection screen that would reveal how many profiles exist.</p>
+  </section>
+
+  <section id="contacts">
+    <h2>3. Adding contacts and chatting</h2>
+    <p>Tap "+ Add contact" and enter the person's public ID. A real-time chat opens, end-to-end encrypted (see section 7).</p>
+  </section>
+
+  <section id="hidden">
+    <h2>4. Hidden chats and the secret combination</h2>
+    <p>From a chat, open the menu and choose "Hide/show this chat". A hidden chat no longer appears in the main list.</p>
+    <p>To bring it back, type your secret combination (the one shown only once at sign-up) into the search bar: all hidden chats reappear until you lock the app again.</p>
+  </section>
+
+  <section id="cover">
+    <h2>5. Cover profile</h2>
+    <p>At sign-up you can check "Create as a cover profile": a profile meant to be shown if asked to, with no hint that other profiles exist on the same device.</p>
+  </section>
+
+  <section id="timed">
+    <h2>6. Timed (self-destructing) messages</h2>
+    <p>Before sending a message, you can pick a self-destruct time from the dropdown: 30 seconds, 5 minutes, or 1 hour. Once that time passes, the message is removed.</p>
+  </section>
+
+  <section id="encryption">
+    <h2>7. End-to-end encryption: how it actually works</h2>
+    <p>This isn't a marketing slogan: every message is encrypted <strong>in your browser</strong>, before it's sent to the server, using this scheme:</p>
+    <ol>
+      <li>On first login, your device generates an ECDH key pair on curve P-256 (one public, one private). The public key is uploaded to the server; the private key stays only in your browser.</li>
+      <li>When you message a contact, your browser combines your private key with their public key (an ECDH exchange) and derives, via HKDF-SHA256, a 256-bit AES-GCM symmetric key specific to that pair of people.</li>
+      <li>Each message is encrypted with that key and a different random number (an IV) every time, then sent to the server already encrypted.</li>
+      <li>The server only stores and transmits ciphertext: it cannot read the content of your messages.</li>
+    </ol>
+    <p>This is the same type of math (ECDH + AES-GCM) used by many modern secure protocols, applied here through the browser's native Web Crypto API, with no external libraries.</p>
+  </section>
+
+  <section id="biometric">
+    <h2>8. Biometric unlock (Face ID / Touch ID / fingerprint)</h2>
+    <p>In the profile settings (⚙️ icon) you'll find "Enable Face ID / fingerprint unlock". Turning it on makes your device create a passkey via WebAuthn/FIDO2 and register it with the server (only the public key, never the biometric data itself).</p>
+    <p>From then on, the login screen shows an "Unlock with biometrics" button: use it instead of the code, and your operating system (not the app) verifies Face ID, Touch ID, Android fingerprint, or Windows Hello. Biometric data never leaves your device.</p>
+    <p>You can turn it off at any time from the same settings.</p>
+  </section>
+
+  <section id="languages">
+    <h2>9. Changing language</h2>
+    <p>In the top corner of every screen you'll find a language selector. The interface is available in 11 languages: Italian, English, Spanish, French, German, Portuguese, Arabic, Chinese, Hindi, Russian and Japanese. Your chosen language is remembered on the device.</p>
+  </section>
+
+  <section id="mobile">
+    <h2>10. Native mobile apps (iOS/Android)</h2>
+    <p>A native app scaffold (built on Expo/React Native) is ready, adding a system-level biometric lock on launch. Actually publishing to the App Store and Google Play requires the developer account credentials (Apple Developer Program and Google Play Console); once those are connected, the app can be built and published. Until then, the webapp remains usable from any mobile browser and can already be "installed" to the home screen like an app.</p>
+  </section>
+
+  <section id="limits">
+    <h2>11. Stated security limits</h2>
+    <p>In the interest of honesty, here's what this prototype does <strong>not</strong> do yet, even though the encryption itself is real:</p>
+    <ul>
+      <li><strong>No ratchet / forward secrecy</strong>: a chat's key stays the same until both people regenerate their keys (unlike protocols such as Signal, which rotate keys with every message).</li>
+      <li><strong>No out-of-band verification of public keys</strong>: there's no "safety number" to compare out loud with a contact. In theory, a malicious server could swap in its own public key (a man-in-the-middle attack). Fine on a trusted server for a prototype; this verification should be added before any high-risk use.</li>
+      <li><strong>Private key lives in the browser</strong>: it's stored in the browser's local storage, not in a hardware secure enclave. Anyone with physical or software access to your unlocked device could read it.</li>
+      <li><strong>No real email sending</strong>: sign-up works, but there's no email service connected yet for a "magic link" account-recovery flow.</li>
+    </ul>
+  </section>
+
+  <section id="troubleshooting">
+    <h2>12. Troubleshooting</h2>
+    <h3>"Can't encrypt: the contact doesn't have a public key yet"</h3>
+    <p>This happens if your contact hasn't logged in since the latest app update (the key is generated and uploaded automatically at login). Ask them to log in once — after that you'll be able to message them normally.</p>
+    <h3>"I lost my access code"</h3>
+    <p>There's currently no automatic recovery: you'll need to register a new profile. Always keep your code in a password manager.</p>
+    <h3>Biometric unlock doesn't show up</h3>
+    <p>It requires a device with Face ID, Touch ID, a fingerprint sensor, or Windows Hello set up, an up-to-date browser, and an HTTPS connection (the production webapp already uses one). It also needs to have been enabled at least once from settings.</p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">Powered by <a href="https://www.simonescaffidi.it" target="_blank" rel="noopener noreferrer">www.simonescaffidi.it</a></p>
+    <nav class="footer-links" aria-label="Legal">
+      <a href="/en/privacy-policy.html">Privacy Policy</a>
+      <a href="/en/cookie-policy.html">Cookie Policy</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="../cookie-banner.js"></script>
+</body>
+</html>
