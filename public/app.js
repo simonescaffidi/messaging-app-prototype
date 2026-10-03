@@ -1,5 +1,6 @@
 // Stato client. Il token/profilo NON viene salvato in localStorage: ogni
-// refresh richiede di reinserire il codice, come da specifica "livello 1".
+// refresh richiede di reinserire il codice (o il biometrico), come da
+// specifica "livello 1".
 const state = {
   token: null,
   me: null,
@@ -7,7 +8,9 @@ const state = {
   activeChatId: null,
   comboUnlocked: false,
   replyTo: null,
-  ws: null
+  ws: null,
+  myKeyPair: null,       // { privateKey, publicKey, publicJwk } - E2E.getOrCreateKeyPair()
+  chatKeys: {}           // chatId -> CryptoKey AES-GCM derivata (cache in memoria, mai persistita)
 };
 
 const $ = (sel) => document.querySelector(sel);
@@ -22,6 +25,26 @@ function api(path, opts = {}) {
     return data;
   });
 }
+
+// ---------- LINGUA ----------
+function initLangSwitcher() {
+  const select = $("#lang-select");
+  select.innerHTML = "";
+  I18N.LANGS.forEach((code) => {
+    const opt = document.createElement("option");
+    opt.value = code;
+    opt.textContent = I18N.LANG_NAMES[code] || code;
+    if (code === I18N.current) opt.selected = true;
+    select.appendChild(opt);
+  });
+  select.addEventListener("change", () => {
+    I18N.setLang(select.value);
+    // Ri-renderizza le parti costruite dinamicamente (non coperte da data-i18n)
+    if (state.me) renderChatList();
+  });
+  I18N.apply();
+}
+initLangSwitcher();
 
 // ---------- TABS AUTH ----------
 $$(".tab-btn").forEach((btn) => {
@@ -40,7 +63,7 @@ $("#btn-register").addEventListener("click", async () => {
   const isCover = $("#reg-cover").checked;
   $("#register-error").textContent = "";
   if (!email || !username) {
-    $("#register-error").textContent = "Compila email e username";
+    $("#register-error").textContent = I18N.t("regEmailLabel") + " / " + I18N.t("regUsernameLabel");
     return;
   }
   try {
@@ -59,7 +82,7 @@ $("#btn-cred-ok").addEventListener("click", () => {
   $$(".tab-btn")[0].click();
 });
 
-// ---------- LOGIN ----------
+// ---------- LOGIN (codice) ----------
 $("#btn-login").addEventListener("click", doLogin);
 $("#login-code").addEventListener("keydown", (e) => { if (e.key === "Enter") doLogin(); });
 
@@ -70,10 +93,58 @@ async function doLogin() {
     const data = await api("/api/login", { method: "POST", body: JSON.stringify({ accessCode }) });
     state.token = data.token;
     state.me = data.profile;
-    enterApp();
+    await enterApp();
   } catch (e) {
     $("#login-error").textContent = "Codice non valido";
   }
+}
+
+// ---------- LOGIN (biometrico) ----------
+async function refreshBiometricLoginButton() {
+  const btn = $("#btn-biometric-login");
+  const supported = WebAuthnUnlock.isSupported() && (await WebAuthnUnlock.platformAvailable());
+  const hasEnrolled = localStorage.getItem("webauthn_enrolled") === "true";
+  btn.classList.toggle("hidden", !(supported && hasEnrolled));
+}
+refreshBiometricLoginButton();
+
+$("#btn-biometric-login").addEventListener("click", async () => {
+  $("#login-error").textContent = "";
+  try {
+    const data = await WebAuthnUnlock.login(api);
+    state.token = data.token;
+    state.me = data.profile;
+    await enterApp();
+  } catch (e) {
+    $("#login-error").textContent = e.message || "Sblocco biometrico non riuscito";
+  }
+});
+
+// ---------- CHIAVI E2E ----------
+async function ensureMyKeys() {
+  state.myKeyPair = await E2E.getOrCreateKeyPair(state.me.publicId);
+  try {
+    await api("/api/me/publickey", { method: "POST", body: JSON.stringify({ publicKeyJwk: state.myKeyPair.publicJwk }) });
+  } catch {
+    // non bloccante: se il server non e' raggiungibile ora, si riprovera' al prossimo login
+  }
+}
+
+async function getChatKey(chat) {
+  if (state.chatKeys[chat.id]) return state.chatKeys[chat.id];
+  if (!chat.with.publicKey) return null; // il contatto non ha ancora generato/caricato una chiave
+  const peerKey = await E2E.importPeerPublicKey(chat.with.publicKey);
+  const key = await E2E.deriveChatKey(state.myKeyPair.privateKey, peerKey, state.me.publicId, chat.with.publicId);
+  state.chatKeys[chat.id] = key;
+  return key;
+}
+
+async function decryptMessage(chat, m) {
+  if (m._plain !== undefined) return m._plain;
+  if (!m.iv || !m.ciphertext) { m._plain = m.text || ""; return m._plain; } // messaggi legacy pre-E2E
+  const key = await getChatKey(chat);
+  m._plain = key ? await E2E.decrypt(key, m.iv, m.ciphertext) : "🔒 (chiave non ancora disponibile)";
+  return m._plain;
 }
 
 async function enterApp() {
@@ -81,6 +152,7 @@ async function enterApp() {
   $("#app-screen").classList.remove("hidden");
   $("#me-username").textContent = state.me.username + (state.me.isCover ? " (copertura)" : "");
   $("#me-publicid").textContent = state.me.publicId;
+  await ensureMyKeys();
   connectWs();
   await loadChats();
 }
@@ -91,11 +163,13 @@ $("#btn-logout").addEventListener("click", () => {
   state.me = null;
   state.chats = [];
   state.activeChatId = null;
+  state.chatKeys = {};
   if (state.ws) state.ws.close();
   $("#app-screen").classList.add("hidden");
   $("#auth-screen").classList.remove("hidden");
   $("#login-code").value = "";
   $("#search-box").value = "";
+  refreshBiometricLoginButton();
 });
 
 // ---------- WEBSOCKET ----------
@@ -127,27 +201,33 @@ async function loadChats(rerenderList = true, combo = "") {
   state.chats = data.chats;
   state.comboUnlocked = data.comboUnlocked;
   $("#combo-status").classList.toggle("hidden", !data.comboUnlocked);
-  if (rerenderList) renderChatList();
+  if (rerenderList) await renderChatList();
 }
 
-function renderChatList() {
+async function renderChatList() {
   const list = $("#chat-list");
   list.innerHTML = "";
   const filterText = $("#search-box").value.trim().toLowerCase();
   const isComboAttempt = state.comboUnlocked && filterText.length > 0;
 
-  state.chats
-    .filter((c) => isComboAttempt ? true : c.with.username.toLowerCase().includes(filterText))
-    .forEach((c) => {
-      const el = document.createElement("div");
-      el.className = "chat-item" + (c.id === state.activeChatId ? " active" : "");
-      el.innerHTML = `
-        <div class="chat-item-name">${escapeHtml(c.with.username)} ${c.hidden ? '<span class="hidden-badge">nascosta</span>' : ""}</div>
-        <div class="chat-item-preview">${c.lastMessage ? escapeHtml(c.lastMessage.text) : "Nessun messaggio"}</div>
-      `;
-      el.addEventListener("click", () => openChat(c.id));
-      list.appendChild(el);
-    });
+  const visible = state.chats.filter((c) =>
+    isComboAttempt ? true : c.with.username.toLowerCase().includes(filterText)
+  );
+
+  for (const c of visible) {
+    let previewText = I18N.t("chatEmpty");
+    if (c.lastMessage) {
+      previewText = await decryptMessage(c, c.lastMessage);
+    }
+    const el = document.createElement("div");
+    el.className = "chat-item" + (c.id === state.activeChatId ? " active" : "");
+    el.innerHTML = `
+      <div class="chat-item-name">${escapeHtml(c.with.username)} ${c.hidden ? '<span class="hidden-badge">nascosta</span>' : ""}</div>
+      <div class="chat-item-preview">${c.lastMessage ? escapeHtml(previewText) : "—"}</div>
+    `;
+    el.addEventListener("click", () => openChat(c.id));
+    list.appendChild(el);
+  }
 }
 
 // ---------- CONTATTI ----------
@@ -172,6 +252,7 @@ $("#btn-add-contact-confirm").addEventListener("click", async () => {
 // ---------- IMPOSTAZIONI ----------
 $("#btn-settings").addEventListener("click", () => {
   $("#settings-notifications").value = state.me.settings?.notifications || "normal";
+  updateBiometricSettingsUI();
   $("#settings-modal").classList.remove("hidden");
 });
 $("#btn-settings-cancel").addEventListener("click", () => $("#settings-modal").classList.add("hidden"));
@@ -179,6 +260,40 @@ $("#btn-settings-save").addEventListener("click", async () => {
   const mode = $("#settings-notifications").value;
   await api("/api/settings/notifications", { method: "POST", body: JSON.stringify({ mode }) });
   $("#settings-modal").classList.add("hidden");
+});
+
+async function updateBiometricSettingsUI() {
+  const supported = WebAuthnUnlock.isSupported() && (await WebAuthnUnlock.platformAvailable());
+  const enabled = !!state.me.hasBiometric;
+  $("#btn-enable-biometric").classList.toggle("hidden", !supported || enabled);
+  $("#btn-disable-biometric").classList.toggle("hidden", !enabled);
+  $("#biometric-status-hint").textContent = !supported
+    ? I18N.t("biometricNotSupported")
+    : (enabled ? I18N.t("biometricEnabledHint") : "");
+}
+
+$("#btn-enable-biometric").addEventListener("click", async () => {
+  try {
+    await WebAuthnUnlock.register(api);
+    localStorage.setItem("webauthn_enrolled", "true");
+    state.me.hasBiometric = true;
+    await updateBiometricSettingsUI();
+    refreshBiometricLoginButton();
+  } catch (e) {
+    $("#biometric-status-hint").textContent = e.message || "Registrazione biometrica non riuscita";
+  }
+});
+
+$("#btn-disable-biometric").addEventListener("click", async () => {
+  try {
+    await api("/api/webauthn/disable", { method: "POST", body: JSON.stringify({}) });
+    localStorage.removeItem("webauthn_enrolled");
+    state.me.hasBiometric = false;
+    await updateBiometricSettingsUI();
+    refreshBiometricLoginButton();
+  } catch (e) {
+    $("#biometric-status-hint").textContent = e.message || "Operazione non riuscita";
+  }
 });
 
 // ---------- CHAT VIEW ----------
@@ -194,7 +309,9 @@ async function openChat(chatId) {
   const data = await api(`/api/chats/${chatId}/messages`);
   const container = $("#messages");
   container.innerHTML = "";
-  data.messages.forEach((m) => appendMessage(m, false));
+  for (const m of data.messages) {
+    await appendMessage(m, false, chat);
+  }
   container.scrollTop = container.scrollHeight;
 }
 
@@ -206,13 +323,16 @@ $("#btn-toggle-hide").addEventListener("click", async () => {
   $("#btn-toggle-hide").textContent = !chat.hidden ? "👁️" : "🙈";
 });
 
-function appendMessage(m, scroll = true) {
+async function appendMessage(m, scroll = true, chatOverride = null) {
   if (m.chatId && m.chatId !== state.activeChatId) return;
+  const chat = chatOverride || state.chats.find((c) => c.id === state.activeChatId);
   const container = $("#messages");
   const mine = m.senderProfileId === state.me.id;
   const row = document.createElement("div");
   row.className = "msg-row " + (mine ? "me" : "other");
   row.dataset.id = m.id;
+
+  const plainText = chat ? await decryptMessage(chat, m) : (m.text || "");
 
   let replyHtml = "";
   if (m.replyTo) {
@@ -223,11 +343,11 @@ function appendMessage(m, scroll = true) {
 
   row.innerHTML = `
     ${replyHtml}
-    <div class="bubble">${escapeHtml(m.text)}</div>
+    <div class="bubble">${escapeHtml(plainText)}</div>
     <div class="msg-meta">${new Date(m.createdAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}${m.selfDestructAt ? " · 💣" : ""}</div>
     <div class="msg-reactions" data-msgid="${m.id}"></div>
     <div class="msg-actions">
-      <button class="btn-reply" data-id="${m.id}">Rispondi</button>
+      <button class="btn-reply" data-id="${m.id}">↩</button>
       <button class="btn-react" data-id="${m.id}" data-emoji="👍">👍</button>
       <button class="btn-react" data-id="${m.id}" data-emoji="❤️">❤️</button>
     </div>
@@ -235,7 +355,7 @@ function appendMessage(m, scroll = true) {
   container.appendChild(row);
   renderReactions(m.id, m.reactions || {});
 
-  row.querySelector(".btn-reply").addEventListener("click", () => setReply(m));
+  row.querySelector(".btn-reply").addEventListener("click", () => setReply(m, plainText));
   row.querySelectorAll(".btn-react").forEach((b) =>
     b.addEventListener("click", () => react(m.id, b.dataset.emoji))
   );
@@ -266,29 +386,38 @@ async function react(msgId, emoji) {
   renderReactions(msgId, data.reactions);
 }
 
-function setReply(m) {
+function setReply(m, plainText) {
   state.replyTo = m.id;
   $("#reply-preview").classList.remove("hidden");
-  $("#reply-preview-text").textContent = "Rispondi a: " + m.text.slice(0, 60);
+  $("#reply-preview-text").textContent = plainText.slice(0, 60);
 }
 $("#btn-cancel-reply").addEventListener("click", () => {
   state.replyTo = null;
   $("#reply-preview").classList.add("hidden");
 });
 
-// ---------- INVIO MESSAGGIO ----------
+// ---------- INVIO MESSAGGIO (cifrato end-to-end) ----------
 $("#message-form").addEventListener("submit", async (e) => {
   e.preventDefault();
   const input = $("#message-input");
   const text = input.value.trim();
   if (!text || !state.activeChatId) return;
+  const chat = state.chats.find((c) => c.id === state.activeChatId);
   const selfDestructSeconds = $("#destruct-select").value ? Number($("#destruct-select").value) : null;
+
+  const key = chat ? await getChatKey(chat) : null;
+  if (!key) {
+    alert("Impossibile cifrare: il contatto non ha ancora generato una chiave pubblica (deve accedere almeno una volta dopo l'aggiornamento).");
+    return;
+  }
+  const { iv, ciphertext } = await E2E.encrypt(key, text);
 
   const data = await api("/api/messages", {
     method: "POST",
-    body: JSON.stringify({ chatId: state.activeChatId, text, replyTo: state.replyTo, selfDestructSeconds })
+    body: JSON.stringify({ chatId: state.activeChatId, iv, ciphertext, replyTo: state.replyTo, selfDestructSeconds })
   });
-  appendMessage(data.message);
+  data.message._plain = text; // evita di dover decifrare il proprio messaggio appena inviato
+  await appendMessage(data.message, true, chat);
   input.value = "";
   state.replyTo = null;
   $("#reply-preview").classList.add("hidden");

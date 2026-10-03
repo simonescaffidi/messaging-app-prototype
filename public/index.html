@@ -8,35 +8,41 @@
 </head>
 <body>
 
+<!-- SELETTORE LINGUA (visibile ovunque) -->
+<div id="lang-switcher" class="lang-switcher">
+  <select id="lang-select" title="Lingua / Language"></select>
+</div>
+
 <!-- SCHERMATA AUTH -->
 <div id="auth-screen" class="screen">
   <div class="auth-card">
-    <h1>🔒 Messaggistica Privata</h1>
-    <p class="subtitle">Prototipo — nessuna crittografia reale, solo demo funzionale</p>
+    <h1 data-i18n="appTitle">🔒 Messaggistica Privata</h1>
+    <p class="subtitle" data-i18n="subtitle">Prototipo — nessuna crittografia reale, solo demo funzionale</p>
 
     <div class="tabs">
-      <button class="tab-btn active" data-tab="login">Ho un codice</button>
-      <button class="tab-btn" data-tab="register">Registrati</button>
+      <button class="tab-btn active" data-tab="login" data-i18n="tabLogin">Ho un codice</button>
+      <button class="tab-btn" data-tab="register" data-i18n="tabRegister">Registrati</button>
     </div>
 
     <div id="tab-login" class="tab-panel active">
-      <label>Codice di accesso</label>
-      <input id="login-code" type="text" placeholder="Es. 483920" maxlength="6" autocomplete="off" />
-      <button id="btn-login" class="primary">Entra</button>
-      <p class="hint">Ogni codice apre automaticamente il profilo associato. Nessuna schermata di scelta.</p>
+      <label data-i18n="loginCodeLabel">Codice di accesso</label>
+      <input id="login-code" type="text" data-i18n-placeholder="loginCodePlaceholder" placeholder="Es. 483920" maxlength="6" autocomplete="off" />
+      <button id="btn-login" class="primary" data-i18n="btnLogin">Entra</button>
+      <button id="btn-biometric-login" class="secondary hidden" data-i18n="btnBiometricLogin">🔐 Sblocca con biometria</button>
+      <p class="hint" data-i18n="loginHint">Ogni codice apre automaticamente il profilo associato. Nessuna schermata di scelta.</p>
       <p id="login-error" class="error"></p>
     </div>
 
     <div id="tab-register" class="tab-panel">
-      <label>Email</label>
-      <input id="reg-email" type="email" placeholder="tuaemail@esempio.it" autocomplete="off" />
-      <label>Username</label>
-      <input id="reg-username" type="text" placeholder="es. mario_r" autocomplete="off" />
+      <label data-i18n="regEmailLabel">Email</label>
+      <input id="reg-email" type="email" data-i18n-placeholder="regEmailPlaceholder" placeholder="tuaemail@esempio.it" autocomplete="off" />
+      <label data-i18n="regUsernameLabel">Username</label>
+      <input id="reg-username" type="text" data-i18n-placeholder="regUsernamePlaceholder" placeholder="es. mario_r" autocomplete="off" />
       <label class="checkbox-row">
         <input id="reg-cover" type="checkbox" />
-        Crea come profilo di copertura (innocuo)
+        <span data-i18n="regCoverLabel">Crea come profilo di copertura (innocuo)</span>
       </label>
-      <button id="btn-register" class="primary">Crea profilo</button>
+      <button id="btn-register" class="primary" data-i18n="btnRegister">Crea profilo</button>
       <p id="register-error" class="error"></p>
     </div>
   </div>
@@ -45,12 +51,12 @@
 <!-- MODALE CREDENZIALI (mostrate una sola volta) -->
 <div id="credentials-modal" class="modal hidden">
   <div class="modal-card">
-    <h2>⚠️ Salva queste informazioni ora</h2>
-    <p>Non verranno mostrate di nuovo. Perderle significa perdere l'accesso al profilo.</p>
-    <div class="cred-row"><span>Codice di accesso</span><strong id="cred-code"></strong></div>
-    <div class="cred-row"><span>ID pubblico</span><strong id="cred-publicid"></strong></div>
-    <div class="cred-row"><span>Combinazione chat nascoste</span><strong id="cred-combo"></strong></div>
-    <button id="btn-cred-ok" class="primary">Ho salvato, continua</button>
+    <h2 data-i18n="credModalTitle">⚠️ Salva queste informazioni ora</h2>
+    <p data-i18n="credModalText">Non verranno mostrate di nuovo. Perderle significa perdere l'accesso al profilo.</p>
+    <div class="cred-row"><span data-i18n="credCodeLabel">Codice di accesso</span><strong id="cred-code"></strong></div>
+    <div class="cred-row"><span data-i18n="credPublicIdLabel">ID pubblico</span><strong id="cred-publicid"></strong></div>
+    <div class="cred-row"><span data-i18n="credComboLabel">Combinazione chat nascoste</span><strong id="cred-combo"></strong></div>
+    <button id="btn-cred-ok" class="primary" data-i18n="btnCredOk">Ho salvato, continua</button>
   </div>
 </div>
 
@@ -62,14 +68,14 @@
         <strong id="me-username"></strong>
         <div class="me-publicid" id="me-publicid"></div>
       </div>
-      <button id="btn-logout" title="Blocca / Esci">🔓</button>
+      <button id="btn-logout" data-i18n-title="btnLogoutTitle" title="Blocca / Esci">🔓</button>
     </div>
 
-    <input id="search-box" type="text" placeholder="Cerca... (o combinazione segreta)" autocomplete="off" />
-    <div id="combo-status" class="combo-status hidden">🔓 Chat nascoste sbloccate</div>
+    <input id="search-box" type="text" data-i18n-placeholder="searchPlaceholder" placeholder="Cerca... (o combinazione segreta)" autocomplete="off" />
+    <div id="combo-status" class="combo-status hidden" data-i18n="comboStatus">🔓 Chat nascoste sbloccate</div>
 
     <div class="sidebar-actions">
-      <button id="btn-add-contact">+ Aggiungi contatto</button>
+      <button id="btn-add-contact" data-i18n="btnAddContact">+ Aggiungi contatto</button>
       <button id="btn-settings">⚙️</button>
     </div>
 
@@ -77,13 +83,13 @@
   </aside>
 
   <main class="chat-main">
-    <div id="chat-empty" class="chat-empty">Seleziona una chat oppure aggiungi un contatto per iniziare</div>
+    <div id="chat-empty" class="chat-empty" data-i18n="chatEmpty">Seleziona una chat oppure aggiungi un contatto per iniziare</div>
 
     <div id="chat-view" class="chat-view hidden">
       <div class="chat-header">
         <strong id="chat-with-name"></strong>
         <div class="chat-header-actions">
-          <button id="btn-toggle-hide" title="Nascondi/mostra questa chat">🙈</button>
+          <button id="btn-toggle-hide" data-i18n-title="chatHideTitle" title="Nascondi/mostra questa chat">🙈</button>
         </div>
       </div>
       <div id="messages" class="messages"></div>
@@ -93,13 +99,13 @@
       </div>
       <form id="message-form" class="message-form">
         <select id="destruct-select">
-          <option value="">Normale</option>
-          <option value="30">Autodistrutto 30s</option>
-          <option value="300">Autodistrutto 5m</option>
-          <option value="3600">Autodistrutto 1h</option>
+          <option value="" data-i18n="destructNormal">Normale</option>
+          <option value="30" data-i18n="destruct30">Autodistrutto 30s</option>
+          <option value="300" data-i18n="destruct300">Autodistrutto 5m</option>
+          <option value="3600" data-i18n="destruct3600">Autodistrutto 1h</option>
         </select>
-        <input id="message-input" type="text" placeholder="Scrivi un messaggio..." autocomplete="off" />
-        <button type="submit" class="primary">Invia</button>
+        <input id="message-input" type="text" data-i18n-placeholder="messagePlaceholder" placeholder="Scrivi un messaggio..." autocomplete="off" />
+        <button type="submit" class="primary" data-i18n="btnSend">Invia</button>
       </form>
     </div>
   </main>
@@ -108,13 +114,13 @@
 <!-- MODALE AGGIUNGI CONTATTO -->
 <div id="add-contact-modal" class="modal hidden">
   <div class="modal-card">
-    <h2>Aggiungi contatto</h2>
-    <label>ID pubblico del contatto</label>
-    <input id="add-contact-publicid" type="text" placeholder="Es. AB12CD34" autocomplete="off" />
+    <h2 data-i18n="addContactTitle">Aggiungi contatto</h2>
+    <label data-i18n="addContactPublicIdLabel">ID pubblico del contatto</label>
+    <input id="add-contact-publicid" type="text" data-i18n-placeholder="addContactPublicIdPlaceholder" placeholder="Es. AB12CD34" autocomplete="off" />
     <p id="add-contact-error" class="error"></p>
     <div class="modal-actions">
-      <button id="btn-add-contact-cancel">Annulla</button>
-      <button id="btn-add-contact-confirm" class="primary">Aggiungi</button>
+      <button id="btn-add-contact-cancel" data-i18n="btnCancel">Annulla</button>
+      <button id="btn-add-contact-confirm" class="primary" data-i18n="btnConfirmAdd">Aggiungi</button>
     </div>
   </div>
 </div>
@@ -122,21 +128,30 @@
 <!-- MODALE IMPOSTAZIONI -->
 <div id="settings-modal" class="modal hidden">
   <div class="modal-card">
-    <h2>Impostazioni profilo</h2>
-    <label>Notifiche</label>
+    <h2 data-i18n="settingsTitle">Impostazioni profilo</h2>
+    <label data-i18n="notificationsLabel">Notifiche</label>
     <select id="settings-notifications">
-      <option value="normal">Normale</option>
-      <option value="no-content">Senza contenuto</option>
-      <option value="alert-only">Solo avviso</option>
-      <option value="off">Disattivate</option>
+      <option value="normal" data-i18n="notifNormal">Normale</option>
+      <option value="no-content" data-i18n="notifNoContent">Senza contenuto</option>
+      <option value="alert-only" data-i18n="notifAlertOnly">Solo avviso</option>
+      <option value="off" data-i18n="notifOff">Disattivate</option>
     </select>
+
+    <label class="settings-divider" data-i18n="biometricSectionLabel">Sblocco biometrico</label>
+    <button id="btn-enable-biometric" type="button" data-i18n="btnEnableBiometric">Attiva sblocco con Face ID / impronta</button>
+    <button id="btn-disable-biometric" type="button" class="hidden" data-i18n="btnDisableBiometric">Disattiva sblocco biometrico</button>
+    <p id="biometric-status-hint" class="hint"></p>
+
     <div class="modal-actions">
-      <button id="btn-settings-cancel">Chiudi</button>
-      <button id="btn-settings-save" class="primary">Salva</button>
+      <button id="btn-settings-cancel" data-i18n="btnClose">Chiudi</button>
+      <button id="btn-settings-save" class="primary" data-i18n="btnSave">Salva</button>
     </div>
   </div>
 </div>
 
+<script src="i18n.js"></script>
+<script src="crypto.js"></script>
+<script src="webauthn.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
