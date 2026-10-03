@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Private Messaging — Chat with multiple profiles and hidden chats</title>
+<meta name="description" content="Private messaging prototype: access by code, multiple profiles, hidden chats and a cover profile. No phone number required." />
+<link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/" />
+<link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
+<link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/" />
+<link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Private Messaging — Prototype" />
+<meta property="og:description" content="Access by code, multiple profiles, hidden chats and a cover profile. A messaging prototype built around privacy." />
+<meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/en/" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="/en/" class="brand"><span class="lock">🔒</span> Private Messaging</a>
+    <div class="header-actions">
+      <nav class="lang-switch" aria-label="Language">
+        <a href="/">IT</a>
+        <a href="/en/" aria-current="true">EN</a>
+      </nav>
+      <a href="/app/" class="btn btn-primary btn-sm">Open the app</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="container">
+      <span class="badge">Prototype / functional demo</span>
+      <h1>A chat where your code is your identity</h1>
+      <p class="lead">No phone number. One access code opens your profile, another code opens a different one. Hidden chats, a cover profile, self-destructing messages.</p>
+      <div class="hero-actions">
+        <a href="/app/" class="btn btn-primary">Open the app →</a>
+        <a href="#how-it-works" class="btn btn-ghost">See how it works</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="container">
+      <h2>What you can do</h2>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="icon">🔑</div>
+          <h3>Code-based access</h3>
+          <p>Every code automatically opens its matching profile. No profile picker screen: the code <em>is</em> the identity.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🪪</div>
+          <h3>Multiple profiles</h3>
+          <p>Several profiles on the same device, each with independent contacts, chats and settings.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🙈</div>
+          <h3>Hidden chats</h3>
+          <p>Hide a conversation from the main list. It only reappears by typing a secret combination into search.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🎭</div>
+          <h3>Cover profile</h3>
+          <p>Create an innocuous profile to show in case of a check, with no hint that other profiles exist.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">💣</div>
+          <h3>Timed messages</h3>
+          <p>Send messages that self-destruct after 30 seconds, 5 minutes or an hour.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">📵</div>
+          <h3>No phone number</h3>
+          <p>Sign up with email and username: your email is never visible to other users.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="how" id="how-it-works">
+    <div class="container">
+      <h2>How it works</h2>
+      <div class="steps">
+        <div class="step">
+          <h3>Sign up</h3>
+          <p>Email and username: you get an access code, a public ID and a secret combination. Save them — they're shown only once.</p>
+        </div>
+        <div class="step">
+          <h3>Log in with your code</h3>
+          <p>Every time you open the app, enter your code: the matching profile opens automatically.</p>
+        </div>
+        <div class="step">
+          <h3>Add contacts</h3>
+          <p>Search for someone by their public ID and start chatting in real time.</p>
+        </div>
+        <div class="step">
+          <h3>Hide what you want</h3>
+          <p>Type the secret combination into the search bar to reveal hidden chats when you need them.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="disclaimer">
+    <div class="container">
+      <h2>What it is, what it isn't</h2>
+      <div class="disclaimer-box">
+        <p><strong>This is a demonstration prototype</strong>, built to validate the concept before any native development. Messages are stored unencrypted on the server: <strong>there is no real end-to-end encryption yet</strong> (no X3DH/Double Ratchet/LibSignal), no real email sending for the magic link, and no biometrics (that's a native mobile feature, not something a webapp can simulate). Good for trying the user experience, not for sensitive conversations.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container">
+      <h2>Try the prototype</h2>
+      <p>All you need is an email and a username to create your first profile.</p>
+      <a href="/app/" class="btn btn-primary">Open the app →</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">Powered by <a href="https://www.simonescaffidi.it" target="_blank" rel="noopener noreferrer">www.simonescaffidi.it</a></p>
+    <nav class="footer-links" aria-label="Legal">
+      <a href="/en/privacy-policy.html">Privacy Policy</a>
+      <a href="/en/cookie-policy.html">Cookie Policy</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="../cookie-banner.js"></script>
+</body>
+</html>
