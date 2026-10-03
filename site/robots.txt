@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /app/
+
+Sitemap: https://messaging-app-prototype-production-ecb3.up.railway.app/sitemap.xml
