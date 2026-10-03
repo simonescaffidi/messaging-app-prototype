@@ -21,4 +21,14 @@
     <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/cookie-policy.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/cookie-policy.html" />
   </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/manual.html" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/en/manual.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/manual.html" />
+  </url>
 </urlset>

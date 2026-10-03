@@ -27,6 +27,7 @@
         <a href="/" aria-current="true">IT</a>
         <a href="/en/">EN</a>
       </nav>
+      <a href="/manuale.html" class="btn btn-ghost btn-sm">Manuale</a>
       <a href="/app/" class="btn btn-primary btn-sm">Apri l'app</a>
     </div>
   </div>
@@ -80,6 +81,21 @@
           <h3>Nessun numero di telefono</h3>
           <p>Registrazione via email, ID pubblico separato dall'indirizzo: la tua email non è mai visibile agli altri.</p>
         </article>
+        <article class="feature-card">
+          <div class="icon">🔐</div>
+          <h3>Crittografia end-to-end reale</h3>
+          <p>Ogni messaggio è cifrato nel browser con ECDH (P-256) + AES-GCM a 256 bit prima di partire: il server vede solo testo cifrato, mai il contenuto in chiaro.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🫆</div>
+          <h3>Sblocco biometrico</h3>
+          <p>Face ID, Touch ID, impronta Android o Windows Hello tramite WebAuthn/FIDO2 reale: nessun dato biometrico lascia mai il dispositivo.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🌍</div>
+          <h3>11 lingue</h3>
+          <p>Interfaccia disponibile in italiano, inglese, spagnolo, francese, tedesco, portoghese, arabo, cinese, hindi, russo e giapponese.</p>
+        </article>
       </div>
     </div>
   </section>
@@ -112,7 +128,16 @@
     <div class="container">
       <h2>Cosa è, cosa non è</h2>
       <div class="disclaimer-box">
-        <p><strong>Questo è un prototipo dimostrativo</strong>, pensato per validare il concetto prima di un eventuale sviluppo nativo. I messaggi sono salvati in chiaro lato server: <strong>non c'è ancora crittografia end-to-end reale</strong> (niente X3DH/Double Ratchet/LibSignal), non c'è invio email per il magic link, e non c'è biometria (è una funzione nativa mobile, non simulabile in webapp). Utile per provare l'esperienza d'uso, non per conversazioni sensibili.</p>
+        <p><strong>Questo è un prototipo funzionale</strong>, non un prodotto finito. I messaggi sono cifrati end-to-end (ECDH P-256 + AES-GCM 256 bit, derivazione HKDF-SHA256): il server non vede mai il testo in chiaro. Lo sblocco biometrico usa WebAuthn/FIDO2 reale. Restano dei limiti noti, spiegati senza giri di parole nel <a href="/manuale.html">manuale utente</a>: non c'è ancora un ratchet con forward secrecy "a la Signal", non c'è verifica fuori banda delle chiavi pubbliche (quindi in teoria un server malevolo potrebbe sostituirle), la chiave privata resta nel browser senza secure enclave hardware, e l'invio email per il recupero account non è ancora collegato a un servizio reale. Utile per provare l'esperienza d'uso con una sicurezza vera ma non "a prova di stato", non ancora per conversazioni ad altissimo rischio.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="disclaimer">
+    <div class="container">
+      <h2>App native iOS e Android</h2>
+      <div class="disclaimer-box">
+        <p>Lo scaffold dell'app nativa (Expo/React Native, con blocco biometrico di sistema) è pronto nel codice del progetto. La pubblicazione su App Store e Google Play richiede le credenziali degli account sviluppatore (Apple Developer Program e Google Play Console): finché non vengono collegate, l'app resta disponibile come webapp, utilizzabile da qualsiasi browser mobile e già installabile come app tramite "Aggiungi a schermata Home".</p>
       </div>
     </div>
   </section>
@@ -131,6 +156,7 @@
   <div class="container">
     <p class="powered-by">Powered by <a href="https://www.simonescaffidi.it" target="_blank" rel="noopener noreferrer">www.simonescaffidi.it</a></p>
     <nav class="footer-links" aria-label="Legale">
+      <a href="/manuale.html">Manuale</a>
       <a href="/privacy-policy.html">Privacy Policy</a>
       <a href="/cookie-policy.html">Cookie Policy</a>
     </nav>

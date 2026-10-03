@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Manuale utente — Messaggistica Privata</title>
+<meta name="description" content="Guida completa a Messaggistica Privata: registrazione, accesso per codice, chat nascoste, crittografia end-to-end, sblocco biometrico e lingue disponibili." />
+<link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
+<link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
+<link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/manual.html" />
+<link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Manuale utente — Messaggistica Privata" />
+<meta property="og:description" content="Guida completa: registrazione, accesso per codice, chat nascoste, crittografia end-to-end, sblocco biometrico e lingue disponibili." />
+<meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="stylesheet" href="style.css" />
+<style>
+  .manual main { max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+  .manual h2 { margin-top: 2.5rem; }
+  .manual h3 { margin-top: 1.5rem; }
+  .manual ol, .manual ul { padding-left: 1.3rem; }
+  .manual li { margin-bottom: 0.5rem; }
+  .manual .toc { background: var(--panel-2); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+  .manual .toc a { color: var(--accent); text-decoration: none; }
+  .manual .warn { border-left: 3px solid var(--danger); padding-left: 0.9rem; color: var(--text-dim); }
+</style>
+</head>
+<body class="manual">
+
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand"><span class="lock">🔒</span> Messaggistica Privata</a>
+    <div class="header-actions">
+      <nav class="lang-switch" aria-label="Lingua">
+        <a href="/manuale.html" aria-current="true">IT</a>
+        <a href="/en/manual.html">EN</a>
+      </nav>
+      <a href="/app/" class="btn btn-primary btn-sm">Apri l'app</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <h1>Manuale utente</h1>
+  <p class="lead">Guida completa a Messaggistica Privata: come registrarsi, accedere, usare le funzioni di privacy e capire cosa protegge davvero questo prototipo — e cosa no.</p>
+
+  <nav class="toc" aria-label="Indice">
+    <strong>Indice</strong>
+    <ol>
+      <li><a href="#registrazione">Registrazione e primo accesso</a></li>
+      <li><a href="#profili">Profili multipli sullo stesso dispositivo</a></li>
+      <li><a href="#contatti">Aggiungere contatti e chattare</a></li>
+      <li><a href="#nascoste">Chat nascoste e combinazione segreta</a></li>
+      <li><a href="#copertura">Profilo di copertura</a></li>
+      <li><a href="#autodistrutti">Messaggi a tempo (autodistruzione)</a></li>
+      <li><a href="#crittografia">Crittografia end-to-end: come funziona davvero</a></li>
+      <li><a href="#biometria">Sblocco biometrico (Face ID / Touch ID / impronta)</a></li>
+      <li><a href="#lingue">Cambiare lingua</a></li>
+      <li><a href="#mobile">App mobile native (iOS/Android)</a></li>
+      <li><a href="#limiti">Limiti di sicurezza dichiarati</a></li>
+      <li><a href="#problemi">Risoluzione dei problemi</a></li>
+    </ol>
+  </nav>
+
+  <section id="registrazione">
+    <h2>1. Registrazione e primo accesso</h2>
+    <p>Nella schermata iniziale, tocca "Registrati" e inserisci la tua email e uno username. Non è richiesto nessun numero di telefono.</p>
+    <p>Dopo la registrazione vedrai una sola volta tre informazioni, che devi salvare subito in un posto sicuro (un gestore di password, ad esempio):</p>
+    <ul>
+      <li><strong>Codice di accesso</strong>: è la tua "password" — a ogni apertura dell'app lo inserisci e il tuo profilo si apre automaticamente.</li>
+      <li><strong>ID pubblico</strong>: è quello che condividi con le persone che vuoi aggiungere come contatti. Non rivela la tua email.</li>
+      <li><strong>Combinazione segreta</strong>: serve per rivelare le chat nascoste (vedi la sezione dedicata).</li>
+    </ul>
+    <p class="warn">Se perdi il codice di accesso, perdi l'accesso al profilo: non esiste ancora un recupero via email reale (vedi "Limiti di sicurezza dichiarati").</p>
+  </section>
+
+  <section id="profili">
+    <h2>2. Profili multipli sullo stesso dispositivo</h2>
+    <p>Puoi creare più profili (ad esempio uno personale e uno di copertura) tutti accessibili dallo stesso dispositivo. Ogni profilo ha il suo codice di accesso: quando apri l'app e inserisci un codice, si apre automaticamente il profilo corrispondente, senza una schermata di scelta che riveli quanti profili esistono.</p>
+  </section>
+
+  <section id="contatti">
+    <h2>3. Aggiungere contatti e chattare</h2>
+    <p>Tocca "+ Aggiungi contatto" e inserisci l'ID pubblico della persona. Si apre una chat in tempo reale, cifrata end-to-end (vedi sezione 7).</p>
+  </section>
+
+  <section id="nascoste">
+    <h2>4. Chat nascoste e combinazione segreta</h2>
+    <p>Da una chat apri il menu e scegli "Nascondi/mostra questa chat". Una chat nascosta non appare più nella lista principale.</p>
+    <p>Per farla riapparire, digita la tua combinazione segreta (quella mostrata una sola volta alla registrazione) nella barra di ricerca: tutte le chat nascoste torneranno visibili finché non blocchi di nuovo l'app.</p>
+  </section>
+
+  <section id="copertura">
+    <h2>5. Profilo di copertura</h2>
+    <p>Alla registrazione puoi spuntare "Crea come profilo di copertura": è un profilo pensato per essere mostrato in caso di controllo, senza contenere indizi sull'esistenza di altri profili sullo stesso dispositivo.</p>
+  </section>
+
+  <section id="autodistrutti">
+    <h2>6. Messaggi a tempo (autodistruzione)</h2>
+    <p>Prima di inviare un messaggio, puoi scegliere dal menu a tendina un tempo di autodistruzione: 30 secondi, 5 minuti o 1 ora. Trascorso quel tempo, il messaggio viene rimosso.</p>
+  </section>
+
+  <section id="crittografia">
+    <h2>7. Crittografia end-to-end: come funziona davvero</h2>
+    <p>Questo non è uno slogan di marketing: ogni messaggio è cifrato <strong>nel tuo browser</strong>, prima di essere inviato al server, con questo schema:</p>
+    <ol>
+      <li>Al primo accesso, il tuo dispositivo genera una coppia di chiavi ECDH sulla curva P-256 (una pubblica e una privata). La chiave pubblica viene caricata sul server; la chiave privata resta solo nel tuo browser.</li>
+      <li>Quando scrivi a un contatto, il tuo browser combina la tua chiave privata con la sua chiave pubblica (scambio ECDH) e deriva, tramite HKDF-SHA256, una chiave simmetrica AES-GCM a 256 bit specifica per quella coppia di persone.</li>
+      <li>Ogni messaggio viene cifrato con quella chiave e un numero casuale (IV) diverso ogni volta, poi inviato al server già cifrato.</li>
+      <li>Il server salva e trasmette solo il testo cifrato: non può leggere il contenuto dei messaggi.</li>
+    </ol>
+    <p>Questo è lo stesso tipo di matematica (ECDH + AES-GCM) usata da molti protocolli sicuri moderni, applicato qui tramite la Web Crypto API nativa del browser, senza librerie esterne.</p>
+  </section>
+
+  <section id="biometria">
+    <h2>8. Sblocco biometrico (Face ID / Touch ID / impronta)</h2>
+    <p>Nelle impostazioni del profilo (icona ⚙️) trovi "Attiva sblocco con Face ID / impronta". Attivandolo, il tuo dispositivo crea una passkey tramite WebAuthn/FIDO2 e la registra sul server (solo la chiave pubblica, mai il dato biometrico).</p>
+    <p>Da quel momento, nella schermata di accesso apparirà un pulsante "Sblocca con biometria": lo usi al posto del codice, e il tuo sistema operativo (non l'app) verifica Face ID, Touch ID, l'impronta Android o Windows Hello. Il dato biometrico non lascia mai il tuo dispositivo.</p>
+    <p>Puoi disattivarlo in qualsiasi momento dalle stesse impostazioni.</p>
+  </section>
+
+  <section id="lingue">
+    <h2>9. Cambiare lingua</h2>
+    <p>In alto a destra, in ogni schermata dell'app, trovi un selettore di lingua. L'interfaccia è disponibile in 11 lingue: italiano, inglese, spagnolo, francese, tedesco, portoghese, arabo, cinese, hindi, russo e giapponese. La lingua scelta viene ricordata sul dispositivo.</p>
+  </section>
+
+  <section id="mobile">
+    <h2>10. App mobile native (iOS/Android)</h2>
+    <p>È pronto uno scaffold per un'app nativa (basata su Expo/React Native) che aggiunge un blocco biometrico di sistema all'apertura. La pubblicazione reale su App Store e Google Play richiede le credenziali degli account sviluppatore (Apple Developer Program e Google Play Console): una volta collegate, si potrà generare e pubblicare l'app. Fino a quel momento, la webapp resta utilizzabile da qualsiasi browser mobile e può essere "installata" sulla schermata Home come se fosse un'app.</p>
+  </section>
+
+  <section id="limiti">
+    <h2>11. Limiti di sicurezza dichiarati</h2>
+    <p>Per onestà, ecco cosa questo prototipo <strong>non</strong> fa ancora, anche se la crittografia è reale:</p>
+    <ul>
+      <li><strong>Nessun ratchet / forward secrecy</strong>: la chiave di una chat resta la stessa finché entrambe le persone non rigenerano le proprie chiavi (diversamente da protocolli come Signal, che cambiano chiave a ogni messaggio).</li>
+      <li><strong>Nessuna verifica fuori banda delle chiavi pubbliche</strong>: non c'è un "numero di sicurezza" da confrontare a voce con il contatto. In teoria, un server malevolo potrebbe sostituire una chiave pubblica con la propria (attacco man-in-the-middle). Su un server fidato per un prototipo va bene; prima di un uso ad alto rischio andrebbe aggiunta questa verifica.</li>
+      <li><strong>Chiave privata nel browser</strong>: è salvata nella memoria locale del browser (localStorage), non in un secure enclave hardware. Chi ha accesso fisico o software al dispositivo sbloccato potrebbe leggerla.</li>
+      <li><strong>Nessun invio email reale</strong>: la registrazione funziona, ma non c'è ancora un servizio email collegato per un eventuale recupero account via "magic link".</li>
+    </ul>
+  </section>
+
+  <section id="problemi">
+    <h2>12. Risoluzione dei problemi</h2>
+    <h3>"Non riesco a cifrare: il contatto non ha ancora una chiave pubblica"</h3>
+    <p>Succede se il tuo contatto non ha ancora effettuato l'accesso dopo l'ultimo aggiornamento dell'app (la chiave viene generata e caricata automaticamente al login). Chiedigli di accedere una volta: dopo potrai scrivergli normalmente.</p>
+    <h3>"Ho perso il codice di accesso"</h3>
+    <p>Al momento non esiste un recupero automatico: è necessario registrare un nuovo profilo. Conserva sempre il codice in un gestore di password.</p>
+    <h3>Lo sblocco biometrico non appare</h3>
+    <p>Richiede un dispositivo con Face ID, Touch ID, impronta o Windows Hello configurato, un browser aggiornato e una connessione HTTPS (la webapp in produzione la usa già). Deve inoltre essere stato attivato almeno una volta dalle impostazioni.</p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">Powered by <a href="https://www.simonescaffidi.it" target="_blank" rel="noopener noreferrer">www.simonescaffidi.it</a></p>
+    <nav class="footer-links" aria-label="Legale">
+      <a href="/privacy-policy.html">Privacy Policy</a>
+      <a href="/cookie-policy.html">Cookie Policy</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="cookie-banner.js"></script>
+</body>
+</html>
