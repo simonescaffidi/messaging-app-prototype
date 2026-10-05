@@ -16,11 +16,13 @@ const NAMES = {
   pt: "Português", ar: "العربية", zh: "中文", hi: "हिन्दी", ru: "Русский", ja: "日本語"
 };
 const SITE = path.join(__dirname, "..", "site");
-const PAGES = ["index", "manual", "privacy", "cookie"];
+const PAGES = ["index", "manual", "demo", "privacy", "cookie"];
+const DEMO = require("./site-i18n/demo.js");
 
 const prefix = (l) => (l === "it" ? "" : "/" + l);
 function fileName(l, page) {
   if (page === "index") return "index.html";
+  if (page === "demo") return "demo.html";
   if (page === "manual") return l === "it" ? "manuale.html" : "manual.html";
   if (page === "privacy") return "privacy-policy.html";
   return "cookie-policy.html";
@@ -62,6 +64,14 @@ function validate() {
       d[k].sections.forEach((s, i) => {
         chk(s[1].length === ref[k].sections[i][1].length, "paragrafi " + k + " #" + i, l);
       });
+    });
+  });
+  LANGS.forEach((l) => {
+    const d = DEMO[l], r = DEMO.it;
+    if (!d) { errors.push("[" + l + "] demo mancante"); return; }
+    Object.keys(r).forEach((k) => {
+      if (!(k in d)) errors.push("[" + l + "] demo: manca " + k);
+      else if (Array.isArray(r[k]) && d[k].length !== r[k].length) errors.push("[" + l + "] demo: lunghezza " + k);
     });
   });
   if (errors.length) {
@@ -110,6 +120,7 @@ function header(l, page) {
     '    <div class="header-actions">',
     '      <select class="lang-select" aria-label="' + esc(d.ui.langAria) + '" onchange="location.href=this.value">' + options + "</select>",
     '      <a href="' + url(l, "manual") + '" class="btn btn-ghost btn-sm">' + esc(d.ui.manual) + "</a>",
+    '      <a href="' + url(l, "demo") + '" class="btn btn-ghost btn-sm">' + esc(DEMO[l].nav) + "</a>",
     '      <a href="/app/" class="btn btn-primary btn-sm">' + esc(d.ui.openApp) + "</a>",
     "    </div>",
     "  </div>",
@@ -132,6 +143,7 @@ function footer(l, page) {
     '    <p class="powered-by">Powered by <a href="https://www.simonescaffidi.it" target="_blank" rel="noopener noreferrer">www.simonescaffidi.it</a></p>',
     '    <nav class="footer-links" aria-label="' + esc(d.ui.legalAria) + '">',
     '      <a href="' + url(l, "manual") + '">' + esc(d.ui.manual) + "</a>",
+    '      <a href="' + url(l, "demo") + '">' + esc(DEMO[l].nav) + "</a>",
     '      <a href="' + url(l, "privacy") + '">' + esc(d.ui.privacy) + "</a>",
     '      <a href="' + url(l, "cookie") + '">' + esc(d.ui.cookie) + "</a>",
     "    </nav>",
@@ -180,6 +192,7 @@ function landing(l) {
     '      <p class="lead">' + L.lead + "</p>",
     '      <div class="hero-actions">',
     '        <a href="/app/" class="btn btn-primary">' + L.ctaOpen + "</a>",
+    '        <a href="' + url(l, "demo") + '" class="btn btn-ghost">' + DEMO[l].cta + "</a>",
     '        <a href="#how-it-works" class="btn btn-ghost">' + L.ctaHow + "</a>",
     "      </div>",
     "    </div>",
@@ -265,6 +278,32 @@ function manual(l) {
   return wrap(l, "manual", M.title, M.description, "article", "manual", main);
 }
 
+function demo(l) {
+  const D = DEMO[l];
+  const items = D.tryItems.map((x) => "        <li>" + x + "</li>").join("\n");
+  const i18n = JSON.stringify(D).replace(/</g, "\\u003c");
+  const main = [
+    "<main>",
+    '  <div class="demo-layout">',
+    '    <div class="demo-intro">',
+    "      <h1>" + D.h1 + "</h1>",
+    '      <p class="lead">' + D.lead + "</p>",
+    '      <p class="demo-notice">' + D.notice + "</p>",
+    "      <h2>" + D.tryTitle + "</h2>",
+    '      <ol class="demo-try">',
+    items,
+    "      </ol>",
+    '      <p><a href="/app/" class="btn btn-primary">' + esc(dicts[l].ui.openApp) + "</a></p>",
+    "    </div>",
+    '    <div id="phone" class="phone" aria-label="' + esc(D.h1) + '"></div>',
+    "  </div>",
+    "</main>",
+    "<script>window.__DEMO_I18N=" + i18n + ";</script>",
+    '<script src="/demo.js"></script>'
+  ].join("\n");
+  return wrap(l, "demo", D.title, D.description, "website", "", main);
+}
+
 function legal(l, key, page) {
   const d = dicts[l];
   const P = d[key];
@@ -300,6 +339,7 @@ LANGS.forEach((l) => {
   const out = {
     index: landing(l),
     manual: manual(l),
+    demo: demo(l),
     privacy: legal(l, "privacy", "privacy"),
     cookie: legal(l, "cookie", "cookie")
   };
