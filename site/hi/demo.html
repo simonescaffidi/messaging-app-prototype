@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="hi" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>इंटरैक्टिव डेमो — निजी मैसेजिंग</title>
+<meta name="description" content="निजी मैसेजिंग अभी आज़माएँ: कोड से लॉगिन, छिपी चैट, कवर प्रोफ़ाइल, समय-सीमित संदेश और एंड-टू-एंड एन्क्रिप्शन। ब्राउज़र में सिमुलेशन, खाता नहीं चाहिए।" />
+<link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/demo.html" />
+<link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/demo.html" />
+<link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/demo.html" />
+<link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/demo.html" />
+<link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/demo.html" />
+<link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/demo.html" />
+<link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/demo.html" />
+<link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/demo.html" />
+<link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/demo.html" />
+<link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/demo.html" />
+<link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/demo.html" />
+<link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/demo.html" />
+<link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/demo.html" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="इंटरैक्टिव डेमो — निजी मैसेजिंग" />
+<meta property="og:description" content="निजी मैसेजिंग अभी आज़माएँ: कोड से लॉगिन, छिपी चैट, कवर प्रोफ़ाइल, समय-सीमित संदेश और एंड-टू-एंड एन्क्रिप्शन। ब्राउज़र में सिमुलेशन, खाता नहीं चाहिए।" />
+<meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/demo.html" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="/hi/" class="brand"><span class="lock">🔒</span> निजी मैसेजिंग</a>
+    <div class="header-actions">
+      <select class="lang-select" aria-label="भाषा" onchange="location.href=this.value"><option value="/demo.html">Italiano</option><option value="/en/demo.html">English</option><option value="/es/demo.html">Español</option><option value="/fr/demo.html">Français</option><option value="/de/demo.html">Deutsch</option><option value="/pt/demo.html">Português</option><option value="/ar/demo.html">العربية</option><option value="/zh/demo.html">中文</option><option value="/hi/demo.html" selected>हिन्दी</option><option value="/ru/demo.html">Русский</option><option value="/ja/demo.html">日本語</option></select>
+      <a href="/hi/manual.html" class="btn btn-ghost btn-sm">मैनुअल</a>
+      <a href="/hi/demo.html" class="btn btn-ghost btn-sm">डेमो</a>
+      <a href="/app/" class="btn btn-primary btn-sm">ऐप खोलें</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="demo-layout">
+    <div class="demo-intro">
+      <h1>डेमो आज़माएँ</h1>
+      <p class="lead">एक इंटरैक्टिव सिमुलेशन जो सिर्फ़ आपके ब्राउज़र में चलता है: कोई खाता नहीं, कोई डेटा नहीं भेजा जाता। असली ऐप के लिए “ऐप खोलें” बटन इस्तेमाल करें।</p>
+      <p class="demo-notice">सिम्युलेटेड डेमो: संदेश आपके डिवाइस पर ही रहते हैं। AES-GCM एन्क्रिप्शन असली है, लेकिन संपर्क और जवाब नकली हैं।</p>
+      <h2>क्या आज़माएँ</h2>
+      <ol class="demo-try">
+        <li>कोड <strong>1111</strong> (निजी प्रोफ़ाइल) या बायोमेट्रिक बटन से प्रवेश करें।</li>
+        <li>कोई चैट खोलें और <strong>30 सेकंड</strong> के टाइमर वाला संदेश भेजें: यह खुद मिट जाता है।</li>
+        <li>“सर्वर व्यू” चालू करें और देखें कि एन्क्रिप्टेड संदेश कैसा दिखता है।</li>
+        <li>मेन्यू से कोई चैट छिपाएँ, फिर खोज में <strong>7777</strong> लिखकर उसे वापस लाएँ।</li>
+        <li>लॉक करें और <strong>2222</strong> से प्रवेश करें: आपको सिर्फ़ कवर प्रोफ़ाइल दिखेगी।</li>
+      </ol>
+      <p><a href="/app/" class="btn btn-primary">ऐप खोलें</a></p>
+    </div>
+    <div id="phone" class="phone" aria-label="डेमो आज़माएँ"></div>
+  </div>
+</main>
+<script>window.__DEMO_I18N={"nav":"डेमो","cta":"डेमो आज़माएँ","title":"इंटरैक्टिव डेमो — निजी मैसेजिंग","description":"निजी मैसेजिंग अभी आज़माएँ: कोड से लॉगिन, छिपी चैट, कवर प्रोफ़ाइल, समय-सीमित संदेश और एंड-टू-एंड एन्क्रिप्शन। ब्राउज़र में सिमुलेशन, खाता नहीं चाहिए।","h1":"डेमो आज़माएँ","lead":"एक इंटरैक्टिव सिमुलेशन जो सिर्फ़ आपके ब्राउज़र में चलता है: कोई खाता नहीं, कोई डेटा नहीं भेजा जाता। असली ऐप के लिए “ऐप खोलें” बटन इस्तेमाल करें।","notice":"सिम्युलेटेड डेमो: संदेश आपके डिवाइस पर ही रहते हैं। AES-GCM एन्क्रिप्शन असली है, लेकिन संपर्क और जवाब नकली हैं।","tryTitle":"क्या आज़माएँ","tryItems":["कोड \u003cstrong>1111\u003c/strong> (निजी प्रोफ़ाइल) या बायोमेट्रिक बटन से प्रवेश करें।","कोई चैट खोलें और \u003cstrong>30 सेकंड\u003c/strong> के टाइमर वाला संदेश भेजें: यह खुद मिट जाता है।","“सर्वर व्यू” चालू करें और देखें कि एन्क्रिप्टेड संदेश कैसा दिखता है।","मेन्यू से कोई चैट छिपाएँ, फिर खोज में \u003cstrong>7777\u003c/strong> लिखकर उसे वापस लाएँ।","लॉक करें और \u003cstrong>2222\u003c/strong> से प्रवेश करें: आपको सिर्फ़ कवर प्रोफ़ाइल दिखेगी।"],"codeLabel":"एक्सेस कोड","codePh":"जैसे 1111","enter":"प्रवेश करें","bio":"फ़िंगरप्रिंट / Face ID से अनलॉक करें","bioScan":"बायोमेट्रिक जाँच हो रही है…","wrongCode":"अमान्य कोड। 1111 या 2222 आज़माएँ।","searchPh":"खोजें (या गुप्त संयोजन)","hide":"चैट छिपाएँ","unhide":"चैट दिखाएँ","hiddenTag":"छिपी","msgPh":"संदेश लिखें…","send":"भेजें","timers":["टाइमर नहीं","30 सेकंड","5 मिनट","1 घंटा"],"serverView":"सर्वर व्यू (एन्क्रिप्टेड)","lockBtn":"लॉक","e2eTag":"एंड-टू-एंड एन्क्रिप्टेड","expiresIn":"{s} सेकंड में मिट जाएगा","secretFound":"छिपी चैट दिखाई गईं","chatsTitle":"चैट","back":"वापस","empty":"कोई चैट नहीं","n1":"अन्ना","m1":"कल शाम 6 बजे मिलें?","n2":"मार्को","m2":"आज रात मैं दस्तावेज़ भेजता हूँ।","n3":"लुका","m3":"योजना पक्की है, किसी को मत बताना।","nc":"माँ","mc":"रोटी लाना मत भूलना!","replies":["बढ़िया, बाद में मिलते हैं!","मिल गया 👍","ठीक है, धन्यवाद।"]};</script>
+<script src="/demo.js"></script>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">Powered by <a href="https://www.simonescaffidi.it" target="_blank" rel="noopener noreferrer">www.simonescaffidi.it</a></p>
+    <nav class="footer-links" aria-label="कानूनी">
+      <a href="/hi/manual.html">मैनुअल</a>
+      <a href="/hi/demo.html">डेमो</a>
+      <a href="/hi/privacy-policy.html">गोपनीयता नीति</a>
+      <a href="/hi/cookie-policy.html">कुकी नीति</a>
+    </nav>
+    <nav class="footer-langs" aria-label="सभी भाषाएँ">
+      <a href="/demo.html" hreflang="it" lang="it">Italiano</a>
+      <a href="/en/demo.html" hreflang="en" lang="en">English</a>
+      <a href="/es/demo.html" hreflang="es" lang="es">Español</a>
+      <a href="/fr/demo.html" hreflang="fr" lang="fr">Français</a>
+      <a href="/de/demo.html" hreflang="de" lang="de">Deutsch</a>
+      <a href="/pt/demo.html" hreflang="pt" lang="pt">Português</a>
+      <a href="/ar/demo.html" hreflang="ar" lang="ar">العربية</a>
+      <a href="/zh/demo.html" hreflang="zh" lang="zh">中文</a>
+      <a href="/hi/demo.html" hreflang="hi" lang="hi" aria-current="true">हिन्दी</a>
+      <a href="/ru/demo.html" hreflang="ru" lang="ru">Русский</a>
+      <a href="/ja/demo.html" hreflang="ja" lang="ja">日本語</a>
+    </nav>
+  </div>
+</footer>
+<script>window.__COOKIE_I18N={"text":"हम आवश्यक तकनीकी कुकी और, आपकी सहमति से, सांख्यिकीय कुकी का उपयोग करते हैं। \u003ca href=\"/hi/privacy-policy.html\">गोपनीयता नीति\u003c/a> और \u003ca href=\"/hi/cookie-policy.html\">कुकी नीति\u003c/a> देखें।","reject":"अस्वीकार करें","customize":"अनुकूलित करें","accept":"सभी स्वीकार करें","statsQuestion":"क्या आप सांख्यिकीय कुकी स्वीकार करना चाहते हैं?"};</script>
+<script src="/cookie-banner.js"></script>
+</body>
+</html>
