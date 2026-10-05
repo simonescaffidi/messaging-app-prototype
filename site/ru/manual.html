@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Руководство пользователя — Приватные сообщения</title>
+<meta name="description" content="Полное руководство: регистрация, вход по коду, скрытые чаты, сквозное шифрование, биометрическая разблокировка и доступные языки." />
+<link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/manual.html" />
+<link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
+<link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/manual.html" />
+<link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/manual.html" />
+<link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/manual.html" />
+<link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/manual.html" />
+<link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/manual.html" />
+<link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/manual.html" />
+<link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/manual.html" />
+<link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/manual.html" />
+<link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/manual.html" />
+<link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/manual.html" />
+<link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Руководство пользователя — Приватные сообщения" />
+<meta property="og:description" content="Полное руководство: регистрация, вход по коду, скрытые чаты, сквозное шифрование, биометрическая разблокировка и доступные языки." />
+<meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/manual.html" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body class="manual">
+
+<header class="site-header">
+  <div class="container">
+    <a href="/ru/" class="brand"><span class="lock">🔒</span> Приватные сообщения</a>
+    <div class="header-actions">
+      <select class="lang-select" aria-label="Язык" onchange="location.href=this.value"><option value="/manuale.html">Italiano</option><option value="/en/manual.html">English</option><option value="/es/manual.html">Español</option><option value="/fr/manual.html">Français</option><option value="/de/manual.html">Deutsch</option><option value="/pt/manual.html">Português</option><option value="/ar/manual.html">العربية</option><option value="/zh/manual.html">中文</option><option value="/hi/manual.html">हिन्दी</option><option value="/ru/manual.html" selected>Русский</option><option value="/ja/manual.html">日本語</option></select>
+      <a href="/ru/manual.html" class="btn btn-ghost btn-sm">Руководство</a>
+      <a href="/app/" class="btn btn-primary btn-sm">Открыть приложение</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <h1>Руководство пользователя</h1>
+  <p class="lead">Полное руководство по «Приватным сообщениям»: как зарегистрироваться, войти, пользоваться функциями приватности и понять, что этот прототип действительно защищает — а что нет.</p>
+
+  <nav class="toc" aria-label="Содержание">
+    <strong>Содержание</strong>
+    <ol>
+      <li><a href="#signup">Регистрация и первый вход</a></li>
+      <li><a href="#profiles">Несколько профилей на одном устройстве</a></li>
+      <li><a href="#contacts">Добавление контактов и общение</a></li>
+      <li><a href="#hidden">Скрытые чаты и секретная комбинация</a></li>
+      <li><a href="#cover">Профиль-прикрытие</a></li>
+      <li><a href="#timed">Сообщения с таймером (самоуничтожение)</a></li>
+      <li><a href="#encryption">Сквозное шифрование: как оно работает на самом деле</a></li>
+      <li><a href="#biometric">Биометрическая разблокировка (Face ID / Touch ID / отпечаток)</a></li>
+      <li><a href="#languages">Смена языка</a></li>
+      <li><a href="#mobile">Нативные мобильные приложения (iOS/Android)</a></li>
+      <li><a href="#limits">Заявленные ограничения безопасности</a></li>
+      <li><a href="#troubleshooting">Устранение неполадок</a></li>
+    </ol>
+  </nav>
+
+  <section id="signup">
+    <h2>1. Регистрация и первый вход</h2>
+    <p>На стартовом экране нажмите «Зарегистрируйтесь» и введите e-mail и имя пользователя. Номер телефона не нужен.</p>
+    <p>После регистрации вы один раз увидите три данных, которые нужно сразу сохранить в надёжном месте (например, в менеджере паролей):</p>
+    <ul>
+      <li><strong>Код доступа</strong>: это ваш «пароль» — при каждом открытии приложения вы вводите его, и профиль открывается автоматически.</li>
+      <li><strong>Публичный ID</strong>: его вы сообщаете тем, кого хотите добавить в контакты. Он не раскрывает ваш e-mail.</li>
+      <li><strong>Секретная комбинация</strong>: нужна, чтобы показать скрытые чаты (см. соответствующий раздел).</li>
+    </ul>
+    <p class="warn">Если вы потеряете код доступа, вы потеряете доступ к профилю: настоящего восстановления по e-mail пока нет (см. «Заявленные ограничения безопасности»).</p>
+  </section>
+
+  <section id="profiles">
+    <h2>2. Несколько профилей на одном устройстве</h2>
+    <p>Вы можете создать несколько профилей (например, личный и профиль-прикрытие), и все они доступны с одного устройства. У каждого профиля свой код доступа: когда вы открываете приложение и вводите код, автоматически открывается нужный профиль — без экрана выбора, который выдал бы, сколько профилей существует.</p>
+  </section>
+
+  <section id="contacts">
+    <h2>3. Добавление контактов и общение</h2>
+    <p>Нажмите «+ Добавить контакт» и введите публичный ID человека. Откроется чат в реальном времени со сквозным шифрованием (см. раздел 7).</p>
+  </section>
+
+  <section id="hidden">
+    <h2>4. Скрытые чаты и секретная комбинация</h2>
+    <p>В чате откройте меню и выберите «Скрыть/показать этот чат». Скрытый чат больше не отображается в основном списке.</p>
+    <p>Чтобы он появился снова, введите секретную комбинацию (ту, что показывалась один раз при регистрации) в строке поиска: все скрытые чаты снова станут видны, пока вы снова не заблокируете приложение.</p>
+  </section>
+
+  <section id="cover">
+    <h2>5. Профиль-прикрытие</h2>
+    <p>При регистрации можно отметить «Создать как профиль-прикрытие»: это профиль, который можно показать при проверке, без намёков на существование других профилей на том же устройстве.</p>
+  </section>
+
+  <section id="timed">
+    <h2>6. Сообщения с таймером (самоуничтожение)</h2>
+    <p>Перед отправкой сообщения в выпадающем меню можно выбрать время самоуничтожения: 30 секунд, 5 минут или 1 час. По истечении этого времени сообщение удаляется.</p>
+  </section>
+
+  <section id="encryption">
+    <h2>7. Сквозное шифрование: как оно работает на самом деле</h2>
+    <p>Это не маркетинговый лозунг: каждое сообщение шифруется <strong>в вашем браузере</strong> до отправки на сервер по следующей схеме:</p>
+    <ol>
+      <li>При первом входе ваше устройство генерирует пару ключей ECDH на кривой P-256 (открытый и закрытый). Открытый ключ загружается на сервер; закрытый остаётся только в вашем браузере.</li>
+      <li>Когда вы пишете контакту, ваш браузер объединяет ваш закрытый ключ с его открытым ключом (обмен ECDH) и с помощью HKDF-SHA256 получает симметричный 256-битный ключ AES-GCM, специфичный для этой пары людей.</li>
+      <li>Каждое сообщение шифруется этим ключом и каждый раз новым случайным числом (IV), после чего отправляется на сервер уже зашифрованным.</li>
+      <li>Сервер хранит и передаёт только шифртекст: он не может прочитать содержимое сообщений.</li>
+    </ol>
+    <p>Это та же математика (ECDH + AES-GCM), которую используют многие современные защищённые протоколы; здесь она применяется через встроенный в браузер Web Crypto API, без внешних библиотек.</p>
+  </section>
+
+  <section id="biometric">
+    <h2>8. Биометрическая разблокировка (Face ID / Touch ID / отпечаток)</h2>
+    <p>В настройках профиля (значок ⚙️) есть пункт «Включить разблокировку по Face ID / отпечатку». При включении ваше устройство создаёт passkey через WebAuthn/FIDO2 и регистрирует его на сервере (только открытый ключ, никогда не биометрические данные).</p>
+    <p>После этого на экране входа появится кнопка «Разблокировать по биометрии»: используйте её вместо кода, а Face ID, Touch ID, отпечаток Android или Windows Hello проверяет ваша операционная система (а не приложение). Биометрические данные никогда не покидают ваше устройство.</p>
+    <p>Вы можете отключить её в любой момент в тех же настройках.</p>
+  </section>
+
+  <section id="languages">
+    <h2>9. Смена языка</h2>
+    <p>В верхнем углу каждого экрана приложения есть выбор языка. Этот сайт тоже доступен на тех же 11 языках: итальянском, английском, испанском, французском, немецком, португальском, арабском, китайском, хинди, русском и японском. Выбранный в приложении язык запоминается на устройстве.</p>
+  </section>
+
+  <section id="mobile">
+    <h2>10. Нативные мобильные приложения (iOS/Android)</h2>
+    <p>Готова основа нативного приложения (на базе Expo/React Native), которая добавляет системную биометрическую блокировку при запуске. Для настоящей публикации в App Store и Google Play нужны данные аккаунтов разработчика (Apple Developer Program и Google Play Console): после подключения приложение можно будет собрать и опубликовать. До тех пор веб-приложение работает в любом мобильном браузере и может быть «установлено» на главный экран как обычное приложение.</p>
+  </section>
+
+  <section id="limits">
+    <h2>11. Заявленные ограничения безопасности</h2>
+    <p>Честно говоря, вот что этот прототип пока <strong>не</strong> делает, хотя шифрование настоящее:</p>
+    <ul>
+      <li><strong>Нет ratchet / прямой секретности</strong>: ключ чата остаётся прежним, пока оба участника не сгенерируют ключи заново (в отличие от протоколов вроде Signal, меняющих ключ с каждым сообщением).</li>
+      <li><strong>Нет внеполосной проверки публичных ключей</strong>: нет «номера безопасности», который можно сверить с контактом голосом. Теоретически вредоносный сервер мог бы подменить публичный ключ своим (атака «человек посередине»). Для прототипа на доверенном сервере это допустимо; перед использованием в условиях высокого риска такую проверку нужно добавить.</li>
+      <li><strong>Закрытый ключ в браузере</strong>: он хранится в локальном хранилище браузера (localStorage), а не в аппаратном защищённом анклаве. Тот, кто получит физический или программный доступ к разблокированному устройству, сможет его прочитать.</li>
+      <li><strong>Нет настоящей отправки e-mail</strong>: регистрация работает, но почтовый сервис для возможного восстановления аккаунта по «волшебной ссылке» ещё не подключён.</li>
+    </ul>
+  </section>
+
+  <section id="troubleshooting">
+    <h2>12. Устранение неполадок</h2>
+    <h3>«Не удаётся зашифровать: у контакта ещё нет публичного ключа»</h3>
+    <p>Так бывает, если ваш контакт не входил в приложение после последнего обновления (ключ создаётся и загружается автоматически при входе). Попросите его войти один раз — после этого вы сможете писать ему как обычно.</p>
+    <h3>«Я потерял код доступа»</h3>
+    <p>Автоматического восстановления сейчас нет: нужно зарегистрировать новый профиль. Всегда храните код в менеджере паролей.</p>
+    <h3>Не появляется биометрическая разблокировка</h3>
+    <p>Нужно устройство с настроенными Face ID, Touch ID, отпечатком или Windows Hello, актуальный браузер и HTTPS-соединение (рабочее веб-приложение его уже использует). Также она должна быть включена хотя бы один раз в настройках.</p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">Powered by <a href="https://www.simonescaffidi.it" target="_blank" rel="noopener noreferrer">www.simonescaffidi.it</a></p>
+    <nav class="footer-links" aria-label="Правовая информация">
+      <a href="/ru/manual.html">Руководство</a>
+      <a href="/ru/privacy-policy.html">Политика конфиденциальности</a>
+      <a href="/ru/cookie-policy.html">Политика использования cookie</a>
+    </nav>
+    <nav class="footer-langs" aria-label="Все языки">
+      <a href="/manuale.html" hreflang="it" lang="it">Italiano</a>
+      <a href="/en/manual.html" hreflang="en" lang="en">English</a>
+      <a href="/es/manual.html" hreflang="es" lang="es">Español</a>
+      <a href="/fr/manual.html" hreflang="fr" lang="fr">Français</a>
+      <a href="/de/manual.html" hreflang="de" lang="de">Deutsch</a>
+      <a href="/pt/manual.html" hreflang="pt" lang="pt">Português</a>
+      <a href="/ar/manual.html" hreflang="ar" lang="ar">العربية</a>
+      <a href="/zh/manual.html" hreflang="zh" lang="zh">中文</a>
+      <a href="/hi/manual.html" hreflang="hi" lang="hi">हिन्दी</a>
+      <a href="/ru/manual.html" hreflang="ru" lang="ru" aria-current="true">Русский</a>
+      <a href="/ja/manual.html" hreflang="ja" lang="ja">日本語</a>
+    </nav>
+  </div>
+</footer>
+<script>window.__COOKIE_I18N={"text":"Мы используем необходимые технические cookie и, с вашего согласия, статистические cookie. См. \u003ca href=\"/ru/privacy-policy.html\">Политику конфиденциальности\u003c/a> и \u003ca href=\"/ru/cookie-policy.html\">Политику использования cookie\u003c/a>.","reject":"Отклонить","customize":"Настроить","accept":"Принять все","statsQuestion":"Принять статистические cookie?"};</script>
+<script src="/cookie-banner.js"></script>
+</body>
+</html>
