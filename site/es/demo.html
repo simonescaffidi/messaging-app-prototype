@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Demo interactiva — Mensajería Privada</title>
+<meta name="description" content="Prueba Mensajería Privada ahora: acceso por código, chats ocultos, perfil de cobertura, mensajes temporales y cifrado de extremo a extremo. Simulación en el navegador, sin cuenta." />
+<link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/demo.html" />
+<link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/demo.html" />
+<link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/demo.html" />
+<link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/demo.html" />
+<link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/demo.html" />
+<link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/demo.html" />
+<link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/demo.html" />
+<link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/demo.html" />
+<link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/demo.html" />
+<link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/demo.html" />
+<link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/demo.html" />
+<link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/demo.html" />
+<link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/demo.html" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Demo interactiva — Mensajería Privada" />
+<meta property="og:description" content="Prueba Mensajería Privada ahora: acceso por código, chats ocultos, perfil de cobertura, mensajes temporales y cifrado de extremo a extremo. Simulación en el navegador, sin cuenta." />
+<meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/es/demo.html" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="/es/" class="brand"><span class="lock">🔒</span> Mensajería Privada</a>
+    <div class="header-actions">
+      <select class="lang-select" aria-label="Idioma" onchange="location.href=this.value"><option value="/demo.html">Italiano</option><option value="/en/demo.html">English</option><option value="/es/demo.html" selected>Español</option><option value="/fr/demo.html">Français</option><option value="/de/demo.html">Deutsch</option><option value="/pt/demo.html">Português</option><option value="/ar/demo.html">العربية</option><option value="/zh/demo.html">中文</option><option value="/hi/demo.html">हिन्दी</option><option value="/ru/demo.html">Русский</option><option value="/ja/demo.html">日本語</option></select>
+      <a href="/es/manual.html" class="btn btn-ghost btn-sm">Manual</a>
+      <a href="/es/demo.html" class="btn btn-ghost btn-sm">Demo</a>
+      <a href="/app/" class="btn btn-primary btn-sm">Abrir la app</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="demo-layout">
+    <div class="demo-intro">
+      <h1>Prueba la demo</h1>
+      <p class="lead">Una simulación interactiva que funciona solo en tu navegador: sin cuenta y sin enviar datos. Para la app real usa el botón «Abrir la app».</p>
+      <p class="demo-notice">Demo simulada: los mensajes se quedan en tu dispositivo. El cifrado AES-GCM es real, pero los contactos y las respuestas son falsos.</p>
+      <h2>Qué probar</h2>
+      <ol class="demo-try">
+        <li>Entra con el código <strong>1111</strong> (perfil personal) o con el botón biométrico.</li>
+        <li>Abre un chat y envía un mensaje con temporizador de <strong>30 segundos</strong>: se autodestruye.</li>
+        <li>Activa «Vista del servidor» para ver cómo se ve un mensaje cifrado.</li>
+        <li>Oculta un chat desde el menú y escribe <strong>7777</strong> en la búsqueda para recuperarlo.</li>
+        <li>Bloquea y entra con <strong>2222</strong>: solo verás el perfil de cobertura.</li>
+      </ol>
+      <p><a href="/app/" class="btn btn-primary">Abrir la app</a></p>
+    </div>
+    <div id="phone" class="phone" aria-label="Prueba la demo"></div>
+  </div>
+</main>
+<script>window.__DEMO_I18N={"nav":"Demo","cta":"Prueba la demo","title":"Demo interactiva — Mensajería Privada","description":"Prueba Mensajería Privada ahora: acceso por código, chats ocultos, perfil de cobertura, mensajes temporales y cifrado de extremo a extremo. Simulación en el navegador, sin cuenta.","h1":"Prueba la demo","lead":"Una simulación interactiva que funciona solo en tu navegador: sin cuenta y sin enviar datos. Para la app real usa el botón «Abrir la app».","notice":"Demo simulada: los mensajes se quedan en tu dispositivo. El cifrado AES-GCM es real, pero los contactos y las respuestas son falsos.","tryTitle":"Qué probar","tryItems":["Entra con el código \u003cstrong>1111\u003c/strong> (perfil personal) o con el botón biométrico.","Abre un chat y envía un mensaje con temporizador de \u003cstrong>30 segundos\u003c/strong>: se autodestruye.","Activa «Vista del servidor» para ver cómo se ve un mensaje cifrado.","Oculta un chat desde el menú y escribe \u003cstrong>7777\u003c/strong> en la búsqueda para recuperarlo.","Bloquea y entra con \u003cstrong>2222\u003c/strong>: solo verás el perfil de cobertura."],"codeLabel":"Código de acceso","codePh":"Ej. 1111","enter":"Entrar","bio":"Desbloquear con huella / Face ID","bioScan":"Verificando biometría…","wrongCode":"Código no válido. Prueba 1111 o 2222.","searchPh":"Buscar (o combinación secreta)","hide":"Ocultar chat","unhide":"Mostrar chat","hiddenTag":"oculto","msgPh":"Escribe un mensaje…","send":"Enviar","timers":["Sin temporizador","30 segundos","5 minutos","1 hora"],"serverView":"Vista del servidor (cifrado)","lockBtn":"Bloquear","e2eTag":"Cifrado de extremo a extremo","expiresIn":"se borra en {s}s","secretFound":"Chats ocultos mostrados","chatsTitle":"Chats","back":"Atrás","empty":"Sin chats","n1":"Anna","m1":"¿Nos vemos mañana a las 18:00?","n2":"Marco","m2":"Te mando los documentos esta noche.","n3":"Luca","m3":"El plan está confirmado, no se lo digas a nadie.","nc":"Mamá","mc":"¡Acuérdate de comprar pan!","replies":["¡Perfecto, hasta luego!","Recibido 👍","Vale, gracias."]};</script>
+<script src="/demo.js"></script>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">Powered by <a href="https://www.simonescaffidi.it" target="_blank" rel="noopener noreferrer">www.simonescaffidi.it</a></p>
+    <nav class="footer-links" aria-label="Legal">
+      <a href="/es/manual.html">Manual</a>
+      <a href="/es/demo.html">Demo</a>
+      <a href="/es/privacy-policy.html">Política de privacidad</a>
+      <a href="/es/cookie-policy.html">Política de cookies</a>
+    </nav>
+    <nav class="footer-langs" aria-label="Todos los idiomas">
+      <a href="/demo.html" hreflang="it" lang="it">Italiano</a>
+      <a href="/en/demo.html" hreflang="en" lang="en">English</a>
+      <a href="/es/demo.html" hreflang="es" lang="es" aria-current="true">Español</a>
+      <a href="/fr/demo.html" hreflang="fr" lang="fr">Français</a>
+      <a href="/de/demo.html" hreflang="de" lang="de">Deutsch</a>
+      <a href="/pt/demo.html" hreflang="pt" lang="pt">Português</a>
+      <a href="/ar/demo.html" hreflang="ar" lang="ar">العربية</a>
+      <a href="/zh/demo.html" hreflang="zh" lang="zh">中文</a>
+      <a href="/hi/demo.html" hreflang="hi" lang="hi">हिन्दी</a>
+      <a href="/ru/demo.html" hreflang="ru" lang="ru">Русский</a>
+      <a href="/ja/demo.html" hreflang="ja" lang="ja">日本語</a>
+    </nav>
+  </div>
+</footer>
+<script>window.__COOKIE_I18N={"text":"Usamos cookies técnicas necesarias y, con tu consentimiento, cookies estadísticas. Consulta la \u003ca href=\"/es/privacy-policy.html\">Política de privacidad\u003c/a> y la \u003ca href=\"/es/cookie-policy.html\">Política de cookies\u003c/a>.","reject":"Rechazar","customize":"Personalizar","accept":"Aceptar todas","statsQuestion":"¿Quieres aceptar las cookies estadísticas?"};</script>
+<script src="/cookie-banner.js"></script>
+</body>
+</html>
