@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>用户手册 — 私密通讯</title>
-<meta name="description" content="完整指南：注册、访问码登录、隐藏聊天、端到端加密、生物识别解锁和可用语言。" />
+<meta name="description" content="完整指南：注册、用户名与密码登录、隐藏聊天、端到端加密、生物识别解锁和可用语言。" />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/manual.html" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
 <link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/manual.html" />
@@ -20,7 +20,7 @@
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="用户手册 — 私密通讯" />
-<meta property="og:description" content="完整指南：注册、访问码登录、隐藏聊天、端到端加密、生物识别解锁和可用语言。" />
+<meta property="og:description" content="完整指南：注册、用户名与密码登录、隐藏聊天、端到端加密、生物识别解锁和可用语言。" />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/manual.html" />
 <meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -67,16 +67,16 @@
     <p>在起始界面点击“注册”，输入邮箱和用户名。无需手机号。</p>
     <p>注册后你只会看到一次以下三项信息，请立即保存在安全的地方（例如密码管理器）：</p>
     <ul>
-      <li><strong>访问码</strong>：相当于你的“密码”——每次打开应用时输入，你的资料会自动打开。</li>
+      <li><strong>用户名和密码</strong>：用户名是第一个字段，密码决定打开哪个资料。同一个用户名下可以有多个资料，各有自己的密码。</li>
       <li><strong>公开 ID</strong>：你分享给想添加为联系人的人。它不会泄露你的邮箱。</li>
       <li><strong>秘密组合</strong>：用于显示隐藏聊天（见相关章节）。</li>
     </ul>
-    <p class="warn">如果丢失访问码，就会失去对该资料的访问：目前还没有真正的邮件找回功能（见“已声明的安全限制”）。</p>
+    <p class="warn">如果丢失密码，就无法再访问该资料：目前还没有真正的邮件找回功能（见“已声明的安全限制”）。</p>
   </section>
 
   <section id="profiles">
     <h2>2. 同一设备上的多个资料</h2>
-    <p>你可以创建多个资料（例如一个个人资料和一个伪装资料），都可从同一设备访问。每个资料有自己的访问码：打开应用并输入访问码时，对应的资料会自动打开，不会有暴露资料数量的选择界面。</p>
+    <p>你可以用同一个用户名、不同的密码创建多个资料（例如个人资料和伪装资料）。输入用户名和密码后会打开对应资料，没有会暴露资料数量的选择界面。同一用户名下的两个资料不能使用相同的密码。</p>
   </section>
 
   <section id="contacts">
@@ -115,7 +115,7 @@
   <section id="biometric">
     <h2>8. 生物识别解锁（Face ID / Touch ID / 指纹）</h2>
     <p>在资料设置（⚙️ 图标）中可以找到“启用 Face ID / 指纹解锁”。启用后，你的设备会通过 WebAuthn/FIDO2 创建通行密钥（passkey）并注册到服务器（仅公钥，绝不包含生物识别数据）。</p>
-    <p>此后，登录界面会出现“使用生物识别解锁”按钮：用它代替访问码，由你的操作系统（而非应用）验证 Face ID、Touch ID、Android 指纹或 Windows Hello。生物识别数据绝不会离开你的设备。</p>
+    <p>此后登录界面会出现“生物识别解锁”按钮：用它代替密码，由操作系统（而非应用）验证 Face ID、Touch ID、Android 指纹或 Windows Hello。生物特征数据绝不会离开你的设备。</p>
     <p>你可以随时在同一设置中关闭它。</p>
   </section>
 
@@ -144,8 +144,8 @@
     <h2>12. 故障排除</h2>
     <h3>“无法加密：联系人还没有公钥”</h3>
     <p>如果你的联系人在应用最近一次更新后还没有登录过，就会出现这种情况（密钥在登录时自动生成并上传）。请让对方登录一次，之后你就可以正常给他发消息了。</p>
-    <h3>“我丢失了访问码”</h3>
-    <p>目前没有自动找回功能：需要重新注册一个新资料。请始终把访问码保存在密码管理器中。</p>
+    <h3>“我忘记了密码”</h3>
+    <p>目前没有自动找回功能，需要注册新的资料。请始终把密码保存在密码管理器中。</p>
     <h3>没有出现生物识别解锁</h3>
     <p>需要设备已设置 Face ID、Touch ID、指纹或 Windows Hello，浏览器为最新版本，并使用 HTTPS 连接（正式环境的网页应用已使用）。此外，还必须至少在设置中启用过一次。</p>
   </section>
