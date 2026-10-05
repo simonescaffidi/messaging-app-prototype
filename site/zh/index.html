@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>私密通讯 — 多资料、隐藏聊天的私密聊天应用</title>
+<meta name="description" content="真正的端到端加密、生物识别解锁、多个资料与隐藏聊天的私密聊天。支持 11 种语言，无需手机号。" />
+<link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/" />
+<link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
+<link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/" />
+<link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/" />
+<link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/" />
+<link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/" />
+<link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/" />
+<link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/" />
+<link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/" />
+<link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/" />
+<link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/" />
+<link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/" />
+<link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="私密通讯 — 原型" />
+<meta property="og:description" content="端到端加密、生物识别解锁、多资料、隐藏聊天和伪装资料，支持 11 种语言。" />
+<meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="/zh/" class="brand"><span class="lock">🔒</span> 私密通讯</a>
+    <div class="header-actions">
+      <select class="lang-select" aria-label="语言" onchange="location.href=this.value"><option value="/">Italiano</option><option value="/en/">English</option><option value="/es/">Español</option><option value="/fr/">Français</option><option value="/de/">Deutsch</option><option value="/pt/">Português</option><option value="/ar/">العربية</option><option value="/zh/" selected>中文</option><option value="/hi/">हिन्दी</option><option value="/ru/">Русский</option><option value="/ja/">日本語</option></select>
+      <a href="/zh/manual.html" class="btn btn-ghost btn-sm">手册</a>
+      <a href="/app/" class="btn btn-primary btn-sm">打开应用</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container">
+      <span class="badge">功能原型</span>
+      <h1>访问码就是你的身份的聊天</h1>
+      <p class="lead">无需手机号。一个访问码打开你的资料，另一个访问码打开另一个资料。隐藏聊天、伪装资料、会自毁的消息。</p>
+      <div class="hero-actions">
+        <a href="/app/" class="btn btn-primary">打开应用 →</a>
+        <a href="#how-it-works" class="btn btn-ghost">了解如何运作</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="container">
+      <h2>你可以做什么</h2>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="icon">🔑</div>
+          <h3>访问码登录</h3>
+          <p>每个访问码都会自动打开对应的资料。没有选择界面：访问码<em>就是</em>身份。</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🪪</div>
+          <h3>多个资料</h3>
+          <p>同一设备上可有多个资料，每个资料拥有独立的联系人、聊天和设置。</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🙈</div>
+          <h3>隐藏聊天</h3>
+          <p>把对话从主列表中隐藏。只有在搜索框输入秘密组合后才会重新出现。</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🎭</div>
+          <h3>伪装资料</h3>
+          <p>创建一个无害的资料，以备检查时展示，不留下存在其他资料的任何线索。</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">💣</div>
+          <h3>限时消息</h3>
+          <p>发送在 30 秒、5 分钟或 1 小时后自毁的消息。</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">📵</div>
+          <h3>无需手机号</h3>
+          <p>通过邮箱注册，公开 ID 与邮箱地址分离：你的邮箱永远不会被他人看到。</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🔐</div>
+          <h3>真正的端到端加密</h3>
+          <p>每条消息在发出前都会在浏览器中用 ECDH（P-256）+ 256 位 AES-GCM 加密：服务器只能看到密文，绝不会看到明文内容。</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🫆</div>
+          <h3>生物识别解锁</h3>
+          <p>通过真正的 WebAuthn/FIDO2 使用 Face ID、Touch ID、Android 指纹或 Windows Hello：任何生物识别数据都不会离开你的设备。</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🌍</div>
+          <h3>11 种语言</h3>
+          <p>应用和网站提供意大利语、英语、西班牙语、法语、德语、葡萄牙语、阿拉伯语、中文、印地语、俄语和日语版本。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="how" id="how-it-works">
+    <div class="container">
+      <h2>如何运作</h2>
+      <div class="steps">
+        <div class="step">
+          <h3>注册</h3>
+          <p>邮箱和用户名：你会获得一个访问码、一个公开 ID 和一个秘密组合。请妥善保存：它们不会再次显示。</p>
+        </div>
+        <div class="step">
+          <h3>用访问码登录</h3>
+          <p>每次打开应用时输入访问码：对应的资料会自动打开。</p>
+        </div>
+        <div class="step">
+          <h3>添加联系人</h3>
+          <p>通过对方的公开 ID 搜索，并开始实时聊天。</p>
+        </div>
+        <div class="step">
+          <h3>按需隐藏</h3>
+          <p>在搜索栏输入秘密组合，需要时即可显示隐藏聊天。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="disclaimer">
+    <div class="container">
+      <h2>它是什么，不是什么</h2>
+      <div class="disclaimer-box">
+        <p><strong>这是一个功能原型</strong>，而不是成品。消息采用端到端加密（ECDH P-256 + 256 位 AES-GCM，密钥由 HKDF-SHA256 派生）：服务器永远看不到明文。生物识别解锁使用真正的 WebAuthn/FIDO2。仍存在一些已知限制，已在<a href="/zh/manual.html">用户手册</a>中坦率说明：目前尚无“类似 Signal”的具备前向保密的棘轮机制；没有对公钥的带外验证（因此理论上恶意服务器可能替换公钥）；私钥保存在浏览器中，没有硬件安全隔区；用于找回账户的真实邮件发送也尚未接入。适合体验真实的安全性，但尚不能“抵御国家级对手”——暂不适用于高风险对话。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="disclaimer">
+    <div class="container">
+      <h2>iOS 和 Android 原生应用</h2>
+      <div class="disclaimer-box">
+        <p>原生应用的基础框架（Expo/React Native，带系统级生物识别锁）已在项目代码中就绪。要发布到 App Store 和 Google Play，需要开发者账户凭据（Apple Developer Program 和 Google Play Console）：在关联之前，应用仍以网页应用形式提供，可在任何手机浏览器中使用，并可通过“添加到主屏幕”安装为应用。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container">
+      <h2>试用原型</h2>
+      <p>只需一个邮箱和一个用户名，即可创建你的第一个资料。</p>
+      <a href="/app/" class="btn btn-primary">打开应用 →</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">Powered by <a href="https://www.simonescaffidi.it" target="_blank" rel="noopener noreferrer">www.simonescaffidi.it</a></p>
+    <nav class="footer-links" aria-label="法律信息">
+      <a href="/zh/manual.html">手册</a>
+      <a href="/zh/privacy-policy.html">隐私政策</a>
+      <a href="/zh/cookie-policy.html">Cookie 政策</a>
+    </nav>
+    <nav class="footer-langs" aria-label="所有语言">
+      <a href="/" hreflang="it" lang="it">Italiano</a>
+      <a href="/en/" hreflang="en" lang="en">English</a>
+      <a href="/es/" hreflang="es" lang="es">Español</a>
+      <a href="/fr/" hreflang="fr" lang="fr">Français</a>
+      <a href="/de/" hreflang="de" lang="de">Deutsch</a>
+      <a href="/pt/" hreflang="pt" lang="pt">Português</a>
+      <a href="/ar/" hreflang="ar" lang="ar">العربية</a>
+      <a href="/zh/" hreflang="zh" lang="zh" aria-current="true">中文</a>
+      <a href="/hi/" hreflang="hi" lang="hi">हिन्दी</a>
+      <a href="/ru/" hreflang="ru" lang="ru">Русский</a>
+      <a href="/ja/" hreflang="ja" lang="ja">日本語</a>
+    </nav>
+  </div>
+</footer>
+<script>window.__COOKIE_I18N={"text":"我们使用必要的技术性 Cookie，并在您同意后使用统计类 Cookie。请查看\u003ca href=\"/zh/privacy-policy.html\">隐私政策\u003c/a>和 \u003ca href=\"/zh/cookie-policy.html\">Cookie 政策\u003c/a>。","reject":"拒绝","customize":"自定义","accept":"全部接受","statsQuestion":"是否接受统计类 Cookie？"};</script>
+<script src="/cookie-banner.js"></script>
+</body>
+</html>
