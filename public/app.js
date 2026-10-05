@@ -60,15 +60,16 @@ $$(".tab-btn").forEach((btn) => {
 $("#btn-register").addEventListener("click", async () => {
   const email = $("#reg-email").value.trim();
   const username = $("#reg-username").value.trim();
+  const password = $("#reg-password").value;
   const isCover = $("#reg-cover").checked;
   $("#register-error").textContent = "";
-  if (!email || !username) {
-    $("#register-error").textContent = I18N.t("regEmailLabel") + " / " + I18N.t("regUsernameLabel");
+  if (!email || !username || password.length < 8) {
+    $("#register-error").textContent = I18N.t("regEmailLabel") + " / " + I18N.t("regUsernameLabel") + " / " + I18N.t("regPasswordLabel") + " (min. 8)";
     return;
   }
   try {
-    const data = await api("/api/register", { method: "POST", body: JSON.stringify({ email, username, isCover }) });
-    $("#cred-code").textContent = data.accessCode;
+    const data = await api("/api/register", { method: "POST", body: JSON.stringify({ email, username, password, isCover }) });
+    $("#reg-password").value = "";
     $("#cred-publicid").textContent = data.publicId;
     $("#cred-combo").textContent = data.secretCombo;
     $("#credentials-modal").classList.remove("hidden");
@@ -84,18 +85,19 @@ $("#btn-cred-ok").addEventListener("click", () => {
 
 // ---------- LOGIN (codice) ----------
 $("#btn-login").addEventListener("click", doLogin);
-$("#login-code").addEventListener("keydown", (e) => { if (e.key === "Enter") doLogin(); });
+["#login-username", "#login-password"].forEach((id) => $(id).addEventListener("keydown", (e) => { if (e.key === "Enter") doLogin(); }));
 
 async function doLogin() {
-  const accessCode = $("#login-code").value.trim();
+  const username = $("#login-username").value.trim();
+  const password = $("#login-password").value;
   $("#login-error").textContent = "";
   try {
-    const data = await api("/api/login", { method: "POST", body: JSON.stringify({ accessCode }) });
+    const data = await api("/api/login", { method: "POST", body: JSON.stringify({ username, password }) });
     state.token = data.token;
     state.me = data.profile;
     await enterApp();
   } catch (e) {
-    $("#login-error").textContent = "Codice non valido";
+    $("#login-error").textContent = e.message && /tentativi/.test(e.message) ? e.message : I18N.t("loginError");
   }
 }
 
@@ -167,7 +169,7 @@ $("#btn-logout").addEventListener("click", () => {
   if (state.ws) state.ws.close();
   $("#app-screen").classList.add("hidden");
   $("#auth-screen").classList.remove("hidden");
-  $("#login-code").value = "";
+  $("#login-password").value = "";
   $("#search-box").value = "";
   refreshBiometricLoginButton();
 });

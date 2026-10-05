@@ -20,13 +20,15 @@
     <p class="subtitle" data-i18n="subtitle">Prototipo — nessuna crittografia reale, solo demo funzionale</p>
 
     <div class="tabs">
-      <button class="tab-btn active" data-tab="login" data-i18n="tabLogin">Ho un codice</button>
+      <button class="tab-btn active" data-tab="login" data-i18n="tabLogin">Accedi</button>
       <button class="tab-btn" data-tab="register" data-i18n="tabRegister">Registrati</button>
     </div>
 
     <div id="tab-login" class="tab-panel active">
-      <label data-i18n="loginCodeLabel">Codice di accesso</label>
-      <input id="login-code" type="text" data-i18n-placeholder="loginCodePlaceholder" placeholder="XXXX-XXXX-XXXX" maxlength="24" autocapitalize="characters" spellcheck="false" autocomplete="off" />
+      <label data-i18n="loginUserLabel">Username</label>
+      <input id="login-username" type="text" maxlength="40" autocapitalize="none" spellcheck="false" autocomplete="username" />
+      <label data-i18n="loginPassLabel">Password</label>
+      <input id="login-password" type="password" maxlength="128" autocomplete="current-password" />
       <button id="btn-login" class="primary" data-i18n="btnLogin">Entra</button>
       <button id="btn-biometric-login" class="secondary hidden" data-i18n="btnBiometricLogin">🔐 Sblocca con biometria</button>
       <p class="hint" data-i18n="loginHint">Ogni codice apre automaticamente il profilo associato. Nessuna schermata di scelta.</p>
@@ -37,7 +39,9 @@
       <label data-i18n="regEmailLabel">Email</label>
       <input id="reg-email" type="email" data-i18n-placeholder="regEmailPlaceholder" placeholder="tuaemail@esempio.it" autocomplete="off" />
       <label data-i18n="regUsernameLabel">Username</label>
-      <input id="reg-username" type="text" data-i18n-placeholder="regUsernamePlaceholder" placeholder="es. mario_r" autocomplete="off" />
+      <input id="reg-username" type="text" data-i18n-placeholder="regUsernamePlaceholder" placeholder="es. mario_r" autocomplete="username" />
+      <label data-i18n="regPasswordLabel">Password</label>
+      <input id="reg-password" type="password" minlength="8" maxlength="128" autocomplete="new-password" />
       <label class="checkbox-row">
         <input id="reg-cover" type="checkbox" />
         <span data-i18n="regCoverLabel">Crea come profilo di copertura (innocuo)</span>
@@ -53,7 +57,6 @@
   <div class="modal-card">
     <h2 data-i18n="credModalTitle">⚠️ Salva queste informazioni ora</h2>
     <p data-i18n="credModalText">Non verranno mostrate di nuovo. Perderle significa perdere l'accesso al profilo.</p>
-    <div class="cred-row"><span data-i18n="credCodeLabel">Codice di accesso</span><strong id="cred-code"></strong></div>
     <div class="cred-row"><span data-i18n="credPublicIdLabel">ID pubblico</span><strong id="cred-publicid"></strong></div>
     <div class="cred-row"><span data-i18n="credComboLabel">Combinazione chat nascoste</span><strong id="cred-combo"></strong></div>
     <button id="btn-cred-ok" class="primary" data-i18n="btnCredOk">Ho salvato, continua</button>
