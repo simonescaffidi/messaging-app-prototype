@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Manual do usuário — Mensagens Privadas</title>
-<meta name="description" content="Guia completo: cadastro, acesso por código, chats ocultos, criptografia de ponta a ponta, desbloqueio biométrico e idiomas disponíveis." />
+<meta name="description" content="Guia completo: cadastro, acesso com usuário e senha, chats ocultos, criptografia de ponta a ponta, desbloqueio biométrico e idiomas disponíveis." />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/manual.html" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
 <link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/manual.html" />
@@ -20,7 +20,7 @@
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="Manual do usuário — Mensagens Privadas" />
-<meta property="og:description" content="Guia completo: cadastro, acesso por código, chats ocultos, criptografia de ponta a ponta, desbloqueio biométrico e idiomas disponíveis." />
+<meta property="og:description" content="Guia completo: cadastro, acesso com usuário e senha, chats ocultos, criptografia de ponta a ponta, desbloqueio biométrico e idiomas disponíveis." />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/manual.html" />
 <meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -67,16 +67,16 @@
     <p>Na tela inicial, toque em "Cadastre-se" e informe seu e-mail e um nome de usuário. Não é necessário número de telefone.</p>
     <p>Após o cadastro você verá uma única vez três informações, que deve guardar imediatamente em local seguro (um gerenciador de senhas, por exemplo):</p>
     <ul>
-      <li><strong>Código de acesso</strong>: é a sua "senha" — a cada abertura do app você o digita e o seu perfil abre automaticamente.</li>
+      <li><strong>Usuário e senha</strong>: o usuário é o primeiro campo e a senha decide qual perfil abre. Com o mesmo usuário você pode ter vários perfis, cada um com sua senha.</li>
       <li><strong>ID público</strong>: é o que você compartilha com as pessoas que quer adicionar como contatos. Não revela o seu e-mail.</li>
       <li><strong>Combinação secreta</strong>: serve para revelar os chats ocultos (veja a seção dedicada).</li>
     </ul>
-    <p class="warn">Se perder o código de acesso, você perde o acesso ao perfil: ainda não existe recuperação real por e-mail (veja "Limites de segurança declarados").</p>
+    <p class="warn">Se perder a senha, você perde o acesso ao perfil: ainda não existe recuperação real por e-mail (veja "Limites de segurança declarados").</p>
   </section>
 
   <section id="profiles">
     <h2>2. Perfis múltiplos no mesmo dispositivo</h2>
-    <p>Você pode criar vários perfis (por exemplo, um pessoal e um de fachada), todos acessíveis do mesmo dispositivo. Cada perfil tem o seu código de acesso: ao abrir o app e digitar um código, o perfil correspondente abre automaticamente, sem uma tela de escolha que revele quantos perfis existem.</p>
+    <p>Você pode criar vários perfis (por exemplo um pessoal e um de cobertura) com o mesmo usuário e senhas diferentes. Ao digitar usuário e senha, abre-se o perfil correspondente, sem tela de seleção que revele quantos perfis existem. Não é possível usar a mesma senha em dois perfis com o mesmo usuário.</p>
   </section>
 
   <section id="contacts">
@@ -115,7 +115,7 @@
   <section id="biometric">
     <h2>8. Desbloqueio biométrico (Face ID / Touch ID / impressão digital)</h2>
     <p>Nas configurações do perfil (ícone ⚙️) você encontra "Ativar desbloqueio com Face ID / impressão digital". Ao ativá-lo, o seu dispositivo cria uma passkey via WebAuthn/FIDO2 e a registra no servidor (apenas a chave pública, nunca o dado biométrico).</p>
-    <p>A partir daí, a tela de acesso mostrará um botão "Desbloquear com biometria": você o usa no lugar do código, e o seu sistema operacional (não o app) verifica Face ID, Touch ID, a impressão digital do Android ou o Windows Hello. O dado biométrico nunca sai do seu dispositivo.</p>
+    <p>A partir daí, a tela de acesso mostrará o botão "Desbloquear com biometria": use-o no lugar da senha, e seu sistema operacional (não o app) verifica Face ID, Touch ID, impressão digital Android ou Windows Hello. O dado biométrico nunca sai do seu dispositivo.</p>
     <p>Você pode desativá-lo a qualquer momento nas mesmas configurações.</p>
   </section>
 
@@ -144,8 +144,8 @@
     <h2>12. Resolução de problemas</h2>
     <h3>"Não consigo criptografar: o contato ainda não tem chave pública"</h3>
     <p>Acontece se o seu contato não entrou desde a última atualização do app (a chave é gerada e enviada automaticamente no login). Peça que ele entre uma vez: depois você poderá escrever-lhe normalmente.</p>
-    <h3>"Perdi o código de acesso"</h3>
-    <p>Por enquanto não existe recuperação automática: é preciso cadastrar um novo perfil. Guarde sempre o código num gerenciador de senhas.</p>
+    <h3>"Perdi minha senha"</h3>
+    <p>No momento não há recuperação automática: é preciso cadastrar um novo perfil. Guarde sempre a senha em um gerenciador de senhas.</p>
     <h3>O desbloqueio biométrico não aparece</h3>
     <p>Requer um dispositivo com Face ID, Touch ID, impressão digital ou Windows Hello configurado, um navegador atualizado e uma conexão HTTPS (a aplicação web em produção já usa uma). Também precisa ter sido ativado pelo menos uma vez nas configurações.</p>
   </section>

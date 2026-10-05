@@ -51,10 +51,10 @@
   <p>Este site não usa ferramentas de análise nem de rastreamento de terceiros. Apenas as preferências de cookies que você escolher são guardadas (veja a Política de Cookies), localmente no seu navegador.</p>
 
   <h2>Dados coletados pelo protótipo (/app)</h2>
-  <p>Para usar o protótipo de mensagens você cria um perfil com e-mail e nome de usuário. São guardados no servidor: e-mail, nome de usuário, ID público, código de acesso, combinação dos chats ocultos, contatos adicionados, a sua chave pública de criptografia e as mensagens enviadas.</p>
+  <p>Para usar o protótipo de mensagens, você cria um perfil com e-mail, usuário e senha. Ficam salvos no servidor: e-mail, usuário, hash da senha, ID público, combinação dos chats ocultos, contatos adicionados, sua chave pública de criptografia e as mensagens enviadas.</p>
   <p><strong>Mensagens:</strong> o conteúdo é criptografado de ponta a ponta no navegador antes do envio; o servidor guarda apenas texto cifrado e não consegue lê-lo. Os metadados (remetente, hora, reações, expiração das mensagens temporárias) permanecem sem criptografia.</p>
   <p><strong>Desbloqueio biométrico:</strong> se o ativar, apenas a chave pública da passkey (WebAuthn) é guardada no servidor. Os dados biométricos nunca saem do seu dispositivo. A sua chave privada de criptografia permanece no navegador (localStorage).</p>
-  <p><strong>Importante:</strong> este é um protótipo de demonstração: e-mail e nome de usuário são armazenados sem criptografia e o serviço não tem os padrões de um produto em produção. Os códigos de acesso não são guardados em texto simples (apenas um hash) e as tentativas de login falhadas são limitadas. Não insira informações sensíveis reais: use dados de teste.</p>
+  <p><strong>Importante:</strong> este é um protótipo de demonstração: e-mail e usuário são salvos sem criptografia e o serviço não atinge os padrões de um produto em produção. As senhas não são guardadas em texto simples (apenas um hash scrypt com salt) e as tentativas de acesso falhas são limitadas por endereço IP e por usuário. Não insira informações sensíveis reais: use dados de teste.</p>
 
   <h2>Finalidade do tratamento</h2>
   <p>Os dados servem exclusivamente para fazer a demonstração funcionar (autenticação, mensagens, contatos). Não são cedidos a terceiros nem usados para perfilamento publicitário.</p>
