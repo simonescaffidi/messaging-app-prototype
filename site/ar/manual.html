@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>دليل المستخدم — مراسلة خاصة</title>
+<meta name="description" content="دليل كامل: التسجيل، الدخول بالرمز، المحادثات المخفية، التشفير من طرف إلى طرف، الفتح بالبصمة الحيوية واللغات المتاحة." />
+<link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/manual.html" />
+<link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
+<link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/manual.html" />
+<link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/manual.html" />
+<link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/manual.html" />
+<link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/manual.html" />
+<link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/manual.html" />
+<link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/manual.html" />
+<link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/manual.html" />
+<link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/manual.html" />
+<link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/manual.html" />
+<link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/manual.html" />
+<link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="دليل المستخدم — مراسلة خاصة" />
+<meta property="og:description" content="دليل كامل: التسجيل، الدخول بالرمز، المحادثات المخفية، التشفير من طرف إلى طرف، الفتح بالبصمة الحيوية واللغات المتاحة." />
+<meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/manual.html" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body class="manual">
+
+<header class="site-header">
+  <div class="container">
+    <a href="/ar/" class="brand"><span class="lock">🔒</span> مراسلة خاصة</a>
+    <div class="header-actions">
+      <select class="lang-select" aria-label="اللغة" onchange="location.href=this.value"><option value="/manuale.html">Italiano</option><option value="/en/manual.html">English</option><option value="/es/manual.html">Español</option><option value="/fr/manual.html">Français</option><option value="/de/manual.html">Deutsch</option><option value="/pt/manual.html">Português</option><option value="/ar/manual.html" selected>العربية</option><option value="/zh/manual.html">中文</option><option value="/hi/manual.html">हिन्दी</option><option value="/ru/manual.html">Русский</option><option value="/ja/manual.html">日本語</option></select>
+      <a href="/ar/manual.html" class="btn btn-ghost btn-sm">الدليل</a>
+      <a href="/app/" class="btn btn-primary btn-sm">افتح التطبيق</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <h1>دليل المستخدم</h1>
+  <p class="lead">دليل كامل لتطبيق مراسلة خاصة: كيف تسجّل وتدخل وتستخدم ميزات الخصوصية، وتفهم ما الذي يحميه هذا النموذج الأولي فعلًا وما الذي لا يحميه.</p>
+
+  <nav class="toc" aria-label="المحتويات">
+    <strong>المحتويات</strong>
+    <ol>
+      <li><a href="#signup">التسجيل والدخول الأول</a></li>
+      <li><a href="#profiles">ملفات شخصية متعددة على الجهاز نفسه</a></li>
+      <li><a href="#contacts">إضافة جهات الاتصال والدردشة</a></li>
+      <li><a href="#hidden">المحادثات المخفية والتركيبة السرية</a></li>
+      <li><a href="#cover">الملف التمويهي</a></li>
+      <li><a href="#timed">الرسائل المؤقتة (التدمير الذاتي)</a></li>
+      <li><a href="#encryption">التشفير من طرف إلى طرف: كيف يعمل فعلًا</a></li>
+      <li><a href="#biometric">الفتح بالبصمة الحيوية (Face ID / Touch ID / البصمة)</a></li>
+      <li><a href="#languages">تغيير اللغة</a></li>
+      <li><a href="#mobile">تطبيقات الجوال الأصلية (iOS/Android)</a></li>
+      <li><a href="#limits">حدود الأمان المعلنة</a></li>
+      <li><a href="#troubleshooting">حل المشكلات</a></li>
+    </ol>
+  </nav>
+
+  <section id="signup">
+    <h2>1. التسجيل والدخول الأول</h2>
+    <p>في الشاشة الأولى اضغط "سجّل" وأدخل بريدك الإلكتروني واسم مستخدم. لا حاجة إلى رقم هاتف.</p>
+    <p>بعد التسجيل سترى ثلاث معلومات مرة واحدة فقط، ويجب أن تحفظها فورًا في مكان آمن (مثل مدير كلمات المرور):</p>
+    <ul>
+      <li><strong>رمز الدخول</strong>: هو "كلمة المرور" الخاصة بك — تدخله عند كل فتح للتطبيق فيُفتح ملفك الشخصي تلقائيًا.</li>
+      <li><strong>المعرّف العام</strong>: هو ما تشاركه مع من تريد إضافتهم كجهات اتصال. لا يكشف بريدك الإلكتروني.</li>
+      <li><strong>التركيبة السرية</strong>: تُستخدم لإظهار المحادثات المخفية (انظر القسم المخصص).</li>
+    </ul>
+    <p class="warn">إذا فقدت رمز الدخول فقدت الوصول إلى الملف الشخصي: لا توجد بعد استعادة حقيقية عبر البريد الإلكتروني (انظر "حدود الأمان المعلنة").</p>
+  </section>
+
+  <section id="profiles">
+    <h2>2. ملفات شخصية متعددة على الجهاز نفسه</h2>
+    <p>يمكنك إنشاء عدة ملفات شخصية (مثلًا ملف شخصي وآخر تمويهي) يمكن الوصول إليها جميعًا من الجهاز نفسه. لكل ملف رمز دخول خاص: عند فتح التطبيق وإدخال رمز يُفتح الملف المطابق تلقائيًا، دون شاشة اختيار تكشف عدد الملفات الموجودة.</p>
+  </section>
+
+  <section id="contacts">
+    <h2>3. إضافة جهات الاتصال والدردشة</h2>
+    <p>اضغط "+ إضافة جهة اتصال" وأدخل المعرّف العام للشخص. تُفتح دردشة في الوقت الفعلي ومشفرة من طرف إلى طرف (انظر القسم 7).</p>
+  </section>
+
+  <section id="hidden">
+    <h2>4. المحادثات المخفية والتركيبة السرية</h2>
+    <p>من داخل المحادثة افتح القائمة واختر "إخفاء/إظهار هذه المحادثة". المحادثة المخفية لا تظهر بعد ذلك في القائمة الرئيسية.</p>
+    <p>لإعادة إظهارها اكتب تركيبتك السرية (التي عُرضت مرة واحدة عند التسجيل) في شريط البحث: تعود كل المحادثات المخفية إلى الظهور حتى تقفل التطبيق من جديد.</p>
+  </section>
+
+  <section id="cover">
+    <h2>5. الملف التمويهي</h2>
+    <p>عند التسجيل يمكنك تحديد "إنشاء كملف تمويهي": ملف مخصص لعرضه عند أي تفتيش، دون أي دليل على وجود ملفات أخرى على الجهاز نفسه.</p>
+  </section>
+
+  <section id="timed">
+    <h2>6. الرسائل المؤقتة (التدمير الذاتي)</h2>
+    <p>قبل إرسال رسالة يمكنك اختيار مدة التدمير الذاتي من القائمة المنسدلة: 30 ثانية أو 5 دقائق أو ساعة واحدة. بعد انقضاء هذه المدة تُحذف الرسالة.</p>
+  </section>
+
+  <section id="encryption">
+    <h2>7. التشفير من طرف إلى طرف: كيف يعمل فعلًا</h2>
+    <p>هذا ليس شعارًا تسويقيًا: كل رسالة تُشفَّر <strong>في متصفحك</strong> قبل إرسالها إلى الخادم، وفق هذا المخطط:</p>
+    <ol>
+      <li>عند أول دخول، يولّد جهازك زوج مفاتيح ECDH على المنحنى P-256 (عام وخاص). يُرفع المفتاح العام إلى الخادم، ويبقى المفتاح الخاص في متصفحك فقط.</li>
+      <li>عندما تراسل جهة اتصال، يدمج متصفحك مفتاحك الخاص مع مفتاحها العام (تبادل ECDH) ويشتق عبر HKDF-SHA256 مفتاحًا متماثلًا AES-GCM بطول 256 بت خاصًا بهذا الزوج من الأشخاص.</li>
+      <li>تُشفَّر كل رسالة بهذا المفتاح مع رقم عشوائي (IV) مختلف في كل مرة، ثم تُرسل إلى الخادم مشفرة بالفعل.</li>
+      <li>يحفظ الخادم النص المشفر وينقله فقط: لا يستطيع قراءة محتوى رسائلك.</li>
+    </ol>
+    <p>هذا هو نوع الرياضيات نفسه (ECDH + AES-GCM) الذي تستخدمه كثير من البروتوكولات الآمنة الحديثة، مطبّقًا هنا عبر واجهة Web Crypto API الأصلية في المتصفح دون مكتبات خارجية.</p>
+  </section>
+
+  <section id="biometric">
+    <h2>8. الفتح بالبصمة الحيوية (Face ID / Touch ID / البصمة)</h2>
+    <p>في إعدادات الملف الشخصي (أيقونة ⚙️) تجد "تفعيل الفتح بـ Face ID / البصمة". عند تفعيله ينشئ جهازك مفتاح مرور (passkey) عبر WebAuthn/FIDO2 ويسجله على الخادم (المفتاح العام فقط، وليس البيانات الحيوية أبدًا).</p>
+    <p>منذ ذلك الحين يظهر في شاشة الدخول زر "فتح بالبصمة الحيوية": تستخدمه بدل الرمز، ويتحقق نظام التشغيل (وليس التطبيق) من Face ID أو Touch ID أو بصمة أندرويد أو Windows Hello. لا تغادر البيانات الحيوية جهازك أبدًا.</p>
+    <p>يمكنك إيقافه في أي وقت من الإعدادات نفسها.</p>
+  </section>
+
+  <section id="languages">
+    <h2>9. تغيير اللغة</h2>
+    <p>في أعلى كل شاشة من التطبيق ستجد محدد لغة. وهذا الموقع متاح أيضًا بـ 11 لغة نفسها: الإيطالية والإنجليزية والإسبانية والفرنسية والألمانية والبرتغالية والعربية والصينية والهندية والروسية واليابانية. واللغة التي تختارها في التطبيق تُحفظ على الجهاز.</p>
+  </section>
+
+  <section id="mobile">
+    <h2>10. تطبيقات الجوال الأصلية (iOS/Android)</h2>
+    <p>هناك هيكل جاهز لتطبيق أصلي (مبني على Expo/React Native) يضيف قفلًا بيومتريًا على مستوى النظام عند الفتح. يتطلب النشر الفعلي على App Store و Google Play بيانات حسابات المطوّر (Apple Developer Program و Google Play Console): وبعد ربطها يمكن بناء التطبيق ونشره. وإلى ذلك الحين يبقى تطبيق الويب قابلًا للاستخدام في أي متصفح جوال ويمكن "تثبيته" على الشاشة الرئيسية كأنه تطبيق.</p>
+  </section>
+
+  <section id="limits">
+    <h2>11. حدود الأمان المعلنة</h2>
+    <p>للأمانة، هذا ما <strong>لا</strong> يفعله هذا النموذج الأولي بعد، رغم أن التشفير حقيقي:</p>
+    <ul>
+      <li><strong>لا ratchet ولا سرية أمامية</strong>: يبقى مفتاح المحادثة نفسه حتى يعيد الطرفان توليد مفاتيحهما (بخلاف بروتوكولات مثل Signal التي تغيّر المفتاح مع كل رسالة).</li>
+      <li><strong>لا تحقق خارج النطاق من المفاتيح العامة</strong>: لا يوجد "رقم أمان" يمكن مقارنته شفهيًا مع جهة الاتصال. نظريًا يمكن لخادم خبيث استبدال مفتاح عام بمفتاحه (هجوم الرجل في المنتصف). مقبول على خادم موثوق في نموذج أولي؛ وقبل أي استخدام عالي الخطورة ينبغي إضافة هذا التحقق.</li>
+      <li><strong>المفتاح الخاص في المتصفح</strong>: يُحفظ في التخزين المحلي للمتصفح (localStorage) وليس في حاوية أمان عتادية. من يملك وصولًا ماديًا أو برمجيًا إلى الجهاز المفتوح يمكنه قراءته.</li>
+      <li><strong>لا إرسال بريد إلكتروني حقيقي</strong>: التسجيل يعمل، لكن لا توجد بعد خدمة بريد موصولة لاستعادة الحساب عبر "رابط سحري".</li>
+    </ul>
+  </section>
+
+  <section id="troubleshooting">
+    <h2>12. حل المشكلات</h2>
+    <h3>"لا أستطيع التشفير: جهة الاتصال ليس لديها مفتاح عام بعد"</h3>
+    <p>يحدث هذا إذا لم تسجّل جهة الاتصال دخولها منذ آخر تحديث للتطبيق (يُولَّد المفتاح ويُرفع تلقائيًا عند الدخول). اطلب منها الدخول مرة واحدة، وبعدها يمكنك مراسلتها بشكل طبيعي.</p>
+    <h3>"فقدت رمز الدخول"</h3>
+    <p>لا توجد حاليًا استعادة تلقائية: يلزم تسجيل ملف شخصي جديد. احتفظ دائمًا بالرمز في مدير كلمات مرور.</p>
+    <h3>لا يظهر الفتح بالبصمة الحيوية</h3>
+    <p>يتطلب جهازًا مهيّأً بـ Face ID أو Touch ID أو البصمة أو Windows Hello، ومتصفحًا محدّثًا، واتصال HTTPS (تطبيق الويب في الإنتاج يستخدمه بالفعل). ويجب أيضًا أن يكون قد فُعِّل مرة واحدة على الأقل من الإعدادات.</p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">Powered by <a href="https://www.simonescaffidi.it" target="_blank" rel="noopener noreferrer">www.simonescaffidi.it</a></p>
+    <nav class="footer-links" aria-label="قانوني">
+      <a href="/ar/manual.html">الدليل</a>
+      <a href="/ar/privacy-policy.html">سياسة الخصوصية</a>
+      <a href="/ar/cookie-policy.html">سياسة ملفات تعريف الارتباط</a>
+    </nav>
+    <nav class="footer-langs" aria-label="جميع اللغات">
+      <a href="/manuale.html" hreflang="it" lang="it">Italiano</a>
+      <a href="/en/manual.html" hreflang="en" lang="en">English</a>
+      <a href="/es/manual.html" hreflang="es" lang="es">Español</a>
+      <a href="/fr/manual.html" hreflang="fr" lang="fr">Français</a>
+      <a href="/de/manual.html" hreflang="de" lang="de">Deutsch</a>
+      <a href="/pt/manual.html" hreflang="pt" lang="pt">Português</a>
+      <a href="/ar/manual.html" hreflang="ar" lang="ar" aria-current="true">العربية</a>
+      <a href="/zh/manual.html" hreflang="zh" lang="zh">中文</a>
+      <a href="/hi/manual.html" hreflang="hi" lang="hi">हिन्दी</a>
+      <a href="/ru/manual.html" hreflang="ru" lang="ru">Русский</a>
+      <a href="/ja/manual.html" hreflang="ja" lang="ja">日本語</a>
+    </nav>
+  </div>
+</footer>
+<script>window.__COOKIE_I18N={"text":"نستخدم ملفات تعريف ارتباط تقنية ضرورية، وبموافقتك ملفات إحصائية. راجع \u003ca href=\"/ar/privacy-policy.html\">سياسة الخصوصية\u003c/a> و\u003ca href=\"/ar/cookie-policy.html\">سياسة ملفات تعريف الارتباط\u003c/a>.","reject":"رفض","customize":"تخصيص","accept":"قبول الكل","statsQuestion":"هل تريد قبول ملفات تعريف الارتباط الإحصائية؟"};</script>
+<script src="/cookie-banner.js"></script>
+</body>
+</html>
