@@ -5,30 +5,616 @@
     <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/</loc>
     <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/" />
-  </url>
-  <url>
-    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/en/</loc>
-    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/" />
-  </url>
-  <url>
-    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/privacy-policy.html</loc>
-    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/privacy-policy.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/privacy-policy.html" />
-  </url>
-  <url>
-    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/cookie-policy.html</loc>
-    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/cookie-policy.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/" />
   </url>
   <url>
     <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html</loc>
     <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/manual.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/manual.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/manual.html" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/manual.html" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/manual.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/manual.html" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/manual.html" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/manual.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/manual.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/manual.html" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/privacy-policy.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/privacy-policy.html" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/cookie-policy.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/cookie-policy.html" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/en/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/" />
   </url>
   <url>
     <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/en/manual.html</loc>
     <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/manual.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/manual.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/manual.html" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/manual.html" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/manual.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/manual.html" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/manual.html" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/manual.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/manual.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/manual.html" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/en/privacy-policy.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/privacy-policy.html" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/en/cookie-policy.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/cookie-policy.html" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/es/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/es/manual.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/manual.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/manual.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/manual.html" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/manual.html" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/manual.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/manual.html" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/manual.html" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/manual.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/manual.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/manual.html" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/es/privacy-policy.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/privacy-policy.html" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/es/cookie-policy.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/cookie-policy.html" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/fr/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/fr/manual.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/manual.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/manual.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/manual.html" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/manual.html" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/manual.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/manual.html" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/manual.html" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/manual.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/manual.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/manual.html" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/fr/privacy-policy.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/privacy-policy.html" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/fr/cookie-policy.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/cookie-policy.html" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/de/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/de/manual.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/manual.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/manual.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/manual.html" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/manual.html" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/manual.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/manual.html" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/manual.html" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/manual.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/manual.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/manual.html" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/de/privacy-policy.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/privacy-policy.html" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/de/cookie-policy.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/cookie-policy.html" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/pt/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/pt/manual.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/manual.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/manual.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/manual.html" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/manual.html" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/manual.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/manual.html" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/manual.html" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/manual.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/manual.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/manual.html" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/pt/privacy-policy.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/privacy-policy.html" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/pt/cookie-policy.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/cookie-policy.html" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/ar/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/ar/manual.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/manual.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/manual.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/manual.html" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/manual.html" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/manual.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/manual.html" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/manual.html" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/manual.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/manual.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/manual.html" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/ar/privacy-policy.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/privacy-policy.html" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/ar/cookie-policy.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/cookie-policy.html" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/zh/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/zh/manual.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/manual.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/manual.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/manual.html" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/manual.html" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/manual.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/manual.html" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/manual.html" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/manual.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/manual.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/manual.html" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/zh/privacy-policy.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/privacy-policy.html" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/zh/cookie-policy.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/cookie-policy.html" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/hi/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/hi/manual.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/manual.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/manual.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/manual.html" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/manual.html" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/manual.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/manual.html" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/manual.html" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/manual.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/manual.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/manual.html" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/hi/privacy-policy.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/privacy-policy.html" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/hi/cookie-policy.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/cookie-policy.html" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/ru/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/ru/manual.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/manual.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/manual.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/manual.html" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/manual.html" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/manual.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/manual.html" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/manual.html" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/manual.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/manual.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/manual.html" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/ru/privacy-policy.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/privacy-policy.html" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/ru/cookie-policy.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/cookie-policy.html" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/ja/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/ja/manual.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/manual.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/manual.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/manual.html" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/manual.html" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/manual.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/manual.html" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/manual.html" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/manual.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/manual.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/manual.html" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/ja/privacy-policy.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/privacy-policy.html" />
+  </url>
+  <url>
+    <loc>https://messaging-app-prototype-production-ecb3.up.railway.app/ja/cookie-policy.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/cookie-policy.html" />
   </url>
 </urlset>

@@ -1,28 +1,19 @@
 // Cookie banner GDPR-compliant, vanilla JS, nessuna dipendenza esterna.
-// Nessuno script di tracciamento e' presente in questo sito: il banner
-// esiste comunque per coerenza GDPR e come base pronta se in futuro
-// si aggiungono strumenti statistici (vedi window.onCookieConsent).
+// Le stringhe (11 lingue) sono iniettate da ogni pagina in window.__COOKIE_I18N
+// dal generatore (tools/build-site.js). Nessuno script di tracciamento e'
+// presente: usare window.onCookieConsent per eventuali strumenti futuri.
 (function () {
   var COOKIE_NAME = "cookie_consent_v1";
   var listeners = [];
-  var lang = document.documentElement.lang === "en" ? "en" : "it";
 
-  var STRINGS = {
-    it: {
-      text: 'Utilizziamo cookie tecnici necessari e, previo consenso, cookie statistici. Consulta la <a href="/privacy-policy.html">Privacy Policy</a> e la <a href="/cookie-policy.html">Cookie Policy</a>.',
-      reject: "Rifiuta",
-      customize: "Personalizza",
-      accept: "Accetta tutti",
-      statsQuestion: "Vuoi accettare i cookie statistici?"
-    },
-    en: {
-      text: 'We use necessary technical cookies and, with your consent, statistics cookies. See our <a href="/en/privacy-policy.html">Privacy Policy</a> and <a href="/en/cookie-policy.html">Cookie Policy</a>.',
-      reject: "Reject",
-      customize: "Customize",
-      accept: "Accept all",
-      statsQuestion: "Do you want to accept statistics cookies?"
-    }
+  var FALLBACK = {
+    text: 'Utilizziamo cookie tecnici necessari e, previo consenso, cookie statistici. Consulta la <a href="/privacy-policy.html">Privacy Policy</a> e la <a href="/cookie-policy.html">Cookie Policy</a>.',
+    reject: "Rifiuta",
+    customize: "Personalizza",
+    accept: "Accetta tutti",
+    statsQuestion: "Vuoi accettare i cookie statistici?"
   };
+  var s = window.__COOKIE_I18N || FALLBACK;
 
   window.onCookieConsent = function (cb) {
     var existing = getConsent();
@@ -30,22 +21,24 @@
   };
 
   function getConsent() {
-    var raw = localStorage.getItem(COOKIE_NAME);
-    return raw ? JSON.parse(raw) : null;
+    try {
+      var raw = localStorage.getItem(COOKIE_NAME);
+      return raw ? JSON.parse(raw) : null;
+    } catch (e) { return null; }
   }
 
   function setConsent(consent) {
-    localStorage.setItem(COOKIE_NAME, JSON.stringify(consent));
+    try { localStorage.setItem(COOKIE_NAME, JSON.stringify(consent)); } catch (e) {}
     var el = document.getElementById("cookie-banner");
     if (el) el.style.display = "none";
     listeners.forEach(function (cb) { cb(consent); });
   }
 
   function buildBanner() {
-    var s = STRINGS[lang];
     var wrap = document.createElement("div");
     wrap.id = "cookie-banner";
     wrap.className = "cookie-banner";
+    wrap.setAttribute("role", "dialog");
     wrap.innerHTML =
       '<div class="cookie-banner-inner">' +
         '<p class="cookie-banner-text">' + s.text + '</p>' +
@@ -70,8 +63,6 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    if (!getConsent()) {
-      buildBanner();
-    }
+    if (!getConsent()) buildBanner();
   });
 })();

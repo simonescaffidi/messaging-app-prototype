@@ -1,21 +1,30 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" dir="ltr">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Messaggistica Privata — Chat con profili multipli e chat nascoste</title>
-<meta name="description" content="Prototipo di messaggistica privata: accesso per codice, profili multipli, chat nascoste e profilo di copertura. Nessun numero di telefono richiesto." />
+<meta name="description" content="Chat privata con crittografia end-to-end reale, sblocco biometrico, profili multipli e chat nascoste. 11 lingue, nessun numero di telefono." />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
 <link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/" />
+<link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/" />
+<link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/" />
+<link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/" />
+<link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/" />
+<link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/" />
+<link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/" />
+<link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/" />
+<link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/" />
+<link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/" />
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Messaggistica Privata — Prototipo" />
-<meta property="og:description" content="Accesso per codice, profili multipli, chat nascoste e profilo di copertura. Un prototipo di messaggistica pensato per la privacy." />
+<meta property="og:description" content="Crittografia end-to-end, sblocco biometrico, profili multipli, chat nascoste e profilo di copertura in 11 lingue." />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
 <meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
 <meta name="twitter:card" content="summary_large_image" />
-<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="/style.css" />
 </head>
 <body>
 
@@ -23,10 +32,7 @@
   <div class="container">
     <a href="/" class="brand"><span class="lock">🔒</span> Messaggistica Privata</a>
     <div class="header-actions">
-      <nav class="lang-switch" aria-label="Lingua">
-        <a href="/" aria-current="true">IT</a>
-        <a href="/en/">EN</a>
-      </nav>
+      <select class="lang-select" aria-label="Lingua" onchange="location.href=this.value"><option value="/" selected>Italiano</option><option value="/en/">English</option><option value="/es/">Español</option><option value="/fr/">Français</option><option value="/de/">Deutsch</option><option value="/pt/">Português</option><option value="/ar/">العربية</option><option value="/zh/">中文</option><option value="/hi/">हिन्दी</option><option value="/ru/">Русский</option><option value="/ja/">日本語</option></select>
       <a href="/manuale.html" class="btn btn-ghost btn-sm">Manuale</a>
       <a href="/app/" class="btn btn-primary btn-sm">Apri l'app</a>
     </div>
@@ -34,20 +40,19 @@
 </header>
 
 <main>
-
   <section class="hero">
     <div class="container">
-      <span class="badge">Prototipo / demo funzionale</span>
+      <span class="badge">Prototipo funzionale</span>
       <h1>Una chat dove il codice è la tua identità</h1>
       <p class="lead">Niente numero di telefono. Un codice di accesso apre il tuo profilo, un altro codice ne apre uno diverso. Chat nascoste, profilo di copertura, messaggi che si autodistruggono.</p>
       <div class="hero-actions">
         <a href="/app/" class="btn btn-primary">Apri l'app →</a>
-        <a href="#come-funziona" class="btn btn-ghost">Scopri come funziona</a>
+        <a href="#how-it-works" class="btn btn-ghost">Scopri come funziona</a>
       </div>
     </div>
   </section>
 
-  <section class="features" id="funzionalita">
+  <section class="features" id="features">
     <div class="container">
       <h2>Cosa puoi fare</h2>
       <div class="feature-grid">
@@ -94,13 +99,13 @@
         <article class="feature-card">
           <div class="icon">🌍</div>
           <h3>11 lingue</h3>
-          <p>Interfaccia disponibile in italiano, inglese, spagnolo, francese, tedesco, portoghese, arabo, cinese, hindi, russo e giapponese.</p>
+          <p>App e sito disponibili in italiano, inglese, spagnolo, francese, tedesco, portoghese, arabo, cinese, hindi, russo e giapponese.</p>
         </article>
       </div>
     </div>
   </section>
 
-  <section class="how" id="come-funziona">
+  <section class="how" id="how-it-works">
     <div class="container">
       <h2>Come funziona</h2>
       <div class="steps">
@@ -128,7 +133,7 @@
     <div class="container">
       <h2>Cosa è, cosa non è</h2>
       <div class="disclaimer-box">
-        <p><strong>Questo è un prototipo funzionale</strong>, non un prodotto finito. I messaggi sono cifrati end-to-end (ECDH P-256 + AES-GCM 256 bit, derivazione HKDF-SHA256): il server non vede mai il testo in chiaro. Lo sblocco biometrico usa WebAuthn/FIDO2 reale. Restano dei limiti noti, spiegati senza giri di parole nel <a href="/manuale.html">manuale utente</a>: non c'è ancora un ratchet con forward secrecy "a la Signal", non c'è verifica fuori banda delle chiavi pubbliche (quindi in teoria un server malevolo potrebbe sostituirle), la chiave privata resta nel browser senza secure enclave hardware, e l'invio email per il recupero account non è ancora collegato a un servizio reale. Utile per provare l'esperienza d'uso con una sicurezza vera ma non "a prova di stato", non ancora per conversazioni ad altissimo rischio.</p>
+        <p><strong>Questo è un prototipo funzionale</strong>, non un prodotto finito. I messaggi sono cifrati end-to-end (ECDH P-256 + AES-GCM 256 bit, derivazione HKDF-SHA256): il server non vede mai il testo in chiaro. Lo sblocco biometrico usa WebAuthn/FIDO2 reale. Restano dei limiti noti, spiegati senza giri di parole nel <a href="/manuale.html">manuale utente</a>: non c'è ancora un ratchet con forward secrecy "alla Signal", non c'è verifica fuori banda delle chiavi pubbliche (quindi in teoria un server malevolo potrebbe sostituirle), la chiave privata resta nel browser senza secure enclave hardware, e l'invio email per il recupero account non è ancora collegato a un servizio reale. Utile per provare l'esperienza d'uso con una sicurezza vera ma non "a prova di stato", non ancora per conversazioni ad altissimo rischio.</p>
       </div>
     </div>
   </section>
@@ -160,9 +165,22 @@
       <a href="/privacy-policy.html">Privacy Policy</a>
       <a href="/cookie-policy.html">Cookie Policy</a>
     </nav>
+    <nav class="footer-langs" aria-label="Tutte le lingue">
+      <a href="/" hreflang="it" lang="it" aria-current="true">Italiano</a>
+      <a href="/en/" hreflang="en" lang="en">English</a>
+      <a href="/es/" hreflang="es" lang="es">Español</a>
+      <a href="/fr/" hreflang="fr" lang="fr">Français</a>
+      <a href="/de/" hreflang="de" lang="de">Deutsch</a>
+      <a href="/pt/" hreflang="pt" lang="pt">Português</a>
+      <a href="/ar/" hreflang="ar" lang="ar">العربية</a>
+      <a href="/zh/" hreflang="zh" lang="zh">中文</a>
+      <a href="/hi/" hreflang="hi" lang="hi">हिन्दी</a>
+      <a href="/ru/" hreflang="ru" lang="ru">Русский</a>
+      <a href="/ja/" hreflang="ja" lang="ja">日本語</a>
+    </nav>
   </div>
 </footer>
-
-<script src="cookie-banner.js"></script>
+<script>window.__COOKIE_I18N={"text":"Utilizziamo cookie tecnici necessari e, previo consenso, cookie statistici. Consulta la \u003ca href=\"/privacy-policy.html\">Privacy Policy\u003c/a> e la \u003ca href=\"/cookie-policy.html\">Cookie Policy\u003c/a>.","reject":"Rifiuta","customize":"Personalizza","accept":"Accetta tutti","statsQuestion":"Vuoi accettare i cookie statistici?"};</script>
+<script src="/cookie-banner.js"></script>
 </body>
 </html>
