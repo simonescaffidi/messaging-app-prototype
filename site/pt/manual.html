@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Manual do usuário — Mensagens Privadas</title>
+<meta name="description" content="Guia completo: cadastro, acesso por código, chats ocultos, criptografia de ponta a ponta, desbloqueio biométrico e idiomas disponíveis." />
+<link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/manual.html" />
+<link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
+<link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/manual.html" />
+<link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/manual.html" />
+<link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/manual.html" />
+<link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/manual.html" />
+<link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/manual.html" />
+<link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/manual.html" />
+<link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/manual.html" />
+<link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/manual.html" />
+<link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/manual.html" />
+<link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/manual.html" />
+<link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Manual do usuário — Mensagens Privadas" />
+<meta property="og:description" content="Guia completo: cadastro, acesso por código, chats ocultos, criptografia de ponta a ponta, desbloqueio biométrico e idiomas disponíveis." />
+<meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/manual.html" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body class="manual">
+
+<header class="site-header">
+  <div class="container">
+    <a href="/pt/" class="brand"><span class="lock">🔒</span> Mensagens Privadas</a>
+    <div class="header-actions">
+      <select class="lang-select" aria-label="Idioma" onchange="location.href=this.value"><option value="/manuale.html">Italiano</option><option value="/en/manual.html">English</option><option value="/es/manual.html">Español</option><option value="/fr/manual.html">Français</option><option value="/de/manual.html">Deutsch</option><option value="/pt/manual.html" selected>Português</option><option value="/ar/manual.html">العربية</option><option value="/zh/manual.html">中文</option><option value="/hi/manual.html">हिन्दी</option><option value="/ru/manual.html">Русский</option><option value="/ja/manual.html">日本語</option></select>
+      <a href="/pt/manual.html" class="btn btn-ghost btn-sm">Manual</a>
+      <a href="/app/" class="btn btn-primary btn-sm">Abrir o app</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <h1>Manual do usuário</h1>
+  <p class="lead">Guia completo de Mensagens Privadas: como se cadastrar, entrar, usar os recursos de privacidade e entender o que este protótipo realmente protege — e o que não protege.</p>
+
+  <nav class="toc" aria-label="Índice">
+    <strong>Índice</strong>
+    <ol>
+      <li><a href="#signup">Cadastro e primeiro acesso</a></li>
+      <li><a href="#profiles">Perfis múltiplos no mesmo dispositivo</a></li>
+      <li><a href="#contacts">Adicionar contatos e conversar</a></li>
+      <li><a href="#hidden">Chats ocultos e combinação secreta</a></li>
+      <li><a href="#cover">Perfil de fachada</a></li>
+      <li><a href="#timed">Mensagens temporárias (autodestruição)</a></li>
+      <li><a href="#encryption">Criptografia de ponta a ponta: como funciona de verdade</a></li>
+      <li><a href="#biometric">Desbloqueio biométrico (Face ID / Touch ID / impressão digital)</a></li>
+      <li><a href="#languages">Mudar de idioma</a></li>
+      <li><a href="#mobile">Apps móveis nativos (iOS/Android)</a></li>
+      <li><a href="#limits">Limites de segurança declarados</a></li>
+      <li><a href="#troubleshooting">Resolução de problemas</a></li>
+    </ol>
+  </nav>
+
+  <section id="signup">
+    <h2>1. Cadastro e primeiro acesso</h2>
+    <p>Na tela inicial, toque em "Cadastre-se" e informe seu e-mail e um nome de usuário. Não é necessário número de telefone.</p>
+    <p>Após o cadastro você verá uma única vez três informações, que deve guardar imediatamente em local seguro (um gerenciador de senhas, por exemplo):</p>
+    <ul>
+      <li><strong>Código de acesso</strong>: é a sua "senha" — a cada abertura do app você o digita e o seu perfil abre automaticamente.</li>
+      <li><strong>ID público</strong>: é o que você compartilha com as pessoas que quer adicionar como contatos. Não revela o seu e-mail.</li>
+      <li><strong>Combinação secreta</strong>: serve para revelar os chats ocultos (veja a seção dedicada).</li>
+    </ul>
+    <p class="warn">Se perder o código de acesso, você perde o acesso ao perfil: ainda não existe recuperação real por e-mail (veja "Limites de segurança declarados").</p>
+  </section>
+
+  <section id="profiles">
+    <h2>2. Perfis múltiplos no mesmo dispositivo</h2>
+    <p>Você pode criar vários perfis (por exemplo, um pessoal e um de fachada), todos acessíveis do mesmo dispositivo. Cada perfil tem o seu código de acesso: ao abrir o app e digitar um código, o perfil correspondente abre automaticamente, sem uma tela de escolha que revele quantos perfis existem.</p>
+  </section>
+
+  <section id="contacts">
+    <h2>3. Adicionar contatos e conversar</h2>
+    <p>Toque em "+ Adicionar contato" e informe o ID público da pessoa. Abre-se um chat em tempo real, com criptografia de ponta a ponta (veja a seção 7).</p>
+  </section>
+
+  <section id="hidden">
+    <h2>4. Chats ocultos e combinação secreta</h2>
+    <p>Em um chat, abra o menu e escolha "Ocultar/mostrar este chat". Um chat oculto deixa de aparecer na lista principal.</p>
+    <p>Para fazê-lo reaparecer, digite a sua combinação secreta (a mostrada uma única vez no cadastro) na barra de busca: todos os chats ocultos voltam a ficar visíveis até você bloquear o app novamente.</p>
+  </section>
+
+  <section id="cover">
+    <h2>5. Perfil de fachada</h2>
+    <p>No cadastro você pode marcar "Criar como perfil de fachada": um perfil pensado para ser mostrado em caso de fiscalização, sem pistas da existência de outros perfis no mesmo dispositivo.</p>
+  </section>
+
+  <section id="timed">
+    <h2>6. Mensagens temporárias (autodestruição)</h2>
+    <p>Antes de enviar uma mensagem, você pode escolher no menu suspenso um tempo de autodestruição: 30 segundos, 5 minutos ou 1 hora. Passado esse tempo, a mensagem é removida.</p>
+  </section>
+
+  <section id="encryption">
+    <h2>7. Criptografia de ponta a ponta: como funciona de verdade</h2>
+    <p>Isto não é um slogan de marketing: cada mensagem é criptografada <strong>no seu navegador</strong>, antes de ser enviada ao servidor, com este esquema:</p>
+    <ol>
+      <li>No primeiro acesso, o seu dispositivo gera um par de chaves ECDH na curva P-256 (uma pública e uma privada). A chave pública é enviada ao servidor; a chave privada permanece apenas no seu navegador.</li>
+      <li>Quando você escreve a um contato, o seu navegador combina a sua chave privada com a chave pública dele (troca ECDH) e deriva, via HKDF-SHA256, uma chave simétrica AES-GCM de 256 bits específica para esse par de pessoas.</li>
+      <li>Cada mensagem é criptografada com essa chave e um número aleatório (IV) diferente a cada vez, e então enviada ao servidor já cifrada.</li>
+      <li>O servidor apenas guarda e transmite texto cifrado: não consegue ler o conteúdo das mensagens.</li>
+    </ol>
+    <p>É o mesmo tipo de matemática (ECDH + AES-GCM) usado por muitos protocolos seguros modernos, aplicado aqui pela Web Crypto API nativa do navegador, sem bibliotecas externas.</p>
+  </section>
+
+  <section id="biometric">
+    <h2>8. Desbloqueio biométrico (Face ID / Touch ID / impressão digital)</h2>
+    <p>Nas configurações do perfil (ícone ⚙️) você encontra "Ativar desbloqueio com Face ID / impressão digital". Ao ativá-lo, o seu dispositivo cria uma passkey via WebAuthn/FIDO2 e a registra no servidor (apenas a chave pública, nunca o dado biométrico).</p>
+    <p>A partir daí, a tela de acesso mostrará um botão "Desbloquear com biometria": você o usa no lugar do código, e o seu sistema operacional (não o app) verifica Face ID, Touch ID, a impressão digital do Android ou o Windows Hello. O dado biométrico nunca sai do seu dispositivo.</p>
+    <p>Você pode desativá-lo a qualquer momento nas mesmas configurações.</p>
+  </section>
+
+  <section id="languages">
+    <h2>9. Mudar de idioma</h2>
+    <p>No canto superior de cada tela do app há um seletor de idioma. Este site também está disponível nos mesmos 11 idiomas: italiano, inglês, espanhol, francês, alemão, português, árabe, chinês, hindi, russo e japonês. O idioma escolhido no app fica guardado no dispositivo.</p>
+  </section>
+
+  <section id="mobile">
+    <h2>10. Apps móveis nativos (iOS/Android)</h2>
+    <p>Há uma base pronta para um app nativo (baseada em Expo/React Native) que acrescenta um bloqueio biométrico do sistema na abertura. A publicação real na App Store e no Google Play exige as credenciais das contas de desenvolvedor (Apple Developer Program e Google Play Console): depois de ligadas, o app poderá ser gerado e publicado. Até lá, a aplicação web continua utilizável em qualquer navegador móvel e pode ser "instalada" na tela inicial como se fosse um app.</p>
+  </section>
+
+  <section id="limits">
+    <h2>11. Limites de segurança declarados</h2>
+    <p>Por honestidade, eis o que este protótipo <strong>ainda não</strong> faz, apesar de a criptografia ser real:</p>
+    <ul>
+      <li><strong>Sem ratchet / forward secrecy</strong>: a chave de um chat permanece a mesma até as duas pessoas regenerarem as suas chaves (ao contrário de protocolos como o Signal, que trocam de chave a cada mensagem).</li>
+      <li><strong>Sem verificação fora de banda das chaves públicas</strong>: não há um "número de segurança" para comparar de viva voz com o contato. Em teoria, um servidor malicioso poderia substituir uma chave pública pela sua (ataque man-in-the-middle). Num servidor confiável e para um protótipo, serve; antes de um uso de alto risco, essa verificação deveria ser acrescentada.</li>
+      <li><strong>Chave privada no navegador</strong>: fica guardada no armazenamento local do navegador (localStorage), não num enclave seguro de hardware. Quem tiver acesso físico ou de software ao dispositivo desbloqueado poderia lê-la.</li>
+      <li><strong>Sem envio real de e-mails</strong>: o cadastro funciona, mas ainda não há um serviço de e-mail ligado para uma eventual recuperação de conta por "magic link".</li>
+    </ul>
+  </section>
+
+  <section id="troubleshooting">
+    <h2>12. Resolução de problemas</h2>
+    <h3>"Não consigo criptografar: o contato ainda não tem chave pública"</h3>
+    <p>Acontece se o seu contato não entrou desde a última atualização do app (a chave é gerada e enviada automaticamente no login). Peça que ele entre uma vez: depois você poderá escrever-lhe normalmente.</p>
+    <h3>"Perdi o código de acesso"</h3>
+    <p>Por enquanto não existe recuperação automática: é preciso cadastrar um novo perfil. Guarde sempre o código num gerenciador de senhas.</p>
+    <h3>O desbloqueio biométrico não aparece</h3>
+    <p>Requer um dispositivo com Face ID, Touch ID, impressão digital ou Windows Hello configurado, um navegador atualizado e uma conexão HTTPS (a aplicação web em produção já usa uma). Também precisa ter sido ativado pelo menos uma vez nas configurações.</p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">Powered by <a href="https://www.simonescaffidi.it" target="_blank" rel="noopener noreferrer">www.simonescaffidi.it</a></p>
+    <nav class="footer-links" aria-label="Legal">
+      <a href="/pt/manual.html">Manual</a>
+      <a href="/pt/privacy-policy.html">Política de Privacidade</a>
+      <a href="/pt/cookie-policy.html">Política de Cookies</a>
+    </nav>
+    <nav class="footer-langs" aria-label="Todos os idiomas">
+      <a href="/manuale.html" hreflang="it" lang="it">Italiano</a>
+      <a href="/en/manual.html" hreflang="en" lang="en">English</a>
+      <a href="/es/manual.html" hreflang="es" lang="es">Español</a>
+      <a href="/fr/manual.html" hreflang="fr" lang="fr">Français</a>
+      <a href="/de/manual.html" hreflang="de" lang="de">Deutsch</a>
+      <a href="/pt/manual.html" hreflang="pt" lang="pt" aria-current="true">Português</a>
+      <a href="/ar/manual.html" hreflang="ar" lang="ar">العربية</a>
+      <a href="/zh/manual.html" hreflang="zh" lang="zh">中文</a>
+      <a href="/hi/manual.html" hreflang="hi" lang="hi">हिन्दी</a>
+      <a href="/ru/manual.html" hreflang="ru" lang="ru">Русский</a>
+      <a href="/ja/manual.html" hreflang="ja" lang="ja">日本語</a>
+    </nav>
+  </div>
+</footer>
+<script>window.__COOKIE_I18N={"text":"Usamos cookies técnicos necessários e, com o seu consentimento, cookies estatísticos. Consulte a \u003ca href=\"/pt/privacy-policy.html\">Política de Privacidade\u003c/a> e a \u003ca href=\"/pt/cookie-policy.html\">Política de Cookies\u003c/a>.","reject":"Recusar","customize":"Personalizar","accept":"Aceitar todos","statsQuestion":"Deseja aceitar os cookies estatísticos?"};</script>
+<script src="/cookie-banner.js"></script>
+</body>
+</html>
