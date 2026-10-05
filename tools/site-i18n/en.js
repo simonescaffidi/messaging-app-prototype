@@ -139,7 +139,7 @@ module.exports = {
         "To use the messaging prototype you create a profile with an email and a username. The following is stored on the server: email, username, public ID, access code, hidden-chat combination, added contacts, your public encryption key and the messages sent.",
         "<strong>Messages:</strong> the content is end-to-end encrypted in the browser before sending; the server keeps only ciphertext and cannot read it. Metadata (sender, time, reactions, expiry of timed messages) remains unencrypted.",
         "<strong>Biometric unlock:</strong> if you enable it, only the passkey's public key (WebAuthn) is stored on the server. Biometric data never leaves your device. Your private encryption key stays in the browser (localStorage).",
-        "<strong>Important:</strong> this is a demonstration prototype: email, username and access codes are stored unencrypted and the service does not meet the standards of a production product. Do not enter real sensitive information: use test data."
+        "<strong>Important:</strong> this is a demonstration prototype: email and username are stored unencrypted and the service does not meet the standards of a production product. Access codes are not kept in plain text (only a hash) and failed login attempts are rate-limited. Do not enter real sensitive information: use test data."
       ]],
       ["Purpose of processing", ["The data is used solely to make the demo work (authentication, messaging, contacts). It is not shared with third parties and not used for advertising profiling."]],
       ["Retention", ["Prototype data may be deleted at any time during demo updates or resets, without notice."]],
