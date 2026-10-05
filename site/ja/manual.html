@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ユーザーマニュアル — プライベートメッセージ</title>
+<meta name="description" content="完全ガイド：登録、コードでのログイン、非表示チャット、エンドツーエンド暗号化、生体認証ロック解除、対応言語。" />
+<link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/manual.html" />
+<link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
+<link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/manual.html" />
+<link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/manual.html" />
+<link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/manual.html" />
+<link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/manual.html" />
+<link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/manual.html" />
+<link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/manual.html" />
+<link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/manual.html" />
+<link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/manual.html" />
+<link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/manual.html" />
+<link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/manual.html" />
+<link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="ユーザーマニュアル — プライベートメッセージ" />
+<meta property="og:description" content="完全ガイド：登録、コードでのログイン、非表示チャット、エンドツーエンド暗号化、生体認証ロック解除、対応言語。" />
+<meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/manual.html" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body class="manual">
+
+<header class="site-header">
+  <div class="container">
+    <a href="/ja/" class="brand"><span class="lock">🔒</span> プライベートメッセージ</a>
+    <div class="header-actions">
+      <select class="lang-select" aria-label="言語" onchange="location.href=this.value"><option value="/manuale.html">Italiano</option><option value="/en/manual.html">English</option><option value="/es/manual.html">Español</option><option value="/fr/manual.html">Français</option><option value="/de/manual.html">Deutsch</option><option value="/pt/manual.html">Português</option><option value="/ar/manual.html">العربية</option><option value="/zh/manual.html">中文</option><option value="/hi/manual.html">हिन्दी</option><option value="/ru/manual.html">Русский</option><option value="/ja/manual.html" selected>日本語</option></select>
+      <a href="/ja/manual.html" class="btn btn-ghost btn-sm">マニュアル</a>
+      <a href="/app/" class="btn btn-primary btn-sm">アプリを開く</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <h1>ユーザーマニュアル</h1>
+  <p class="lead">プライベートメッセージの完全ガイド：登録とログインの方法、プライバシー機能の使い方、そしてこのプロトタイプが実際に何を守り、何を守らないのかを説明します。</p>
+
+  <nav class="toc" aria-label="目次">
+    <strong>目次</strong>
+    <ol>
+      <li><a href="#signup">登録と初回ログイン</a></li>
+      <li><a href="#profiles">同じ端末の複数プロフィール</a></li>
+      <li><a href="#contacts">連絡先の追加とチャット</a></li>
+      <li><a href="#hidden">非表示チャットと秘密の組み合わせ</a></li>
+      <li><a href="#cover">カバープロフィール</a></li>
+      <li><a href="#timed">時限メッセージ（自動消去）</a></li>
+      <li><a href="#encryption">エンドツーエンド暗号化：本当の仕組み</a></li>
+      <li><a href="#biometric">生体認証ロック解除（Face ID / Touch ID / 指紋）</a></li>
+      <li><a href="#languages">言語の切り替え</a></li>
+      <li><a href="#mobile">ネイティブモバイルアプリ（iOS/Android）</a></li>
+      <li><a href="#limits">明示している安全性の制限</a></li>
+      <li><a href="#troubleshooting">トラブルシューティング</a></li>
+    </ol>
+  </nav>
+
+  <section id="signup">
+    <h2>1. 登録と初回ログイン</h2>
+    <p>最初の画面で「登録する」をタップし、メールアドレスとユーザー名を入力します。電話番号は不要です。</p>
+    <p>登録後、次の3つの情報が一度だけ表示されます。パスワードマネージャーなど安全な場所にすぐ保存してください。</p>
+    <ul>
+      <li><strong>アクセスコード</strong>：あなたの「パスワード」です。アプリを開くたびに入力すると、プロフィールが自動で開きます。</li>
+      <li><strong>公開ID</strong>：連絡先に追加してほしい相手と共有するものです。メールアドレスは明かされません。</li>
+      <li><strong>秘密の組み合わせ</strong>：非表示チャットを表示するために使います（専用の項目を参照）。</li>
+    </ul>
+    <p class="warn">アクセスコードを失うと、そのプロフィールにアクセスできなくなります。メールによる本物の復旧はまだありません（「明示している安全性の制限」を参照）。</p>
+  </section>
+
+  <section id="profiles">
+    <h2>2. 同じ端末の複数プロフィール</h2>
+    <p>複数のプロフィール（例：個人用とカバー用）を作成でき、すべて同じ端末から使えます。プロフィールごとに専用のアクセスコードがあり、アプリを開いてコードを入力すると対応するプロフィールが自動で開きます。プロフィール数が分かってしまう選択画面はありません。</p>
+  </section>
+
+  <section id="contacts">
+    <h2>3. 連絡先の追加とチャット</h2>
+    <p>「+ 連絡先を追加」をタップして相手の公開IDを入力します。エンドツーエンドで暗号化されたリアルタイムのチャットが開きます（第7項を参照）。</p>
+  </section>
+
+  <section id="hidden">
+    <h2>4. 非表示チャットと秘密の組み合わせ</h2>
+    <p>チャット内でメニューを開き、「このチャットを非表示/表示」を選びます。非表示にしたチャットはメインリストに表示されなくなります。</p>
+    <p>再表示するには、検索バーに秘密の組み合わせ（登録時に一度だけ表示されたもの）を入力します。アプリを再びロックするまで、すべての非表示チャットが表示されます。</p>
+  </section>
+
+  <section id="cover">
+    <h2>5. カバープロフィール</h2>
+    <p>登録時に「カバープロフィールとして作成」を選べます。確認を受けたときに見せるためのプロフィールで、同じ端末に他のプロフィールがあることを示す手がかりは含まれません。</p>
+  </section>
+
+  <section id="timed">
+    <h2>6. 時限メッセージ（自動消去）</h2>
+    <p>メッセージを送る前に、ドロップダウンから自動消去までの時間（30秒、5分、1時間）を選べます。その時間が過ぎるとメッセージは削除されます。</p>
+  </section>
+
+  <section id="encryption">
+    <h2>7. エンドツーエンド暗号化：本当の仕組み</h2>
+    <p>これは宣伝文句ではありません。すべてのメッセージは、サーバーに送信される前に<strong>お使いのブラウザ内で</strong>次の方式で暗号化されます。</p>
+    <ol>
+      <li>初回ログイン時に、端末がP-256曲線上のECDH鍵ペア（公開鍵と秘密鍵）を生成します。公開鍵はサーバーにアップロードされ、秘密鍵はブラウザ内にだけ残ります。</li>
+      <li>連絡先にメッセージを送るとき、ブラウザはあなたの秘密鍵と相手の公開鍵を組み合わせ（ECDH交換）、HKDF-SHA256でその2人専用の256ビットAES-GCM共通鍵を導出します。</li>
+      <li>各メッセージはその鍵と、毎回異なる乱数（IV）で暗号化され、暗号化された状態でサーバーに送られます。</li>
+      <li>サーバーは暗号文を保存・中継するだけで、メッセージの内容を読むことはできません。</li>
+    </ol>
+    <p>これは多くの現代的な安全なプロトコルが使うのと同じ種類の数学（ECDH + AES-GCM）で、ここではブラウザ標準のWeb Crypto APIを使い、外部ライブラリなしで実装しています。</p>
+  </section>
+
+  <section id="biometric">
+    <h2>8. 生体認証ロック解除（Face ID / Touch ID / 指紋）</h2>
+    <p>プロフィール設定（⚙️アイコン）に「Face ID / 指紋でのロック解除を有効にする」があります。有効にすると、端末がWebAuthn/FIDO2でパスキーを作成してサーバーに登録します（公開鍵のみで、生体データは決して送られません）。</p>
+    <p>以降はログイン画面に「生体認証でロック解除」ボタンが表示されます。コードの代わりに使うと、Face ID、Touch ID、Androidの指紋、Windows Helloの確認はアプリではなくOSが行います。生体データが端末の外に出ることはありません。</p>
+    <p>同じ設定からいつでも無効にできます。</p>
+  </section>
+
+  <section id="languages">
+    <h2>9. 言語の切り替え</h2>
+    <p>アプリの各画面の上部に言語セレクターがあります。このサイトも同じ11言語で利用できます：イタリア語、英語、スペイン語、フランス語、ドイツ語、ポルトガル語、アラビア語、中国語、ヒンディー語、ロシア語、日本語。アプリで選んだ言語は端末に記憶されます。</p>
+  </section>
+
+  <section id="mobile">
+    <h2>10. ネイティブモバイルアプリ（iOS/Android）</h2>
+    <p>起動時にシステムレベルの生体認証ロックを追加する、ネイティブアプリの土台（Expo/React Nativeベース）が用意されています。App StoreとGoogle Playへの実際の公開には、開発者アカウントの認証情報（Apple Developer ProgramとGoogle Play Console）が必要です。接続後にアプリをビルドして公開できます。それまでは、ウェブアプリをどのモバイルブラウザでも使え、ホーム画面にアプリのように「インストール」できます。</p>
+  </section>
+
+  <section id="limits">
+    <h2>11. 明示している安全性の制限</h2>
+    <p>正直にお伝えすると、暗号化自体は本物ですが、このプロトタイプには<strong>まだない</strong>ものがあります。</p>
+    <ul>
+      <li><strong>ラチェット／前方秘匿性がない</strong>：チャットの鍵は、双方が鍵を再生成するまで変わりません（メッセージごとに鍵を更新するSignalのようなプロトコルとは異なります）。</li>
+      <li><strong>公開鍵の帯域外検証がない</strong>：連絡先と口頭で照合できる「セーフティナンバー」がありません。理論上、悪意あるサーバーが公開鍵を自分の鍵にすり替える（中間者攻撃）可能性があります。信頼できるサーバー上のプロトタイプなら許容できますが、高リスクな利用の前にこの検証を追加すべきです。</li>
+      <li><strong>秘密鍵がブラウザ内にある</strong>：ハードウェアのセキュアエンクレーブではなく、ブラウザのローカルストレージ（localStorage）に保存されています。ロック解除済みの端末に物理的またはソフトウェア的にアクセスできる人は、読み取れる可能性があります。</li>
+      <li><strong>本物のメール送信がない</strong>：登録は機能しますが、「マジックリンク」によるアカウント復旧のためのメールサービスはまだ接続されていません。</li>
+    </ul>
+  </section>
+
+  <section id="troubleshooting">
+    <h2>12. トラブルシューティング</h2>
+    <h3>「暗号化できません：連絡先にまだ公開鍵がありません」</h3>
+    <p>連絡先がアプリの最新アップデート後にまだログインしていない場合に起こります（鍵はログイン時に自動で生成・アップロードされます）。一度ログインしてもらえば、通常どおりメッセージを送れるようになります。</p>
+    <h3>「アクセスコードをなくしました」</h3>
+    <p>現時点では自動復旧はなく、新しいプロフィールを登録する必要があります。コードは必ずパスワードマネージャーに保管してください。</p>
+    <h3>生体認証ロック解除が表示されない</h3>
+    <p>Face ID、Touch ID、指紋、またはWindows Helloが設定された端末、最新のブラウザ、HTTPS接続（本番のウェブアプリはすでに使用しています）が必要です。また、設定で少なくとも一度は有効にしておく必要があります。</p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">Powered by <a href="https://www.simonescaffidi.it" target="_blank" rel="noopener noreferrer">www.simonescaffidi.it</a></p>
+    <nav class="footer-links" aria-label="法的情報">
+      <a href="/ja/manual.html">マニュアル</a>
+      <a href="/ja/privacy-policy.html">プライバシーポリシー</a>
+      <a href="/ja/cookie-policy.html">Cookieポリシー</a>
+    </nav>
+    <nav class="footer-langs" aria-label="すべての言語">
+      <a href="/manuale.html" hreflang="it" lang="it">Italiano</a>
+      <a href="/en/manual.html" hreflang="en" lang="en">English</a>
+      <a href="/es/manual.html" hreflang="es" lang="es">Español</a>
+      <a href="/fr/manual.html" hreflang="fr" lang="fr">Français</a>
+      <a href="/de/manual.html" hreflang="de" lang="de">Deutsch</a>
+      <a href="/pt/manual.html" hreflang="pt" lang="pt">Português</a>
+      <a href="/ar/manual.html" hreflang="ar" lang="ar">العربية</a>
+      <a href="/zh/manual.html" hreflang="zh" lang="zh">中文</a>
+      <a href="/hi/manual.html" hreflang="hi" lang="hi">हिन्दी</a>
+      <a href="/ru/manual.html" hreflang="ru" lang="ru">Русский</a>
+      <a href="/ja/manual.html" hreflang="ja" lang="ja" aria-current="true">日本語</a>
+    </nav>
+  </div>
+</footer>
+<script>window.__COOKIE_I18N={"text":"当サイトでは、必要な技術的Cookieと、同意いただいた場合に統計Cookieを使用します。\u003ca href=\"/ja/privacy-policy.html\">プライバシーポリシー\u003c/a>と\u003ca href=\"/ja/cookie-policy.html\">Cookieポリシー\u003c/a>をご覧ください。","reject":"拒否","customize":"カスタマイズ","accept":"すべて許可","statsQuestion":"統計Cookieを許可しますか？"};</script>
+<script src="/cookie-banner.js"></script>
+</body>
+</html>
