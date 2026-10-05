@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="de" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Benutzerhandbuch — Private Nachrichten</title>
+<meta name="description" content="Vollständige Anleitung: Registrierung, Anmeldung per Code, versteckte Chats, Ende-zu-Ende-Verschlüsselung, biometrische Entsperrung und verfügbare Sprachen." />
+<link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/manual.html" />
+<link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
+<link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/manual.html" />
+<link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/manual.html" />
+<link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/manual.html" />
+<link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/manual.html" />
+<link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/manual.html" />
+<link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/manual.html" />
+<link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/manual.html" />
+<link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/manual.html" />
+<link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/manual.html" />
+<link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/manual.html" />
+<link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Benutzerhandbuch — Private Nachrichten" />
+<meta property="og:description" content="Vollständige Anleitung: Registrierung, Anmeldung per Code, versteckte Chats, Ende-zu-Ende-Verschlüsselung, biometrische Entsperrung und verfügbare Sprachen." />
+<meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/de/manual.html" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body class="manual">
+
+<header class="site-header">
+  <div class="container">
+    <a href="/de/" class="brand"><span class="lock">🔒</span> Private Nachrichten</a>
+    <div class="header-actions">
+      <select class="lang-select" aria-label="Sprache" onchange="location.href=this.value"><option value="/manuale.html">Italiano</option><option value="/en/manual.html">English</option><option value="/es/manual.html">Español</option><option value="/fr/manual.html">Français</option><option value="/de/manual.html" selected>Deutsch</option><option value="/pt/manual.html">Português</option><option value="/ar/manual.html">العربية</option><option value="/zh/manual.html">中文</option><option value="/hi/manual.html">हिन्दी</option><option value="/ru/manual.html">Русский</option><option value="/ja/manual.html">日本語</option></select>
+      <a href="/de/manual.html" class="btn btn-ghost btn-sm">Handbuch</a>
+      <a href="/app/" class="btn btn-primary btn-sm">App öffnen</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <h1>Benutzerhandbuch</h1>
+  <p class="lead">Eine vollständige Anleitung zu Private Nachrichten: wie du dich registrierst, anmeldest, die Datenschutzfunktionen nutzt und verstehst, was dieser Prototyp wirklich schützt – und was nicht.</p>
+
+  <nav class="toc" aria-label="Inhalt">
+    <strong>Inhalt</strong>
+    <ol>
+      <li><a href="#signup">Registrierung und erste Anmeldung</a></li>
+      <li><a href="#profiles">Mehrere Profile auf demselben Gerät</a></li>
+      <li><a href="#contacts">Kontakte hinzufügen und chatten</a></li>
+      <li><a href="#hidden">Versteckte Chats und geheime Kombination</a></li>
+      <li><a href="#cover">Tarnprofil</a></li>
+      <li><a href="#timed">Zeitgesteuerte Nachrichten (Selbstzerstörung)</a></li>
+      <li><a href="#encryption">Ende-zu-Ende-Verschlüsselung: wie sie wirklich funktioniert</a></li>
+      <li><a href="#biometric">Biometrische Entsperrung (Face ID / Touch ID / Fingerabdruck)</a></li>
+      <li><a href="#languages">Sprache wechseln</a></li>
+      <li><a href="#mobile">Native Mobile-Apps (iOS/Android)</a></li>
+      <li><a href="#limits">Erklärte Sicherheitsgrenzen</a></li>
+      <li><a href="#troubleshooting">Fehlerbehebung</a></li>
+    </ol>
+  </nav>
+
+  <section id="signup">
+    <h2>1. Registrierung und erste Anmeldung</h2>
+    <p>Tippe auf dem Startbildschirm auf „Registrieren“ und gib deine E-Mail und einen Benutzernamen ein. Eine Telefonnummer ist nicht erforderlich.</p>
+    <p>Nach der Registrierung siehst du einmalig drei Angaben, die du sofort an einem sicheren Ort speichern musst (zum Beispiel in einem Passwortmanager):</p>
+    <ul>
+      <li><strong>Zugangscode</strong>: dein „Passwort“ – bei jedem Öffnen der App gibst du ihn ein und dein Profil öffnet sich automatisch.</li>
+      <li><strong>Öffentliche ID</strong>: die gibst du an Personen weiter, die du als Kontakte hinzufügen möchtest. Sie verrät nicht deine E-Mail.</li>
+      <li><strong>Geheime Kombination</strong>: dient dazu, versteckte Chats anzuzeigen (siehe eigener Abschnitt).</li>
+    </ul>
+    <p class="warn">Wenn du den Zugangscode verlierst, verlierst du den Zugriff auf das Profil: Eine echte Wiederherstellung per E-Mail gibt es noch nicht (siehe „Erklärte Sicherheitsgrenzen“).</p>
+  </section>
+
+  <section id="profiles">
+    <h2>2. Mehrere Profile auf demselben Gerät</h2>
+    <p>Du kannst mehrere Profile anlegen (zum Beispiel ein persönliches und ein Tarnprofil), alle vom selben Gerät aus erreichbar. Jedes Profil hat seinen eigenen Zugangscode: Wenn du die App öffnest und einen Code eingibst, öffnet sich automatisch das passende Profil – ohne Auswahlanzeige, die verraten würde, wie viele Profile existieren.</p>
+  </section>
+
+  <section id="contacts">
+    <h2>3. Kontakte hinzufügen und chatten</h2>
+    <p>Tippe auf „+ Kontakt hinzufügen“ und gib die öffentliche ID der Person ein. Es öffnet sich ein Echtzeit-Chat, Ende-zu-Ende-verschlüsselt (siehe Abschnitt 7).</p>
+  </section>
+
+  <section id="hidden">
+    <h2>4. Versteckte Chats und geheime Kombination</h2>
+    <p>Öffne in einem Chat das Menü und wähle „Diesen Chat verstecken/anzeigen“. Ein versteckter Chat erscheint nicht mehr in der Hauptliste.</p>
+    <p>Damit er wieder erscheint, gib deine geheime Kombination (die, die bei der Registrierung nur einmal angezeigt wurde) in die Suchleiste ein: Alle versteckten Chats sind wieder sichtbar, bis du die App erneut sperrst.</p>
+  </section>
+
+  <section id="cover">
+    <h2>5. Tarnprofil</h2>
+    <p>Bei der Registrierung kannst du „Als Tarnprofil erstellen“ ankreuzen: ein Profil, das bei einer Kontrolle gezeigt werden kann, ohne Hinweise auf weitere Profile auf demselben Gerät.</p>
+  </section>
+
+  <section id="timed">
+    <h2>6. Zeitgesteuerte Nachrichten (Selbstzerstörung)</h2>
+    <p>Vor dem Senden einer Nachricht kannst du im Dropdown-Menü eine Selbstzerstörungszeit wählen: 30 Sekunden, 5 Minuten oder 1 Stunde. Nach Ablauf dieser Zeit wird die Nachricht entfernt.</p>
+  </section>
+
+  <section id="encryption">
+    <h2>7. Ende-zu-Ende-Verschlüsselung: wie sie wirklich funktioniert</h2>
+    <p>Das ist kein Marketing-Slogan: Jede Nachricht wird <strong>in deinem Browser</strong> verschlüsselt, bevor sie an den Server geht, nach diesem Schema:</p>
+    <ol>
+      <li>Bei der ersten Anmeldung erzeugt dein Gerät ein ECDH-Schlüsselpaar auf der Kurve P-256 (einen öffentlichen und einen privaten Schlüssel). Der öffentliche Schlüssel wird auf den Server geladen; der private bleibt nur in deinem Browser.</li>
+      <li>Wenn du einem Kontakt schreibst, kombiniert dein Browser deinen privaten Schlüssel mit dessen öffentlichem Schlüssel (ECDH-Austausch) und leitet per HKDF-SHA256 einen symmetrischen 256-Bit-AES-GCM-Schlüssel ab, der speziell für dieses Personenpaar gilt.</li>
+      <li>Jede Nachricht wird mit diesem Schlüssel und jedes Mal einer anderen Zufallszahl (IV) verschlüsselt und dann bereits verschlüsselt an den Server gesendet.</li>
+      <li>Der Server speichert und überträgt nur Geheimtext: Er kann den Inhalt deiner Nachrichten nicht lesen.</li>
+    </ol>
+    <p>Das ist dieselbe Art von Mathematik (ECDH + AES-GCM), die viele moderne sichere Protokolle nutzen – hier über die native Web Crypto API des Browsers angewendet, ohne externe Bibliotheken.</p>
+  </section>
+
+  <section id="biometric">
+    <h2>8. Biometrische Entsperrung (Face ID / Touch ID / Fingerabdruck)</h2>
+    <p>In den Profileinstellungen (⚙️-Symbol) findest du „Entsperrung per Face ID / Fingerabdruck aktivieren“. Wenn du sie einschaltest, erstellt dein Gerät einen Passkey über WebAuthn/FIDO2 und registriert ihn beim Server (nur den öffentlichen Schlüssel, nie das biometrische Datum).</p>
+    <p>Ab dann zeigt der Anmeldebildschirm eine Schaltfläche „Mit Biometrie entsperren“: Du nutzt sie statt des Codes, und dein Betriebssystem (nicht die App) prüft Face ID, Touch ID, den Android-Fingerabdruck oder Windows Hello. Das biometrische Datum verlässt dein Gerät nie.</p>
+    <p>Du kannst sie jederzeit in denselben Einstellungen wieder ausschalten.</p>
+  </section>
+
+  <section id="languages">
+    <h2>9. Sprache wechseln</h2>
+    <p>Oben in jedem App-Bildschirm findest du eine Sprachauswahl. Auch diese Website gibt es in denselben 11 Sprachen: Italienisch, Englisch, Spanisch, Französisch, Deutsch, Portugiesisch, Arabisch, Chinesisch, Hindi, Russisch und Japanisch. Die in der App gewählte Sprache wird auf dem Gerät gespeichert.</p>
+  </section>
+
+  <section id="mobile">
+    <h2>10. Native Mobile-Apps (iOS/Android)</h2>
+    <p>Ein Grundgerüst für eine native App (auf Basis von Expo/React Native) ist fertig und fügt beim Start eine biometrische Systemsperre hinzu. Die tatsächliche Veröffentlichung im App Store und bei Google Play erfordert die Zugangsdaten der Entwicklerkonten (Apple Developer Program und Google Play Console): Sobald diese verbunden sind, kann die App gebaut und veröffentlicht werden. Bis dahin bleibt die Web-App in jedem mobilen Browser nutzbar und lässt sich wie eine App auf dem Home-Bildschirm „installieren“.</p>
+  </section>
+
+  <section id="limits">
+    <h2>11. Erklärte Sicherheitsgrenzen</h2>
+    <p>Aus Ehrlichkeit: Das kann dieser Prototyp <strong>noch nicht</strong>, auch wenn die Verschlüsselung echt ist:</p>
+    <ul>
+      <li><strong>Kein Ratchet / keine Forward Secrecy</strong>: Der Schlüssel eines Chats bleibt gleich, bis beide Personen ihre Schlüssel neu erzeugen (anders als bei Protokollen wie Signal, die den Schlüssel mit jeder Nachricht wechseln).</li>
+      <li><strong>Keine Out-of-Band-Prüfung der öffentlichen Schlüssel</strong>: Es gibt keine „Sicherheitsnummer“, die du mündlich mit dem Kontakt vergleichen könntest. Theoretisch könnte ein böswilliger Server einen öffentlichen Schlüssel durch seinen eigenen ersetzen (Man-in-the-Middle-Angriff). Für einen Prototyp auf einem vertrauenswürdigen Server in Ordnung; vor einem Einsatz mit hohem Risiko sollte diese Prüfung ergänzt werden.</li>
+      <li><strong>Privater Schlüssel im Browser</strong>: Er liegt im lokalen Speicher des Browsers (localStorage), nicht in einer Hardware-Secure-Enclave. Wer physischen oder softwareseitigen Zugriff auf das entsperrte Gerät hat, könnte ihn lesen.</li>
+      <li><strong>Kein echter E-Mail-Versand</strong>: Die Registrierung funktioniert, aber es ist noch kein E-Mail-Dienst für eine mögliche Kontowiederherstellung per „Magic Link“ angebunden.</li>
+    </ul>
+  </section>
+
+  <section id="troubleshooting">
+    <h2>12. Fehlerbehebung</h2>
+    <h3>„Verschlüsselung nicht möglich: Der Kontakt hat noch keinen öffentlichen Schlüssel“</h3>
+    <p>Das passiert, wenn sich dein Kontakt seit dem letzten App-Update nicht angemeldet hat (der Schlüssel wird bei der Anmeldung automatisch erzeugt und hochgeladen). Bitte ihn, sich einmal anzumelden – danach kannst du ihm normal schreiben.</p>
+    <h3>„Ich habe den Zugangscode verloren“</h3>
+    <p>Derzeit gibt es keine automatische Wiederherstellung: Du musst ein neues Profil registrieren. Bewahre den Code immer in einem Passwortmanager auf.</p>
+    <h3>Die biometrische Entsperrung erscheint nicht</h3>
+    <p>Sie erfordert ein Gerät mit eingerichtetem Face ID, Touch ID, Fingerabdruck oder Windows Hello, einen aktuellen Browser und eine HTTPS-Verbindung (die Web-App in Produktion nutzt bereits eine). Außerdem muss sie mindestens einmal in den Einstellungen aktiviert worden sein.</p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">Powered by <a href="https://www.simonescaffidi.it" target="_blank" rel="noopener noreferrer">www.simonescaffidi.it</a></p>
+    <nav class="footer-links" aria-label="Rechtliches">
+      <a href="/de/manual.html">Handbuch</a>
+      <a href="/de/privacy-policy.html">Datenschutzerklärung</a>
+      <a href="/de/cookie-policy.html">Cookie-Richtlinie</a>
+    </nav>
+    <nav class="footer-langs" aria-label="Alle Sprachen">
+      <a href="/manuale.html" hreflang="it" lang="it">Italiano</a>
+      <a href="/en/manual.html" hreflang="en" lang="en">English</a>
+      <a href="/es/manual.html" hreflang="es" lang="es">Español</a>
+      <a href="/fr/manual.html" hreflang="fr" lang="fr">Français</a>
+      <a href="/de/manual.html" hreflang="de" lang="de" aria-current="true">Deutsch</a>
+      <a href="/pt/manual.html" hreflang="pt" lang="pt">Português</a>
+      <a href="/ar/manual.html" hreflang="ar" lang="ar">العربية</a>
+      <a href="/zh/manual.html" hreflang="zh" lang="zh">中文</a>
+      <a href="/hi/manual.html" hreflang="hi" lang="hi">हिन्दी</a>
+      <a href="/ru/manual.html" hreflang="ru" lang="ru">Русский</a>
+      <a href="/ja/manual.html" hreflang="ja" lang="ja">日本語</a>
+    </nav>
+  </div>
+</footer>
+<script>window.__COOKIE_I18N={"text":"Wir verwenden notwendige technische Cookies und, mit deiner Einwilligung, Statistik-Cookies. Siehe \u003ca href=\"/de/privacy-policy.html\">Datenschutzerklärung\u003c/a> und \u003ca href=\"/de/cookie-policy.html\">Cookie-Richtlinie\u003c/a>.","reject":"Ablehnen","customize":"Anpassen","accept":"Alle akzeptieren","statsQuestion":"Möchtest du Statistik-Cookies akzeptieren?"};</script>
+<script src="/cookie-banner.js"></script>
+</body>
+</html>
