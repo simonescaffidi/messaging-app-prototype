@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Manuel d'utilisation — Messagerie Privée</title>
-<meta name="description" content="Guide complet : inscription, connexion par code, discussions masquées, chiffrement de bout en bout, déverrouillage biométrique et langues disponibles." />
+<meta name="description" content="Guide complet : inscription, connexion par identifiant et mot de passe, discussions masquées, chiffrement de bout en bout, déverrouillage biométrique et langues disponibles." />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/manual.html" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
 <link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/manual.html" />
@@ -20,7 +20,7 @@
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="Manuel d'utilisation — Messagerie Privée" />
-<meta property="og:description" content="Guide complet : inscription, connexion par code, discussions masquées, chiffrement de bout en bout, déverrouillage biométrique et langues disponibles." />
+<meta property="og:description" content="Guide complet : inscription, connexion par identifiant et mot de passe, discussions masquées, chiffrement de bout en bout, déverrouillage biométrique et langues disponibles." />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/manual.html" />
 <meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -67,16 +67,16 @@
     <p>Sur l'écran d'accueil, touchez « Inscrivez-vous » et saisissez votre e-mail et un nom d'utilisateur. Aucun numéro de téléphone n'est demandé.</p>
     <p>Après l'inscription, vous verrez une seule fois trois informations, à enregistrer tout de suite dans un endroit sûr (un gestionnaire de mots de passe, par exemple) :</p>
     <ul>
-      <li><strong>Code d'accès</strong> : c'est votre « mot de passe ». À chaque ouverture de l'app vous le saisissez et votre profil s'ouvre automatiquement.</li>
+      <li><strong>Identifiant et mot de passe</strong> : l'identifiant est le premier champ, le mot de passe décide quel profil s'ouvre. Avec le même identifiant, vous pouvez avoir plusieurs profils, chacun avec son mot de passe.</li>
       <li><strong>ID public</strong> : c'est ce que vous partagez avec les personnes que vous voulez ajouter comme contacts. Il ne révèle pas votre e-mail.</li>
       <li><strong>Combinaison secrète</strong> : elle sert à révéler les discussions masquées (voir la section dédiée).</li>
     </ul>
-    <p class="warn">Si vous perdez le code d'accès, vous perdez l'accès au profil : il n'existe pas encore de vraie récupération par e-mail (voir « Limites de sécurité déclarées »).</p>
+    <p class="warn">Si vous perdez le mot de passe, vous perdez l'accès au profil : il n'existe pas encore de récupération réelle par e-mail (voir « Limites de sécurité déclarées »).</p>
   </section>
 
   <section id="profiles">
     <h2>2. Profils multiples sur le même appareil</h2>
-    <p>Vous pouvez créer plusieurs profils (par exemple un personnel et un de couverture), tous accessibles depuis le même appareil. Chaque profil a son propre code d'accès : quand vous ouvrez l'app et saisissez un code, le profil correspondant s'ouvre automatiquement, sans écran de sélection qui révélerait combien de profils existent.</p>
+    <p>Vous pouvez créer plusieurs profils (par exemple un personnel et un de couverture) avec le même identifiant mais des mots de passe différents. En saisissant identifiant et mot de passe, le profil correspondant s'ouvre, sans écran de sélection révélant le nombre de profils. Vous ne pouvez pas utiliser le même mot de passe pour deux profils du même identifiant.</p>
   </section>
 
   <section id="contacts">
@@ -115,7 +115,7 @@
   <section id="biometric">
     <h2>8. Déverrouillage biométrique (Face ID / Touch ID / empreinte)</h2>
     <p>Dans les réglages du profil (icône ⚙️), vous trouverez « Activer le déverrouillage par Face ID / empreinte ». En l'activant, votre appareil crée une passkey via WebAuthn/FIDO2 et l'enregistre sur le serveur (uniquement la clé publique, jamais la donnée biométrique).</p>
-    <p>Dès lors, l'écran de connexion affiche un bouton « Déverrouiller par biométrie » : vous l'utilisez à la place du code, et votre système d'exploitation (pas l'app) vérifie Face ID, Touch ID, l'empreinte Android ou Windows Hello. La donnée biométrique ne quitte jamais votre appareil.</p>
+    <p>Ensuite, l'écran de connexion affichera un bouton « Déverrouiller par biométrie » : utilisez-le à la place du mot de passe ; votre système d'exploitation (et non l'app) vérifie Face ID, Touch ID, l'empreinte Android ou Windows Hello. La donnée biométrique ne quitte jamais votre appareil.</p>
     <p>Vous pouvez le désactiver à tout moment depuis les mêmes réglages.</p>
   </section>
 
@@ -144,8 +144,8 @@
     <h2>12. Dépannage</h2>
     <h3>« Impossible de chiffrer : le contact n'a pas encore de clé publique »</h3>
     <p>Cela arrive si votre contact ne s'est pas connecté depuis la dernière mise à jour de l'app (la clé est générée et envoyée automatiquement à la connexion). Demandez-lui de se connecter une fois : ensuite vous pourrez lui écrire normalement.</p>
-    <h3>« J'ai perdu le code d'accès »</h3>
-    <p>Il n'existe pour l'instant aucune récupération automatique : il faut créer un nouveau profil. Conservez toujours le code dans un gestionnaire de mots de passe.</p>
+    <h3>« J'ai perdu mon mot de passe »</h3>
+    <p>Il n'existe pas encore de récupération automatique : il faut créer un nouveau profil. Conservez toujours votre mot de passe dans un gestionnaire de mots de passe.</p>
     <h3>Le déverrouillage biométrique n'apparaît pas</h3>
     <p>Il nécessite un appareil avec Face ID, Touch ID, empreinte ou Windows Hello configuré, un navigateur à jour et une connexion HTTPS (l'application web en production en utilise déjà une). Il doit en outre avoir été activé au moins une fois dans les réglages.</p>
   </section>
