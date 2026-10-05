@@ -9,6 +9,7 @@ const http = require("http");
 const { WebSocketServer } = require("ws");
 const { v4: uuidv4 } = require("uuid");
 const path = require("path");
+const crypto = require("crypto");
 const store = require("./db");
 const {
   generateRegistrationOptions,
@@ -18,7 +19,8 @@ const {
 } = require("@simplewebauthn/server");
 
 const app = express();
-app.use(express.json());
+app.set("trust proxy", 1); // dietro il proxy di Railway: req.ip e' l'IP reale del client
+app.use(express.json({ limit: "256kb" }));
 
 // Sito di presentazione (landing IT/EN) servito sulla root.
 app.use(express.static(path.join(__dirname, "site")));
@@ -36,12 +38,81 @@ const sockets = new Map();
 
 function randomCode(len, chars) {
   let out = "";
-  for (let i = 0; i < len; i++) out += chars[Math.floor(Math.random() * chars.length)];
+  for (let i = 0; i < len; i++) out += chars[crypto.randomInt(chars.length)];
   return out;
 }
-function randomAccessCode() {
-  return randomCode(6, "0123456789");
+
+// ---------- CODICE DI ACCESSO: lungo, casuale, hashato, anti-indovinamento ----------
+// 12 caratteri da un alfabeto di 32 simboli = 60 bit di entropia (circa 10^18
+// combinazioni), generati con un CSPRNG. Il server non conserva il codice in
+// chiaro: salva solo un HMAC-SHA256 con un "pepper" segreto.
+const CODE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+const CODE_LEN = 12;
+const PEPPER = process.env.CODE_PEPPER || crypto.createHash("sha256")
+  .update("pepper:" + (process.env.RAILWAY_SERVICE_ID || "") + ":" + (process.env.RAILWAY_PROJECT_ID || "local") + ":" + (process.env.SESSION_SECRET || ""))
+  .digest("hex");
+function normalizeCode(raw) {
+  return String(raw || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
 }
+function hashCode(raw) {
+  return crypto.createHmac("sha256", PEPPER).update(normalizeCode(raw)).digest("hex");
+}
+function formatCode(code) {
+  return code.match(/.{1,4}/g).join("-");
+}
+function randomAccessCode() {
+  return randomCode(CODE_LEN, CODE_ALPHABET);
+}
+
+// Limitazione dei tentativi falliti per IP (finestra scorrevole di 15 minuti).
+const LOGIN_WINDOW_MS = 15 * 60 * 1000;
+const LOGIN_MAX_FAILS = 8;
+const failedLogins = new Map(); // ip -> [timestamp, ...]
+function recentFails(ip) {
+  const now = Date.now();
+  const list = (failedLogins.get(ip) || []).filter((t) => now - t < LOGIN_WINDOW_MS);
+  failedLogins.set(ip, list);
+  return list;
+}
+setInterval(() => { for (const ip of failedLogins.keys()) recentFails(ip); }, 5 * 60 * 1000).unref();
+function loginThrottle(req, res, next) {
+  const fails = recentFails(req.ip);
+  if (fails.length >= LOGIN_MAX_FAILS) {
+    const retry = Math.ceil((LOGIN_WINDOW_MS - (Date.now() - fails[0])) / 1000);
+    res.set("Retry-After", String(retry));
+    return res.status(429).json({ error: "troppi tentativi, riprova tra " + Math.ceil(retry / 60) + " minuti" });
+  }
+  next();
+}
+function registerFail(ip) { recentFails(ip).push(Date.now()); }
+
+// Limite semplice sulle registrazioni (anti-spam): 20 per ora per IP.
+const registrations = new Map();
+function registerThrottle(req, res, next) {
+  const now = Date.now();
+  const list = (registrations.get(req.ip) || []).filter((t) => now - t < 3600 * 1000);
+  if (list.length >= 20) return res.status(429).json({ error: "troppe registrazioni da questo indirizzo, riprova piu' tardi" });
+  list.push(now);
+  registrations.set(req.ip, list);
+  next();
+}
+
+// Migrazione: i profili creati con la vecchia versione avevano il codice in chiaro.
+// Li convertiamo in hash e rimuoviamo il testo in chiaro. I codici a 6 cifre
+// restano validi (e protetti dal limite di tentativi) ma vengono marcati "deboli".
+(function migrateLegacyCodes() {
+  const db = store.load();
+  let changed = false;
+  for (const p of db.profiles) {
+    if (p.accessCode) {
+      p.accessCodeHash = hashCode(p.accessCode);
+      p.legacyWeakCode = normalizeCode(p.accessCode).length < CODE_LEN;
+      delete p.accessCode;
+      changed = true;
+    }
+  }
+  if (changed) store.save(db);
+})();
 function randomPublicId() {
   return randomCode(8, "ABCDEFGHJKLMNPQRSTUVWXYZ23456789");
 }
@@ -91,17 +162,23 @@ function rpInfo(req) {
 
 // ---------- REGISTRAZIONE / LOGIN ----------
 
-app.post("/api/register", (req, res) => {
+app.post("/api/register", registerThrottle, (req, res) => {
   const { email, username, isCover } = req.body;
   if (!email || !username) return res.status(400).json({ error: "email e username obbligatori" });
 
   const db = store.load();
+  // Codice univoco: rigenera finche' l'hash non collide con nessun profilo esistente.
+  let accessCode, accessCodeHash;
+  do {
+    accessCode = randomAccessCode();
+    accessCodeHash = hashCode(accessCode);
+  } while (db.profiles.some((p) => p.accessCodeHash === accessCodeHash));
   const profile = {
     id: uuidv4(),
     email,
     username,
     publicId: randomPublicId(),
-    accessCode: randomAccessCode(),
+    accessCodeHash,
     secretCombo: randomSecretCombo(),
     isCover: !!isCover,
     settings: { notifications: "normal" },
@@ -116,17 +193,26 @@ app.post("/api/register", (req, res) => {
   // e' responsabilita' dell'utente salvarli (come una seed phrase).
   res.json({
     profileId: profile.id,
-    accessCode: profile.accessCode,
+    accessCode: formatCode(accessCode),
     publicId: profile.publicId,
     secretCombo: profile.secretCombo
   });
 });
 
-app.post("/api/login", (req, res) => {
+app.post("/api/login", loginThrottle, async (req, res) => {
   const { accessCode } = req.body;
   const db = store.load();
-  const profile = db.profiles.find((p) => p.accessCode === accessCode);
-  if (!profile) return res.status(401).json({ error: "codice non valido" });
+  const candidate = Buffer.from(hashCode(accessCode), "hex");
+  const profile = db.profiles.find((p) => {
+    if (!p.accessCodeHash) return false;
+    const h = Buffer.from(p.accessCodeHash, "hex");
+    return h.length === candidate.length && crypto.timingSafeEqual(h, candidate);
+  });
+  if (!profile) {
+    registerFail(req.ip);
+    await new Promise((r) => setTimeout(r, 400)); // rallenta il brute force
+    return res.status(401).json({ error: "codice non valido" });
+  }
 
   const token = uuidv4();
   sessions.set(token, profile.id);

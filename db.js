@@ -1,7 +1,8 @@
 // Storage minimale su file JSON (prototipo: niente vero database).
 // NOTE DI SICUREZZA:
-// - Gli "accessCode" restano in chiaro lato server per semplicita' di demo
-//   (in un sistema reale andrebbero hashati, es. argon2).
+// - Il codice di accesso NON e' salvato in chiaro: il profilo contiene solo
+//   "accessCodeHash" (HMAC-SHA256 con pepper, vedi server.js). Codici di 12
+//   caratteri casuali (60 bit) + limite di tentativi falliti per IP.
 // - I MESSAGGI pero' ora sono cifrati end-to-end: il server salva solo
 //   { iv, ciphertext } prodotti dal client con AES-GCM, e non e' MAI in
 //   grado di leggerne il contenuto in chiaro. Vedi public/crypto.js.
@@ -17,7 +18,7 @@ const DB_PATH = path.join(__dirname, "data.json");
 function emptyDb() {
   return {
     profiles: [
-      // { id, email, username, publicId, accessCode, secretCombo, isCover,
+      // { id, email, username, publicId, accessCodeHash, secretCombo, isCover,
       //   settings, createdAt, publicKey: <JWK ECDH P-256 | null>,
       //   webauthnCredentials: [{ id, publicKeyPem, counter, deviceLabel, createdAt }] }
     ],
