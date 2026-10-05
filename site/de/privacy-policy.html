@@ -51,10 +51,10 @@
   <p>Diese Website verwendet keine Analyse- oder Tracking-Tools von Drittanbietern. Gespeichert werden nur die von dir gewählten Cookie-Einstellungen (siehe Cookie-Richtlinie), lokal in deinem Browser.</p>
 
   <h2>Vom Prototyp (/app) erhobene Daten</h2>
-  <p>Um den Messaging-Prototyp zu nutzen, legst du ein Profil mit E-Mail und Benutzername an. Auf dem Server werden gespeichert: E-Mail, Benutzername, öffentliche ID, Zugangscode, Kombination der versteckten Chats, hinzugefügte Kontakte, dein öffentlicher Verschlüsselungsschlüssel und die gesendeten Nachrichten.</p>
+  <p>Für den Messaging-Prototyp legst du ein Profil mit E-Mail, Benutzername und Passwort an. Auf dem Server gespeichert werden: E-Mail, Benutzername, Passwort-Hash, öffentliche ID, Kombination für versteckte Chats, hinzugefügte Kontakte, dein öffentlicher Verschlüsselungsschlüssel und die gesendeten Nachrichten.</p>
   <p><strong>Nachrichten:</strong> Der Inhalt wird vor dem Senden im Browser Ende-zu-Ende-verschlüsselt; der Server speichert nur Geheimtext und kann ihn nicht lesen. Metadaten (Absender, Uhrzeit, Reaktionen, Ablauf zeitgesteuerter Nachrichten) bleiben unverschlüsselt.</p>
   <p><strong>Biometrische Entsperrung:</strong> Wenn du sie aktivierst, wird auf dem Server nur der öffentliche Schlüssel des Passkeys (WebAuthn) gespeichert. Biometrische Daten verlassen nie dein Gerät. Dein privater Verschlüsselungsschlüssel bleibt im Browser (localStorage).</p>
-  <p><strong>Wichtig:</strong> Dies ist ein Demonstrationsprototyp: E-Mail und Benutzername werden unverschlüsselt gespeichert, und der Dienst erreicht nicht die Standards eines Produktivsystems. Zugangscodes werden nicht im Klartext gespeichert (nur ein Hash), und fehlgeschlagene Anmeldeversuche werden begrenzt. Geben Sie keine echten sensiblen Informationen ein: verwenden Sie Testdaten.</p>
+  <p><strong>Wichtig:</strong> Dies ist ein Demonstrationsprototyp: E-Mail und Benutzername werden unverschlüsselt gespeichert und der Dienst erreicht nicht den Standard eines Produktivprodukts. Passwörter werden nicht im Klartext gespeichert (nur ein gesalzener scrypt-Hash) und fehlgeschlagene Anmeldeversuche werden pro IP-Adresse und pro Benutzername begrenzt. Gib keine echten sensiblen Informationen ein: Verwende Testdaten.</p>
 
   <h2>Zweck der Verarbeitung</h2>
   <p>Die Daten dienen ausschließlich dazu, die Demo zum Laufen zu bringen (Authentifizierung, Nachrichten, Kontakte). Sie werden nicht an Dritte weitergegeben und nicht für Werbeprofile verwendet.</p>

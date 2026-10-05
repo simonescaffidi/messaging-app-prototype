@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Benutzerhandbuch — Private Nachrichten</title>
-<meta name="description" content="Vollständige Anleitung: Registrierung, Anmeldung per Code, versteckte Chats, Ende-zu-Ende-Verschlüsselung, biometrische Entsperrung und verfügbare Sprachen." />
+<meta name="description" content="Vollständige Anleitung: Registrierung, Anmeldung mit Benutzername und Passwort, versteckte Chats, Ende-zu-Ende-Verschlüsselung, biometrisches Entsperren und verfügbare Sprachen." />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/manual.html" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
 <link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/manual.html" />
@@ -20,7 +20,7 @@
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="Benutzerhandbuch — Private Nachrichten" />
-<meta property="og:description" content="Vollständige Anleitung: Registrierung, Anmeldung per Code, versteckte Chats, Ende-zu-Ende-Verschlüsselung, biometrische Entsperrung und verfügbare Sprachen." />
+<meta property="og:description" content="Vollständige Anleitung: Registrierung, Anmeldung mit Benutzername und Passwort, versteckte Chats, Ende-zu-Ende-Verschlüsselung, biometrisches Entsperren und verfügbare Sprachen." />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/de/manual.html" />
 <meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -67,16 +67,16 @@
     <p>Tippe auf dem Startbildschirm auf „Registrieren“ und gib deine E-Mail und einen Benutzernamen ein. Eine Telefonnummer ist nicht erforderlich.</p>
     <p>Nach der Registrierung siehst du einmalig drei Angaben, die du sofort an einem sicheren Ort speichern musst (zum Beispiel in einem Passwortmanager):</p>
     <ul>
-      <li><strong>Zugangscode</strong>: dein „Passwort“ – bei jedem Öffnen der App gibst du ihn ein und dein Profil öffnet sich automatisch.</li>
+      <li><strong>Benutzername und Passwort</strong>: Der Benutzername ist das erste Feld, das Passwort entscheidet, welches Profil sich öffnet. Unter demselben Benutzernamen kannst du mehrere Profile haben, jedes mit eigenem Passwort.</li>
       <li><strong>Öffentliche ID</strong>: die gibst du an Personen weiter, die du als Kontakte hinzufügen möchtest. Sie verrät nicht deine E-Mail.</li>
       <li><strong>Geheime Kombination</strong>: dient dazu, versteckte Chats anzuzeigen (siehe eigener Abschnitt).</li>
     </ul>
-    <p class="warn">Wenn du den Zugangscode verlierst, verlierst du den Zugriff auf das Profil: Eine echte Wiederherstellung per E-Mail gibt es noch nicht (siehe „Erklärte Sicherheitsgrenzen“).</p>
+    <p class="warn">Wenn du das Passwort verlierst, verlierst du den Zugriff auf das Profil: Eine echte Wiederherstellung per E-Mail gibt es noch nicht (siehe „Deklarierte Sicherheitsgrenzen“).</p>
   </section>
 
   <section id="profiles">
     <h2>2. Mehrere Profile auf demselben Gerät</h2>
-    <p>Du kannst mehrere Profile anlegen (zum Beispiel ein persönliches und ein Tarnprofil), alle vom selben Gerät aus erreichbar. Jedes Profil hat seinen eigenen Zugangscode: Wenn du die App öffnest und einen Code eingibst, öffnet sich automatisch das passende Profil – ohne Auswahlanzeige, die verraten würde, wie viele Profile existieren.</p>
+    <p>Du kannst mehrere Profile (z. B. ein persönliches und ein Tarnprofil) mit demselben Benutzernamen, aber unterschiedlichen Passwörtern anlegen. Bei Eingabe von Benutzername und Passwort öffnet sich das passende Profil, ohne Auswahlanzeige, die verrät, wie viele Profile existieren. Dasselbe Passwort darf nicht für zwei Profile unter demselben Benutzernamen verwendet werden.</p>
   </section>
 
   <section id="contacts">
@@ -115,7 +115,7 @@
   <section id="biometric">
     <h2>8. Biometrische Entsperrung (Face ID / Touch ID / Fingerabdruck)</h2>
     <p>In den Profileinstellungen (⚙️-Symbol) findest du „Entsperrung per Face ID / Fingerabdruck aktivieren“. Wenn du sie einschaltest, erstellt dein Gerät einen Passkey über WebAuthn/FIDO2 und registriert ihn beim Server (nur den öffentlichen Schlüssel, nie das biometrische Datum).</p>
-    <p>Ab dann zeigt der Anmeldebildschirm eine Schaltfläche „Mit Biometrie entsperren“: Du nutzt sie statt des Codes, und dein Betriebssystem (nicht die App) prüft Face ID, Touch ID, den Android-Fingerabdruck oder Windows Hello. Das biometrische Datum verlässt dein Gerät nie.</p>
+    <p>Danach erscheint auf dem Anmeldebildschirm die Schaltfläche „Mit Biometrie entsperren“: Nutze sie statt des Passworts; dein Betriebssystem (nicht die App) prüft Face ID, Touch ID, den Android-Fingerabdruck oder Windows Hello. Die biometrischen Daten verlassen nie dein Gerät.</p>
     <p>Du kannst sie jederzeit in denselben Einstellungen wieder ausschalten.</p>
   </section>
 
@@ -144,8 +144,8 @@
     <h2>12. Fehlerbehebung</h2>
     <h3>„Verschlüsselung nicht möglich: Der Kontakt hat noch keinen öffentlichen Schlüssel“</h3>
     <p>Das passiert, wenn sich dein Kontakt seit dem letzten App-Update nicht angemeldet hat (der Schlüssel wird bei der Anmeldung automatisch erzeugt und hochgeladen). Bitte ihn, sich einmal anzumelden – danach kannst du ihm normal schreiben.</p>
-    <h3>„Ich habe den Zugangscode verloren“</h3>
-    <p>Derzeit gibt es keine automatische Wiederherstellung: Du musst ein neues Profil registrieren. Bewahre den Code immer in einem Passwortmanager auf.</p>
+    <h3>„Ich habe mein Passwort verloren“</h3>
+    <p>Derzeit gibt es keine automatische Wiederherstellung: Du musst ein neues Profil registrieren. Bewahre das Passwort immer in einem Passwortmanager auf.</p>
     <h3>Die biometrische Entsperrung erscheint nicht</h3>
     <p>Sie erfordert ein Gerät mit eingerichtetem Face ID, Touch ID, Fingerabdruck oder Windows Hello, einen aktuellen Browser und eine HTTPS-Verbindung (die Web-App in Produktion nutzt bereits eine). Außerdem muss sie mindestens einmal in den Einstellungen aktiviert worden sein.</p>
   </section>
