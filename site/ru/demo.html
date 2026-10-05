@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Интерактивное демо — Приватные сообщения</title>
+<meta name="description" content="Попробуйте Приватные сообщения: вход по коду, скрытые чаты, профиль-прикрытие, сообщения с таймером и сквозное шифрование. Симуляция в браузере, без аккаунта." />
+<link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/demo.html" />
+<link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/demo.html" />
+<link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/demo.html" />
+<link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/demo.html" />
+<link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/demo.html" />
+<link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/demo.html" />
+<link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/demo.html" />
+<link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/demo.html" />
+<link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/demo.html" />
+<link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/demo.html" />
+<link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/demo.html" />
+<link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/demo.html" />
+<link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/demo.html" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Интерактивное демо — Приватные сообщения" />
+<meta property="og:description" content="Попробуйте Приватные сообщения: вход по коду, скрытые чаты, профиль-прикрытие, сообщения с таймером и сквозное шифрование. Симуляция в браузере, без аккаунта." />
+<meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/demo.html" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="/ru/" class="brand"><span class="lock">🔒</span> Приватные сообщения</a>
+    <div class="header-actions">
+      <select class="lang-select" aria-label="Язык" onchange="location.href=this.value"><option value="/demo.html">Italiano</option><option value="/en/demo.html">English</option><option value="/es/demo.html">Español</option><option value="/fr/demo.html">Français</option><option value="/de/demo.html">Deutsch</option><option value="/pt/demo.html">Português</option><option value="/ar/demo.html">العربية</option><option value="/zh/demo.html">中文</option><option value="/hi/demo.html">हिन्दी</option><option value="/ru/demo.html" selected>Русский</option><option value="/ja/demo.html">日本語</option></select>
+      <a href="/ru/manual.html" class="btn btn-ghost btn-sm">Руководство</a>
+      <a href="/ru/demo.html" class="btn btn-ghost btn-sm">Демо</a>
+      <a href="/app/" class="btn btn-primary btn-sm">Открыть приложение</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="demo-layout">
+    <div class="demo-intro">
+      <h1>Попробуйте демо</h1>
+      <p class="lead">Интерактивная симуляция, которая работает только в вашем браузере: без аккаунта и без отправки данных. Для настоящего приложения нажмите «Открыть приложение».</p>
+      <p class="demo-notice">Демо-симуляция: сообщения остаются на вашем устройстве. Шифрование AES-GCM настоящее, но контакты и ответы вымышлены.</p>
+      <h2>Что попробовать</h2>
+      <ol class="demo-try">
+        <li>Войдите с кодом <strong>1111</strong> (личный профиль) или кнопкой биометрии.</li>
+        <li>Откройте чат и отправьте сообщение с таймером <strong>30 секунд</strong>: оно самоуничтожится.</li>
+        <li>Включите «Вид сервера», чтобы увидеть, как выглядит зашифрованное сообщение.</li>
+        <li>Скройте чат через меню, затем введите <strong>7777</strong> в поиске, чтобы вернуть его.</li>
+        <li>Заблокируйте и войдите с кодом <strong>2222</strong>: вы увидите только профиль-прикрытие.</li>
+      </ol>
+      <p><a href="/app/" class="btn btn-primary">Открыть приложение</a></p>
+    </div>
+    <div id="phone" class="phone" aria-label="Попробуйте демо"></div>
+  </div>
+</main>
+<script>window.__DEMO_I18N={"nav":"Демо","cta":"Попробовать демо","title":"Интерактивное демо — Приватные сообщения","description":"Попробуйте Приватные сообщения: вход по коду, скрытые чаты, профиль-прикрытие, сообщения с таймером и сквозное шифрование. Симуляция в браузере, без аккаунта.","h1":"Попробуйте демо","lead":"Интерактивная симуляция, которая работает только в вашем браузере: без аккаунта и без отправки данных. Для настоящего приложения нажмите «Открыть приложение».","notice":"Демо-симуляция: сообщения остаются на вашем устройстве. Шифрование AES-GCM настоящее, но контакты и ответы вымышлены.","tryTitle":"Что попробовать","tryItems":["Войдите с кодом \u003cstrong>1111\u003c/strong> (личный профиль) или кнопкой биометрии.","Откройте чат и отправьте сообщение с таймером \u003cstrong>30 секунд\u003c/strong>: оно самоуничтожится.","Включите «Вид сервера», чтобы увидеть, как выглядит зашифрованное сообщение.","Скройте чат через меню, затем введите \u003cstrong>7777\u003c/strong> в поиске, чтобы вернуть его.","Заблокируйте и войдите с кодом \u003cstrong>2222\u003c/strong>: вы увидите только профиль-прикрытие."],"codeLabel":"Код доступа","codePh":"Напр. 1111","enter":"Войти","bio":"Разблокировать отпечатком / Face ID","bioScan":"Проверка биометрии…","wrongCode":"Неверный код. Попробуйте 1111 или 2222.","searchPh":"Поиск (или секретная комбинация)","hide":"Скрыть чат","unhide":"Показать чат","hiddenTag":"скрыт","msgPh":"Напишите сообщение…","send":"Отправить","timers":["Без таймера","30 секунд","5 минут","1 час"],"serverView":"Вид сервера (зашифровано)","lockBtn":"Заблокировать","e2eTag":"Сквозное шифрование","expiresIn":"удалится через {s} с","secretFound":"Скрытые чаты показаны","chatsTitle":"Чаты","back":"Назад","empty":"Нет чатов","n1":"Анна","m1":"Увидимся завтра в 18:00?","n2":"Марко","m2":"Отправлю документы сегодня вечером.","n3":"Лука","m3":"План подтверждён, никому не говори.","nc":"Мама","mc":"Не забудь купить хлеб!","replies":["Отлично, до встречи!","Принято 👍","Хорошо, спасибо."]};</script>
+<script src="/demo.js"></script>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">Powered by <a href="https://www.simonescaffidi.it" target="_blank" rel="noopener noreferrer">www.simonescaffidi.it</a></p>
+    <nav class="footer-links" aria-label="Правовая информация">
+      <a href="/ru/manual.html">Руководство</a>
+      <a href="/ru/demo.html">Демо</a>
+      <a href="/ru/privacy-policy.html">Политика конфиденциальности</a>
+      <a href="/ru/cookie-policy.html">Политика использования cookie</a>
+    </nav>
+    <nav class="footer-langs" aria-label="Все языки">
+      <a href="/demo.html" hreflang="it" lang="it">Italiano</a>
+      <a href="/en/demo.html" hreflang="en" lang="en">English</a>
+      <a href="/es/demo.html" hreflang="es" lang="es">Español</a>
+      <a href="/fr/demo.html" hreflang="fr" lang="fr">Français</a>
+      <a href="/de/demo.html" hreflang="de" lang="de">Deutsch</a>
+      <a href="/pt/demo.html" hreflang="pt" lang="pt">Português</a>
+      <a href="/ar/demo.html" hreflang="ar" lang="ar">العربية</a>
+      <a href="/zh/demo.html" hreflang="zh" lang="zh">中文</a>
+      <a href="/hi/demo.html" hreflang="hi" lang="hi">हिन्दी</a>
+      <a href="/ru/demo.html" hreflang="ru" lang="ru" aria-current="true">Русский</a>
+      <a href="/ja/demo.html" hreflang="ja" lang="ja">日本語</a>
+    </nav>
+  </div>
+</footer>
+<script>window.__COOKIE_I18N={"text":"Мы используем необходимые технические cookie и, с вашего согласия, статистические cookie. См. \u003ca href=\"/ru/privacy-policy.html\">Политику конфиденциальности\u003c/a> и \u003ca href=\"/ru/cookie-policy.html\">Политику использования cookie\u003c/a>.","reject":"Отклонить","customize":"Настроить","accept":"Принять все","statsQuestion":"Принять статистические cookie?"};</script>
+<script src="/cookie-banner.js"></script>
+</body>
+</html>
