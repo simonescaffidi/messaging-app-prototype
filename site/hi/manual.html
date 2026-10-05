@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="hi" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>उपयोगकर्ता मैनुअल — निजी मैसेजिंग</title>
+<meta name="description" content="पूरी गाइड: पंजीकरण, कोड से लॉगिन, छिपी चैट, एंड-टू-एंड एन्क्रिप्शन, बायोमेट्रिक अनलॉक और उपलब्ध भाषाएँ।" />
+<link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/manual.html" />
+<link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
+<link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/manual.html" />
+<link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/manual.html" />
+<link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/manual.html" />
+<link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/manual.html" />
+<link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/manual.html" />
+<link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/manual.html" />
+<link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/manual.html" />
+<link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/manual.html" />
+<link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/manual.html" />
+<link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/manual.html" />
+<link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="उपयोगकर्ता मैनुअल — निजी मैसेजिंग" />
+<meta property="og:description" content="पूरी गाइड: पंजीकरण, कोड से लॉगिन, छिपी चैट, एंड-टू-एंड एन्क्रिप्शन, बायोमेट्रिक अनलॉक और उपलब्ध भाषाएँ।" />
+<meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/manual.html" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body class="manual">
+
+<header class="site-header">
+  <div class="container">
+    <a href="/hi/" class="brand"><span class="lock">🔒</span> निजी मैसेजिंग</a>
+    <div class="header-actions">
+      <select class="lang-select" aria-label="भाषा" onchange="location.href=this.value"><option value="/manuale.html">Italiano</option><option value="/en/manual.html">English</option><option value="/es/manual.html">Español</option><option value="/fr/manual.html">Français</option><option value="/de/manual.html">Deutsch</option><option value="/pt/manual.html">Português</option><option value="/ar/manual.html">العربية</option><option value="/zh/manual.html">中文</option><option value="/hi/manual.html" selected>हिन्दी</option><option value="/ru/manual.html">Русский</option><option value="/ja/manual.html">日本語</option></select>
+      <a href="/hi/manual.html" class="btn btn-ghost btn-sm">मैनुअल</a>
+      <a href="/app/" class="btn btn-primary btn-sm">ऐप खोलें</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <h1>उपयोगकर्ता मैनुअल</h1>
+  <p class="lead">निजी मैसेजिंग की पूरी गाइड: पंजीकरण और लॉगिन कैसे करें, गोपनीयता सुविधाएँ कैसे इस्तेमाल करें, और समझें कि यह प्रोटोटाइप वास्तव में क्या सुरक्षित रखता है — और क्या नहीं।</p>
+
+  <nav class="toc" aria-label="विषय-सूची">
+    <strong>विषय-सूची</strong>
+    <ol>
+      <li><a href="#signup">पंजीकरण और पहला लॉगिन</a></li>
+      <li><a href="#profiles">एक ही डिवाइस पर कई प्रोफ़ाइल</a></li>
+      <li><a href="#contacts">संपर्क जोड़ना और चैट करना</a></li>
+      <li><a href="#hidden">छिपी चैट और गुप्त संयोजन</a></li>
+      <li><a href="#cover">कवर प्रोफ़ाइल</a></li>
+      <li><a href="#timed">समय-सीमित संदेश (खुद मिटने वाले)</a></li>
+      <li><a href="#encryption">एंड-टू-एंड एन्क्रिप्शन: यह वास्तव में कैसे काम करता है</a></li>
+      <li><a href="#biometric">बायोमेट्रिक अनलॉक (Face ID / Touch ID / फ़िंगरप्रिंट)</a></li>
+      <li><a href="#languages">भाषा बदलना</a></li>
+      <li><a href="#mobile">नेटिव मोबाइल ऐप (iOS/Android)</a></li>
+      <li><a href="#limits">घोषित सुरक्षा सीमाएँ</a></li>
+      <li><a href="#troubleshooting">समस्या-निवारण</a></li>
+    </ol>
+  </nav>
+
+  <section id="signup">
+    <h2>1. पंजीकरण और पहला लॉगिन</h2>
+    <p>शुरुआती स्क्रीन पर "पंजीकरण करें" दबाएँ और अपना ईमेल व यूज़रनेम डालें। फ़ोन नंबर ज़रूरी नहीं है।</p>
+    <p>पंजीकरण के बाद आपको तीन जानकारियाँ सिर्फ़ एक बार दिखेंगी, जिन्हें तुरंत किसी सुरक्षित जगह (जैसे पासवर्ड मैनेजर) में सहेजना ज़रूरी है:</p>
+    <ul>
+      <li><strong>एक्सेस कोड</strong>: यह आपका "पासवर्ड" है — ऐप खोलने पर हर बार इसे डालते हैं और आपकी प्रोफ़ाइल अपने-आप खुल जाती है।</li>
+      <li><strong>सार्वजनिक ID</strong>: इसे आप उन लोगों के साथ साझा करते हैं जिन्हें संपर्क के रूप में जोड़ना चाहते हैं। यह आपका ईमेल उजागर नहीं करती।</li>
+      <li><strong>गुप्त संयोजन</strong>: छिपी चैट दिखाने के काम आता है (संबंधित अनुभाग देखें)।</li>
+    </ul>
+    <p class="warn">एक्सेस कोड खो देने पर प्रोफ़ाइल तक पहुँच खो जाती है: अभी ईमेल से असली पुनर्प्राप्ति उपलब्ध नहीं है ("घोषित सुरक्षा सीमाएँ" देखें)।</p>
+  </section>
+
+  <section id="profiles">
+    <h2>2. एक ही डिवाइस पर कई प्रोफ़ाइल</h2>
+    <p>आप कई प्रोफ़ाइल बना सकते हैं (जैसे एक निजी और एक कवर प्रोफ़ाइल), जो सभी एक ही डिवाइस से खुल सकती हैं। हर प्रोफ़ाइल का अपना एक्सेस कोड होता है: ऐप खोलकर कोड डालने पर संबंधित प्रोफ़ाइल अपने-आप खुल जाती है, कोई चयन स्क्रीन नहीं जो बताए कि कितनी प्रोफ़ाइल मौजूद हैं।</p>
+  </section>
+
+  <section id="contacts">
+    <h2>3. संपर्क जोड़ना और चैट करना</h2>
+    <p>"+ संपर्क जोड़ें" दबाएँ और व्यक्ति की सार्वजनिक ID डालें। एक रीयल-टाइम चैट खुलती है, जो एंड-टू-एंड एन्क्रिप्टेड है (अनुभाग 7 देखें)।</p>
+  </section>
+
+  <section id="hidden">
+    <h2>4. छिपी चैट और गुप्त संयोजन</h2>
+    <p>किसी चैट में मेन्यू खोलें और "इस चैट को छुपाएँ/दिखाएँ" चुनें। छिपी चैट मुख्य सूची में नहीं दिखती।</p>
+    <p>उसे वापस लाने के लिए खोज बार में अपना गुप्त संयोजन लिखें (जो पंजीकरण पर सिर्फ़ एक बार दिखाया गया था): जब तक आप ऐप को दोबारा लॉक नहीं करते, सभी छिपी चैट फिर दिखने लगती हैं।</p>
+  </section>
+
+  <section id="cover">
+    <h2>5. कवर प्रोफ़ाइल</h2>
+    <p>पंजीकरण पर आप "कवर प्रोफ़ाइल के रूप में बनाएँ" चुन सकते हैं: यह ऐसी प्रोफ़ाइल है जिसे जाँच के समय दिखाया जा सके, और उसमें एक ही डिवाइस पर अन्य प्रोफ़ाइल होने का कोई संकेत नहीं होता।</p>
+  </section>
+
+  <section id="timed">
+    <h2>6. समय-सीमित संदेश (खुद मिटने वाले)</h2>
+    <p>संदेश भेजने से पहले ड्रॉपडाउन से खुद मिटने का समय चुन सकते हैं: 30 सेकंड, 5 मिनट या 1 घंटा। वह समय बीतते ही संदेश हटा दिया जाता है।</p>
+  </section>
+
+  <section id="encryption">
+    <h2>7. एंड-टू-एंड एन्क्रिप्शन: यह वास्तव में कैसे काम करता है</h2>
+    <p>यह कोई मार्केटिंग नारा नहीं है: हर संदेश सर्वर पर भेजे जाने से पहले <strong>आपके ब्राउज़र में</strong> इस योजना से एन्क्रिप्ट होता है:</p>
+    <ol>
+      <li>पहले लॉगिन पर आपका डिवाइस P-256 वक्र पर ECDH कुंजी-युग्म बनाता है (एक सार्वजनिक, एक निजी)। सार्वजनिक कुंजी सर्वर पर अपलोड होती है; निजी कुंजी सिर्फ़ आपके ब्राउज़र में रहती है।</li>
+      <li>जब आप किसी संपर्क को लिखते हैं, आपका ब्राउज़र आपकी निजी कुंजी को उसकी सार्वजनिक कुंजी के साथ मिलाता है (ECDH विनिमय) और HKDF-SHA256 से उस जोड़ी के लिए विशिष्ट 256-बिट AES-GCM सममित कुंजी निकालता है।</li>
+      <li>हर संदेश उसी कुंजी और हर बार अलग यादृच्छिक संख्या (IV) से एन्क्रिप्ट होता है, फिर पहले से एन्क्रिप्टेड रूप में सर्वर को भेजा जाता है।</li>
+      <li>सर्वर केवल सिफ़रटेक्स्ट सहेजता और भेजता है: वह संदेशों की सामग्री नहीं पढ़ सकता।</li>
+    </ol>
+    <p>यह उसी तरह का गणित (ECDH + AES-GCM) है जो कई आधुनिक सुरक्षित प्रोटोकॉल में इस्तेमाल होता है, जिसे यहाँ ब्राउज़र की मूल Web Crypto API से, बिना किसी बाहरी लाइब्रेरी के, लागू किया गया है।</p>
+  </section>
+
+  <section id="biometric">
+    <h2>8. बायोमेट्रिक अनलॉक (Face ID / Touch ID / फ़िंगरप्रिंट)</h2>
+    <p>प्रोफ़ाइल सेटिंग (⚙️ आइकन) में "Face ID / फ़िंगरप्रिंट से अनलॉक सक्षम करें" मिलेगा। इसे चालू करने पर आपका डिवाइस WebAuthn/FIDO2 से एक पासकी बनाता है और उसे सर्वर पर पंजीकृत करता है (केवल सार्वजनिक कुंजी, बायोमेट्रिक डेटा कभी नहीं)।</p>
+    <p>इसके बाद लॉगिन स्क्रीन पर "बायोमेट्रिक से अनलॉक करें" बटन दिखेगा: इसे कोड की जगह इस्तेमाल करें, और आपका ऑपरेटिंग सिस्टम (ऐप नहीं) Face ID, Touch ID, Android फ़िंगरप्रिंट या Windows Hello की जाँच करता है। बायोमेट्रिक डेटा आपके डिवाइस से बाहर नहीं जाता।</p>
+    <p>आप इसे उसी सेटिंग से कभी भी बंद कर सकते हैं।</p>
+  </section>
+
+  <section id="languages">
+    <h2>9. भाषा बदलना</h2>
+    <p>ऐप की हर स्क्रीन के ऊपरी कोने में भाषा चयनकर्ता है। यह वेबसाइट भी उन्हीं 11 भाषाओं में उपलब्ध है: इतालवी, अंग्रेज़ी, स्पेनिश, फ़्रेंच, जर्मन, पुर्तगाली, अरबी, चीनी, हिन्दी, रूसी और जापानी। ऐप में चुनी गई भाषा डिवाइस पर याद रखी जाती है।</p>
+  </section>
+
+  <section id="mobile">
+    <h2>10. नेटिव मोबाइल ऐप (iOS/Android)</h2>
+    <p>नेटिव ऐप का ढाँचा (Expo/React Native पर आधारित) तैयार है, जो खुलते समय सिस्टम-स्तर का बायोमेट्रिक लॉक जोड़ता है। App Store और Google Play पर असली प्रकाशन के लिए डेवलपर खातों के क्रेडेंशियल (Apple Developer Program और Google Play Console) चाहिए: जुड़ने के बाद ऐप बनाया और प्रकाशित किया जा सकेगा। तब तक वेब ऐप किसी भी मोबाइल ब्राउज़र में चलता है और होम स्क्रीन पर ऐप की तरह "इंस्टॉल" किया जा सकता है।</p>
+  </section>
+
+  <section id="limits">
+    <h2>11. घोषित सुरक्षा सीमाएँ</h2>
+    <p>ईमानदारी से, एन्क्रिप्शन असली होने के बावजूद यह प्रोटोटाइप अभी ये चीज़ें <strong>नहीं</strong> करता:</p>
+    <ul>
+      <li><strong>कोई रैचेट / फ़ॉरवर्ड सीक्रेसी नहीं</strong>: चैट की कुंजी तब तक वही रहती है जब तक दोनों लोग अपनी कुंजियाँ दोबारा नहीं बनाते (Signal जैसे प्रोटोकॉल के विपरीत, जो हर संदेश पर कुंजी बदलते हैं)।</li>
+      <li><strong>सार्वजनिक कुंजियों का आउट-ऑफ़-बैंड सत्यापन नहीं</strong>: कोई "सुरक्षा संख्या" नहीं है जिसे संपर्क से मौखिक रूप से मिलाया जा सके। सैद्धांतिक रूप से कोई दुर्भावनापूर्ण सर्वर किसी सार्वजनिक कुंजी को अपनी कुंजी से बदल सकता है (मैन-इन-द-मिडल हमला)। विश्वसनीय सर्वर पर प्रोटोटाइप के लिए ठीक है; अधिक जोखिम वाले उपयोग से पहले यह सत्यापन जोड़ना चाहिए।</li>
+      <li><strong>निजी कुंजी ब्राउज़र में</strong>: यह ब्राउज़र के लोकल स्टोरेज (localStorage) में रहती है, हार्डवेयर सिक्योर एन्क्लेव में नहीं। अनलॉक डिवाइस तक भौतिक या सॉफ़्टवेयर पहुँच रखने वाला इसे पढ़ सकता है।</li>
+      <li><strong>असली ईमेल भेजना नहीं</strong>: पंजीकरण काम करता है, लेकिन "मैजिक लिंक" से खाता-पुनर्प्राप्ति के लिए अभी कोई ईमेल सेवा जुड़ी नहीं है।</li>
+    </ul>
+  </section>
+
+  <section id="troubleshooting">
+    <h2>12. समस्या-निवारण</h2>
+    <h3>"एन्क्रिप्ट नहीं कर पा रहा: संपर्क के पास अभी सार्वजनिक कुंजी नहीं है"</h3>
+    <p>ऐसा तब होता है जब आपके संपर्क ने ऐप के आख़िरी अपडेट के बाद लॉगिन नहीं किया है (कुंजी लॉगिन पर अपने-आप बनती और अपलोड होती है)। उनसे एक बार लॉगिन करने को कहें: उसके बाद आप सामान्य रूप से संदेश भेज सकेंगे।</p>
+    <h3>"मैंने एक्सेस कोड खो दिया"</h3>
+    <p>फ़िलहाल कोई स्वचालित पुनर्प्राप्ति नहीं है: आपको नई प्रोफ़ाइल पंजीकृत करनी होगी। कोड हमेशा पासवर्ड मैनेजर में रखें।</p>
+    <h3>बायोमेट्रिक अनलॉक नहीं दिख रहा</h3>
+    <p>इसके लिए Face ID, Touch ID, फ़िंगरप्रिंट या Windows Hello सेट किया हुआ डिवाइस, अपडेटेड ब्राउज़र और HTTPS कनेक्शन चाहिए (प्रोडक्शन वेब ऐप पहले से इसका उपयोग करता है)। साथ ही इसे सेटिंग से कम-से-कम एक बार सक्षम किया गया होना चाहिए।</p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">Powered by <a href="https://www.simonescaffidi.it" target="_blank" rel="noopener noreferrer">www.simonescaffidi.it</a></p>
+    <nav class="footer-links" aria-label="कानूनी">
+      <a href="/hi/manual.html">मैनुअल</a>
+      <a href="/hi/privacy-policy.html">गोपनीयता नीति</a>
+      <a href="/hi/cookie-policy.html">कुकी नीति</a>
+    </nav>
+    <nav class="footer-langs" aria-label="सभी भाषाएँ">
+      <a href="/manuale.html" hreflang="it" lang="it">Italiano</a>
+      <a href="/en/manual.html" hreflang="en" lang="en">English</a>
+      <a href="/es/manual.html" hreflang="es" lang="es">Español</a>
+      <a href="/fr/manual.html" hreflang="fr" lang="fr">Français</a>
+      <a href="/de/manual.html" hreflang="de" lang="de">Deutsch</a>
+      <a href="/pt/manual.html" hreflang="pt" lang="pt">Português</a>
+      <a href="/ar/manual.html" hreflang="ar" lang="ar">العربية</a>
+      <a href="/zh/manual.html" hreflang="zh" lang="zh">中文</a>
+      <a href="/hi/manual.html" hreflang="hi" lang="hi" aria-current="true">हिन्दी</a>
+      <a href="/ru/manual.html" hreflang="ru" lang="ru">Русский</a>
+      <a href="/ja/manual.html" hreflang="ja" lang="ja">日本語</a>
+    </nav>
+  </div>
+</footer>
+<script>window.__COOKIE_I18N={"text":"हम आवश्यक तकनीकी कुकी और, आपकी सहमति से, सांख्यिकीय कुकी का उपयोग करते हैं। \u003ca href=\"/hi/privacy-policy.html\">गोपनीयता नीति\u003c/a> और \u003ca href=\"/hi/cookie-policy.html\">कुकी नीति\u003c/a> देखें।","reject":"अस्वीकार करें","customize":"अनुकूलित करें","accept":"सभी स्वीकार करें","statsQuestion":"क्या आप सांख्यिकीय कुकी स्वीकार करना चाहते हैं?"};</script>
+<script src="/cookie-banner.js"></script>
+</body>
+</html>
