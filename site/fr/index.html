@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Messagerie Privée — Chat à profils multiples et discussions masquées</title>
+<meta name="description" content="Chat privé avec un vrai chiffrement de bout en bout, déverrouillage biométrique, profils multiples et discussions masquées. 11 langues, sans numéro de téléphone." />
+<link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/" />
+<link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
+<link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/" />
+<link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/" />
+<link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/" />
+<link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/" />
+<link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/" />
+<link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/" />
+<link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/" />
+<link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/" />
+<link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/" />
+<link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/" />
+<link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Messagerie Privée — Prototype" />
+<meta property="og:description" content="Chiffrement de bout en bout, déverrouillage biométrique, profils multiples, discussions masquées et profil de couverture en 11 langues." />
+<meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="/fr/" class="brand"><span class="lock">🔒</span> Messagerie Privée</a>
+    <div class="header-actions">
+      <select class="lang-select" aria-label="Langue" onchange="location.href=this.value"><option value="/">Italiano</option><option value="/en/">English</option><option value="/es/">Español</option><option value="/fr/" selected>Français</option><option value="/de/">Deutsch</option><option value="/pt/">Português</option><option value="/ar/">العربية</option><option value="/zh/">中文</option><option value="/hi/">हिन्दी</option><option value="/ru/">Русский</option><option value="/ja/">日本語</option></select>
+      <a href="/fr/manual.html" class="btn btn-ghost btn-sm">Manuel</a>
+      <a href="/app/" class="btn btn-primary btn-sm">Ouvrir l'app</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container">
+      <span class="badge">Prototype fonctionnel</span>
+      <h1>Un chat où votre code est votre identité</h1>
+      <p class="lead">Pas de numéro de téléphone. Un code d'accès ouvre votre profil, un autre code en ouvre un différent. Discussions masquées, profil de couverture, messages qui s'autodétruisent.</p>
+      <div class="hero-actions">
+        <a href="/app/" class="btn btn-primary">Ouvrir l'app →</a>
+        <a href="#how-it-works" class="btn btn-ghost">Découvrir le fonctionnement</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="container">
+      <h2>Ce que vous pouvez faire</h2>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="icon">🔑</div>
+          <h3>Accès par code</h3>
+          <p>Chaque code ouvre automatiquement le profil associé. Pas d'écran de choix : le code <em>est</em> l'identité.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🪪</div>
+          <h3>Profils multiples</h3>
+          <p>Plusieurs profils sur le même appareil, chacun avec ses propres contacts, discussions et réglages.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🙈</div>
+          <h3>Discussions masquées</h3>
+          <p>Masquez une conversation de la liste principale. Elle ne réapparaît qu'en saisissant une combinaison secrète dans la recherche.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🎭</div>
+          <h3>Profil de couverture</h3>
+          <p>Créez un profil anodin à montrer en cas de contrôle, sans aucun indice de l'existence d'autres profils.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">💣</div>
+          <h3>Messages éphémères</h3>
+          <p>Envoyez des messages qui s'autodétruisent après 30 secondes, 5 minutes ou une heure.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">📵</div>
+          <h3>Aucun numéro de téléphone</h3>
+          <p>Inscription par e-mail et ID public distinct de l'adresse : votre e-mail n'est jamais visible par les autres.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🔐</div>
+          <h3>Vrai chiffrement de bout en bout</h3>
+          <p>Chaque message est chiffré dans le navigateur avec ECDH (P-256) + AES-GCM 256 bits avant de partir : le serveur ne voit que du texte chiffré, jamais le contenu en clair.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🫆</div>
+          <h3>Déverrouillage biométrique</h3>
+          <p>Face ID, Touch ID, empreinte Android ou Windows Hello via un vrai WebAuthn/FIDO2 : aucune donnée biométrique ne quitte jamais l'appareil.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🌍</div>
+          <h3>11 langues</h3>
+          <p>App et site disponibles en italien, anglais, espagnol, français, allemand, portugais, arabe, chinois, hindi, russe et japonais.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="how" id="how-it-works">
+    <div class="container">
+      <h2>Comment ça marche</h2>
+      <div class="steps">
+        <div class="step">
+          <h3>Inscrivez-vous</h3>
+          <p>E-mail et nom d'utilisateur : vous recevez un code d'accès, un ID public et une combinaison secrète. Conservez-les : ils ne sont plus affichés ensuite.</p>
+        </div>
+        <div class="step">
+          <h3>Connectez-vous avec le code</h3>
+          <p>À chaque ouverture, saisissez le code : le profil correspondant s'ouvre automatiquement.</p>
+        </div>
+        <div class="step">
+          <h3>Ajoutez des contacts</h3>
+          <p>Recherchez une personne grâce à son ID public et commencez à discuter en temps réel.</p>
+        </div>
+        <div class="step">
+          <h3>Masquez ce que vous voulez</h3>
+          <p>Saisissez la combinaison secrète dans la barre de recherche pour révéler les discussions masquées quand vous en avez besoin.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="disclaimer">
+    <div class="container">
+      <h2>Ce que c'est, ce que ce n'est pas</h2>
+      <div class="disclaimer-box">
+        <p><strong>Ceci est un prototype fonctionnel</strong>, pas un produit fini. Les messages sont chiffrés de bout en bout (ECDH P-256 + AES-GCM 256 bits, dérivation HKDF-SHA256) : le serveur ne voit jamais le texte en clair. Le déverrouillage biométrique utilise un vrai WebAuthn/FIDO2. Des limites connues demeurent, exposées sans détour dans le <a href="/fr/manual.html">manuel d'utilisation</a> : il n'y a pas encore de ratchet avec forward secrecy « à la Signal », pas de vérification hors bande des clés publiques (un serveur malveillant pourrait donc, en théorie, les remplacer), la clé privée reste dans le navigateur sans enclave sécurisée matérielle, et l'envoi réel d'e-mails pour la récupération de compte n'est pas encore branché. Utile pour tester l'expérience avec une vraie sécurité, mais pas « à l'épreuve d'un État » — pas encore pour des conversations à très haut risque.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="disclaimer">
+    <div class="container">
+      <h2>Apps natives iOS et Android</h2>
+      <div class="disclaimer-box">
+        <p>La base de l'app native (Expo/React Native, avec verrouillage biométrique du système) est prête dans le code du projet. La publication sur l'App Store et Google Play nécessite les identifiants des comptes développeur (Apple Developer Program et Google Play Console) : tant qu'ils ne sont pas reliés, l'app reste disponible comme application web, utilisable depuis n'importe quel navigateur mobile et déjà installable via « Ajouter à l'écran d'accueil ».</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container">
+      <h2>Essayez le prototype</h2>
+      <p>Un e-mail et un nom d'utilisateur suffisent pour créer votre premier profil.</p>
+      <a href="/app/" class="btn btn-primary">Ouvrir l'app →</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">Powered by <a href="https://www.simonescaffidi.it" target="_blank" rel="noopener noreferrer">www.simonescaffidi.it</a></p>
+    <nav class="footer-links" aria-label="Mentions légales">
+      <a href="/fr/manual.html">Manuel</a>
+      <a href="/fr/privacy-policy.html">Politique de confidentialité</a>
+      <a href="/fr/cookie-policy.html">Politique de cookies</a>
+    </nav>
+    <nav class="footer-langs" aria-label="Toutes les langues">
+      <a href="/" hreflang="it" lang="it">Italiano</a>
+      <a href="/en/" hreflang="en" lang="en">English</a>
+      <a href="/es/" hreflang="es" lang="es">Español</a>
+      <a href="/fr/" hreflang="fr" lang="fr" aria-current="true">Français</a>
+      <a href="/de/" hreflang="de" lang="de">Deutsch</a>
+      <a href="/pt/" hreflang="pt" lang="pt">Português</a>
+      <a href="/ar/" hreflang="ar" lang="ar">العربية</a>
+      <a href="/zh/" hreflang="zh" lang="zh">中文</a>
+      <a href="/hi/" hreflang="hi" lang="hi">हिन्दी</a>
+      <a href="/ru/" hreflang="ru" lang="ru">Русский</a>
+      <a href="/ja/" hreflang="ja" lang="ja">日本語</a>
+    </nav>
+  </div>
+</footer>
+<script>window.__COOKIE_I18N={"text":"Nous utilisons des cookies techniques nécessaires et, avec votre consentement, des cookies statistiques. Consultez la \u003ca href=\"/fr/privacy-policy.html\">Politique de confidentialité\u003c/a> et la \u003ca href=\"/fr/cookie-policy.html\">Politique de cookies\u003c/a>.","reject":"Refuser","customize":"Personnaliser","accept":"Tout accepter","statsQuestion":"Souhaitez-vous accepter les cookies statistiques ?"};</script>
+<script src="/cookie-banner.js"></script>
+</body>
+</html>
