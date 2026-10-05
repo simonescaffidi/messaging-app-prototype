@@ -162,23 +162,73 @@ function rpInfo(req) {
 
 // ---------- REGISTRAZIONE / LOGIN ----------
 
-app.post("/api/register", registerThrottle, (req, res) => {
-  const { email, username, isCover } = req.body;
-  if (!email || !username) return res.status(400).json({ error: "email e username obbligatori" });
+// Modello di accesso: USERNAME + PASSWORD. Lo stesso username puo' avere piu'
+// profili (es. reale + copertura): la password decide quale profilo si apre.
+// Password hashate con scrypt (salt per profilo). Tentativi limitati per IP
+// e per username (anti brute-force anche distribuito).
+const PASSWORD_MIN = 8;
+const PASSWORD_MAX = 128;
+function userKey(u) { return String(u || "").trim().toLowerCase(); }
+function scryptAsync(pw, salt) {
+  return new Promise((resolve, reject) => {
+    crypto.scrypt(String(pw), salt, 64, { N: 16384, r: 8, p: 1 }, (err, key) => err ? reject(err) : resolve(key));
+  });
+}
+async function verifyPassword(p, password) {
+  if (p.passHash && p.passSalt) {
+    const key = await scryptAsync(password, Buffer.from(p.passSalt, "hex"));
+    const h = Buffer.from(p.passHash, "hex");
+    return h.length === key.length && crypto.timingSafeEqual(h, key);
+  }
+  if (p.accessCodeHash) { // profili legacy creati con il solo codice
+    const cand = Buffer.from(hashCode(password), "hex");
+    const h = Buffer.from(p.accessCodeHash, "hex");
+    return h.length === cand.length && crypto.timingSafeEqual(h, cand);
+  }
+  return false;
+}
+const DUMMY_SALT = crypto.randomBytes(16);
+const failedByUser = new Map(); // userKey -> [timestamp, ...]
+const USER_MAX_FAILS = 10;
+function userFails(k) {
+  const now = Date.now();
+  const list = (failedByUser.get(k) || []).filter((t) => now - t < LOGIN_WINDOW_MS);
+  failedByUser.set(k, list);
+  return list;
+}
+setInterval(() => { for (const k of failedByUser.keys()) userFails(k); }, 5 * 60 * 1000).unref();
+
+app.post("/api/register", registerThrottle, loginThrottle, async (req, res) => {
+  const { email, username, password, isCover } = req.body;
+  if (!email || !username || !password) return res.status(400).json({ error: "email, username e password obbligatori" });
+  const pw = String(password);
+  if (pw.length < PASSWORD_MIN || pw.length > PASSWORD_MAX) {
+    return res.status(400).json({ error: "la password deve avere almeno " + PASSWORD_MIN + " caratteri" });
+  }
+  const key = userKey(username);
+  if (key.length < 2 || key.length > 40) return res.status(400).json({ error: "username non valido" });
 
   const db = store.load();
-  // Codice univoco: rigenera finche' l'hash non collide con nessun profilo esistente.
-  let accessCode, accessCodeHash;
-  do {
-    accessCode = randomAccessCode();
-    accessCodeHash = hashCode(accessCode);
-  } while (db.profiles.some((p) => p.accessCodeHash === accessCodeHash));
+  // Stesso username ammesso, ma NON con la stessa password di un profilo esistente
+  // (altrimenti il login non saprebbe quale aprire). Il tentativo conta come
+  // "fallito" per evitare che la registrazione diventi un oracolo di password.
+  const same = db.profiles.filter((p) => userKey(p.username) === key);
+  for (const p of same) {
+    if (await verifyPassword(p, pw)) {
+      registerFail(req.ip);
+      userFails(key).push(Date.now());
+      return res.status(409).json({ error: "scegli una password diversa" });
+    }
+  }
+  const passSalt = crypto.randomBytes(16);
+  const passHash = (await scryptAsync(pw, passSalt)).toString("hex");
   const profile = {
     id: uuidv4(),
     email,
-    username,
+    username: String(username).trim(),
     publicId: randomPublicId(),
-    accessCodeHash,
+    passSalt: passSalt.toString("hex"),
+    passHash,
     secretCombo: randomSecretCombo(),
     isCover: !!isCover,
     settings: { notifications: "normal" },
@@ -189,29 +239,39 @@ app.post("/api/register", registerThrottle, (req, res) => {
   db.profiles.push(profile);
   store.save(db);
 
-  // Il codice e la combinazione segreta vengono mostrati UNA VOLTA sola:
-  // e' responsabilita' dell'utente salvarli (come una seed phrase).
+  // La combinazione segreta viene mostrata UNA VOLTA sola.
   res.json({
     profileId: profile.id,
-    accessCode: formatCode(accessCode),
     publicId: profile.publicId,
     secretCombo: profile.secretCombo
   });
 });
 
 app.post("/api/login", loginThrottle, async (req, res) => {
-  const { accessCode } = req.body;
+  const { username, password } = req.body;
+  const key = userKey(username);
+  if (!key || !password) return res.status(400).json({ error: "username e password obbligatori" });
+  const pw = String(password).slice(0, PASSWORD_MAX);
+
+  if (userFails(key).length >= USER_MAX_FAILS) {
+    return res.status(429).json({ error: "troppi tentativi per questo username, riprova piu' tardi" });
+  }
+
   const db = store.load();
-  const candidate = Buffer.from(hashCode(accessCode), "hex");
-  const profile = db.profiles.find((p) => {
-    if (!p.accessCodeHash) return false;
-    const h = Buffer.from(p.accessCodeHash, "hex");
-    return h.length === candidate.length && crypto.timingSafeEqual(h, candidate);
-  });
+  const candidates = db.profiles.filter((p) => userKey(p.username) === key);
+  let profile = null;
+  if (!candidates.length) {
+    await scryptAsync(pw, DUMMY_SALT); // stesso costo temporale anche per username inesistenti
+  } else {
+    for (const p of candidates) {
+      if (await verifyPassword(p, pw)) { profile = p; break; }
+    }
+  }
   if (!profile) {
     registerFail(req.ip);
+    userFails(key).push(Date.now());
     await new Promise((r) => setTimeout(r, 400)); // rallenta il brute force
-    return res.status(401).json({ error: "codice non valido" });
+    return res.status(401).json({ error: "credenziali non valide" });
   }
 
   const token = uuidv4();

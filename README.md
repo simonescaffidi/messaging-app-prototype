@@ -1,6 +1,6 @@
 # Prototipo — Messaggistica Privata
 
-Webapp dimostrativa basata su `Progetto_App_Messaggistica_v1.txt`. Implementa il meccanismo distintivo del progetto (codice = profilo, chat nascoste, profilo di copertura) su una base di chat funzionante e in tempo reale.
+Webapp dimostrativa basata su `Progetto_App_Messaggistica_v1.txt`. Implementa il meccanismo distintivo del progetto (username + password = profilo, chat nascoste, profilo di copertura) su una base di chat funzionante e in tempo reale.
 
 ## Avvio
 
@@ -14,8 +14,8 @@ Apri `http://localhost:3000` in due schede/browser diversi per simulare due uten
 
 ## Cosa puoi provare
 
-- **Registrazione**: crea un profilo con email + username (nessun numero di telefono). Il sistema mostra una sola volta codice di accesso, ID pubblico e combinazione segreta — vanno salvati, non sono recuperabili.
-- **Login per codice**: ogni codice apre automaticamente il profilo corrispondente, senza schermata di scelta.
+- **Registrazione**: crea un profilo con email + username + password (nessun numero di telefono). Il sistema mostra una sola volta ID pubblico e combinazione segreta — vanno salvati.
+- **Login username + password**: lo username e' il primo campo, la password decide quale profilo si apre (stesso username, password diverse = profili diversi). Password con hash scrypt e limite di tentativi per IP e per username.
 - **Profilo di copertura**: spunta l'opzione in registrazione per creare un profilo "innocuo".
 - **Contatti**: aggiungi qualcuno tramite il suo ID pubblico.
 - **Messaggi**: testo in tempo reale (WebSocket), risposte, reazioni, messaggi con autodistruzione a tempo.
