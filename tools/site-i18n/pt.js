@@ -26,13 +26,13 @@ module.exports = {
     ogTitle: "Mensagens Privadas — Protótipo",
     ogDesc: "Criptografia de ponta a ponta, desbloqueio biométrico, perfis múltiplos, chats ocultos e perfil de fachada em 11 idiomas.",
     badge: "Protótipo funcional",
-    h1: "Um chat onde o código é a sua identidade",
-    lead: "Sem número de telefone. Um código de acesso abre o seu perfil, outro código abre um perfil diferente. Chats ocultos, perfil de fachada, mensagens que se autodestroem.",
+    h1: "Um chat em que a senha escolhe o seu perfil",
+    lead: "Sem número de telefone. Digite seu usuário e senha: a senha decide qual perfil abre. Chats ocultos, perfil de cobertura, mensagens que se autodestroem.",
     ctaOpen: "Abrir o app →",
     ctaHow: "Veja como funciona",
     featuresTitle: "O que você pode fazer",
     features: [
-      ["🔑", "Acesso por código", "Cada código abre automaticamente o perfil associado. Sem tela de escolha: o código <em>é</em> a identidade."],
+      ["🔑", "Acesso com usuário e senha", "Primeiro o usuário, depois a senha: mesmo usuário, senha diferente, perfil diferente. Sem tela de seleção."],
       ["🪪", "Perfis múltiplos", "Vários perfis no mesmo dispositivo, cada um com contatos, chats e configurações independentes."],
       ["🙈", "Chats ocultos", "Oculte uma conversa da lista principal. Ela só volta a aparecer ao digitar uma combinação secreta na busca."],
       ["🎭", "Perfil de fachada", "Crie um perfil inofensivo para mostrar em caso de fiscalização, sem pistas da existência de outros perfis."],
@@ -44,8 +44,8 @@ module.exports = {
     ],
     howTitle: "Como funciona",
     steps: [
-      ["Cadastre-se", "E-mail e nome de usuário: você recebe um código de acesso, um ID público e uma combinação secreta. Guarde-os: não são mostrados novamente."],
-      ["Entre com o código", "A cada abertura, digite o código: o perfil correspondente abre automaticamente."],
+      ["Cadastre-se", "E-mail, usuário e senha: você recebe um ID público e uma combinação secreta. Guarde-os: não serão mostrados novamente."],
+      ["Entre com usuário e senha", "A cada abertura, digite usuário e senha: o perfil correspondente abre automaticamente."],
       ["Adicione contatos", "Procure uma pessoa pelo ID público dela e comece a conversar em tempo real."],
       ["Oculte o que quiser", "Digite a combinação secreta na barra de busca para revelar os chats ocultos quando precisar."]
     ],
@@ -58,7 +58,7 @@ module.exports = {
   },
   manual: {
     title: "Manual do usuário — Mensagens Privadas",
-    description: "Guia completo: cadastro, acesso por código, chats ocultos, criptografia de ponta a ponta, desbloqueio biométrico e idiomas disponíveis.",
+    description: "Guia completo: cadastro, acesso com usuário e senha, chats ocultos, criptografia de ponta a ponta, desbloqueio biométrico e idiomas disponíveis.",
     h1: "Manual do usuário",
     lead: "Guia completo de Mensagens Privadas: como se cadastrar, entrar, usar os recursos de privacidade e entender o que este protótipo realmente protege — e o que não protege.",
     sections: [
@@ -66,14 +66,14 @@ module.exports = {
         ["p", "Na tela inicial, toque em \"Cadastre-se\" e informe seu e-mail e um nome de usuário. Não é necessário número de telefone."],
         ["p", "Após o cadastro você verá uma única vez três informações, que deve guardar imediatamente em local seguro (um gerenciador de senhas, por exemplo):"],
         ["ul", [
-          "<strong>Código de acesso</strong>: é a sua \"senha\" — a cada abertura do app você o digita e o seu perfil abre automaticamente.",
+          "<strong>Usuário e senha</strong>: o usuário é o primeiro campo e a senha decide qual perfil abre. Com o mesmo usuário você pode ter vários perfis, cada um com sua senha.",
           "<strong>ID público</strong>: é o que você compartilha com as pessoas que quer adicionar como contatos. Não revela o seu e-mail.",
           "<strong>Combinação secreta</strong>: serve para revelar os chats ocultos (veja a seção dedicada)."
         ]],
-        ["warn", "Se perder o código de acesso, você perde o acesso ao perfil: ainda não existe recuperação real por e-mail (veja \"Limites de segurança declarados\")."]
+        ["warn", "Se perder a senha, você perde o acesso ao perfil: ainda não existe recuperação real por e-mail (veja \"Limites de segurança declarados\")."]
       ]},
       { id: "profiles", h: "2. Perfis múltiplos no mesmo dispositivo", blocks: [
-        ["p", "Você pode criar vários perfis (por exemplo, um pessoal e um de fachada), todos acessíveis do mesmo dispositivo. Cada perfil tem o seu código de acesso: ao abrir o app e digitar um código, o perfil correspondente abre automaticamente, sem uma tela de escolha que revele quantos perfis existem."]
+        ["p", "Você pode criar vários perfis (por exemplo um pessoal e um de cobertura) com o mesmo usuário e senhas diferentes. Ao digitar usuário e senha, abre-se o perfil correspondente, sem tela de seleção que revele quantos perfis existem. Não é possível usar a mesma senha em dois perfis com o mesmo usuário."]
       ]},
       { id: "contacts", h: "3. Adicionar contatos e conversar", blocks: [
         ["p", "Toque em \"+ Adicionar contato\" e informe o ID público da pessoa. Abre-se um chat em tempo real, com criptografia de ponta a ponta (veja a seção 7)."]
@@ -100,7 +100,7 @@ module.exports = {
       ]},
       { id: "biometric", h: "8. Desbloqueio biométrico (Face ID / Touch ID / impressão digital)", blocks: [
         ["p", "Nas configurações do perfil (ícone ⚙️) você encontra \"Ativar desbloqueio com Face ID / impressão digital\". Ao ativá-lo, o seu dispositivo cria uma passkey via WebAuthn/FIDO2 e a registra no servidor (apenas a chave pública, nunca o dado biométrico)."],
-        ["p", "A partir daí, a tela de acesso mostrará um botão \"Desbloquear com biometria\": você o usa no lugar do código, e o seu sistema operacional (não o app) verifica Face ID, Touch ID, a impressão digital do Android ou o Windows Hello. O dado biométrico nunca sai do seu dispositivo."],
+        ["p", "A partir daí, a tela de acesso mostrará o botão \"Desbloquear com biometria\": use-o no lugar da senha, e seu sistema operacional (não o app) verifica Face ID, Touch ID, impressão digital Android ou Windows Hello. O dado biométrico nunca sai do seu dispositivo."],
         ["p", "Você pode desativá-lo a qualquer momento nas mesmas configurações."]
       ]},
       { id: "languages", h: "9. Mudar de idioma", blocks: [
@@ -121,8 +121,8 @@ module.exports = {
       { id: "troubleshooting", h: "12. Resolução de problemas", blocks: [
         ["h3", "\"Não consigo criptografar: o contato ainda não tem chave pública\""],
         ["p", "Acontece se o seu contato não entrou desde a última atualização do app (a chave é gerada e enviada automaticamente no login). Peça que ele entre uma vez: depois você poderá escrever-lhe normalmente."],
-        ["h3", "\"Perdi o código de acesso\""],
-        ["p", "Por enquanto não existe recuperação automática: é preciso cadastrar um novo perfil. Guarde sempre o código num gerenciador de senhas."],
+        ["h3", "\"Perdi minha senha\""],
+        ["p", "No momento não há recuperação automática: é preciso cadastrar um novo perfil. Guarde sempre a senha em um gerenciador de senhas."],
         ["h3", "O desbloqueio biométrico não aparece"],
         ["p", "Requer um dispositivo com Face ID, Touch ID, impressão digital ou Windows Hello configurado, um navegador atualizado e uma conexão HTTPS (a aplicação web em produção já usa uma). Também precisa ter sido ativado pelo menos uma vez nas configurações."]
       ]}
@@ -136,10 +136,10 @@ module.exports = {
       ["Quem trata os dados", ["Este site e o protótipo associado são um projeto pessoal de demonstração. Para qualquer pedido relacionado a dados, você pode escrever através de <a href=\"https://www.simonescaffidi.it\" target=\"_blank\" rel=\"noopener noreferrer\">www.simonescaffidi.it</a>."]],
       ["Dados coletados pelo site de apresentação", ["Este site não usa ferramentas de análise nem de rastreamento de terceiros. Apenas as preferências de cookies que você escolher são guardadas (veja a Política de Cookies), localmente no seu navegador."]],
       ["Dados coletados pelo protótipo (/app)", [
-        "Para usar o protótipo de mensagens você cria um perfil com e-mail e nome de usuário. São guardados no servidor: e-mail, nome de usuário, ID público, código de acesso, combinação dos chats ocultos, contatos adicionados, a sua chave pública de criptografia e as mensagens enviadas.",
+        "Para usar o protótipo de mensagens, você cria um perfil com e-mail, usuário e senha. Ficam salvos no servidor: e-mail, usuário, hash da senha, ID público, combinação dos chats ocultos, contatos adicionados, sua chave pública de criptografia e as mensagens enviadas.",
         "<strong>Mensagens:</strong> o conteúdo é criptografado de ponta a ponta no navegador antes do envio; o servidor guarda apenas texto cifrado e não consegue lê-lo. Os metadados (remetente, hora, reações, expiração das mensagens temporárias) permanecem sem criptografia.",
         "<strong>Desbloqueio biométrico:</strong> se o ativar, apenas a chave pública da passkey (WebAuthn) é guardada no servidor. Os dados biométricos nunca saem do seu dispositivo. A sua chave privada de criptografia permanece no navegador (localStorage).",
-        "<strong>Importante:</strong> este é um protótipo de demonstração: e-mail e nome de usuário são armazenados sem criptografia e o serviço não tem os padrões de um produto em produção. Os códigos de acesso não são guardados em texto simples (apenas um hash) e as tentativas de login falhadas são limitadas. Não insira informações sensíveis reais: use dados de teste."
+        "<strong>Importante:</strong> este é um protótipo de demonstração: e-mail e usuário são salvos sem criptografia e o serviço não atinge os padrões de um produto em produção. As senhas não são guardadas em texto simples (apenas um hash scrypt com salt) e as tentativas de acesso falhas são limitadas por endereço IP e por usuário. Não insira informações sensíveis reais: use dados de teste."
       ]],
       ["Finalidade do tratamento", ["Os dados servem exclusivamente para fazer a demonstração funcionar (autenticação, mensagens, contatos). Não são cedidos a terceiros nem usados para perfilamento publicitário."]],
       ["Conservação", ["Os dados do protótipo podem ser apagados a qualquer momento por ocasião de atualizações ou reinícios da demonstração, sem aviso prévio."]],

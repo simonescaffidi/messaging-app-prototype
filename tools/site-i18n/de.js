@@ -26,13 +26,13 @@ module.exports = {
     ogTitle: "Private Nachrichten — Prototyp",
     ogDesc: "Ende-zu-Ende-Verschlüsselung, biometrische Entsperrung, mehrere Profile, versteckte Chats und Tarnprofil in 11 Sprachen.",
     badge: "Funktionaler Prototyp",
-    h1: "Ein Chat, in dem dein Code deine Identität ist",
-    lead: "Keine Telefonnummer. Ein Zugangscode öffnet dein Profil, ein anderer Code öffnet ein anderes. Versteckte Chats, ein Tarnprofil, selbstzerstörende Nachrichten.",
+    h1: "Ein Chat, in dem das Passwort dein Profil wählt",
+    lead: "Keine Telefonnummer. Gib Benutzername und Passwort ein: Das Passwort entscheidet, welches Profil sich öffnet. Versteckte Chats, Tarnprofil, selbstzerstörende Nachrichten.",
     ctaOpen: "App öffnen →",
     ctaHow: "So funktioniert es",
     featuresTitle: "Was du tun kannst",
     features: [
-      ["🔑", "Zugang per Code", "Jeder Code öffnet automatisch das zugehörige Profil. Keine Auswahlanzeige: Der Code <em>ist</em> die Identität."],
+      ["🔑", "Anmeldung mit Benutzername und Passwort", "Zuerst der Benutzername, dann das Passwort: gleicher Benutzername, anderes Passwort, anderes Profil. Keine Auswahlanzeige."],
       ["🪪", "Mehrere Profile", "Mehrere Profile auf demselben Gerät, jedes mit eigenen Kontakten, Chats und Einstellungen."],
       ["🙈", "Versteckte Chats", "Verstecke eine Unterhaltung in der Hauptliste. Sie erscheint nur wieder, wenn du eine geheime Kombination in die Suche eingibst."],
       ["🎭", "Tarnprofil", "Lege ein harmloses Profil an, das du bei einer Kontrolle zeigen kannst – ohne Hinweis auf weitere Profile."],
@@ -44,8 +44,8 @@ module.exports = {
     ],
     howTitle: "So funktioniert es",
     steps: [
-      ["Registrieren", "E-Mail und Benutzername: Du erhältst einen Zugangscode, eine öffentliche ID und eine geheime Kombination. Speichere sie – sie werden nur einmal angezeigt."],
-      ["Mit dem Code anmelden", "Gib bei jedem Öffnen der App deinen Code ein: Das passende Profil öffnet sich automatisch."],
+      ["Registrieren", "E-Mail, Benutzername und Passwort: Du erhältst eine öffentliche ID und eine geheime Kombination. Speichere sie, sie werden nicht erneut angezeigt."],
+      ["Mit Benutzername und Passwort anmelden", "Gib bei jedem Öffnen Benutzername und Passwort ein: Das passende Profil öffnet sich automatisch."],
       ["Kontakte hinzufügen", "Suche eine Person über ihre öffentliche ID und schreibe in Echtzeit."],
       ["Verstecken, was du willst", "Gib die geheime Kombination in die Suchleiste ein, um versteckte Chats bei Bedarf anzuzeigen."]
     ],
@@ -58,7 +58,7 @@ module.exports = {
   },
   manual: {
     title: "Benutzerhandbuch — Private Nachrichten",
-    description: "Vollständige Anleitung: Registrierung, Anmeldung per Code, versteckte Chats, Ende-zu-Ende-Verschlüsselung, biometrische Entsperrung und verfügbare Sprachen.",
+    description: "Vollständige Anleitung: Registrierung, Anmeldung mit Benutzername und Passwort, versteckte Chats, Ende-zu-Ende-Verschlüsselung, biometrisches Entsperren und verfügbare Sprachen.",
     h1: "Benutzerhandbuch",
     lead: "Eine vollständige Anleitung zu Private Nachrichten: wie du dich registrierst, anmeldest, die Datenschutzfunktionen nutzt und verstehst, was dieser Prototyp wirklich schützt – und was nicht.",
     sections: [
@@ -66,14 +66,14 @@ module.exports = {
         ["p", "Tippe auf dem Startbildschirm auf „Registrieren“ und gib deine E-Mail und einen Benutzernamen ein. Eine Telefonnummer ist nicht erforderlich."],
         ["p", "Nach der Registrierung siehst du einmalig drei Angaben, die du sofort an einem sicheren Ort speichern musst (zum Beispiel in einem Passwortmanager):"],
         ["ul", [
-          "<strong>Zugangscode</strong>: dein „Passwort“ – bei jedem Öffnen der App gibst du ihn ein und dein Profil öffnet sich automatisch.",
+          "<strong>Benutzername und Passwort</strong>: Der Benutzername ist das erste Feld, das Passwort entscheidet, welches Profil sich öffnet. Unter demselben Benutzernamen kannst du mehrere Profile haben, jedes mit eigenem Passwort.",
           "<strong>Öffentliche ID</strong>: die gibst du an Personen weiter, die du als Kontakte hinzufügen möchtest. Sie verrät nicht deine E-Mail.",
           "<strong>Geheime Kombination</strong>: dient dazu, versteckte Chats anzuzeigen (siehe eigener Abschnitt)."
         ]],
-        ["warn", "Wenn du den Zugangscode verlierst, verlierst du den Zugriff auf das Profil: Eine echte Wiederherstellung per E-Mail gibt es noch nicht (siehe „Erklärte Sicherheitsgrenzen“)."]
+        ["warn", "Wenn du das Passwort verlierst, verlierst du den Zugriff auf das Profil: Eine echte Wiederherstellung per E-Mail gibt es noch nicht (siehe „Deklarierte Sicherheitsgrenzen“)."]
       ]},
       { id: "profiles", h: "2. Mehrere Profile auf demselben Gerät", blocks: [
-        ["p", "Du kannst mehrere Profile anlegen (zum Beispiel ein persönliches und ein Tarnprofil), alle vom selben Gerät aus erreichbar. Jedes Profil hat seinen eigenen Zugangscode: Wenn du die App öffnest und einen Code eingibst, öffnet sich automatisch das passende Profil – ohne Auswahlanzeige, die verraten würde, wie viele Profile existieren."]
+        ["p", "Du kannst mehrere Profile (z. B. ein persönliches und ein Tarnprofil) mit demselben Benutzernamen, aber unterschiedlichen Passwörtern anlegen. Bei Eingabe von Benutzername und Passwort öffnet sich das passende Profil, ohne Auswahlanzeige, die verrät, wie viele Profile existieren. Dasselbe Passwort darf nicht für zwei Profile unter demselben Benutzernamen verwendet werden."]
       ]},
       { id: "contacts", h: "3. Kontakte hinzufügen und chatten", blocks: [
         ["p", "Tippe auf „+ Kontakt hinzufügen“ und gib die öffentliche ID der Person ein. Es öffnet sich ein Echtzeit-Chat, Ende-zu-Ende-verschlüsselt (siehe Abschnitt 7)."]
@@ -100,7 +100,7 @@ module.exports = {
       ]},
       { id: "biometric", h: "8. Biometrische Entsperrung (Face ID / Touch ID / Fingerabdruck)", blocks: [
         ["p", "In den Profileinstellungen (⚙️-Symbol) findest du „Entsperrung per Face ID / Fingerabdruck aktivieren“. Wenn du sie einschaltest, erstellt dein Gerät einen Passkey über WebAuthn/FIDO2 und registriert ihn beim Server (nur den öffentlichen Schlüssel, nie das biometrische Datum)."],
-        ["p", "Ab dann zeigt der Anmeldebildschirm eine Schaltfläche „Mit Biometrie entsperren“: Du nutzt sie statt des Codes, und dein Betriebssystem (nicht die App) prüft Face ID, Touch ID, den Android-Fingerabdruck oder Windows Hello. Das biometrische Datum verlässt dein Gerät nie."],
+        ["p", "Danach erscheint auf dem Anmeldebildschirm die Schaltfläche „Mit Biometrie entsperren“: Nutze sie statt des Passworts; dein Betriebssystem (nicht die App) prüft Face ID, Touch ID, den Android-Fingerabdruck oder Windows Hello. Die biometrischen Daten verlassen nie dein Gerät."],
         ["p", "Du kannst sie jederzeit in denselben Einstellungen wieder ausschalten."]
       ]},
       { id: "languages", h: "9. Sprache wechseln", blocks: [
@@ -121,8 +121,8 @@ module.exports = {
       { id: "troubleshooting", h: "12. Fehlerbehebung", blocks: [
         ["h3", "„Verschlüsselung nicht möglich: Der Kontakt hat noch keinen öffentlichen Schlüssel“"],
         ["p", "Das passiert, wenn sich dein Kontakt seit dem letzten App-Update nicht angemeldet hat (der Schlüssel wird bei der Anmeldung automatisch erzeugt und hochgeladen). Bitte ihn, sich einmal anzumelden – danach kannst du ihm normal schreiben."],
-        ["h3", "„Ich habe den Zugangscode verloren“"],
-        ["p", "Derzeit gibt es keine automatische Wiederherstellung: Du musst ein neues Profil registrieren. Bewahre den Code immer in einem Passwortmanager auf."],
+        ["h3", "„Ich habe mein Passwort verloren“"],
+        ["p", "Derzeit gibt es keine automatische Wiederherstellung: Du musst ein neues Profil registrieren. Bewahre das Passwort immer in einem Passwortmanager auf."],
         ["h3", "Die biometrische Entsperrung erscheint nicht"],
         ["p", "Sie erfordert ein Gerät mit eingerichtetem Face ID, Touch ID, Fingerabdruck oder Windows Hello, einen aktuellen Browser und eine HTTPS-Verbindung (die Web-App in Produktion nutzt bereits eine). Außerdem muss sie mindestens einmal in den Einstellungen aktiviert worden sein."]
       ]}
@@ -136,10 +136,10 @@ module.exports = {
       ["Wer die Daten verarbeitet", ["Diese Website und der verknüpfte Prototyp sind ein persönliches Demonstrationsprojekt. Für Anfragen zu Daten kannst du über <a href=\"https://www.simonescaffidi.it\" target=\"_blank\" rel=\"noopener noreferrer\">www.simonescaffidi.it</a> schreiben."]],
       ["Von der Präsentationswebsite erhobene Daten", ["Diese Website verwendet keine Analyse- oder Tracking-Tools von Drittanbietern. Gespeichert werden nur die von dir gewählten Cookie-Einstellungen (siehe Cookie-Richtlinie), lokal in deinem Browser."]],
       ["Vom Prototyp (/app) erhobene Daten", [
-        "Um den Messaging-Prototyp zu nutzen, legst du ein Profil mit E-Mail und Benutzername an. Auf dem Server werden gespeichert: E-Mail, Benutzername, öffentliche ID, Zugangscode, Kombination der versteckten Chats, hinzugefügte Kontakte, dein öffentlicher Verschlüsselungsschlüssel und die gesendeten Nachrichten.",
+        "Für den Messaging-Prototyp legst du ein Profil mit E-Mail, Benutzername und Passwort an. Auf dem Server gespeichert werden: E-Mail, Benutzername, Passwort-Hash, öffentliche ID, Kombination für versteckte Chats, hinzugefügte Kontakte, dein öffentlicher Verschlüsselungsschlüssel und die gesendeten Nachrichten.",
         "<strong>Nachrichten:</strong> Der Inhalt wird vor dem Senden im Browser Ende-zu-Ende-verschlüsselt; der Server speichert nur Geheimtext und kann ihn nicht lesen. Metadaten (Absender, Uhrzeit, Reaktionen, Ablauf zeitgesteuerter Nachrichten) bleiben unverschlüsselt.",
         "<strong>Biometrische Entsperrung:</strong> Wenn du sie aktivierst, wird auf dem Server nur der öffentliche Schlüssel des Passkeys (WebAuthn) gespeichert. Biometrische Daten verlassen nie dein Gerät. Dein privater Verschlüsselungsschlüssel bleibt im Browser (localStorage).",
-        "<strong>Wichtig:</strong> Dies ist ein Demonstrationsprototyp: E-Mail und Benutzername werden unverschlüsselt gespeichert, und der Dienst erreicht nicht die Standards eines Produktivsystems. Zugangscodes werden nicht im Klartext gespeichert (nur ein Hash), und fehlgeschlagene Anmeldeversuche werden begrenzt. Geben Sie keine echten sensiblen Informationen ein: verwenden Sie Testdaten."
+        "<strong>Wichtig:</strong> Dies ist ein Demonstrationsprototyp: E-Mail und Benutzername werden unverschlüsselt gespeichert und der Dienst erreicht nicht den Standard eines Produktivprodukts. Passwörter werden nicht im Klartext gespeichert (nur ein gesalzener scrypt-Hash) und fehlgeschlagene Anmeldeversuche werden pro IP-Adresse und pro Benutzername begrenzt. Gib keine echten sensiblen Informationen ein: Verwende Testdaten."
       ]],
       ["Zweck der Verarbeitung", ["Die Daten dienen ausschließlich dazu, die Demo zum Laufen zu bringen (Authentifizierung, Nachrichten, Kontakte). Sie werden nicht an Dritte weitergegeben und nicht für Werbeprofile verwendet."]],
       ["Speicherdauer", ["Die Daten des Prototyps können jederzeit bei Updates oder Zurücksetzungen der Demo ohne Vorankündigung gelöscht werden."]],

@@ -27,13 +27,13 @@ module.exports = {
     ogTitle: "Messaggistica Privata — Prototipo",
     ogDesc: "Crittografia end-to-end, sblocco biometrico, profili multipli, chat nascoste e profilo di copertura in 11 lingue.",
     badge: "Prototipo funzionale",
-    h1: "Una chat dove il codice è la tua identità",
-    lead: "Niente numero di telefono. Un codice di accesso apre il tuo profilo, un altro codice ne apre uno diverso. Chat nascoste, profilo di copertura, messaggi che si autodistruggono.",
+    h1: "Una chat dove la password sceglie il tuo profilo",
+    lead: "Niente numero di telefono. Scrivi il tuo username e la password: la password decide quale profilo si apre. Chat nascoste, profilo di copertura, messaggi che si autodistruggono.",
     ctaOpen: "Apri l'app →",
     ctaHow: "Scopri come funziona",
     featuresTitle: "Cosa puoi fare",
     features: [
-      ["🔑", "Accesso per codice", "Ogni codice apre automaticamente il profilo associato. Nessuna schermata di scelta: il codice <em>è</em> l'identità."],
+      ["🔑", "Accesso con username e password", "Lo username è il primo campo, poi la password: stesso username, password diversa, profilo diverso. Nessuna schermata di scelta."],
       ["🪪", "Profili multipli", "Più profili sullo stesso dispositivo, ciascuno con contatti, chat e impostazioni indipendenti."],
       ["🙈", "Chat nascoste", "Nascondi una conversazione dalla lista principale. Torna visibile solo digitando una combinazione segreta nella ricerca."],
       ["🎭", "Profilo di copertura", "Crea un profilo innocuo da mostrare in caso di controlli, senza indizi sull'esistenza di altri profili."],
@@ -45,8 +45,8 @@ module.exports = {
     ],
     howTitle: "Come funziona",
     steps: [
-      ["Registrati", "Email e username: ricevi un codice di accesso, un ID pubblico e una combinazione segreta. Salvali: non vengono mostrati di nuovo."],
-      ["Accedi col codice", "A ogni apertura inserisci il codice: il profilo corrispondente si apre automaticamente."],
+      ["Registrati", "Email, username e password: ricevi un ID pubblico e una combinazione segreta. Salvali: non vengono mostrati di nuovo."],
+      ["Accedi con username e password", "A ogni apertura inserisci lo username e la password: il profilo corrispondente si apre automaticamente."],
       ["Aggiungi contatti", "Cerca una persona tramite il suo ID pubblico e inizia a scrivere in tempo reale."],
       ["Nascondi se vuoi", "Digita la combinazione segreta nella barra di ricerca per rivelare le chat nascoste quando serve."]
     ],
@@ -59,7 +59,7 @@ module.exports = {
   },
   manual: {
     title: "Manuale utente — Messaggistica Privata",
-    description: "Guida completa: registrazione, accesso per codice, chat nascoste, crittografia end-to-end, sblocco biometrico e lingue disponibili.",
+    description: "Guida completa: registrazione, accesso con username e password, chat nascoste, crittografia end-to-end, sblocco biometrico e lingue disponibili.",
     h1: "Manuale utente",
     lead: "Guida completa a Messaggistica Privata: come registrarsi, accedere, usare le funzioni di privacy e capire cosa protegge davvero questo prototipo — e cosa no.",
     sections: [
@@ -67,14 +67,14 @@ module.exports = {
         ["p", "Nella schermata iniziale, tocca \"Registrati\" e inserisci la tua email e uno username. Non è richiesto nessun numero di telefono."],
         ["p", "Dopo la registrazione vedrai una sola volta tre informazioni, che devi salvare subito in un posto sicuro (un gestore di password, ad esempio):"],
         ["ul", [
-          "<strong>Codice di accesso</strong>: è la tua \"password\" — a ogni apertura dell'app lo inserisci e il tuo profilo si apre automaticamente.",
+          "<strong>Username e password</strong>: lo username è il primo campo, la password decide quale profilo si apre. Con lo stesso username puoi avere più profili, ognuno con la sua password.",
           "<strong>ID pubblico</strong>: è quello che condividi con le persone che vuoi aggiungere come contatti. Non rivela la tua email.",
           "<strong>Combinazione segreta</strong>: serve per rivelare le chat nascoste (vedi la sezione dedicata)."
         ]],
-        ["warn", "Se perdi il codice di accesso, perdi l'accesso al profilo: non esiste ancora un recupero via email reale (vedi \"Limiti di sicurezza dichiarati\")."]
+        ["warn", "Se perdi la password, perdi l'accesso al profilo: non esiste ancora un recupero via email reale (vedi \"Limiti di sicurezza dichiarati\")."]
       ]},
       { id: "profiles", h: "2. Profili multipli sullo stesso dispositivo", blocks: [
-        ["p", "Puoi creare più profili (ad esempio uno personale e uno di copertura) tutti accessibili dallo stesso dispositivo. Ogni profilo ha il suo codice di accesso: quando apri l'app e inserisci un codice, si apre automaticamente il profilo corrispondente, senza una schermata di scelta che riveli quanti profili esistono."]
+        ["p", "Puoi creare più profili (ad esempio uno personale e uno di copertura) con lo stesso username ma password diverse. Quando inserisci username e password si apre il profilo corrispondente, senza una schermata di scelta che riveli quanti profili esistono. Non puoi usare la stessa password per due profili con lo stesso username."]
       ]},
       { id: "contacts", h: "3. Aggiungere contatti e chattare", blocks: [
         ["p", "Tocca \"+ Aggiungi contatto\" e inserisci l'ID pubblico della persona. Si apre una chat in tempo reale, cifrata end-to-end (vedi sezione 7)."]
@@ -101,7 +101,7 @@ module.exports = {
       ]},
       { id: "biometric", h: "8. Sblocco biometrico (Face ID / Touch ID / impronta)", blocks: [
         ["p", "Nelle impostazioni del profilo (icona ⚙️) trovi \"Attiva sblocco con Face ID / impronta\". Attivandolo, il tuo dispositivo crea una passkey tramite WebAuthn/FIDO2 e la registra sul server (solo la chiave pubblica, mai il dato biometrico)."],
-        ["p", "Da quel momento, nella schermata di accesso apparirà un pulsante \"Sblocca con biometria\": lo usi al posto del codice, e il tuo sistema operativo (non l'app) verifica Face ID, Touch ID, l'impronta Android o Windows Hello. Il dato biometrico non lascia mai il tuo dispositivo."],
+        ["p", "Da quel momento, nella schermata di accesso apparirà un pulsante \"Sblocca con biometria\": lo usi al posto della password, e il tuo sistema operativo (non l'app) verifica Face ID, Touch ID, l'impronta Android o Windows Hello. Il dato biometrico non lascia mai il tuo dispositivo."],
         ["p", "Puoi disattivarlo in qualsiasi momento dalle stesse impostazioni."]
       ]},
       { id: "languages", h: "9. Cambiare lingua", blocks: [
@@ -122,8 +122,8 @@ module.exports = {
       { id: "troubleshooting", h: "12. Risoluzione dei problemi", blocks: [
         ["h3", "\"Non riesco a cifrare: il contatto non ha ancora una chiave pubblica\""],
         ["p", "Succede se il tuo contatto non ha ancora effettuato l'accesso dopo l'ultimo aggiornamento dell'app (la chiave viene generata e caricata automaticamente al login). Chiedigli di accedere una volta: dopo potrai scrivergli normalmente."],
-        ["h3", "\"Ho perso il codice di accesso\""],
-        ["p", "Al momento non esiste un recupero automatico: è necessario registrare un nuovo profilo. Conserva sempre il codice in un gestore di password."],
+        ["h3", "\"Ho perso la password\""],
+        ["p", "Al momento non esiste un recupero automatico: è necessario registrare un nuovo profilo. Conserva sempre la password in un gestore di password."],
         ["h3", "Lo sblocco biometrico non appare"],
         ["p", "Richiede un dispositivo con Face ID, Touch ID, impronta o Windows Hello configurato, un browser aggiornato e una connessione HTTPS (la webapp in produzione la usa già). Deve inoltre essere stato attivato almeno una volta dalle impostazioni."]
       ]}
@@ -137,10 +137,10 @@ module.exports = {
       ["Chi tratta i dati", ["Questo sito e il prototipo collegato sono un progetto dimostrativo personale. Per qualsiasi richiesta relativa ai dati puoi scrivere tramite <a href=\"https://www.simonescaffidi.it\" target=\"_blank\" rel=\"noopener noreferrer\">www.simonescaffidi.it</a>."]],
       ["Dati raccolti dal sito di presentazione", ["Questo sito non utilizza strumenti di analytics o tracciamento di terze parti. Vengono salvate solo le preferenze cookie che scegli (vedi Cookie Policy), in locale sul tuo browser."]],
       ["Dati raccolti dal prototipo (/app)", [
-        "Per usare il prototipo di messaggistica crei un profilo con email e username. Vengono salvati sul server: email, username, ID pubblico, codice di accesso, combinazione per le chat nascoste, contatti aggiunti, la tua chiave pubblica di cifratura e i messaggi inviati.",
+        "Per usare il prototipo di messaggistica crei un profilo con email, username e password. Vengono salvati sul server: email, username, hash della password, ID pubblico, combinazione per le chat nascoste, contatti aggiunti, la tua chiave pubblica di cifratura e i messaggi inviati.",
         "<strong>Messaggi:</strong> il contenuto è cifrato end-to-end nel browser prima dell'invio; il server conserva solo testo cifrato e non può leggerlo. Restano invece in chiaro i metadati (mittente, orario, reazioni, scadenza dei messaggi a tempo).",
         "<strong>Sblocco biometrico:</strong> se lo attivi, sul server viene salvata solo la chiave pubblica della passkey (WebAuthn). I dati biometrici non lasciano mai il tuo dispositivo. La tua chiave privata di cifratura resta nel browser (localStorage).",
-        "<strong>Importante:</strong> è un prototipo dimostrativo: email e username sono salvati senza cifratura e il servizio non ha gli standard di un prodotto in produzione. I codici di accesso non sono conservati in chiaro (solo un hash) e i tentativi errati di accesso sono limitati. Non inserire informazioni reali sensibili: usa dati di prova."
+        "<strong>Importante:</strong> è un prototipo dimostrativo: email e username sono salvati senza cifratura e il servizio non ha gli standard di un prodotto in produzione. Le password non sono conservate in chiaro (solo un hash con salt, scrypt) e i tentativi errati di accesso sono limitati per indirizzo IP e per username. Non inserire informazioni reali sensibili: usa dati di prova."
       ]],
       ["Finalità del trattamento", ["I dati servono esclusivamente a far funzionare la demo (autenticazione, messaggistica, contatti). Non vengono ceduti a terzi, non sono usati per profilazione pubblicitaria."]],
       ["Conservazione", ["I dati del prototipo possono essere cancellati in qualsiasi momento in occasione di aggiornamenti o reset della demo, senza preavviso."]],

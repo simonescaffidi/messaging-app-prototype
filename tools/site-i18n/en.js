@@ -26,13 +26,13 @@ module.exports = {
     ogTitle: "Private Messaging — Prototype",
     ogDesc: "End-to-end encryption, biometric unlock, multiple profiles, hidden chats and a cover profile in 11 languages.",
     badge: "Functional prototype",
-    h1: "A chat where your code is your identity",
-    lead: "No phone number. One access code opens your profile, another code opens a different one. Hidden chats, a cover profile, self-destructing messages.",
+    h1: "A chat where your password picks your profile",
+    lead: "No phone number. Enter your username and password: the password decides which profile opens. Hidden chats, a cover profile, self-destructing messages.",
     ctaOpen: "Open the app →",
     ctaHow: "See how it works",
     featuresTitle: "What you can do",
     features: [
-      ["🔑", "Code-based access", "Every code automatically opens its matching profile. No profile picker screen: the code <em>is</em> the identity."],
+      ["🔑", "Username and password login", "Username comes first, then the password: same username, different password, different profile. No selection screen."],
       ["🪪", "Multiple profiles", "Several profiles on the same device, each with independent contacts, chats and settings."],
       ["🙈", "Hidden chats", "Hide a conversation from the main list. It only reappears by typing a secret combination into search."],
       ["🎭", "Cover profile", "Create an innocuous profile to show in case of a check, with no hint that other profiles exist."],
@@ -44,8 +44,8 @@ module.exports = {
     ],
     howTitle: "How it works",
     steps: [
-      ["Sign up", "Email and username: you get an access code, a public ID and a secret combination. Save them — they're shown only once."],
-      ["Log in with your code", "Every time you open the app, enter your code: the matching profile opens automatically."],
+      ["Sign up", "Email, username and password: you get a public ID and a secret combination. Save them: they are not shown again."],
+      ["Log in with username and password", "Every time you open the app, enter your username and password: the matching profile opens automatically."],
       ["Add contacts", "Search for someone by their public ID and start chatting in real time."],
       ["Hide what you want", "Type the secret combination into the search bar to reveal hidden chats when you need them."]
     ],
@@ -58,7 +58,7 @@ module.exports = {
   },
   manual: {
     title: "User manual — Private Messaging",
-    description: "Complete guide: sign-up, code-based login, hidden chats, end-to-end encryption, biometric unlock and available languages.",
+    description: "Complete guide: sign-up, username and password login, hidden chats, end-to-end encryption, biometric unlock and available languages.",
     h1: "User manual",
     lead: "A complete guide to Private Messaging: how to sign up, log in, use the privacy features, and understand what this prototype really protects — and what it doesn't.",
     sections: [
@@ -66,14 +66,14 @@ module.exports = {
         ["p", "On the start screen, tap \"Sign up\" and enter your email and a username. No phone number is required."],
         ["p", "After signing up you'll see three pieces of information only once — save them right away somewhere safe (a password manager, for instance):"],
         ["ul", [
-          "<strong>Access code</strong>: this is your \"password\" — every time you open the app you enter it, and your profile opens automatically.",
+          "<strong>Username and password</strong>: the username is the first field, the password decides which profile opens. You can have several profiles under the same username, each with its own password.",
           "<strong>Public ID</strong>: this is what you share with people you want to add as contacts. It never reveals your email.",
           "<strong>Secret combination</strong>: used to reveal hidden chats (see the dedicated section)."
         ]],
-        ["warn", "If you lose your access code, you lose access to that profile: there's no real email-based recovery yet (see \"Stated security limits\")."]
+        ["warn", "If you lose your password, you lose access to the profile: there is no real email recovery yet (see \"Declared security limits\")."]
       ]},
       { id: "profiles", h: "2. Multiple profiles on the same device", blocks: [
-        ["p", "You can create several profiles (for example a personal one and a cover one), all reachable from the same device. Each profile has its own access code: when you open the app and enter a code, the matching profile opens automatically — there's no selection screen that would reveal how many profiles exist."]
+        ["p", "You can create several profiles (for example a personal one and a cover one) with the same username but different passwords. When you enter your username and password the matching profile opens, with no selection screen that would reveal how many profiles exist. You cannot use the same password for two profiles under the same username."]
       ]},
       { id: "contacts", h: "3. Adding contacts and chatting", blocks: [
         ["p", "Tap \"+ Add contact\" and enter the person's public ID. A real-time chat opens, end-to-end encrypted (see section 7)."]
@@ -100,7 +100,7 @@ module.exports = {
       ]},
       { id: "biometric", h: "8. Biometric unlock (Face ID / Touch ID / fingerprint)", blocks: [
         ["p", "In the profile settings (⚙️ icon) you'll find \"Enable Face ID / fingerprint unlock\". Turning it on makes your device create a passkey via WebAuthn/FIDO2 and register it with the server (only the public key, never the biometric data itself)."],
-        ["p", "From then on, the login screen shows an \"Unlock with biometrics\" button: use it instead of the code, and your operating system (not the app) verifies Face ID, Touch ID, Android fingerprint, or Windows Hello. Biometric data never leaves your device."],
+        ["p", "From then on, the login screen shows an \"Unlock with biometrics\" button: use it instead of the password, and your operating system (not the app) verifies Face ID, Touch ID, Android fingerprint, or Windows Hello. Biometric data never leaves your device."],
         ["p", "You can turn it off at any time from the same settings."]
       ]},
       { id: "languages", h: "9. Changing language", blocks: [
@@ -121,8 +121,8 @@ module.exports = {
       { id: "troubleshooting", h: "12. Troubleshooting", blocks: [
         ["h3", "\"Can't encrypt: the contact doesn't have a public key yet\""],
         ["p", "This happens if your contact hasn't logged in since the latest app update (the key is generated and uploaded automatically at login). Ask them to log in once — after that you'll be able to message them normally."],
-        ["h3", "\"I lost my access code\""],
-        ["p", "There's currently no automatic recovery: you'll need to register a new profile. Always keep your code in a password manager."],
+        ["h3", "\"I lost my password\""],
+        ["p", "There's currently no automatic recovery: you'll need to register a new profile. Always keep your password in a password manager."],
         ["h3", "Biometric unlock doesn't show up"],
         ["p", "It requires a device with Face ID, Touch ID, a fingerprint sensor, or Windows Hello set up, an up-to-date browser, and an HTTPS connection (the production webapp already uses one). It also needs to have been enabled at least once from settings."]
       ]}
@@ -136,10 +136,10 @@ module.exports = {
       ["Who processes the data", ["This website and the linked prototype are a personal demonstration project. For any data-related request you can get in touch via <a href=\"https://www.simonescaffidi.it\" target=\"_blank\" rel=\"noopener noreferrer\">www.simonescaffidi.it</a>."]],
       ["Data collected by the presentation website", ["This website does not use third-party analytics or tracking tools. Only the cookie preferences you choose are saved (see Cookie Policy), locally in your browser."]],
       ["Data collected by the prototype (/app)", [
-        "To use the messaging prototype you create a profile with an email and a username. The following is stored on the server: email, username, public ID, access code, hidden-chat combination, added contacts, your public encryption key and the messages sent.",
+        "To use the messaging prototype you create a profile with an email, a username and a password. The following is stored on the server: email, username, password hash, public ID, hidden-chat combination, added contacts, your public encryption key and the messages sent.",
         "<strong>Messages:</strong> the content is end-to-end encrypted in the browser before sending; the server keeps only ciphertext and cannot read it. Metadata (sender, time, reactions, expiry of timed messages) remains unencrypted.",
         "<strong>Biometric unlock:</strong> if you enable it, only the passkey's public key (WebAuthn) is stored on the server. Biometric data never leaves your device. Your private encryption key stays in the browser (localStorage).",
-        "<strong>Important:</strong> this is a demonstration prototype: email and username are stored unencrypted and the service does not meet the standards of a production product. Access codes are not kept in plain text (only a hash) and failed login attempts are rate-limited. Do not enter real sensitive information: use test data."
+        "<strong>Important:</strong> this is a demonstration prototype: email and username are stored unencrypted and the service does not meet the standards of a production product. Passwords are not kept in plain text (only a salted scrypt hash) and failed login attempts are rate-limited per IP address and per username. Do not enter real sensitive information: use test data."
       ]],
       ["Purpose of processing", ["The data is used solely to make the demo work (authentication, messaging, contacts). It is not shared with third parties and not used for advertising profiling."]],
       ["Retention", ["Prototype data may be deleted at any time during demo updates or resets, without notice."]],

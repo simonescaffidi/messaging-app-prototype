@@ -10,14 +10,14 @@ module.exports = {
     notice: "Demo simulata: i messaggi restano sul tuo dispositivo. La cifratura AES-GCM è reale, ma contatti e risposte sono finti.",
     tryTitle: "Cosa provare",
     tryItems: [
-      "Entra con il codice <strong>1111</strong> (profilo personale) oppure con il pulsante biometrico.",
+      "Entra con username <strong>demo</strong> e password <strong>1111</strong> (profilo personale) oppure con il pulsante biometrico.",
       "Apri una chat e invia un messaggio con timer di <strong>30 secondi</strong>: si autodistrugge.",
       "Attiva «Vista del server» per vedere come appare un messaggio cifrato.",
       "Nascondi una chat dal menu, poi scrivi <strong>7777</strong> nella ricerca per rivederla.",
-      "Blocca e rientra con <strong>2222</strong>: vedrai solo il profilo di copertura."
+      "Blocca e rientra con username <strong>demo</strong> e password <strong>2222</strong>: vedrai solo il profilo di copertura."
     ],
-    codeLabel: "Codice di accesso", codePh: "Es. 1111", enter: "Entra",
-    bio: "Sblocca con impronta / Face ID", bioScan: "Verifica biometrica…", wrongCode: "Codice non valido. Prova 1111 o 2222.",
+    userLabel: "Username", codeLabel: "Password", codePh: "Es. 1111", enter: "Entra",
+    bio: "Sblocca con impronta / Face ID", bioScan: "Verifica biometrica…", wrongCode: "Credenziali non valide. Usa demo + 1111 o 2222.",
     searchPh: "Cerca (o combinazione segreta)", hide: "Nascondi chat", unhide: "Mostra chat", hiddenTag: "nascosta",
     msgPh: "Scrivi un messaggio…", send: "Invia", timers: ["Nessun timer", "30 secondi", "5 minuti", "1 ora"],
     serverView: "Vista del server (cifrato)", lockBtn: "Blocca", e2eTag: "Cifrato end-to-end", expiresIn: "si cancella tra {s}s",
@@ -35,14 +35,14 @@ module.exports = {
     notice: "Simulated demo: messages stay on your device. AES-GCM encryption is real, but contacts and replies are fake.",
     tryTitle: "What to try",
     tryItems: [
-      "Sign in with code <strong>1111</strong> (personal profile) or with the biometric button.",
+      "Log in with username <strong>demo</strong> and password <strong>1111</strong> (personal profile) or with the biometric button.",
       "Open a chat and send a message with a <strong>30-second</strong> timer: it self-destructs.",
       "Turn on “Server view” to see how an encrypted message looks.",
       "Hide a chat from the menu, then type <strong>7777</strong> in search to bring it back.",
-      "Lock and sign in with <strong>2222</strong>: you will only see the cover profile."
+      "Lock and log back in with username <strong>demo</strong> and password <strong>2222</strong>: you will only see the cover profile."
     ],
-    codeLabel: "Access code", codePh: "e.g. 1111", enter: "Enter",
-    bio: "Unlock with fingerprint / Face ID", bioScan: "Verifying biometrics…", wrongCode: "Invalid code. Try 1111 or 2222.",
+    userLabel: "Username", codeLabel: "Password", codePh: "e.g. 1111", enter: "Enter",
+    bio: "Unlock with fingerprint / Face ID", bioScan: "Verifying biometrics…", wrongCode: "Invalid credentials. Use demo + 1111 or 2222.",
     searchPh: "Search (or secret combination)", hide: "Hide chat", unhide: "Show chat", hiddenTag: "hidden",
     msgPh: "Write a message…", send: "Send", timers: ["No timer", "30 seconds", "5 minutes", "1 hour"],
     serverView: "Server view (encrypted)", lockBtn: "Lock", e2eTag: "End-to-end encrypted", expiresIn: "deletes in {s}s",
@@ -60,14 +60,14 @@ module.exports = {
     notice: "Demo simulada: los mensajes se quedan en tu dispositivo. El cifrado AES-GCM es real, pero los contactos y las respuestas son falsos.",
     tryTitle: "Qué probar",
     tryItems: [
-      "Entra con el código <strong>1111</strong> (perfil personal) o con el botón biométrico.",
+      "Entra con usuario <strong>demo</strong> y contraseña <strong>1111</strong> (perfil personal) o con el botón biométrico.",
       "Abre un chat y envía un mensaje con temporizador de <strong>30 segundos</strong>: se autodestruye.",
       "Activa «Vista del servidor» para ver cómo se ve un mensaje cifrado.",
       "Oculta un chat desde el menú y escribe <strong>7777</strong> en la búsqueda para recuperarlo.",
-      "Bloquea y entra con <strong>2222</strong>: solo verás el perfil de cobertura."
+      "Bloquea y vuelve a entrar con usuario <strong>demo</strong> y contraseña <strong>2222</strong>: solo verás el perfil de cobertura."
     ],
-    codeLabel: "Código de acceso", codePh: "Ej. 1111", enter: "Entrar",
-    bio: "Desbloquear con huella / Face ID", bioScan: "Verificando biometría…", wrongCode: "Código no válido. Prueba 1111 o 2222.",
+    userLabel: "Usuario", codeLabel: "Contraseña", codePh: "Ej. 1111", enter: "Entrar",
+    bio: "Desbloquear con huella / Face ID", bioScan: "Verificando biometría…", wrongCode: "Credenciales no válidas. Usa demo + 1111 o 2222.",
     searchPh: "Buscar (o combinación secreta)", hide: "Ocultar chat", unhide: "Mostrar chat", hiddenTag: "oculto",
     msgPh: "Escribe un mensaje…", send: "Enviar", timers: ["Sin temporizador", "30 segundos", "5 minutos", "1 hora"],
     serverView: "Vista del servidor (cifrado)", lockBtn: "Bloquear", e2eTag: "Cifrado de extremo a extremo", expiresIn: "se borra en {s}s",
@@ -85,14 +85,14 @@ module.exports = {
     notice: "Démo simulée : les messages restent sur votre appareil. Le chiffrement AES-GCM est réel, mais les contacts et les réponses sont fictifs.",
     tryTitle: "À essayer",
     tryItems: [
-      "Connectez-vous avec le code <strong>1111</strong> (profil personnel) ou avec le bouton biométrique.",
+      "Connectez-vous avec l'identifiant <strong>demo</strong> et le mot de passe <strong>1111</strong> (profil personnel) ou avec le bouton biométrique.",
       "Ouvrez un chat et envoyez un message avec un minuteur de <strong>30 secondes</strong> : il s'autodétruit.",
       "Activez « Vue du serveur » pour voir à quoi ressemble un message chiffré.",
       "Masquez un chat depuis le menu, puis tapez <strong>7777</strong> dans la recherche pour le retrouver.",
-      "Verrouillez et reconnectez-vous avec <strong>2222</strong> : vous ne verrez que le profil de couverture."
+      "Verrouillez puis reconnectez-vous avec l'identifiant <strong>demo</strong> et le mot de passe <strong>2222</strong> : vous ne verrez que le profil de couverture."
     ],
-    codeLabel: "Code d'accès", codePh: "Ex. 1111", enter: "Entrer",
-    bio: "Déverrouiller par empreinte / Face ID", bioScan: "Vérification biométrique…", wrongCode: "Code invalide. Essayez 1111 ou 2222.",
+    userLabel: "Identifiant", codeLabel: "Mot de passe", codePh: "Ex. 1111", enter: "Entrer",
+    bio: "Déverrouiller par empreinte / Face ID", bioScan: "Vérification biométrique…", wrongCode: "Identifiants invalides. Utilisez demo + 1111 ou 2222.",
     searchPh: "Rechercher (ou combinaison secrète)", hide: "Masquer le chat", unhide: "Afficher le chat", hiddenTag: "masqué",
     msgPh: "Écrire un message…", send: "Envoyer", timers: ["Sans minuteur", "30 secondes", "5 minutes", "1 heure"],
     serverView: "Vue du serveur (chiffré)", lockBtn: "Verrouiller", e2eTag: "Chiffré de bout en bout", expiresIn: "supprimé dans {s}s",
@@ -110,14 +110,14 @@ module.exports = {
     notice: "Simulierte Demo: Nachrichten bleiben auf Ihrem Gerät. Die AES-GCM-Verschlüsselung ist echt, Kontakte und Antworten sind erfunden.",
     tryTitle: "Das können Sie ausprobieren",
     tryItems: [
-      "Melden Sie sich mit dem Code <strong>1111</strong> (persönliches Profil) oder per Biometrie-Taste an.",
+      "Melde dich mit Benutzername <strong>demo</strong> und Passwort <strong>1111</strong> (persönliches Profil) oder mit der Biometrie-Schaltfläche an.",
       "Öffnen Sie einen Chat und senden Sie eine Nachricht mit <strong>30-Sekunden</strong>-Timer: Sie löscht sich selbst.",
       "Aktivieren Sie die „Serveransicht“, um eine verschlüsselte Nachricht zu sehen.",
       "Verstecken Sie einen Chat im Menü und geben Sie <strong>7777</strong> in die Suche ein, um ihn zurückzuholen.",
-      "Sperren Sie und melden Sie sich mit <strong>2222</strong> an: Sie sehen nur das Tarnprofil."
+      "Sperre und melde dich mit Benutzername <strong>demo</strong> und Passwort <strong>2222</strong> neu an: Du siehst nur das Tarnprofil."
     ],
-    codeLabel: "Zugangscode", codePh: "z. B. 1111", enter: "Eintreten",
-    bio: "Mit Fingerabdruck / Face ID entsperren", bioScan: "Biometrie wird geprüft…", wrongCode: "Ungültiger Code. Versuchen Sie 1111 oder 2222.",
+    userLabel: "Benutzername", codeLabel: "Passwort", codePh: "z. B. 1111", enter: "Eintreten",
+    bio: "Mit Fingerabdruck / Face ID entsperren", bioScan: "Biometrie wird geprüft…", wrongCode: "Ungültige Zugangsdaten. Nutze demo + 1111 oder 2222.",
     searchPh: "Suchen (oder Geheimkombination)", hide: "Chat verstecken", unhide: "Chat anzeigen", hiddenTag: "versteckt",
     msgPh: "Nachricht schreiben…", send: "Senden", timers: ["Kein Timer", "30 Sekunden", "5 Minuten", "1 Stunde"],
     serverView: "Serveransicht (verschlüsselt)", lockBtn: "Sperren", e2eTag: "Ende-zu-Ende-verschlüsselt", expiresIn: "gelöscht in {s}s",
@@ -135,14 +135,14 @@ module.exports = {
     notice: "Demo simulada: as mensagens ficam no seu dispositivo. A criptografia AES-GCM é real, mas contatos e respostas são fictícios.",
     tryTitle: "O que experimentar",
     tryItems: [
-      "Entre com o código <strong>1111</strong> (perfil pessoal) ou com o botão biométrico.",
+      "Entre com usuário <strong>demo</strong> e senha <strong>1111</strong> (perfil pessoal) ou com o botão biométrico.",
       "Abra um chat e envie uma mensagem com temporizador de <strong>30 segundos</strong>: ela se autodestrói.",
       "Ative a «Visão do servidor» para ver como uma mensagem criptografada aparece.",
       "Oculte um chat pelo menu e digite <strong>7777</strong> na busca para vê-lo de novo.",
-      "Bloqueie e entre com <strong>2222</strong>: você verá apenas o perfil de cobertura."
+      "Bloqueie e entre de novo com usuário <strong>demo</strong> e senha <strong>2222</strong>: você verá só o perfil de cobertura."
     ],
-    codeLabel: "Código de acesso", codePh: "Ex.: 1111", enter: "Entrar",
-    bio: "Desbloquear com digital / Face ID", bioScan: "Verificando biometria…", wrongCode: "Código inválido. Tente 1111 ou 2222.",
+    userLabel: "Usuário", codeLabel: "Senha", codePh: "Ex. 1111", enter: "Entrar",
+    bio: "Desbloquear com digital / Face ID", bioScan: "Verificando biometria…", wrongCode: "Credenciais inválidas. Use demo + 1111 ou 2222.",
     searchPh: "Buscar (ou combinação secreta)", hide: "Ocultar chat", unhide: "Mostrar chat", hiddenTag: "oculto",
     msgPh: "Escreva uma mensagem…", send: "Enviar", timers: ["Sem temporizador", "30 segundos", "5 minutos", "1 hora"],
     serverView: "Visão do servidor (criptografado)", lockBtn: "Bloquear", e2eTag: "Criptografado de ponta a ponta", expiresIn: "apaga em {s}s",
@@ -160,14 +160,14 @@ module.exports = {
     notice: "عرض تجريبي محاكى: تبقى الرسائل على جهازك. تشفير AES-GCM حقيقي، لكن جهات الاتصال والردود وهمية.",
     tryTitle: "ما الذي يمكنك تجربته",
     tryItems: [
-      "ادخل بالرمز <strong>1111</strong> (الملف الشخصي) أو بزر البصمة.",
+      "ادخل باسم المستخدم <strong>demo</strong> وكلمة المرور <strong>1111</strong> (الملف الشخصي) أو بزر البصمة.",
       "افتح محادثة وأرسل رسالة بمؤقّت <strong>30 ثانية</strong>: تُحذف تلقائيًا.",
       "فعّل «عرض الخادم» لترى شكل الرسالة المشفّرة.",
       "أخفِ محادثة من القائمة ثم اكتب <strong>7777</strong> في البحث لإظهارها.",
-      "اقفل ثم ادخل بالرمز <strong>2222</strong>: سترى ملف التمويه فقط."
+      "اقفل ثم ادخل مجددًا باسم المستخدم <strong>demo</strong> وكلمة المرور <strong>2222</strong>: سترى الملف التمويهي فقط."
     ],
-    codeLabel: "رمز الدخول", codePh: "مثال: 1111", enter: "دخول",
-    bio: "افتح ببصمة الإصبع / Face ID", bioScan: "جارٍ التحقق من البصمة…", wrongCode: "رمز غير صالح. جرّب 1111 أو 2222.",
+    userLabel: "اسم المستخدم", codeLabel: "كلمة المرور", codePh: "مثال: 1111", enter: "دخول",
+    bio: "افتح ببصمة الإصبع / Face ID", bioScan: "جارٍ التحقق من البصمة…", wrongCode: "بيانات غير صحيحة. استخدم demo مع 1111 أو 2222.",
     searchPh: "بحث (أو التركيبة السرية)", hide: "إخفاء المحادثة", unhide: "إظهار المحادثة", hiddenTag: "مخفية",
     msgPh: "اكتب رسالة…", send: "إرسال", timers: ["بدون مؤقّت", "30 ثانية", "5 دقائق", "ساعة واحدة"],
     serverView: "عرض الخادم (مشفّر)", lockBtn: "قفل", e2eTag: "مشفّر من طرف إلى طرف", expiresIn: "تُحذف خلال {s} ث",
@@ -185,14 +185,14 @@ module.exports = {
     notice: "模拟演示：消息只保存在您的设备上。AES-GCM 加密是真实的，但联系人和回复都是虚构的。",
     tryTitle: "可以试试这些",
     tryItems: [
-      "使用代码 <strong>1111</strong>（个人档案）或生物识别按钮登录。",
+      "用用户名 <strong>demo</strong> 和密码 <strong>1111</strong>（个人资料）登录，或使用生物识别按钮。",
       "打开聊天，发送一条 <strong>30 秒</strong>计时的消息：它会自动销毁。",
       "开启“服务器视图”，查看加密消息的样子。",
       "在菜单中隐藏一个聊天，再在搜索框输入 <strong>7777</strong> 让它重新出现。",
-      "锁定后用 <strong>2222</strong> 登录：只会看到掩护档案。"
+      "锁定后用用户名 <strong>demo</strong> 和密码 <strong>2222</strong> 重新登录：只会看到伪装资料。"
     ],
-    codeLabel: "访问代码", codePh: "例如 1111", enter: "进入",
-    bio: "用指纹 / Face ID 解锁", bioScan: "正在验证生物识别…", wrongCode: "代码无效。请试试 1111 或 2222。",
+    userLabel: "用户名", codeLabel: "密码", codePh: "例如 1111", enter: "进入",
+    bio: "用指纹 / Face ID 解锁", bioScan: "正在验证生物识别…", wrongCode: "凭据无效。请使用 demo + 1111 或 2222。",
     searchPh: "搜索（或输入秘密组合）", hide: "隐藏聊天", unhide: "显示聊天", hiddenTag: "已隐藏",
     msgPh: "输入消息…", send: "发送", timers: ["不计时", "30 秒", "5 分钟", "1 小时"],
     serverView: "服务器视图（已加密）", lockBtn: "锁定", e2eTag: "端到端加密", expiresIn: "{s} 秒后删除",
@@ -210,14 +210,14 @@ module.exports = {
     notice: "सिम्युलेटेड डेमो: संदेश आपके डिवाइस पर ही रहते हैं। AES-GCM एन्क्रिप्शन असली है, लेकिन संपर्क और जवाब नकली हैं।",
     tryTitle: "क्या आज़माएँ",
     tryItems: [
-      "कोड <strong>1111</strong> (निजी प्रोफ़ाइल) या बायोमेट्रिक बटन से प्रवेश करें।",
+      "उपयोगकर्ता नाम <strong>demo</strong> और पासवर्ड <strong>1111</strong> (निजी प्रोफ़ाइल) से या बायोमेट्रिक बटन से लॉग इन करें।",
       "कोई चैट खोलें और <strong>30 सेकंड</strong> के टाइमर वाला संदेश भेजें: यह खुद मिट जाता है।",
       "“सर्वर व्यू” चालू करें और देखें कि एन्क्रिप्टेड संदेश कैसा दिखता है।",
       "मेन्यू से कोई चैट छिपाएँ, फिर खोज में <strong>7777</strong> लिखकर उसे वापस लाएँ।",
-      "लॉक करें और <strong>2222</strong> से प्रवेश करें: आपको सिर्फ़ कवर प्रोफ़ाइल दिखेगी।"
+      "लॉक करें और उपयोगकर्ता नाम <strong>demo</strong> व पासवर्ड <strong>2222</strong> से फिर लॉग इन करें: सिर्फ़ कवर प्रोफ़ाइल दिखेगा।"
     ],
-    codeLabel: "एक्सेस कोड", codePh: "जैसे 1111", enter: "प्रवेश करें",
-    bio: "फ़िंगरप्रिंट / Face ID से अनलॉक करें", bioScan: "बायोमेट्रिक जाँच हो रही है…", wrongCode: "अमान्य कोड। 1111 या 2222 आज़माएँ।",
+    userLabel: "उपयोगकर्ता नाम", codeLabel: "पासवर्ड", codePh: "जैसे 1111", enter: "प्रवेश करें",
+    bio: "फ़िंगरप्रिंट / Face ID से अनलॉक करें", bioScan: "बायोमेट्रिक जाँच हो रही है…", wrongCode: "अमान्य जानकारी। demo + 1111 या 2222 आज़माएँ।",
     searchPh: "खोजें (या गुप्त संयोजन)", hide: "चैट छिपाएँ", unhide: "चैट दिखाएँ", hiddenTag: "छिपी",
     msgPh: "संदेश लिखें…", send: "भेजें", timers: ["टाइमर नहीं", "30 सेकंड", "5 मिनट", "1 घंटा"],
     serverView: "सर्वर व्यू (एन्क्रिप्टेड)", lockBtn: "लॉक", e2eTag: "एंड-टू-एंड एन्क्रिप्टेड", expiresIn: "{s} सेकंड में मिट जाएगा",
@@ -235,14 +235,14 @@ module.exports = {
     notice: "Демо-симуляция: сообщения остаются на вашем устройстве. Шифрование AES-GCM настоящее, но контакты и ответы вымышлены.",
     tryTitle: "Что попробовать",
     tryItems: [
-      "Войдите с кодом <strong>1111</strong> (личный профиль) или кнопкой биометрии.",
+      "Войдите с именем <strong>demo</strong> и паролем <strong>1111</strong> (личный профиль) или кнопкой биометрии.",
       "Откройте чат и отправьте сообщение с таймером <strong>30 секунд</strong>: оно самоуничтожится.",
       "Включите «Вид сервера», чтобы увидеть, как выглядит зашифрованное сообщение.",
       "Скройте чат через меню, затем введите <strong>7777</strong> в поиске, чтобы вернуть его.",
-      "Заблокируйте и войдите с кодом <strong>2222</strong>: вы увидите только профиль-прикрытие."
+      "Заблокируйте и войдите снова с именем <strong>demo</strong> и паролем <strong>2222</strong>: вы увидите только профиль-прикрытие."
     ],
-    codeLabel: "Код доступа", codePh: "Напр. 1111", enter: "Войти",
-    bio: "Разблокировать отпечатком / Face ID", bioScan: "Проверка биометрии…", wrongCode: "Неверный код. Попробуйте 1111 или 2222.",
+    userLabel: "Имя пользователя", codeLabel: "Пароль", codePh: "Напр. 1111", enter: "Войти",
+    bio: "Разблокировать отпечатком / Face ID", bioScan: "Проверка биометрии…", wrongCode: "Неверные данные. Используйте demo + 1111 или 2222.",
     searchPh: "Поиск (или секретная комбинация)", hide: "Скрыть чат", unhide: "Показать чат", hiddenTag: "скрыт",
     msgPh: "Напишите сообщение…", send: "Отправить", timers: ["Без таймера", "30 секунд", "5 минут", "1 час"],
     serverView: "Вид сервера (зашифровано)", lockBtn: "Заблокировать", e2eTag: "Сквозное шифрование", expiresIn: "удалится через {s} с",
@@ -260,14 +260,14 @@ module.exports = {
     notice: "シミュレーションのデモ：メッセージは端末内に残ります。AES-GCM暗号化は本物ですが、連絡先と返信は架空です。",
     tryTitle: "試してみること",
     tryItems: [
-      "コード <strong>1111</strong>（個人プロフィール）または生体認証ボタンでログインします。",
+      "ユーザー名 <strong>demo</strong>、パスワード <strong>1111</strong>（個人プロフィール）か生体認証ボタンでログインします。",
       "チャットを開き、<strong>30秒</strong>タイマー付きでメッセージを送信：自動で消えます。",
       "「サーバー表示」をオンにして、暗号化されたメッセージの見え方を確認します。",
       "メニューからチャットを非表示にし、検索欄に <strong>7777</strong> と入力して再表示します。",
-      "ロックして <strong>2222</strong> でログイン：カバープロフィールだけが表示されます。"
+      "ロックして、ユーザー名 <strong>demo</strong>・パスワード <strong>2222</strong> で再ログイン：カバープロフィールだけが見えます。"
     ],
-    codeLabel: "アクセスコード", codePh: "例：1111", enter: "入る",
-    bio: "指紋 / Face IDでロック解除", bioScan: "生体認証を確認中…", wrongCode: "コードが無効です。1111 または 2222 をお試しください。",
+    userLabel: "ユーザー名", codeLabel: "パスワード", codePh: "例: 1111", enter: "入る",
+    bio: "指紋 / Face IDでロック解除", bioScan: "生体認証を確認中…", wrongCode: "認証情報が無効です。demo + 1111 または 2222 を使ってください。",
     searchPh: "検索（または秘密の組み合わせ）", hide: "チャットを非表示", unhide: "チャットを表示", hiddenTag: "非表示",
     msgPh: "メッセージを入力…", send: "送信", timers: ["タイマーなし", "30秒", "5分", "1時間"],
     serverView: "サーバー表示（暗号化）", lockBtn: "ロック", e2eTag: "エンドツーエンド暗号化", expiresIn: "{s}秒後に削除",
