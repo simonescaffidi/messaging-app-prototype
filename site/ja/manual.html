@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>ユーザーマニュアル — プライベートメッセージ</title>
-<meta name="description" content="完全ガイド：登録、コードでのログイン、非表示チャット、エンドツーエンド暗号化、生体認証ロック解除、対応言語。" />
+<meta name="description" content="完全ガイド：登録、ユーザー名とパスワードでのログイン、非表示チャット、エンドツーエンド暗号化、生体認証ロック解除、対応言語。" />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/manual.html" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
 <link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/manual.html" />
@@ -20,7 +20,7 @@
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="ユーザーマニュアル — プライベートメッセージ" />
-<meta property="og:description" content="完全ガイド：登録、コードでのログイン、非表示チャット、エンドツーエンド暗号化、生体認証ロック解除、対応言語。" />
+<meta property="og:description" content="完全ガイド：登録、ユーザー名とパスワードでのログイン、非表示チャット、エンドツーエンド暗号化、生体認証ロック解除、対応言語。" />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/manual.html" />
 <meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -67,16 +67,16 @@
     <p>最初の画面で「登録する」をタップし、メールアドレスとユーザー名を入力します。電話番号は不要です。</p>
     <p>登録後、次の3つの情報が一度だけ表示されます。パスワードマネージャーなど安全な場所にすぐ保存してください。</p>
     <ul>
-      <li><strong>アクセスコード</strong>：あなたの「パスワード」です。アプリを開くたびに入力すると、プロフィールが自動で開きます。</li>
+      <li><strong>ユーザー名とパスワード</strong>：ユーザー名が最初の入力欄で、パスワードが開くプロフィールを決めます。同じユーザー名で複数のプロフィールを持て、それぞれ別のパスワードを使います。</li>
       <li><strong>公開ID</strong>：連絡先に追加してほしい相手と共有するものです。メールアドレスは明かされません。</li>
       <li><strong>秘密の組み合わせ</strong>：非表示チャットを表示するために使います（専用の項目を参照）。</li>
     </ul>
-    <p class="warn">アクセスコードを失うと、そのプロフィールにアクセスできなくなります。メールによる本物の復旧はまだありません（「明示している安全性の制限」を参照）。</p>
+    <p class="warn">パスワードを失うとプロフィールにアクセスできなくなります。メールによる本格的な復旧はまだありません（「明示されたセキュリティ上の制限」を参照）。</p>
   </section>
 
   <section id="profiles">
     <h2>2. 同じ端末の複数プロフィール</h2>
-    <p>複数のプロフィール（例：個人用とカバー用）を作成でき、すべて同じ端末から使えます。プロフィールごとに専用のアクセスコードがあり、アプリを開いてコードを入力すると対応するプロフィールが自動で開きます。プロフィール数が分かってしまう選択画面はありません。</p>
+    <p>同じユーザー名で異なるパスワードを使い、複数のプロフィール（例：個人用とカバー用）を作成できます。ユーザー名とパスワードを入力すると対応するプロフィールが開き、プロフィール数が分かる選択画面は表示されません。同じユーザー名の2つのプロフィールに同じパスワードは使えません。</p>
   </section>
 
   <section id="contacts">
@@ -115,7 +115,7 @@
   <section id="biometric">
     <h2>8. 生体認証ロック解除（Face ID / Touch ID / 指紋）</h2>
     <p>プロフィール設定（⚙️アイコン）に「Face ID / 指紋でのロック解除を有効にする」があります。有効にすると、端末がWebAuthn/FIDO2でパスキーを作成してサーバーに登録します（公開鍵のみで、生体データは決して送られません）。</p>
-    <p>以降はログイン画面に「生体認証でロック解除」ボタンが表示されます。コードの代わりに使うと、Face ID、Touch ID、Androidの指紋、Windows Helloの確認はアプリではなくOSが行います。生体データが端末の外に出ることはありません。</p>
+    <p>以降、ログイン画面に「生体認証でロック解除」ボタンが表示されます。パスワードの代わりに使え、Face ID、Touch ID、Androidの指紋、Windows Helloの確認はアプリではなくOSが行います。生体データが端末の外に出ることはありません。</p>
     <p>同じ設定からいつでも無効にできます。</p>
   </section>
 
@@ -144,8 +144,8 @@
     <h2>12. トラブルシューティング</h2>
     <h3>「暗号化できません：連絡先にまだ公開鍵がありません」</h3>
     <p>連絡先がアプリの最新アップデート後にまだログインしていない場合に起こります（鍵はログイン時に自動で生成・アップロードされます）。一度ログインしてもらえば、通常どおりメッセージを送れるようになります。</p>
-    <h3>「アクセスコードをなくしました」</h3>
-    <p>現時点では自動復旧はなく、新しいプロフィールを登録する必要があります。コードは必ずパスワードマネージャーに保管してください。</p>
+    <h3>「パスワードを忘れた」</h3>
+    <p>現時点では自動復旧はなく、新しいプロフィールを登録する必要があります。パスワードは必ずパスワードマネージャーで保管してください。</p>
     <h3>生体認証ロック解除が表示されない</h3>
     <p>Face ID、Touch ID、指紋、またはWindows Helloが設定された端末、最新のブラウザ、HTTPS接続（本番のウェブアプリはすでに使用しています）が必要です。また、設定で少なくとも一度は有効にしておく必要があります。</p>
   </section>
