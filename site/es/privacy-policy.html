@@ -54,7 +54,7 @@
   <p>Para usar el prototipo de mensajería creas un perfil con correo y nombre de usuario. En el servidor se guardan: correo, nombre de usuario, ID público, código de acceso, combinación de chats ocultos, contactos añadidos, tu clave pública de cifrado y los mensajes enviados.</p>
   <p><strong>Mensajes:</strong> el contenido se cifra de extremo a extremo en el navegador antes de enviarse; el servidor conserva solo texto cifrado y no puede leerlo. Los metadatos (remitente, hora, reacciones, caducidad de los mensajes temporales) permanecen sin cifrar.</p>
   <p><strong>Desbloqueo biométrico:</strong> si lo activas, en el servidor solo se guarda la clave pública de la passkey (WebAuthn). Los datos biométricos nunca salen de tu dispositivo. Tu clave privada de cifrado permanece en el navegador (localStorage).</p>
-  <p><strong>Importante:</strong> es un prototipo de demostración: el correo, el nombre de usuario y los códigos de acceso se guardan sin cifrar y el servicio no cumple los estándares de un producto en producción. No introduzcas información real sensible: usa datos de prueba.</p>
+  <p><strong>Importante:</strong> es un prototipo de demostración: el correo y el nombre de usuario se guardan sin cifrar y el servicio no cumple los estándares de un producto en producción. Los códigos de acceso no se conservan en texto claro (solo un hash) y los intentos de acceso fallidos están limitados. No introduzcas información sensible real: usa datos de prueba.</p>
 
   <h2>Finalidad del tratamiento</h2>
   <p>Los datos sirven exclusivamente para que funcione la demo (autenticación, mensajería, contactos). No se ceden a terceros ni se usan para perfilado publicitario.</p>
