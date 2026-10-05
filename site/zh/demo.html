@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>交互式演示 — 私密消息</title>
+<meta name="description" content="立即体验私密消息：代码登录、隐藏聊天、掩护档案、限时消息和端到端加密。浏览器内模拟，无需账号。" />
+<link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/demo.html" />
+<link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/demo.html" />
+<link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/demo.html" />
+<link rel="alternate" hreflang="es" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/demo.html" />
+<link rel="alternate" hreflang="fr" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/demo.html" />
+<link rel="alternate" hreflang="de" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/demo.html" />
+<link rel="alternate" hreflang="pt" href="https://messaging-app-prototype-production-ecb3.up.railway.app/pt/demo.html" />
+<link rel="alternate" hreflang="ar" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/demo.html" />
+<link rel="alternate" hreflang="zh" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/demo.html" />
+<link rel="alternate" hreflang="hi" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/demo.html" />
+<link rel="alternate" hreflang="ru" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/demo.html" />
+<link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/demo.html" />
+<link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/demo.html" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="交互式演示 — 私密消息" />
+<meta property="og:description" content="立即体验私密消息：代码登录、隐藏聊天、掩护档案、限时消息和端到端加密。浏览器内模拟，无需账号。" />
+<meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/demo.html" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="/zh/" class="brand"><span class="lock">🔒</span> 私密通讯</a>
+    <div class="header-actions">
+      <select class="lang-select" aria-label="语言" onchange="location.href=this.value"><option value="/demo.html">Italiano</option><option value="/en/demo.html">English</option><option value="/es/demo.html">Español</option><option value="/fr/demo.html">Français</option><option value="/de/demo.html">Deutsch</option><option value="/pt/demo.html">Português</option><option value="/ar/demo.html">العربية</option><option value="/zh/demo.html" selected>中文</option><option value="/hi/demo.html">हिन्दी</option><option value="/ru/demo.html">Русский</option><option value="/ja/demo.html">日本語</option></select>
+      <a href="/zh/manual.html" class="btn btn-ghost btn-sm">手册</a>
+      <a href="/zh/demo.html" class="btn btn-ghost btn-sm">演示</a>
+      <a href="/app/" class="btn btn-primary btn-sm">打开应用</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="demo-layout">
+    <div class="demo-intro">
+      <h1>试用演示</h1>
+      <p class="lead">仅在您的浏览器中运行的交互式模拟：无需账号，不发送任何数据。要使用真正的应用，请点击“打开应用”。</p>
+      <p class="demo-notice">模拟演示：消息只保存在您的设备上。AES-GCM 加密是真实的，但联系人和回复都是虚构的。</p>
+      <h2>可以试试这些</h2>
+      <ol class="demo-try">
+        <li>使用代码 <strong>1111</strong>（个人档案）或生物识别按钮登录。</li>
+        <li>打开聊天，发送一条 <strong>30 秒</strong>计时的消息：它会自动销毁。</li>
+        <li>开启“服务器视图”，查看加密消息的样子。</li>
+        <li>在菜单中隐藏一个聊天，再在搜索框输入 <strong>7777</strong> 让它重新出现。</li>
+        <li>锁定后用 <strong>2222</strong> 登录：只会看到掩护档案。</li>
+      </ol>
+      <p><a href="/app/" class="btn btn-primary">打开应用</a></p>
+    </div>
+    <div id="phone" class="phone" aria-label="试用演示"></div>
+  </div>
+</main>
+<script>window.__DEMO_I18N={"nav":"演示","cta":"试用演示","title":"交互式演示 — 私密消息","description":"立即体验私密消息：代码登录、隐藏聊天、掩护档案、限时消息和端到端加密。浏览器内模拟，无需账号。","h1":"试用演示","lead":"仅在您的浏览器中运行的交互式模拟：无需账号，不发送任何数据。要使用真正的应用，请点击“打开应用”。","notice":"模拟演示：消息只保存在您的设备上。AES-GCM 加密是真实的，但联系人和回复都是虚构的。","tryTitle":"可以试试这些","tryItems":["使用代码 \u003cstrong>1111\u003c/strong>（个人档案）或生物识别按钮登录。","打开聊天，发送一条 \u003cstrong>30 秒\u003c/strong>计时的消息：它会自动销毁。","开启“服务器视图”，查看加密消息的样子。","在菜单中隐藏一个聊天，再在搜索框输入 \u003cstrong>7777\u003c/strong> 让它重新出现。","锁定后用 \u003cstrong>2222\u003c/strong> 登录：只会看到掩护档案。"],"codeLabel":"访问代码","codePh":"例如 1111","enter":"进入","bio":"用指纹 / Face ID 解锁","bioScan":"正在验证生物识别…","wrongCode":"代码无效。请试试 1111 或 2222。","searchPh":"搜索（或输入秘密组合）","hide":"隐藏聊天","unhide":"显示聊天","hiddenTag":"已隐藏","msgPh":"输入消息…","send":"发送","timers":["不计时","30 秒","5 分钟","1 小时"],"serverView":"服务器视图（已加密）","lockBtn":"锁定","e2eTag":"端到端加密","expiresIn":"{s} 秒后删除","secretFound":"已显示隐藏的聊天","chatsTitle":"聊天","back":"返回","empty":"没有聊天","n1":"安娜","m1":"明天下午6点见？","n2":"马可","m2":"今晚我把文件发给你。","n3":"卢卡","m3":"计划已确定，别告诉任何人。","nc":"妈妈","mc":"记得买面包！","replies":["好的，回头见！","收到 👍","好，谢谢。"]};</script>
+<script src="/demo.js"></script>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">Powered by <a href="https://www.simonescaffidi.it" target="_blank" rel="noopener noreferrer">www.simonescaffidi.it</a></p>
+    <nav class="footer-links" aria-label="法律信息">
+      <a href="/zh/manual.html">手册</a>
+      <a href="/zh/demo.html">演示</a>
+      <a href="/zh/privacy-policy.html">隐私政策</a>
+      <a href="/zh/cookie-policy.html">Cookie 政策</a>
+    </nav>
+    <nav class="footer-langs" aria-label="所有语言">
+      <a href="/demo.html" hreflang="it" lang="it">Italiano</a>
+      <a href="/en/demo.html" hreflang="en" lang="en">English</a>
+      <a href="/es/demo.html" hreflang="es" lang="es">Español</a>
+      <a href="/fr/demo.html" hreflang="fr" lang="fr">Français</a>
+      <a href="/de/demo.html" hreflang="de" lang="de">Deutsch</a>
+      <a href="/pt/demo.html" hreflang="pt" lang="pt">Português</a>
+      <a href="/ar/demo.html" hreflang="ar" lang="ar">العربية</a>
+      <a href="/zh/demo.html" hreflang="zh" lang="zh" aria-current="true">中文</a>
+      <a href="/hi/demo.html" hreflang="hi" lang="hi">हिन्दी</a>
+      <a href="/ru/demo.html" hreflang="ru" lang="ru">Русский</a>
+      <a href="/ja/demo.html" hreflang="ja" lang="ja">日本語</a>
+    </nav>
+  </div>
+</footer>
+<script>window.__COOKIE_I18N={"text":"我们使用必要的技术性 Cookie，并在您同意后使用统计类 Cookie。请查看\u003ca href=\"/zh/privacy-policy.html\">隐私政策\u003c/a>和 \u003ca href=\"/zh/cookie-policy.html\">Cookie 政策\u003c/a>。","reject":"拒绝","customize":"自定义","accept":"全部接受","statsQuestion":"是否接受统计类 Cookie？"};</script>
+<script src="/cookie-banner.js"></script>
+</body>
+</html>
