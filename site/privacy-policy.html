@@ -51,10 +51,10 @@
   <p>Questo sito non utilizza strumenti di analytics o tracciamento di terze parti. Vengono salvate solo le preferenze cookie che scegli (vedi Cookie Policy), in locale sul tuo browser.</p>
 
   <h2>Dati raccolti dal prototipo (/app)</h2>
-  <p>Per usare il prototipo di messaggistica crei un profilo con email e username. Vengono salvati sul server: email, username, ID pubblico, codice di accesso, combinazione per le chat nascoste, contatti aggiunti, la tua chiave pubblica di cifratura e i messaggi inviati.</p>
+  <p>Per usare il prototipo di messaggistica crei un profilo con email, username e password. Vengono salvati sul server: email, username, hash della password, ID pubblico, combinazione per le chat nascoste, contatti aggiunti, la tua chiave pubblica di cifratura e i messaggi inviati.</p>
   <p><strong>Messaggi:</strong> il contenuto è cifrato end-to-end nel browser prima dell'invio; il server conserva solo testo cifrato e non può leggerlo. Restano invece in chiaro i metadati (mittente, orario, reazioni, scadenza dei messaggi a tempo).</p>
   <p><strong>Sblocco biometrico:</strong> se lo attivi, sul server viene salvata solo la chiave pubblica della passkey (WebAuthn). I dati biometrici non lasciano mai il tuo dispositivo. La tua chiave privata di cifratura resta nel browser (localStorage).</p>
-  <p><strong>Importante:</strong> è un prototipo dimostrativo: email e username sono salvati senza cifratura e il servizio non ha gli standard di un prodotto in produzione. I codici di accesso non sono conservati in chiaro (solo un hash) e i tentativi errati di accesso sono limitati. Non inserire informazioni reali sensibili: usa dati di prova.</p>
+  <p><strong>Importante:</strong> è un prototipo dimostrativo: email e username sono salvati senza cifratura e il servizio non ha gli standard di un prodotto in produzione. Le password non sono conservate in chiaro (solo un hash con salt, scrypt) e i tentativi errati di accesso sono limitati per indirizzo IP e per username. Non inserire informazioni reali sensibili: usa dati di prova.</p>
 
   <h2>Finalità del trattamento</h2>
   <p>I dati servono esclusivamente a far funzionare la demo (autenticazione, messaggistica, contatti). Non vengono ceduti a terzi, non sono usati per profilazione pubblicitaria.</p>

@@ -71,8 +71,10 @@
     root.innerHTML =
       '<div class="ph-login">' +
       '<div class="ph-logo">🔒</div>' +
+      '<label for="ph-user">' + esc(T.userLabel) + "</label>" +
+      '<input id="ph-user" type="text" autocomplete="off" value="demo" />' +
       '<label for="ph-code">' + esc(T.codeLabel) + "</label>" +
-      '<input id="ph-code" type="password" inputmode="numeric" autocomplete="off" placeholder="' + esc(T.codePh) + '" />' +
+      '<input id="ph-code" type="password" autocomplete="off" placeholder="' + esc(T.codePh) + '" />' +
       '<button id="ph-enter" class="btn btn-primary">' + esc(T.enter) + "</button>" +
       '<button id="ph-bio" class="btn btn-ghost">' + (S.scanning ? "⏳ " + esc(T.bioScan) : "🫆 " + esc(T.bio)) + "</button>" +
       '<p class="ph-err" role="alert">' + esc(S.err) + "</p>" +
@@ -80,12 +82,14 @@
     var inp = document.getElementById("ph-code");
     function go() {
       var v = inp.value.trim();
-      if (v === "1111") login("main");
-      else if (v === "2222") login("cover");
+      var u = document.getElementById("ph-user").value.trim().toLowerCase();
+      if (u === "demo" && v === "1111") login("main");
+      else if (u === "demo" && v === "2222") login("cover");
       else { S.err = T.wrongCode; renderLogin(); }
     }
     document.getElementById("ph-enter").onclick = go;
     inp.onkeydown = function (e) { if (e.key === "Enter") go(); };
+    document.getElementById("ph-user").onkeydown = inp.onkeydown;
     document.getElementById("ph-bio").onclick = function () {
       if (S.scanning) return;
       S.scanning = true; S.err = ""; renderLogin();
