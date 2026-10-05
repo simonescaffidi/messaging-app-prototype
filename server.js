@@ -549,7 +549,7 @@ app.post("/api/webauthn/register-verify", requireAuth, async (req, res) => {
   }
 });
 
-app.post("/api/webauthn/login-options", async (req, res) => {
+app.post("/api/webauthn/login-options", loginThrottle, async (req, res) => {
   const { rpID } = rpInfo(req);
   const db = store.load();
 
@@ -565,7 +565,7 @@ app.post("/api/webauthn/login-options", async (req, res) => {
   res.json(options);
 });
 
-app.post("/api/webauthn/login-verify", async (req, res) => {
+app.post("/api/webauthn/login-verify", loginThrottle, async (req, res) => {
   const db = store.load();
   const pending = db.webauthnChallenges["__anonymous__"];
   const { rpID, origin } = rpInfo(req);
@@ -575,7 +575,7 @@ app.post("/api/webauthn/login-verify", async (req, res) => {
 
   const credentialId = req.body.id;
   const profile = db.profiles.find((p) => (p.webauthnCredentials || []).some((c) => c.id === credentialId));
-  if (!profile) return res.status(404).json({ error: "passkey non riconosciuta su questo server" });
+  if (!profile) { registerFail(req.ip); return res.status(404).json({ error: "passkey non riconosciuta su questo server" }); }
   const savedCred = profile.webauthnCredentials.find((c) => c.id === credentialId);
 
   try {
@@ -591,7 +591,7 @@ app.post("/api/webauthn/login-verify", async (req, res) => {
         transports: savedCred.transports || []
       }
     });
-    if (!verification.verified) return res.status(400).json({ error: "verifica biometrica fallita" });
+    if (!verification.verified) { registerFail(req.ip); return res.status(400).json({ error: "verifica biometrica fallita" }); }
 
     savedCred.counter = verification.authenticationInfo.newCounter;
     delete db.webauthnChallenges["__anonymous__"];
@@ -601,6 +601,7 @@ app.post("/api/webauthn/login-verify", async (req, res) => {
     sessions.set(token, profile.id);
     res.json({ token, profile: publicProfile(profile) });
   } catch (err) {
+    registerFail(req.ip);
     res.status(400).json({ error: "login biometrico non valido: " + err.message });
   }
 });
