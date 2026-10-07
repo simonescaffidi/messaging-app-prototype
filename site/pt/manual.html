@@ -104,12 +104,18 @@
     <h2>7. Criptografia de ponta a ponta: como funciona de verdade</h2>
     <p>Isto não é um slogan de marketing: cada mensagem é criptografada <strong>no seu navegador</strong>, antes de ser enviada ao servidor, com este esquema:</p>
     <ol>
-      <li>No primeiro acesso, o seu dispositivo gera um par de chaves ECDH na curva P-256 (uma pública e uma privada). A chave pública é enviada ao servidor; a chave privada permanece apenas no seu navegador.</li>
-      <li>Quando você escreve a um contato, o seu navegador combina a sua chave privada com a chave pública dele (troca ECDH) e deriva, via HKDF-SHA256, uma chave simétrica AES-GCM de 256 bits específica para esse par de pessoas.</li>
-      <li>Cada mensagem é criptografada com essa chave e um número aleatório (IV) diferente a cada vez, e então enviada ao servidor já cifrada.</li>
-      <li>O servidor apenas guarda e transmite texto cifrado: não consegue ler o conteúdo das mensagens.</li>
+      <li>No primeiro acesso, o dispositivo gera um par de chaves ECDH (curva P-256): a pública vai para o servidor, a privada fica no dispositivo, cifrada com a sua senha. Também prepara um lote de chaves públicas de uso único («prekeys»).</li>
+      <li>Para cada mensagem, o navegador gera uma chave temporária e busca no servidor UMA prekey de uso único do contato. Combina três trocas ECDH (sua identidade, a chave temporária, a prekey) e deriva com HKDF-SHA256 uma chave AES-GCM de 256 bits válida só para aquela mensagem.</li>
+      <li>A mensagem é cifrada com essa chave e um IV aleatório; o cabeçalho é autenticado e não pode ser alterado. O servidor recebe apenas texto cifrado.</li>
+      <li>O destinatário reconstrói a mesma chave, lê a mensagem e apaga logo a prekey privada: a partir daí ninguém a decifra, nem com as suas chaves de longo prazo.</li>
     </ol>
     <p>É o mesmo tipo de matemática (ECDH + AES-GCM) usado por muitos protocolos seguros modernos, aplicado aqui pela Web Crypto API nativa do navegador, sem bibliotecas externas.</p>
+    <h3>Forward secrecy: as mensagens passadas continuam seguras</h3>
+    <p>Mesmo que alguém obtivesse suas chaves de longo prazo (por exemplo, roubando o dispositivo), não conseguiria decifrar as mensagens já recebidas, pois as chaves foram apagadas. O texto já lido fica apenas no cache local cifrado do seu dispositivo.</p>
+    <h3>O cofre de chaves</h3>
+    <p>Chaves privadas, prekeys e cache de mensagens ficam no navegador apenas cifrados (AES-GCM), com uma chave derivada da sua senha por PBKDF2-SHA256 (310.000 iterações). Se entrar por biometria, a senha é pedida uma vez para abrir o cofre. Ao trocar a senha, o cofre é recifrado.</p>
+    <h3>Confirme que é mesmo ele: número de segurança</h3>
+    <p>No chat, toque no ícone 🔑: aparece um número de 60 dígitos, igual para os dois. Compare com o contato pessoalmente ou por voz: se coincidir, ninguém está interferindo. Se a chave de um contato mudar (novo dispositivo ou possível interceptação), surge um aviso e o envio fica bloqueado até você escolher «Aceitar nova chave».</p>
   </section>
 
   <section id="biometric">
@@ -131,12 +137,13 @@
 
   <section id="limits">
     <h2>11. Limites de segurança declarados</h2>
-    <p>Por honestidade, eis o que este protótipo <strong>ainda não</strong> faz, apesar de a criptografia ser real:</p>
+    <p>Por honestidade, estes são os limites que permanecem, embora a criptografia seja real e não apenas declarada:</p>
     <ul>
-      <li><strong>Sem ratchet / forward secrecy</strong>: a chave de um chat permanece a mesma até as duas pessoas regenerarem as suas chaves (ao contrário de protocolos como o Signal, que trocam de chave a cada mensagem).</li>
-      <li><strong>Sem verificação fora de banda das chaves públicas</strong>: não há um "número de segurança" para comparar de viva voz com o contato. Em teoria, um servidor malicioso poderia substituir uma chave pública pela sua (ataque man-in-the-middle). Num servidor confiável e para um protótipo, serve; antes de um uso de alto risco, essa verificação deveria ser acrescentada.</li>
-      <li><strong>Chave privada no navegador</strong>: fica guardada no armazenamento local do navegador (localStorage), não num enclave seguro de hardware. Quem tiver acesso físico ou de software ao dispositivo desbloqueado poderia lê-la.</li>
-      <li><strong>Recuperação só por e-mail</strong>: se perder a senha e o acesso ao e-mail verificado, o perfil não pode ser recuperado. Se usar vários perfis (por exemplo um de cobertura), use e-mails diferentes: um link de recuperação revela a quem controla o e-mail que o perfil existe.</li>
+      <li><strong>Prekeys esgotadas</strong>: se um contato fica muito tempo offline e acaba as chaves de uso único, a mensagem ainda usa uma chave nova, mas sem exclusão única — forward secrecy mais fraca.</li>
+      <li><strong>Mensagens ligadas a este dispositivo</strong>: por projeto, o histórico decifrado não se move. Em um novo dispositivo ou após recuperar a senha por e-mail, o cofre anterior não é recuperável: você recomeça com nova identidade e os contatos veem o aviso de troca de chave.</li>
+      <li><strong>O cofre vale o que vale a senha</strong>: escolha uma longa e única. Quem tiver seu dispositivo já desbloqueado com o app aberto pode ler os chats, como em qualquer app.</li>
+      <li><strong>Metadados visíveis ao servidor</strong>: remetente, horário, reações e expiração das mensagens temporárias não são cifrados.</li>
+      <li><strong>Recuperação só por e-mail</strong>: se perder a senha e o acesso ao e-mail verificado, o perfil não é recuperável. Se usar vários perfis (por exemplo, um de cobertura), use e-mails diferentes: um link de recuperação revela a quem controla o e-mail que o perfil existe.</li>
     </ul>
   </section>
 
@@ -148,6 +155,8 @@
     <p>Use "Esqueceu a senha?" na tela de acesso e informe e-mail e usuário: se o e-mail do perfil estiver verificado, você recebe um link válido por 1 hora. Caso contrário, o perfil não é recuperável e precisa ser criado de novo. Guarde sempre a senha em um gerenciador de senhas.</p>
     <h3>O desbloqueio biométrico não aparece</h3>
     <p>Requer um dispositivo com Face ID, Touch ID, impressão digital ou Windows Hello configurado, um navegador atualizado e uma conexão HTTPS (a aplicação web em produção já usa uma). Também precisa ter sido ativado pelo menos uma vez nas configurações.</p>
+    <h3>«Mensagem não mais legível»</h3>
+    <p>Por segurança, a chave de cada mensagem é apagada assim que você a lê: o texto fica só no cache cifrado deste dispositivo. Se trocar de dispositivo, limpar os dados do navegador ou redefinir a senha por e-mail, as mensagens anteriores não podem ser recuperadas. É o preço da forward secrecy.</p>
   </section>
 </main>
 
