@@ -230,3 +230,6 @@ html[dir="rtl"] .msg-row.me { margin-left: 0; }
 .key-banner{background:#fff3cd;color:#664d03;padding:.5rem .75rem;display:flex;gap:.5rem;align-items:center;justify-content:space-between;font-size:.9rem}
 .key-banner.hidden{display:none}
 .safety-number{font-family:ui-monospace,Menlo,monospace;font-size:1.15rem;letter-spacing:.05em;line-height:1.6;word-spacing:.4em;text-align:center;background:rgba(127,127,127,.12);padding:.75rem;border-radius:.5rem}
+
+button.danger{background:#b3261e;color:#fff;border:0}
+.message-form.disabled{opacity:.6}
