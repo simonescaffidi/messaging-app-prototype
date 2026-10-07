@@ -19,7 +19,9 @@ module.exports = {
       "customize": "Customize",
       "accept": "Accept all",
       "statsQuestion": "Do you want to accept statistics cookies?"
-    }
+    },
+    "terms": "Terms of Service",
+    "owner": "Controller"
   },
   "landing": {
     "title": "Private Messaging — Chat with multiple profiles and hidden chats",
@@ -450,6 +452,67 @@ module.exports = {
         "How to manage your preferences",
         [
           "You can delete the saved preference by clearing your browser data for this site: the banner will reappear on your next visit."
+        ]
+      ]
+    ]
+  },
+  "terms": {
+    "title": "Terms of Service and License — Private Messaging",
+    "description": "Terms of service and license for the Private Messaging app and website.",
+    "h1": "Terms of Service and License",
+    "sections": [
+      [
+        "1. Subject and owner",
+        [
+          "These Terms govern use of the \"Private Messaging\" app and website (the \"Service\"). By registering or using the Service you accept them. If you disagree, do not use it."
+        ]
+      ],
+      [
+        "2. Nature of the Service",
+        [
+          "The Service is a working prototype provided \"as is\". It may change, be interrupted or reset without notice. Use test data and do not entrust it with extremely high-risk conversations or essential information."
+        ]
+      ],
+      [
+        "3. Account and security",
+        [
+          "You must be at least 14 years old. You are responsible for your password and device. Encryption keys are held only on your device, encrypted with your password: if you lose or reset it, local history cannot be recovered and we cannot restore it."
+        ]
+      ],
+      [
+        "4. Acceptable use",
+        [
+          "You may not use the Service for unlawful activity, harassment, threats, spam, scams, spreading malware, content that exploits minors or violates others' rights, or to attempt to breach, overload or bypass the Service's security measures."
+        ]
+      ],
+      [
+        "5. Reports and suspension",
+        [
+          "You can block and report any contact. Messages are end-to-end encrypted and the Owner cannot read them: reports rely on what the user states and on available technical data. The Owner may suspend or delete accounts that violate these Terms or the law and cooperate with authorities where required."
+        ]
+      ],
+      [
+        "6. License",
+        [
+          "You are granted a personal, non-exclusive, non-transferable, revocable license to use the app and website for lawful purposes. Software, graphics, trademarks and texts remain the Owner's. You may not copy, sell, decompile or create derivative works, except where mandatory law allows."
+        ]
+      ],
+      [
+        "7. Warranties and liability",
+        [
+          "To the extent permitted by law the Service is provided without warranty of continuity, error-free operation or fitness for a particular purpose, and the Owner is not liable for indirect damages or data loss. Consumer rights and liabilities that cannot be excluded remain unaffected."
+        ]
+      ],
+      [
+        "8. Account deletion and data",
+        [
+          "You can delete your account at any time from Settings: profile, contacts and chats are permanently erased. Data processing is described in the Privacy Policy."
+        ]
+      ],
+      [
+        "9. Governing law and changes",
+        [
+          "These Terms are governed by Italian law; consumers keep the protections and forum provided by the Italian Consumer Code and mandatory EU rules. We may update these Terms: material changes will be announced in the Service. Contact: info@simonescaffidi.it."
         ]
       ]
     ]

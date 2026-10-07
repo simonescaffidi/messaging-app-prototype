@@ -19,7 +19,9 @@ module.exports = {
       "customize": "Anpassen",
       "accept": "Alle akzeptieren",
       "statsQuestion": "Möchtest du Statistik-Cookies akzeptieren?"
-    }
+    },
+    "terms": "Nutzungsbedingungen",
+    "owner": "Verantwortlicher"
   },
   "landing": {
     "title": "Private Nachrichten — Chat mit mehreren Profilen und versteckten Chats",
@@ -450,6 +452,67 @@ module.exports = {
         "So verwaltest du deine Einstellungen",
         [
           "Du kannst die gespeicherte Einstellung löschen, indem du die Browserdaten für diese Website entfernst: Beim nächsten Besuch erscheint das Banner wieder."
+        ]
+      ]
+    ]
+  },
+  "terms": {
+    "title": "Nutzungsbedingungen und Lizenz — Private Nachrichten",
+    "description": "Nutzungsbedingungen und Lizenz für App und Website Private Nachrichten.",
+    "h1": "Nutzungsbedingungen und Lizenz",
+    "sections": [
+      [
+        "1. Gegenstand und Verantwortlicher",
+        [
+          "Diese Bedingungen regeln die Nutzung von App und Website „Private Nachrichten“ (der „Dienst“). Mit Registrierung oder Nutzung akzeptierst du sie. Andernfalls nutze den Dienst nicht."
+        ]
+      ],
+      [
+        "2. Art des Dienstes",
+        [
+          "Der Dienst ist ein funktionsfähiger Prototyp, bereitgestellt „wie besehen“. Er kann sich ändern, unterbrochen oder zurückgesetzt werden, ohne Vorankündigung. Verwende Testdaten und vertraue ihm keine Gespräche mit extrem hohem Risiko oder unverzichtbare Informationen an."
+        ]
+      ],
+      [
+        "3. Konto und Sicherheit",
+        [
+          "Du musst mindestens 14 Jahre alt sein. Du bist für Passwort und Gerät verantwortlich. Verschlüsselungsschlüssel liegen nur auf deinem Gerät, mit deinem Passwort verschlüsselt: Verlierst oder setzt du es zurück, ist der lokale Verlauf nicht wiederherstellbar und wir können ihn nicht wiederherstellen."
+        ]
+      ],
+      [
+        "4. Zulässige Nutzung",
+        [
+          "Untersagt ist die Nutzung für rechtswidrige Handlungen, Belästigung, Drohungen, Spam, Betrug, Verbreitung von Schadsoftware, Inhalte, die Minderjährige ausbeuten oder Rechte Dritter verletzen, sowie Versuche, die Sicherheitsmaßnahmen zu umgehen, zu überlasten oder zu verletzen."
+        ]
+      ],
+      [
+        "5. Meldungen und Sperrung",
+        [
+          "Du kannst jeden Kontakt blockieren und melden. Nachrichten sind Ende-zu-Ende-verschlüsselt und der Verantwortliche kann sie nicht lesen: Meldungen beruhen auf den Angaben der Nutzer und verfügbaren technischen Daten. Der Verantwortliche kann Konten sperren oder löschen, die gegen diese Bedingungen oder das Gesetz verstoßen, und bei gesetzlicher Pflicht mit Behörden zusammenarbeiten."
+        ]
+      ],
+      [
+        "6. Nutzungslizenz",
+        [
+          "Dir wird eine persönliche, nicht ausschließliche, nicht übertragbare, widerrufliche Lizenz zur Nutzung von App und Website für rechtmäßige Zwecke erteilt. Software, Grafiken, Marken und Texte bleiben beim Verantwortlichen. Kopieren, Verkaufen, Dekompilieren und abgeleitete Werke sind untersagt, außer soweit zwingendes Recht es erlaubt."
+        ]
+      ],
+      [
+        "7. Gewährleistung und Haftung",
+        [
+          "Soweit gesetzlich zulässig wird der Dienst ohne Gewähr für Verfügbarkeit, Fehlerfreiheit oder Eignung für einen bestimmten Zweck bereitgestellt; der Verantwortliche haftet nicht für mittelbare Schäden oder Datenverlust. Verbraucherrechte und nicht ausschließbare Haftung bleiben unberührt."
+        ]
+      ],
+      [
+        "8. Kontolöschung und Daten",
+        [
+          "Du kannst dein Konto jederzeit in den Einstellungen löschen: Profil, Kontakte und Chats werden endgültig gelöscht. Die Datenverarbeitung ist in der Datenschutzerklärung beschrieben."
+        ]
+      ],
+      [
+        "9. Anwendbares Recht und Änderungen",
+        [
+          "Es gilt italienisches Recht; Verbraucher behalten die Schutzrechte und den Gerichtsstand nach dem italienischen Verbraucherkodex und zwingendem EU-Recht. Wir können diese Bedingungen aktualisieren: wesentliche Änderungen werden im Dienst mitgeteilt. Kontakt: info@simonescaffidi.it."
         ]
       ]
     ]

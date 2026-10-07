@@ -19,7 +19,9 @@ module.exports = {
       "customize": "Personnaliser",
       "accept": "Tout accepter",
       "statsQuestion": "Souhaitez-vous accepter les cookies statistiques ?"
-    }
+    },
+    "terms": "Conditions d'utilisation",
+    "owner": "Titulaire"
   },
   "landing": {
     "title": "Messagerie Privée — Chat à profils multiples et discussions masquées",
@@ -450,6 +452,67 @@ module.exports = {
         "Comment gérer vos préférences",
         [
           "Vous pouvez effacer la préférence enregistrée en supprimant les données de navigation de votre navigateur pour ce site : le bandeau réapparaîtra à la prochaine visite."
+        ]
+      ]
+    ]
+  },
+  "terms": {
+    "title": "Conditions d'utilisation et licence — Messagerie Privée",
+    "description": "Conditions d'utilisation et licence de l'appli et du site Messagerie Privée.",
+    "h1": "Conditions d'utilisation et licence",
+    "sections": [
+      [
+        "1. Objet et titulaire",
+        [
+          "Ces Conditions régissent l'utilisation de l'appli et du site « Messagerie Privée » (le « Service »). En vous inscrivant ou en l'utilisant, vous les acceptez. Sinon, ne l'utilisez pas."
+        ]
+      ],
+      [
+        "2. Nature du Service",
+        [
+          "Le Service est un prototype fonctionnel fourni « en l'état ». Il peut changer, être interrompu ou réinitialisé sans préavis. Utilisez des données de test et ne lui confiez pas de conversations à très haut risque ni d'informations indispensables."
+        ]
+      ],
+      [
+        "3. Compte et sécurité",
+        [
+          "Vous devez avoir au moins 14 ans. Vous êtes responsable de votre mot de passe et de votre appareil. Les clés de chiffrement ne sont conservées que sur votre appareil, chiffrées avec votre mot de passe : si vous le perdez ou le réinitialisez, l'historique local est irrécupérable et nous ne pouvons pas le restaurer."
+        ]
+      ],
+      [
+        "4. Usage autorisé",
+        [
+          "Il est interdit d'utiliser le Service pour des activités illicites, du harcèlement, des menaces, du spam, des escroqueries, la diffusion de logiciels malveillants, des contenus exploitant des mineurs ou portant atteinte aux droits d'autrui, ou pour tenter de contourner, surcharger ou violer ses mesures de sécurité."
+        ]
+      ],
+      [
+        "5. Signalements et suspension",
+        [
+          "Vous pouvez bloquer et signaler tout contact. Les messages sont chiffrés de bout en bout et le Titulaire ne peut pas les lire : les signalements reposent sur ce qu'indique l'utilisateur et sur les données techniques disponibles. Le Titulaire peut suspendre ou supprimer les comptes qui enfreignent ces Conditions ou la loi et coopérer avec les autorités lorsque c'est requis."
+        ]
+      ],
+      [
+        "6. Licence d'utilisation",
+        [
+          "Vous recevez une licence personnelle, non exclusive, non transférable et révocable pour utiliser l'appli et le site à des fins licites. Logiciel, graphismes, marques et textes restent la propriété du Titulaire. Vous ne pouvez ni copier, vendre, décompiler ni créer d'œuvres dérivées, sauf dans les limites permises par la loi impérative."
+        ]
+      ],
+      [
+        "7. Garanties et responsabilité",
+        [
+          "Dans la mesure permise par la loi, le Service est fourni sans garantie de continuité, d'absence d'erreurs ou d'adéquation à un usage particulier, et le Titulaire n'est pas responsable des dommages indirects ni de la perte de données. Les droits des consommateurs et les responsabilités non excluables restent inchangés."
+        ]
+      ],
+      [
+        "8. Suppression du compte et données",
+        [
+          "Vous pouvez supprimer votre compte à tout moment depuis les Réglages : profil, contacts et discussions sont effacés définitivement. Le traitement des données est décrit dans la Politique de confidentialité."
+        ]
+      ],
+      [
+        "9. Droit applicable et modifications",
+        [
+          "Ces Conditions sont régies par le droit italien ; les consommateurs conservent les protections et le for prévus par le Code italien de la consommation et les règles impératives de l'UE. Nous pouvons mettre à jour ces Conditions : les changements importants seront annoncés dans le Service. Contact : info@simonescaffidi.it."
         ]
       ]
     ]

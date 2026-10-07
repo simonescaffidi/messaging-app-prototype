@@ -19,7 +19,9 @@ module.exports = {
       "customize": "Personalizar",
       "accept": "Aceptar todas",
       "statsQuestion": "¿Quieres aceptar las cookies estadísticas?"
-    }
+    },
+    "terms": "Términos de servicio",
+    "owner": "Titular"
   },
   "landing": {
     "title": "Mensajería Privada — Chat con perfiles múltiples y chats ocultos",
@@ -450,6 +452,67 @@ module.exports = {
         "Cómo gestionar las preferencias",
         [
           "Puedes borrar la preferencia guardada eliminando los datos de navegación de tu navegador para este sitio: en el siguiente acceso el banner volverá a aparecer."
+        ]
+      ]
+    ]
+  },
+  "terms": {
+    "title": "Términos de servicio y licencia — Mensajería Privada",
+    "description": "Términos de servicio y licencia de uso de la app y el sitio Mensajería Privada.",
+    "h1": "Términos de servicio y licencia de uso",
+    "sections": [
+      [
+        "1. Objeto y titular",
+        [
+          "Estos Términos regulan el uso de la app y el sitio «Mensajería Privada» (el «Servicio»). Al registrarte o usar el Servicio los aceptas. Si no estás de acuerdo, no lo uses."
+        ]
+      ],
+      [
+        "2. Naturaleza del Servicio",
+        [
+          "El Servicio es un prototipo funcional ofrecido «tal cual». Puede cambiar, interrumpirse o reiniciarse sin aviso. Usa datos de prueba y no le confíes conversaciones de riesgo extremo ni información imprescindible."
+        ]
+      ],
+      [
+        "3. Cuenta y seguridad",
+        [
+          "Debes tener al menos 14 años. Eres responsable de tu contraseña y tu dispositivo. Las claves de cifrado solo están en tu dispositivo, cifradas con tu contraseña: si la pierdes o la restableces, el historial local no se puede recuperar y no podemos restaurarlo."
+        ]
+      ],
+      [
+        "4. Uso permitido",
+        [
+          "Está prohibido usar el Servicio para actividades ilícitas, acoso, amenazas, spam, estafas, difusión de malware, contenido que explote a menores o vulnere derechos ajenos, o para intentar vulnerar, sobrecargar o eludir las medidas de seguridad."
+        ]
+      ],
+      [
+        "5. Denuncias y suspensión",
+        [
+          "Puedes bloquear y denunciar a cualquier contacto. Los mensajes están cifrados de extremo a extremo y el Titular no puede leerlos: las denuncias se basan en lo que indique el usuario y en los datos técnicos disponibles. El Titular puede suspender o eliminar cuentas que infrinjan estos Términos o la ley y colaborar con las autoridades cuando proceda."
+        ]
+      ],
+      [
+        "6. Licencia de uso",
+        [
+          "Se te concede una licencia personal, no exclusiva, intransferible y revocable para usar la app y el sitio con fines lícitos. El software, gráficos, marcas y textos siguen siendo del Titular. No puedes copiar, vender, descompilar ni crear obras derivadas, salvo en lo que la ley imperativa permita."
+        ]
+      ],
+      [
+        "7. Garantías y responsabilidad",
+        [
+          "En la medida permitida por la ley, el Servicio se ofrece sin garantía de continuidad, ausencia de errores o idoneidad para un fin concreto, y el Titular no responde de daños indirectos ni pérdida de datos. Se mantienen los derechos de los consumidores y las responsabilidades que no pueden excluirse."
+        ]
+      ],
+      [
+        "8. Eliminación de la cuenta y datos",
+        [
+          "Puedes eliminar tu cuenta en cualquier momento desde Ajustes: perfil, contactos y chats se borran definitivamente. El tratamiento de datos se describe en la Política de privacidad."
+        ]
+      ],
+      [
+        "9. Ley aplicable y cambios",
+        [
+          "Estos Términos se rigen por la ley italiana; los consumidores conservan las protecciones y el fuero que les reconocen el Código de Consumo italiano y las normas imperativas de la UE. Podemos actualizar estos Términos: los cambios relevantes se comunicarán en el Servicio. Contacto: info@simonescaffidi.it."
         ]
       ]
     ]
