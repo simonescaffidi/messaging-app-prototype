@@ -2,7 +2,7 @@
 module.exports = {
   "code": "fr",
   "dir": "ltr",
-  "brand": "Messagerie Privée",
+  "brand": "Securmy",
   "ui": {
     "openApp": "Ouvrir l'app",
     "manual": "Manuel",
@@ -24,10 +24,10 @@ module.exports = {
     "owner": "Titulaire"
   },
   "landing": {
-    "title": "Messagerie Privée — Chat à profils multiples et discussions masquées",
-    "description": "Chat privé avec un vrai chiffrement de bout en bout, déverrouillage biométrique, profils multiples et discussions masquées. 11 langues, sans numéro de téléphone.",
-    "ogTitle": "Messagerie Privée — Prototype",
-    "ogDesc": "Chiffrement de bout en bout, déverrouillage biométrique, profils multiples, discussions masquées et profil de couverture en 11 langues.",
+    "title": "Securmy — Messagerie privée, coffre de fichiers et envoi P2P chiffré",
+    "description": "Chat à chiffrement de bout en bout réel, coffre de fichiers, mots de passe et notes chiffrés, envoi P2P par lien, appels chiffrés et vérification en deux étapes. 11 langues.",
+    "ogTitle": "Securmy — Sécurité, confidentialité et discrétion",
+    "ogDesc": "Messages, fichiers, mots de passe et appels protégés par un chiffrement de bout en bout : tout est chiffré sur votre appareil, en 11 langues.",
     "badge": "Prototype fonctionnel",
     "h1": "Un chat où le mot de passe choisit votre profil",
     "lead": "Pas de numéro de téléphone. Saisissez votre nom d'utilisateur et votre mot de passe : le mot de passe décide quel profil s'ouvre. Discussions masquées, profil de couverture, messages auto-destructeurs.",
@@ -139,13 +139,86 @@ module.exports = {
         "Une biométrie qui ne quitte pas votre appareil",
         "Avec WebAuthn/FIDO2, le serveur ne reçoit que la clé publique de la passkey : la donnée biométrique ne quitte jamais votre téléphone ou ordinateur."
       ]
+    ],
+    "suiteTitle": "Plus qu'un chat : votre coffre numérique",
+    "suiteLead": "Securmy va au-delà de la messagerie. Tout ce que vous enregistrez ou partagez est chiffré sur votre appareil, avec le même coffre qui protège vos discussions.",
+    "suite": [
+      [
+        "🗄️",
+        "Coffre de fichiers",
+        "Cachez et protégez documents, photos et fichiers : chiffrés sur l'appareil en AES-256 et ouverts uniquement par votre mot de passe ou la biométrie."
+      ],
+      [
+        "🔗",
+        "Envoi P2P par lien",
+        "Le fichier passe directement d'un appareil à l'autre, chiffré, sans être stocké sur le serveur. Lien à usage unique avec expiration."
+      ],
+      [
+        "🧼",
+        "Nettoyage des métadonnées",
+        "Supprime la position GPS, le modèle d'appareil et d'autres données cachées des photos avant de les partager."
+      ],
+      [
+        "🔑",
+        "Gestionnaire de mots de passe",
+        "Enregistrez vos identifiants dans le coffre, générez des mots de passe robustes et copiez-les : le presse-papiers est vidé au bout de 20 secondes."
+      ],
+      [
+        "📝",
+        "Notes chiffrées",
+        "Notes privées chiffrées sur votre appareil, jamais envoyées à un serveur."
+      ],
+      [
+        "👁️",
+        "Messages à vue unique",
+        "Le destinataire ne les ouvre qu'une fois : quelques secondes après, ils sont supprimés du serveur et de son appareil."
+      ],
+      [
+        "📞",
+        "Appels audio et vidéo chiffrés",
+        "Directement entre les deux appareils (DTLS-SRTP), avec un code de vérification à comparer à voix haute contre l'écoute."
+      ],
+      [
+        "🔢",
+        "Vérification en deux étapes",
+        "Codes TOTP avec n'importe quelle appli d'authentification : même quelqu'un qui découvre votre mot de passe n'entre pas."
+      ],
+      [
+        "💾",
+        "Sauvegarde chiffrée",
+        "Exportez fichiers, notes et mots de passe dans une seule archive chiffrée par une phrase secrète que vous seul connaissez."
+      ],
+      [
+        "🚨",
+        "Contrôle de sécurité et effacement d'urgence",
+        "Un score vous dit quoi améliorer ; en cas de danger, un geste efface de l'appareil clés, fichiers et mots de passe."
+      ]
+    ],
+    "roadmapTitle": "Bientôt",
+    "roadmapLead": "Ce que nous prévoyons. Ce n'est pas encore disponible et ne constitue pas une date promise.",
+    "roadmap": [
+      [
+        "🧅",
+        "Réseau Tor",
+        "Une adresse .onion du service et un mode Tor dans les applis natives, pour masquer aussi votre position réseau. Un navigateur seul ne peut pas faire passer le trafic par Tor : il faut Tor Browser ou l'appli native."
+      ],
+      [
+        "📱",
+        "Applis iOS et Android",
+        "Applis natives avec déverrouillage biométrique, publiées sur les stores avec les mêmes garanties de sécurité et de confidentialité que le site."
+      ],
+      [
+        "🛰️",
+        "Serveur TURN privé",
+        "Pour masquer votre adresse IP pendant les appels et envois P2P et les faire fonctionner même derrière des réseaux très restrictifs."
+      ]
     ]
   },
   "manual": {
-    "title": "Manuel d'utilisation — Messagerie Privée",
+    "title": "Manuel d'utilisation — Securmy",
     "description": "Guide complet : inscription, connexion par identifiant et mot de passe, discussions masquées, chiffrement de bout en bout, déverrouillage biométrique et langues disponibles.",
     "h1": "Manuel d'utilisation",
-    "lead": "Guide complet de Messagerie Privée : comment s'inscrire, se connecter, utiliser les fonctions de confidentialité et comprendre ce que ce prototype protège vraiment — et ce qu'il ne protège pas.",
+    "lead": "Guide complet de Securmy : comment s'inscrire, se connecter, utiliser les fonctions de confidentialité et comprendre ce que ce prototype protège vraiment — et ce qu'il ne protège pas.",
     "sections": [
       {
         "id": "signup",
@@ -369,12 +442,99 @@ module.exports = {
             "Par sécurité, la clé de chaque message est supprimée dès que vous l'avez lu : le texte ne reste que dans le cache chiffré de cet appareil. Si vous changez d'appareil, effacez les données du navigateur ou réinitialisez le mot de passe par e-mail, les messages précédents sont irrécupérables. C'est le prix de la forward secrecy."
           ]
         ]
+      },
+      {
+        "id": "suite",
+        "h": "13. Coffre et outils Securmy",
+        "blocks": [
+          [
+            "p",
+            "Ouvrez le Coffre avec le bouton 🛡️ de la barre latérale. Tout son contenu est chiffré sur votre appareil en AES-256-GCM, avec une clé conservée dans votre coffre et protégée par votre mot de passe : le serveur ne reçoit jamais fichiers, notes ni mots de passe."
+          ],
+          [
+            "h3",
+            "Coffre de fichiers"
+          ],
+          [
+            "p",
+            "Ajoutez des fichiers (jusqu'à 100 Mo chacun) depuis l'onglet Fichiers. Si la case est cochée, les métadonnées des photos sont supprimées avant l'enregistrement. Vous pouvez télécharger, envoyer en P2P ou supprimer chaque fichier."
+          ],
+          [
+            "h3",
+            "Envoi P2P par lien"
+          ],
+          [
+            "p",
+            "Choisissez un fichier et une durée de validité (10 minutes ou 1 heure) : vous obtenez un lien à usage unique. Le fichier va directement au destinataire, chiffré avec une clé qui se trouve uniquement après le # du lien et n'atteint jamais le serveur. Gardez la page ouverte jusqu'à la fin du transfert."
+          ],
+          [
+            "h3",
+            "Nettoyer les photos"
+          ],
+          [
+            "p",
+            "Redessine l'image en supprimant EXIF, position GPS et miniatures. Fonctionne avec JPEG, PNG et WebP ; pour les autres formats, le nettoyage automatique n'est pas disponible."
+          ],
+          [
+            "h3",
+            "Notes et mots de passe"
+          ],
+          [
+            "p",
+            "Notes et identifiants restent chiffrés dans le coffre. Le générateur crée des mots de passe aléatoires ; quand vous en copiez un, le presse-papiers est vidé au bout de 20 secondes."
+          ],
+          [
+            "h3",
+            "Messages à vue unique"
+          ],
+          [
+            "p",
+            "Choisissez « Vue unique » à côté du champ de message. Le destinataire touche pour voir : le texte reste visible 10 secondes, puis il est détruit sur son appareil et sur le serveur. Cela n'empêche pas de photographier l'écran."
+          ],
+          [
+            "h3",
+            "Appels audio et vidéo"
+          ],
+          [
+            "p",
+            "Utilisez les boutons 📞 et 🎥 dans l'en-tête de la discussion. Audio et vidéo circulent directement entre les appareils, chiffrés. Les deux voient un code à 4 chiffres : comparez-le à voix haute ; s'il coïncide, l'appel n'a pas été intercepté."
+          ],
+          [
+            "h3",
+            "Vérification en deux étapes"
+          ],
+          [
+            "p",
+            "Dans Sécurité, vous pouvez activer les codes TOTP avec une appli d'authentification (Google Authenticator, Aegis, 1Password…). Une fois activés, la connexion par mot de passe exige aussi le code à 6 chiffres. Le déverrouillage biométrique reste une méthode d'accès distincte."
+          ],
+          [
+            "h3",
+            "Sauvegarde et effacement d'urgence"
+          ],
+          [
+            "p",
+            "La sauvegarde contient fichiers, notes et mots de passe chiffrés avec une phrase secrète d'au moins 10 caractères que vous choisissez : sans elle, elle est irrécupérable. Les messages ne sont pas inclus. L'effacement d'urgence supprime de l'appareil clés, cache des messages, fichiers, notes et mots de passe et est irréversible."
+          ],
+          [
+            "h3",
+            "Limites à connaître"
+          ],
+          [
+            "ul",
+            [
+              "Le coffre est local : fichiers, notes et mots de passe ne se synchronisent pas entre appareils ; utilisez la sauvegarde pour les déplacer.",
+              "Dans les envois P2P et les appels, l'autre personne (et un serveur STUN public) peut voir votre adresse IP, sauf si le service utilise un serveur TURN ; sur des réseaux très restrictifs, la connexion peut échouer.",
+              "Le gestionnaire de mots de passe est basique : il ne remplit pas les formulaires seul et ne remplace pas un gestionnaire dédié pour un usage professionnel.",
+              "Si vous perdez votre mot de passe et la phrase de sauvegarde, les données chiffrées sont irrécupérables : personne, pas même nous, ne peut les ouvrir."
+            ]
+          ]
+        ]
       }
     ]
   },
   "privacy": {
-    "title": "Politique de confidentialité — Messagerie Privée",
-    "description": "Politique de confidentialité du prototype Messagerie Privée : quelles données sont traitées et comment.",
+    "title": "Politique de confidentialité — Securmy",
+    "description": "Politique de confidentialité du prototype Securmy : quelles données sont traitées et comment.",
     "h1": "Politique de confidentialité",
     "sections": [
       [
@@ -416,12 +576,20 @@ module.exports = {
         [
           "Vous pouvez demander à tout moment la suppression des données saisies dans le prototype en écrivant via les contacts indiqués ci-dessus."
         ]
+      ],
+      [
+        "Fonctions Securmy : coffre, envois P2P et appels",
+        [
+          "Fichiers, notes, mots de passe et sauvegardes du coffre restent sur votre appareil, chiffrés par une clé qui n'en sort jamais : nous ne les recevons pas et ne pouvons ni les lire ni les récupérer.",
+          "Pour les envois P2P et les appels, le contenu circule directement entre appareils, chiffré. Le serveur ne traite que les informations de connexion (SDP et candidats ICE), conservées en mémoire au plus une heure puis supprimées ; l'autre participant et un serveur STUN public peuvent voir votre adresse IP.",
+          "Si vous activez la vérification en deux étapes, nous conservons le secret TOTP, chiffré au repos ; les messages à vue unique sont supprimés du serveur quelques secondes après leur ouverture."
+        ]
       ]
     ]
   },
   "cookie": {
-    "title": "Politique de cookies — Messagerie Privée",
-    "description": "Informations sur les cookies utilisés par le site de présentation du prototype Messagerie Privée.",
+    "title": "Politique de cookies — Securmy",
+    "description": "Informations sur les cookies utilisés par le site de présentation du prototype Securmy.",
     "h1": "Politique de cookies",
     "sections": [
       [
@@ -457,14 +625,14 @@ module.exports = {
     ]
   },
   "terms": {
-    "title": "Conditions d'utilisation et licence — Messagerie Privée",
-    "description": "Conditions d'utilisation et licence de l'appli et du site Messagerie Privée.",
+    "title": "Conditions d'utilisation et licence — Securmy",
+    "description": "Conditions d'utilisation et licence de l'appli et du site Securmy.",
     "h1": "Conditions d'utilisation et licence",
     "sections": [
       [
         "1. Objet et titulaire",
         [
-          "Ces Conditions régissent l'utilisation de l'appli et du site « Messagerie Privée » (le « Service »). En vous inscrivant ou en l'utilisant, vous les acceptez. Sinon, ne l'utilisez pas."
+          "Ces Conditions régissent l'utilisation de l'appli et du site « Securmy » (le « Service »). En vous inscrivant ou en l'utilisant, vous les acceptez. Sinon, ne l'utilisez pas."
         ]
       ],
       [
@@ -513,6 +681,12 @@ module.exports = {
         "9. Droit applicable et modifications",
         [
           "Ces Conditions sont régies par le droit italien ; les consommateurs conservent les protections et le for prévus par le Code italien de la consommation et les règles impératives de l'UE. Nous pouvons mettre à jour ces Conditions : les changements importants seront annoncés dans le Service. Contact : info@simonescaffidi.it."
+        ]
+      ],
+      [
+        "10. Partage de fichiers et appels",
+        [
+          "Vous êtes responsable des fichiers que vous partagez et des appels que vous passez. Il est interdit de partager des contenus illicites ou de porter atteinte aux droits d'autrui. Les contenus étant chiffrés de bout en bout, nous ne pouvons pas les voir, mais nous pouvons suspendre les comptes visés par des signalements fondés. Les fonctions sont fournies « en l'état » et peuvent évoluer ou être suspendues."
         ]
       ]
     ]

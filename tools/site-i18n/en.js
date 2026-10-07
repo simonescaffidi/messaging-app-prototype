@@ -2,7 +2,7 @@
 module.exports = {
   "code": "en",
   "dir": "ltr",
-  "brand": "Private Messaging",
+  "brand": "Securmy",
   "ui": {
     "openApp": "Open the app",
     "manual": "Manual",
@@ -24,10 +24,10 @@ module.exports = {
     "owner": "Controller"
   },
   "landing": {
-    "title": "Private Messaging — Chat with multiple profiles and hidden chats",
-    "description": "Private chat with real end-to-end encryption, biometric unlock, multiple profiles and hidden chats. 11 languages, no phone number.",
-    "ogTitle": "Private Messaging — Prototype",
-    "ogDesc": "End-to-end encryption, biometric unlock, multiple profiles, hidden chats and a cover profile in 11 languages.",
+    "title": "Securmy — Private messaging, file vault and encrypted P2P transfer",
+    "description": "Chat with real end-to-end encryption, file vault, encrypted passwords and notes, P2P link transfer, encrypted calls and two-step verification. 11 languages.",
+    "ogTitle": "Securmy — Security, privacy and confidentiality",
+    "ogDesc": "Messages, files, passwords and calls protected by end-to-end encryption: everything encrypted on your device, in 11 languages.",
     "badge": "Functional prototype",
     "h1": "A chat where your password picks your profile",
     "lead": "No phone number. Enter your username and password: the password decides which profile opens. Hidden chats, a cover profile, self-destructing messages.",
@@ -139,13 +139,86 @@ module.exports = {
         "Biometrics that never leave your device",
         "With WebAuthn/FIDO2 the server only receives the passkey's public key: biometric data never leaves your phone or computer."
       ]
+    ],
+    "suiteTitle": "More than a chat: your digital vault",
+    "suiteLead": "Securmy goes beyond messaging. Everything you save or share is encrypted on your device, using the same vault that protects your chats.",
+    "suite": [
+      [
+        "🗄️",
+        "File vault",
+        "Hide and protect documents, photos and files: encrypted on your device with AES-256 and opened only by your password or biometrics."
+      ],
+      [
+        "🔗",
+        "P2P transfer by link",
+        "The file goes straight from one device to the other, encrypted, never stored on the server. One-time link with an expiry."
+      ],
+      [
+        "🧼",
+        "Metadata cleaning",
+        "Removes GPS location, camera model and other hidden data from photos before you share them."
+      ],
+      [
+        "🔑",
+        "Password manager",
+        "Store credentials in the vault, generate strong passwords and copy them: the clipboard is cleared after 20 seconds."
+      ],
+      [
+        "📝",
+        "Encrypted notes",
+        "Private notes encrypted on your device, never sent to any server."
+      ],
+      [
+        "👁️",
+        "View-once messages",
+        "The recipient opens them once: after a few seconds they are deleted from the server and from their device."
+      ],
+      [
+        "📞",
+        "Encrypted voice and video calls",
+        "Directly between the two devices (DTLS-SRTP), with a verification code to compare out loud against eavesdropping."
+      ],
+      [
+        "🔢",
+        "Two-step verification",
+        "TOTP codes with any authenticator app: even someone who discovers your password cannot get in."
+      ],
+      [
+        "💾",
+        "Encrypted backup",
+        "Export files, notes and passwords into a single archive encrypted with a passphrase only you know."
+      ],
+      [
+        "🚨",
+        "Security check and emergency wipe",
+        "A score tells you what to improve; in danger, one tap erases keys, files and passwords from the device."
+      ]
+    ],
+    "roadmapTitle": "Coming soon",
+    "roadmapLead": "What we are planning. It is not available yet and should not be taken as a promised date.",
+    "roadmap": [
+      [
+        "🧅",
+        "Tor network",
+        "A .onion address for the service and a Tor mode in the native apps, to hide your network location too. A plain browser cannot route traffic over Tor: you need Tor Browser or the native app."
+      ],
+      [
+        "📱",
+        "iOS and Android apps",
+        "Native apps with biometric unlock, published in the stores with the same security and privacy guarantees as the website."
+      ],
+      [
+        "🛰️",
+        "Private TURN server",
+        "To hide your IP address during calls and P2P transfers and make them work even behind very restrictive networks."
+      ]
     ]
   },
   "manual": {
-    "title": "User manual — Private Messaging",
+    "title": "User manual — Securmy",
     "description": "Complete guide: sign-up, username and password login, hidden chats, end-to-end encryption, biometric unlock and available languages.",
     "h1": "User manual",
-    "lead": "A complete guide to Private Messaging: how to sign up, log in, use the privacy features, and understand what this prototype really protects — and what it doesn't.",
+    "lead": "A complete guide to Securmy: how to sign up, log in, use the privacy features, and understand what this prototype really protects — and what it doesn't.",
     "sections": [
       {
         "id": "signup",
@@ -369,12 +442,99 @@ module.exports = {
             "For safety each message's key is deleted as soon as you've read it: the text remains only in this device's encrypted cache. If you change device, clear browser data or reset your password via email, earlier messages can't be recovered. That's the price of forward secrecy."
           ]
         ]
+      },
+      {
+        "id": "suite",
+        "h": "13. Securmy vault and tools",
+        "blocks": [
+          [
+            "p",
+            "Open the Vault from the 🛡️ button in the sidebar. Everything inside is encrypted on your device with AES-256-GCM, using a key kept in your vault and protected by your password: the server never receives files, notes or passwords."
+          ],
+          [
+            "h3",
+            "File vault"
+          ],
+          [
+            "p",
+            "Add files (up to 100 MB each) from the Files tab. If the box is ticked, photos are stripped of metadata before being saved. You can download, send via P2P or delete each file."
+          ],
+          [
+            "h3",
+            "P2P transfer by link"
+          ],
+          [
+            "p",
+            "Pick a file and an expiry time (10 minutes or 1 hour): you get a one-time link. The file travels straight to the recipient, encrypted with a key that sits only after the # in the link and never reaches the server. Keep the page open until the transfer finishes."
+          ],
+          [
+            "h3",
+            "Clean photos"
+          ],
+          [
+            "p",
+            "Redraws the image, discarding EXIF, GPS location and thumbnails. Works with JPEG, PNG and WebP; for other formats automatic cleaning is not available."
+          ],
+          [
+            "h3",
+            "Notes and passwords"
+          ],
+          [
+            "p",
+            "Notes and credentials stay encrypted in the vault. The generator creates random passwords; when you copy a password, the clipboard is cleared after 20 seconds."
+          ],
+          [
+            "h3",
+            "View-once messages"
+          ],
+          [
+            "p",
+            "Choose “View once” next to the message field. The recipient taps to see: the text stays visible for 10 seconds, then is destroyed on their device and on the server. It cannot stop a reader from photographing the screen."
+          ],
+          [
+            "h3",
+            "Voice and video calls"
+          ],
+          [
+            "p",
+            "Use the 📞 and 🎥 buttons in the chat header. Audio and video travel directly between the devices, encrypted. Both sides see a 4-digit code: compare it out loud; if it matches, the call has not been intercepted."
+          ],
+          [
+            "h3",
+            "Two-step verification"
+          ],
+          [
+            "p",
+            "In Security you can enable TOTP codes with an authenticator app (Google Authenticator, Aegis, 1Password…). Once enabled, signing in with your password also requires the 6-digit code. Biometric unlock remains a separate sign-in method."
+          ],
+          [
+            "h3",
+            "Backup and emergency wipe"
+          ],
+          [
+            "p",
+            "The backup holds files, notes and passwords encrypted with a passphrase of at least 10 characters that you choose: without it, it cannot be recovered. Messages are not included. The emergency wipe removes keys, message cache, files, notes and passwords from the device and cannot be undone."
+          ],
+          [
+            "h3",
+            "Limits to know"
+          ],
+          [
+            "ul",
+            [
+              "The vault is local: files, notes and passwords do not sync between devices; use the backup to move them.",
+              "In P2P transfers and calls the other person (and a public STUN server) can see your IP address, unless the service uses a TURN server; on very restrictive networks the connection may fail.",
+              "The password manager is basic: it does not fill in forms by itself and does not replace a dedicated manager for professional use.",
+              "If you lose your password and the backup passphrase, the encrypted data cannot be recovered: nobody, not even us, can open it."
+            ]
+          ]
+        ]
       }
     ]
   },
   "privacy": {
-    "title": "Privacy Policy — Private Messaging",
-    "description": "Privacy notice for the Private Messaging prototype: what data is processed and how.",
+    "title": "Privacy Policy — Securmy",
+    "description": "Privacy notice for the Securmy prototype: what data is processed and how.",
     "h1": "Privacy Policy",
     "sections": [
       [
@@ -416,12 +576,20 @@ module.exports = {
         [
           "You can request deletion of the data entered in the prototype at any time by writing via the contact details above."
         ]
+      ],
+      [
+        "Securmy features: vault, P2P transfers and calls",
+        [
+          "Vault files, notes, passwords and backups stay on your device, encrypted with a key that never leaves it: we do not receive them and cannot read or recover them.",
+          "For P2P transfers and calls, the content travels directly between devices, encrypted. The server only handles connection information (SDP and ICE candidates), kept in memory for at most one hour and then deleted; the other participant and a public STUN server can see your IP address.",
+          "If you enable two-step verification we store the TOTP secret, encrypted at rest; view-once messages are deleted from the server a few seconds after being opened."
+        ]
       ]
     ]
   },
   "cookie": {
-    "title": "Cookie Policy — Private Messaging",
-    "description": "Notice on the cookies used by the Private Messaging prototype presentation website.",
+    "title": "Cookie Policy — Securmy",
+    "description": "Notice on the cookies used by the Securmy prototype presentation website.",
     "h1": "Cookie Policy",
     "sections": [
       [
@@ -457,14 +625,14 @@ module.exports = {
     ]
   },
   "terms": {
-    "title": "Terms of Service and License — Private Messaging",
-    "description": "Terms of service and license for the Private Messaging app and website.",
+    "title": "Terms of Service and License — Securmy",
+    "description": "Terms of service and license for the Securmy app and website.",
     "h1": "Terms of Service and License",
     "sections": [
       [
         "1. Subject and owner",
         [
-          "These Terms govern use of the \"Private Messaging\" app and website (the \"Service\"). By registering or using the Service you accept them. If you disagree, do not use it."
+          "These Terms govern use of the \"Securmy\" app and website (the \"Service\"). By registering or using the Service you accept them. If you disagree, do not use it."
         ]
       ],
       [
@@ -513,6 +681,12 @@ module.exports = {
         "9. Governing law and changes",
         [
           "These Terms are governed by Italian law; consumers keep the protections and forum provided by the Italian Consumer Code and mandatory EU rules. We may update these Terms: material changes will be announced in the Service. Contact: info@simonescaffidi.it."
+        ]
+      ],
+      [
+        "10. File sharing and calls",
+        [
+          "You are responsible for the files you share and the calls you make. Sharing illegal content or infringing the rights of others is prohibited. Because content is end-to-end encrypted we cannot see it, but we may suspend accounts subject to well-founded reports. The features are provided “as is” and may change or be suspended."
         ]
       ]
     ]

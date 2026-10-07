@@ -2,7 +2,7 @@
 module.exports = {
   "code": "it",
   "dir": "ltr",
-  "brand": "Messaggistica Privata",
+  "brand": "Securmy",
   "ui": {
     "openApp": "Apri l'app",
     "manual": "Manuale",
@@ -24,10 +24,10 @@ module.exports = {
     "owner": "Titolare"
   },
   "landing": {
-    "title": "Messaggistica Privata — Chat con profili multipli e chat nascoste",
-    "description": "Chat privata con crittografia end-to-end reale, sblocco biometrico, profili multipli e chat nascoste. 11 lingue, nessun numero di telefono.",
-    "ogTitle": "Messaggistica Privata — Prototipo",
-    "ogDesc": "Crittografia end-to-end, sblocco biometrico, profili multipli, chat nascoste e profilo di copertura in 11 lingue.",
+    "title": "Securmy — Messaggistica privata, cassaforte file e invio P2P cifrato",
+    "description": "Chat con crittografia end-to-end reale, cassaforte file, password e note cifrate, invio P2P via link, chiamate cifrate e verifica in due passaggi. 11 lingue.",
+    "ogTitle": "Securmy — Sicurezza, privacy e riservatezza",
+    "ogDesc": "Messaggi, file, password e chiamate protetti da crittografia end-to-end: tutto cifrato nel tuo dispositivo, in 11 lingue.",
     "badge": "Prototipo funzionale",
     "h1": "Una chat dove la password sceglie il tuo profilo",
     "lead": "Niente numero di telefono. Scrivi il tuo username e la password: la password decide quale profilo si apre. Chat nascoste, profilo di copertura, messaggi che si autodistruggono.",
@@ -139,13 +139,86 @@ module.exports = {
         "Biometria che resta sul tuo dispositivo",
         "Con WebAuthn/FIDO2 il server riceve solo la chiave pubblica della passkey: il dato biometrico non lascia mai il telefono o il computer."
       ]
+    ],
+    "suiteTitle": "Non solo chat: la tua cassaforte digitale",
+    "suiteLead": "Securmy cresce oltre la messaggistica. Tutto ciò che salvi o condividi è cifrato nel tuo dispositivo, con la stessa cassaforte che protegge le tue chat.",
+    "suite": [
+      [
+        "🗄️",
+        "Cassaforte file",
+        "Nascondi e proteggi documenti, foto e file: cifrati nel dispositivo con AES-256 e aperti solo dalla tua password o dalla biometria."
+      ],
+      [
+        "🔗",
+        "Invio P2P via link",
+        "Il file passa direttamente da un dispositivo all'altro, cifrato, senza essere salvato sul server. Link monouso con scadenza."
+      ],
+      [
+        "🧼",
+        "Pulizia dei metadati",
+        "Rimuove posizione GPS, modello di fotocamera e altri dati nascosti dalle foto prima di condividerle."
+      ],
+      [
+        "🔑",
+        "Gestore di password",
+        "Salva credenziali nella cassaforte, genera password forti e copiale: gli appunti si svuotano dopo 20 secondi."
+      ],
+      [
+        "📝",
+        "Note cifrate",
+        "Appunti privati cifrati nel dispositivo, mai inviati a nessun server."
+      ],
+      [
+        "👁️",
+        "Messaggi a visualizzazione singola",
+        "Il destinatario li apre una volta sola: dopo pochi secondi si cancellano dal server e dal suo dispositivo."
+      ],
+      [
+        "📞",
+        "Chiamate audio e video cifrate",
+        "Direttamente tra i due dispositivi (DTLS-SRTP), con un codice di verifica da confrontare a voce contro le intercettazioni."
+      ],
+      [
+        "🔢",
+        "Verifica in due passaggi",
+        "Codici TOTP con qualsiasi app di autenticazione: anche chi scopre la tua password non entra."
+      ],
+      [
+        "💾",
+        "Backup cifrato",
+        "Esporta file, note e password in un unico archivio cifrato con una frase segreta che conosci solo tu."
+      ],
+      [
+        "🚨",
+        "Controllo di sicurezza e cancellazione di emergenza",
+        "Un punteggio ti dice cosa migliorare; in caso di pericolo, un tocco cancella dal dispositivo chiavi, file e password."
+      ]
+    ],
+    "roadmapTitle": "In arrivo",
+    "roadmapLead": "Cosa stiamo pianificando. Non è ancora disponibile e non va considerato una promessa di data.",
+    "roadmap": [
+      [
+        "🧅",
+        "Rete Tor",
+        "Un indirizzo .onion del servizio e una modalità Tor nelle app native, per nascondere anche la tua posizione di rete. Nel solo browser non è possibile instradare il traffico su Tor: serve Tor Browser o l'app nativa."
+      ],
+      [
+        "📱",
+        "App per iOS e Android",
+        "App native con sblocco biometrico, pubblicate negli store con le stesse garanzie di sicurezza e privacy del sito."
+      ],
+      [
+        "🛰️",
+        "Server TURN privato",
+        "Per nascondere l'indirizzo IP durante chiamate e invii P2P e farli funzionare anche dietro reti molto restrittive."
+      ]
     ]
   },
   "manual": {
-    "title": "Manuale utente — Messaggistica Privata",
+    "title": "Manuale utente — Securmy",
     "description": "Guida completa: registrazione, accesso con username e password, chat nascoste, crittografia end-to-end, sblocco biometrico e lingue disponibili.",
     "h1": "Manuale utente",
-    "lead": "Guida completa a Messaggistica Privata: come registrarsi, accedere, usare le funzioni di privacy e capire cosa protegge davvero questo prototipo — e cosa no.",
+    "lead": "Guida completa a Securmy: come registrarsi, accedere, usare le funzioni di privacy e capire cosa protegge davvero questo prototipo — e cosa no.",
     "sections": [
       {
         "id": "signup",
@@ -369,12 +442,99 @@ module.exports = {
             "Per sicurezza la chiave di ogni messaggio viene eliminata appena l'hai letto: il testo resta solo nella cache cifrata di questo dispositivo. Se cambi dispositivo, svuoti i dati del browser o reimposti la password via email, i messaggi precedenti non sono più recuperabili. È il prezzo della forward secrecy."
           ]
         ]
+      },
+      {
+        "id": "suite",
+        "h": "13. Cassaforte e strumenti Securmy",
+        "blocks": [
+          [
+            "p",
+            "Dal pulsante 🛡️ nella barra laterale apri la Cassaforte. Tutto ciò che contiene è cifrato nel tuo dispositivo con AES-256-GCM, con una chiave custodita nella tua cassaforte e protetta dalla password: il server non riceve mai file, note o password."
+          ],
+          [
+            "h3",
+            "Cassaforte file"
+          ],
+          [
+            "p",
+            "Aggiungi file (fino a 100 MB ciascuno) dalla scheda File. Se la casella è attiva, le foto vengono ripulite dai metadati prima di essere salvate. Puoi scaricare, inviare via P2P o eliminare ogni file."
+          ],
+          [
+            "h3",
+            "Invio P2P via link"
+          ],
+          [
+            "p",
+            "Scegli un file e un tempo di scadenza (10 minuti o 1 ora): ottieni un link monouso. Il file viaggia direttamente al destinatario, cifrato con una chiave che sta solo dopo il simbolo # del link e non arriva mai al server. Tieni aperta la pagina finché il trasferimento non è finito."
+          ],
+          [
+            "h3",
+            "Pulisci foto"
+          ],
+          [
+            "p",
+            "Ridisegna l'immagine eliminando EXIF, posizione GPS e miniature. Funziona con JPEG, PNG e WebP; per gli altri formati la pulizia automatica non è disponibile."
+          ],
+          [
+            "h3",
+            "Note e password"
+          ],
+          [
+            "p",
+            "Le note e le credenziali restano cifrate nella cassaforte. Il generatore crea password casuali; quando copi una password, gli appunti si svuotano dopo 20 secondi."
+          ],
+          [
+            "h3",
+            "Messaggi a visualizzazione singola"
+          ],
+          [
+            "p",
+            "Scegli «Visualizzazione singola» accanto al campo del messaggio. Il destinatario tocca per vedere: il testo resta visibile 10 secondi, poi viene distrutto sul suo dispositivo e sul server. Non impedisce a chi legge di fare una foto allo schermo."
+          ],
+          [
+            "h3",
+            "Chiamate audio e video"
+          ],
+          [
+            "p",
+            "Dai pulsanti 📞 e 🎥 nell'intestazione della chat. Audio e video viaggiano direttamente tra i dispositivi, cifrati. Entrambi vedono un codice di 4 cifre: confrontatelo a voce, se coincide la chiamata non è stata intercettata."
+          ],
+          [
+            "h3",
+            "Verifica in due passaggi"
+          ],
+          [
+            "p",
+            "In Sicurezza puoi attivare i codici TOTP con un'app di autenticazione (Google Authenticator, Aegis, 1Password…). Dopo l'attivazione, per accedere con la password serve anche il codice a 6 cifre. Lo sblocco biometrico resta un metodo di accesso separato."
+          ],
+          [
+            "h3",
+            "Backup e cancellazione di emergenza"
+          ],
+          [
+            "p",
+            "Il backup contiene file, note e password cifrati con una frase segreta di almeno 10 caratteri che scegli tu: senza di essa non è recuperabile. I messaggi non sono inclusi. La cancellazione di emergenza rimuove dal dispositivo chiavi, cache dei messaggi, file, note e password e non si può annullare."
+          ],
+          [
+            "h3",
+            "Limiti da conoscere"
+          ],
+          [
+            "ul",
+            [
+              "La cassaforte è locale: file, note e password non si sincronizzano tra dispositivi; usa il backup per spostarli.",
+              "Nell'invio P2P e nelle chiamate l'altra persona (e un server STUN pubblico) può vedere il tuo indirizzo IP, a meno che il servizio non usi un server TURN; con reti molto restrittive la connessione può fallire.",
+              "Il gestore di password è essenziale: non compila i moduli da solo e non sostituisce un gestore dedicato per usi professionali.",
+              "Se perdi la password e la frase del backup, i dati cifrati non sono recuperabili: nessuno, nemmeno noi, può aprirli."
+            ]
+          ]
+        ]
       }
     ]
   },
   "privacy": {
-    "title": "Privacy Policy — Messaggistica Privata",
-    "description": "Informativa sulla privacy del prototipo Messaggistica Privata: quali dati vengono trattati e come.",
+    "title": "Privacy Policy — Securmy",
+    "description": "Informativa sulla privacy del prototipo Securmy: quali dati vengono trattati e come.",
     "h1": "Privacy Policy",
     "sections": [
       [
@@ -416,12 +576,20 @@ module.exports = {
         [
           "Puoi chiedere in qualsiasi momento la cancellazione dei dati inseriti nel prototipo scrivendo tramite i contatti indicati sopra."
         ]
+      ],
+      [
+        "Funzioni Securmy: cassaforte, invii P2P e chiamate",
+        [
+          "Cassaforte file, note, password e backup restano nel tuo dispositivo, cifrati con una chiave che non lasciamo mai uscire: non li riceviamo, non possiamo leggerli né recuperarli.",
+          "Per gli invii P2P e le chiamate i contenuti viaggiano direttamente tra i dispositivi, cifrati. Il server tratta solo le informazioni di connessione (SDP e candidati ICE), tenute in memoria per al massimo un'ora e poi eliminate; l'altro partecipante e un server STUN pubblico possono vedere il tuo indirizzo IP.",
+          "Se attivi la verifica in due passaggi conserviamo il segreto TOTP, cifrato a riposo; i messaggi a visualizzazione singola vengono eliminati dal server pochi secondi dopo l'apertura."
+        ]
       ]
     ]
   },
   "cookie": {
-    "title": "Cookie Policy — Messaggistica Privata",
-    "description": "Informativa sui cookie usati dal sito di presentazione del prototipo Messaggistica Privata.",
+    "title": "Cookie Policy — Securmy",
+    "description": "Informativa sui cookie usati dal sito di presentazione del prototipo Securmy.",
     "h1": "Cookie Policy",
     "sections": [
       [
@@ -457,14 +625,14 @@ module.exports = {
     ]
   },
   "terms": {
-    "title": "Termini di servizio e licenza d'uso — Messaggistica Privata",
-    "description": "Termini di servizio e licenza d'uso dell'app e del sito Messaggistica Privata.",
+    "title": "Termini di servizio e licenza d'uso — Securmy",
+    "description": "Termini di servizio e licenza d'uso dell'app e del sito Securmy.",
     "h1": "Termini di servizio e licenza d'uso",
     "sections": [
       [
         "1. Oggetto e titolare",
         [
-          "Questi Termini regolano l'uso dell'app e del sito «Messaggistica Privata» (il «Servizio»). Registrandoti o usando il Servizio li accetti. Se non sei d'accordo, non usarlo."
+          "Questi Termini regolano l'uso dell'app e del sito «Securmy» (il «Servizio»). Registrandoti o usando il Servizio li accetti. Se non sei d'accordo, non usarlo."
         ]
       ],
       [
@@ -513,6 +681,12 @@ module.exports = {
         "9. Legge applicabile e modifiche",
         [
           "I Termini sono regolati dalla legge italiana; per i consumatori restano ferme le tutele e il foro previsti dal Codice del consumo. Possiamo aggiornare questi Termini: le modifiche rilevanti saranno comunicate nel Servizio. Per contatti: info@simonescaffidi.it."
+        ]
+      ],
+      [
+        "10. Condivisione di file e chiamate",
+        [
+          "Sei responsabile dei file che condividi e delle chiamate che effettui. È vietato condividere contenuti illegali o violare diritti altrui. Poiché i contenuti sono cifrati end-to-end non possiamo vederli, ma possiamo sospendere gli account oggetto di segnalazioni fondate. Le funzioni sono fornite «così come sono» e possono cambiare o essere sospese."
         ]
       ]
     ]

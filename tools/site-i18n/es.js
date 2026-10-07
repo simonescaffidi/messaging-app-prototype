@@ -2,7 +2,7 @@
 module.exports = {
   "code": "es",
   "dir": "ltr",
-  "brand": "Mensajería Privada",
+  "brand": "Securmy",
   "ui": {
     "openApp": "Abrir la app",
     "manual": "Manual",
@@ -24,10 +24,10 @@ module.exports = {
     "owner": "Titular"
   },
   "landing": {
-    "title": "Mensajería Privada — Chat con perfiles múltiples y chats ocultos",
-    "description": "Chat privado con cifrado de extremo a extremo real, desbloqueo biométrico, perfiles múltiples y chats ocultos. 11 idiomas, sin número de teléfono.",
-    "ogTitle": "Mensajería Privada — Prototipo",
-    "ogDesc": "Cifrado de extremo a extremo, desbloqueo biométrico, perfiles múltiples, chats ocultos y perfil de cobertura en 11 idiomas.",
+    "title": "Securmy — Mensajería privada, caja fuerte de archivos y envío P2P cifrado",
+    "description": "Chat con cifrado de extremo a extremo real, caja fuerte de archivos, contraseñas y notas cifradas, envío P2P por enlace, llamadas cifradas y verificación en dos pasos. 11 idiomas.",
+    "ogTitle": "Securmy — Seguridad, privacidad y confidencialidad",
+    "ogDesc": "Mensajes, archivos, contraseñas y llamadas protegidos con cifrado de extremo a extremo: todo cifrado en tu dispositivo, en 11 idiomas.",
     "badge": "Prototipo funcional",
     "h1": "Un chat donde la contraseña elige tu perfil",
     "lead": "Sin número de teléfono. Escribe tu usuario y contraseña: la contraseña decide qué perfil se abre. Chats ocultos, perfil de cobertura, mensajes que se autodestruyen.",
@@ -139,13 +139,86 @@ module.exports = {
         "Biometría que no sale de tu dispositivo",
         "Con WebAuthn/FIDO2 el servidor solo recibe la clave pública de la passkey: el dato biométrico nunca sale del móvil u ordenador."
       ]
+    ],
+    "suiteTitle": "Más que un chat: tu caja fuerte digital",
+    "suiteLead": "Securmy va más allá de la mensajería. Todo lo que guardas o compartes se cifra en tu dispositivo, con la misma caja fuerte que protege tus chats.",
+    "suite": [
+      [
+        "🗄️",
+        "Caja fuerte de archivos",
+        "Oculta y protege documentos, fotos y archivos: cifrados en tu dispositivo con AES-256 y abiertos solo con tu contraseña o biometría."
+      ],
+      [
+        "🔗",
+        "Envío P2P por enlace",
+        "El archivo pasa directamente de un dispositivo a otro, cifrado, sin guardarse en el servidor. Enlace de un solo uso con caducidad."
+      ],
+      [
+        "🧼",
+        "Limpieza de metadatos",
+        "Elimina la ubicación GPS, el modelo de cámara y otros datos ocultos de las fotos antes de compartirlas."
+      ],
+      [
+        "🔑",
+        "Gestor de contraseñas",
+        "Guarda credenciales en la caja fuerte, genera contraseñas robustas y cópialas: el portapapeles se vacía a los 20 segundos."
+      ],
+      [
+        "📝",
+        "Notas cifradas",
+        "Notas privadas cifradas en tu dispositivo, nunca enviadas a ningún servidor."
+      ],
+      [
+        "👁️",
+        "Mensajes de una sola vista",
+        "El destinatario los abre una vez: a los pocos segundos se borran del servidor y de su dispositivo."
+      ],
+      [
+        "📞",
+        "Llamadas de voz y vídeo cifradas",
+        "Directamente entre los dos dispositivos (DTLS-SRTP), con un código de verificación para comparar de viva voz frente a escuchas."
+      ],
+      [
+        "🔢",
+        "Verificación en dos pasos",
+        "Códigos TOTP con cualquier app de autenticación: aunque alguien descubra tu contraseña, no entra."
+      ],
+      [
+        "💾",
+        "Copia de seguridad cifrada",
+        "Exporta archivos, notas y contraseñas en un único archivo cifrado con una frase secreta que solo tú conoces."
+      ],
+      [
+        "🚨",
+        "Revisión de seguridad y borrado de emergencia",
+        "Una puntuación te dice qué mejorar; en caso de peligro, un toque borra del dispositivo claves, archivos y contraseñas."
+      ]
+    ],
+    "roadmapTitle": "Próximamente",
+    "roadmapLead": "Lo que estamos planificando. Aún no está disponible y no debe entenderse como una fecha prometida.",
+    "roadmap": [
+      [
+        "🧅",
+        "Red Tor",
+        "Una dirección .onion del servicio y un modo Tor en las apps nativas, para ocultar también tu ubicación de red. Un navegador por sí solo no puede enrutar el tráfico por Tor: hace falta Tor Browser o la app nativa."
+      ],
+      [
+        "📱",
+        "Apps para iOS y Android",
+        "Apps nativas con desbloqueo biométrico, publicadas en las tiendas con las mismas garantías de seguridad y privacidad que el sitio."
+      ],
+      [
+        "🛰️",
+        "Servidor TURN privado",
+        "Para ocultar tu dirección IP en llamadas y envíos P2P y que funcionen incluso tras redes muy restrictivas."
+      ]
     ]
   },
   "manual": {
-    "title": "Manual de usuario — Mensajería Privada",
+    "title": "Manual de usuario — Securmy",
     "description": "Guía completa: registro, acceso con usuario y contraseña, chats ocultos, cifrado de extremo a extremo, desbloqueo biométrico e idiomas disponibles.",
     "h1": "Manual de usuario",
-    "lead": "Guía completa de Mensajería Privada: cómo registrarte, acceder, usar las funciones de privacidad y entender qué protege realmente este prototipo, y qué no.",
+    "lead": "Guía completa de Securmy: cómo registrarte, acceder, usar las funciones de privacidad y entender qué protege realmente este prototipo, y qué no.",
     "sections": [
       {
         "id": "signup",
@@ -369,12 +442,99 @@ module.exports = {
             "Por seguridad, la clave de cada mensaje se elimina en cuanto lo lees: el texto solo queda en la caché cifrada de este dispositivo. Si cambias de dispositivo, borras los datos del navegador o restableces la contraseña por correo, los mensajes anteriores no se pueden recuperar. Es el precio de la forward secrecy."
           ]
         ]
+      },
+      {
+        "id": "suite",
+        "h": "13. Caja fuerte y herramientas de Securmy",
+        "blocks": [
+          [
+            "p",
+            "Abre la Caja fuerte desde el botón 🛡️ de la barra lateral. Todo lo que contiene se cifra en tu dispositivo con AES-256-GCM, con una clave guardada en tu caja fuerte y protegida por tu contraseña: el servidor nunca recibe archivos, notas ni contraseñas."
+          ],
+          [
+            "h3",
+            "Caja fuerte de archivos"
+          ],
+          [
+            "p",
+            "Añade archivos (hasta 100 MB cada uno) desde la pestaña Archivos. Si la casilla está marcada, las fotos se limpian de metadatos antes de guardarse. Puedes descargar, enviar por P2P o eliminar cada archivo."
+          ],
+          [
+            "h3",
+            "Envío P2P por enlace"
+          ],
+          [
+            "p",
+            "Elige un archivo y un tiempo de caducidad (10 minutos o 1 hora): obtienes un enlace de un solo uso. El archivo viaja directo al destinatario, cifrado con una clave que está solo después del símbolo # del enlace y nunca llega al servidor. Mantén la página abierta hasta que termine la transferencia."
+          ],
+          [
+            "h3",
+            "Limpiar fotos"
+          ],
+          [
+            "p",
+            "Redibuja la imagen eliminando EXIF, ubicación GPS y miniaturas. Funciona con JPEG, PNG y WebP; para otros formatos la limpieza automática no está disponible."
+          ],
+          [
+            "h3",
+            "Notas y contraseñas"
+          ],
+          [
+            "p",
+            "Las notas y credenciales permanecen cifradas en la caja fuerte. El generador crea contraseñas aleatorias; al copiar una contraseña, el portapapeles se vacía a los 20 segundos."
+          ],
+          [
+            "h3",
+            "Mensajes de una sola vista"
+          ],
+          [
+            "p",
+            "Elige «Ver una vez» junto al campo del mensaje. El destinatario toca para ver: el texto permanece visible 10 segundos y luego se destruye en su dispositivo y en el servidor. No impide que quien lee fotografíe la pantalla."
+          ],
+          [
+            "h3",
+            "Llamadas de voz y vídeo"
+          ],
+          [
+            "p",
+            "Usa los botones 📞 y 🎥 en la cabecera del chat. Audio y vídeo viajan directamente entre los dispositivos, cifrados. Ambos ven un código de 4 cifras: compáralo de viva voz; si coincide, la llamada no ha sido interceptada."
+          ],
+          [
+            "h3",
+            "Verificación en dos pasos"
+          ],
+          [
+            "p",
+            "En Seguridad puedes activar los códigos TOTP con una app de autenticación (Google Authenticator, Aegis, 1Password…). Una vez activados, para entrar con la contraseña también hace falta el código de 6 cifras. El desbloqueo biométrico sigue siendo un método de acceso aparte."
+          ],
+          [
+            "h3",
+            "Copia de seguridad y borrado de emergencia"
+          ],
+          [
+            "p",
+            "La copia contiene archivos, notas y contraseñas cifrados con una frase secreta de al menos 10 caracteres que eliges tú: sin ella no se puede recuperar. Los mensajes no se incluyen. El borrado de emergencia elimina del dispositivo claves, caché de mensajes, archivos, notas y contraseñas y no se puede deshacer."
+          ],
+          [
+            "h3",
+            "Límites que conviene conocer"
+          ],
+          [
+            "ul",
+            [
+              "La caja fuerte es local: archivos, notas y contraseñas no se sincronizan entre dispositivos; usa la copia de seguridad para moverlos.",
+              "En los envíos P2P y las llamadas la otra persona (y un servidor STUN público) puede ver tu dirección IP, salvo que el servicio use un servidor TURN; en redes muy restrictivas la conexión puede fallar.",
+              "El gestor de contraseñas es básico: no rellena formularios por sí solo y no sustituye a un gestor dedicado para uso profesional.",
+              "Si pierdes la contraseña y la frase de la copia, los datos cifrados no se pueden recuperar: nadie, ni siquiera nosotros, puede abrirlos."
+            ]
+          ]
+        ]
       }
     ]
   },
   "privacy": {
-    "title": "Política de privacidad — Mensajería Privada",
-    "description": "Información sobre la privacidad del prototipo Mensajería Privada: qué datos se tratan y cómo.",
+    "title": "Política de privacidad — Securmy",
+    "description": "Información sobre la privacidad del prototipo Securmy: qué datos se tratan y cómo.",
     "h1": "Política de privacidad",
     "sections": [
       [
@@ -416,12 +576,20 @@ module.exports = {
         [
           "Puedes solicitar en cualquier momento la eliminación de los datos introducidos en el prototipo escribiendo a través de los contactos indicados arriba."
         ]
+      ],
+      [
+        "Funciones de Securmy: caja fuerte, envíos P2P y llamadas",
+        [
+          "Los archivos, notas, contraseñas y copias de la caja fuerte permanecen en tu dispositivo, cifrados con una clave que nunca sale de él: no los recibimos y no podemos leerlos ni recuperarlos.",
+          "En los envíos P2P y las llamadas el contenido viaja directamente entre dispositivos, cifrado. El servidor solo trata la información de conexión (SDP y candidatos ICE), conservada en memoria como máximo una hora y luego eliminada; el otro participante y un servidor STUN público pueden ver tu dirección IP.",
+          "Si activas la verificación en dos pasos conservamos el secreto TOTP, cifrado en reposo; los mensajes de una sola vista se eliminan del servidor pocos segundos después de abrirse."
+        ]
       ]
     ]
   },
   "cookie": {
-    "title": "Política de cookies — Mensajería Privada",
-    "description": "Información sobre las cookies que usa el sitio de presentación del prototipo Mensajería Privada.",
+    "title": "Política de cookies — Securmy",
+    "description": "Información sobre las cookies que usa el sitio de presentación del prototipo Securmy.",
     "h1": "Política de cookies",
     "sections": [
       [
@@ -457,14 +625,14 @@ module.exports = {
     ]
   },
   "terms": {
-    "title": "Términos de servicio y licencia — Mensajería Privada",
-    "description": "Términos de servicio y licencia de uso de la app y el sitio Mensajería Privada.",
+    "title": "Términos de servicio y licencia — Securmy",
+    "description": "Términos de servicio y licencia de uso de la app y el sitio Securmy.",
     "h1": "Términos de servicio y licencia de uso",
     "sections": [
       [
         "1. Objeto y titular",
         [
-          "Estos Términos regulan el uso de la app y el sitio «Mensajería Privada» (el «Servicio»). Al registrarte o usar el Servicio los aceptas. Si no estás de acuerdo, no lo uses."
+          "Estos Términos regulan el uso de la app y el sitio «Securmy» (el «Servicio»). Al registrarte o usar el Servicio los aceptas. Si no estás de acuerdo, no lo uses."
         ]
       ],
       [
@@ -513,6 +681,12 @@ module.exports = {
         "9. Ley aplicable y cambios",
         [
           "Estos Términos se rigen por la ley italiana; los consumidores conservan las protecciones y el fuero que les reconocen el Código de Consumo italiano y las normas imperativas de la UE. Podemos actualizar estos Términos: los cambios relevantes se comunicarán en el Servicio. Contacto: info@simonescaffidi.it."
+        ]
+      ],
+      [
+        "10. Compartir archivos y llamadas",
+        [
+          "Eres responsable de los archivos que compartes y de las llamadas que haces. Está prohibido compartir contenido ilegal o vulnerar derechos ajenos. Como el contenido está cifrado de extremo a extremo no podemos verlo, pero podemos suspender cuentas objeto de denuncias fundadas. Las funciones se ofrecen «tal cual» y pueden cambiar o suspenderse."
         ]
       ]
     ]

@@ -2,7 +2,7 @@
 module.exports = {
   "code": "de",
   "dir": "ltr",
-  "brand": "Private Nachrichten",
+  "brand": "Securmy",
   "ui": {
     "openApp": "App öffnen",
     "manual": "Handbuch",
@@ -24,10 +24,10 @@ module.exports = {
     "owner": "Verantwortlicher"
   },
   "landing": {
-    "title": "Private Nachrichten — Chat mit mehreren Profilen und versteckten Chats",
-    "description": "Privater Chat mit echter Ende-zu-Ende-Verschlüsselung, biometrischer Entsperrung, mehreren Profilen und versteckten Chats. 11 Sprachen, keine Telefonnummer.",
-    "ogTitle": "Private Nachrichten — Prototyp",
-    "ogDesc": "Ende-zu-Ende-Verschlüsselung, biometrische Entsperrung, mehrere Profile, versteckte Chats und Tarnprofil in 11 Sprachen.",
+    "title": "Securmy — Privater Messenger, Datentresor und verschlüsselter P2P-Versand",
+    "description": "Chat mit echter Ende-zu-Ende-Verschlüsselung, Datentresor, verschlüsselte Passwörter und Notizen, P2P-Versand per Link, verschlüsselte Anrufe und Zwei-Schritt-Bestätigung. 11 Sprachen.",
+    "ogTitle": "Securmy — Sicherheit, Privatsphäre und Vertraulichkeit",
+    "ogDesc": "Nachrichten, Dateien, Passwörter und Anrufe mit Ende-zu-Ende-Verschlüsselung geschützt: alles auf deinem Gerät verschlüsselt, in 11 Sprachen.",
     "badge": "Funktionaler Prototyp",
     "h1": "Ein Chat, in dem das Passwort dein Profil wählt",
     "lead": "Keine Telefonnummer. Gib Benutzername und Passwort ein: Das Passwort entscheidet, welches Profil sich öffnet. Versteckte Chats, Tarnprofil, selbstzerstörende Nachrichten.",
@@ -139,13 +139,86 @@ module.exports = {
         "Biometrie, die dein Gerät nie verlässt",
         "Mit WebAuthn/FIDO2 erhält der Server nur den öffentlichen Schlüssel der Passkey: biometrische Daten verlassen nie dein Handy oder deinen Computer."
       ]
+    ],
+    "suiteTitle": "Mehr als ein Chat: dein digitaler Tresor",
+    "suiteLead": "Securmy geht über Messaging hinaus. Alles, was du speicherst oder teilst, wird auf deinem Gerät verschlüsselt – mit demselben Tresor, der auch deine Chats schützt.",
+    "suite": [
+      [
+        "🗄️",
+        "Datentresor",
+        "Verstecke und schütze Dokumente, Fotos und Dateien: auf dem Gerät mit AES-256 verschlüsselt und nur mit deinem Passwort oder per Biometrie zu öffnen."
+      ],
+      [
+        "🔗",
+        "P2P-Versand per Link",
+        "Die Datei geht direkt von Gerät zu Gerät, verschlüsselt und ohne Speicherung auf dem Server. Einmal-Link mit Ablaufzeit."
+      ],
+      [
+        "🧼",
+        "Metadaten entfernen",
+        "Entfernt GPS-Position, Kameramodell und andere versteckte Daten aus Fotos, bevor du sie teilst."
+      ],
+      [
+        "🔑",
+        "Passwort-Manager",
+        "Speichere Zugangsdaten im Tresor, erzeuge starke Passwörter und kopiere sie: Die Zwischenablage wird nach 20 Sekunden geleert."
+      ],
+      [
+        "📝",
+        "Verschlüsselte Notizen",
+        "Private Notizen, auf deinem Gerät verschlüsselt und nie an einen Server gesendet."
+      ],
+      [
+        "👁️",
+        "Einmal-Nachrichten",
+        "Der Empfänger öffnet sie nur einmal: Nach wenigen Sekunden werden sie vom Server und von seinem Gerät gelöscht."
+      ],
+      [
+        "📞",
+        "Verschlüsselte Sprach- und Videoanrufe",
+        "Direkt zwischen den beiden Geräten (DTLS-SRTP), mit einem Prüfcode zum mündlichen Vergleich gegen Abhören."
+      ],
+      [
+        "🔢",
+        "Zwei-Schritt-Bestätigung",
+        "TOTP-Codes mit jeder Authenticator-App: Auch wer dein Passwort kennt, kommt nicht hinein."
+      ],
+      [
+        "💾",
+        "Verschlüsseltes Backup",
+        "Exportiere Dateien, Notizen und Passwörter in ein einziges Archiv, verschlüsselt mit einer Passphrase, die nur du kennst."
+      ],
+      [
+        "🚨",
+        "Sicherheitscheck und Notfall-Löschung",
+        "Ein Punktwert zeigt, was zu verbessern ist; in Gefahr löscht ein Tipp Schlüssel, Dateien und Passwörter vom Gerät."
+      ]
+    ],
+    "roadmapTitle": "Demnächst",
+    "roadmapLead": "Was wir planen. Noch nicht verfügbar und kein Terminversprechen.",
+    "roadmap": [
+      [
+        "🧅",
+        "Tor-Netzwerk",
+        "Eine .onion-Adresse des Dienstes und ein Tor-Modus in den nativen Apps, um auch deinen Netzwerkstandort zu verbergen. Ein reiner Browser kann den Datenverkehr nicht über Tor leiten: Dafür braucht es den Tor Browser oder die native App."
+      ],
+      [
+        "📱",
+        "iOS- und Android-Apps",
+        "Native Apps mit biometrischer Entsperrung, in den Stores veröffentlicht – mit denselben Sicherheits- und Datenschutzgarantien wie die Website."
+      ],
+      [
+        "🛰️",
+        "Privater TURN-Server",
+        "Um deine IP-Adresse bei Anrufen und P2P-Übertragungen zu verbergen und sie auch in sehr restriktiven Netzen zum Laufen zu bringen."
+      ]
     ]
   },
   "manual": {
-    "title": "Benutzerhandbuch — Private Nachrichten",
+    "title": "Benutzerhandbuch — Securmy",
     "description": "Vollständige Anleitung: Registrierung, Anmeldung mit Benutzername und Passwort, versteckte Chats, Ende-zu-Ende-Verschlüsselung, biometrisches Entsperren und verfügbare Sprachen.",
     "h1": "Benutzerhandbuch",
-    "lead": "Eine vollständige Anleitung zu Private Nachrichten: wie du dich registrierst, anmeldest, die Datenschutzfunktionen nutzt und verstehst, was dieser Prototyp wirklich schützt – und was nicht.",
+    "lead": "Eine vollständige Anleitung zu Securmy: wie du dich registrierst, anmeldest, die Datenschutzfunktionen nutzt und verstehst, was dieser Prototyp wirklich schützt – und was nicht.",
     "sections": [
       {
         "id": "signup",
@@ -369,12 +442,99 @@ module.exports = {
             "Aus Sicherheitsgründen wird der Schlüssel jeder Nachricht gelöscht, sobald du sie gelesen hast: der Text bleibt nur im verschlüsselten Cache dieses Geräts. Wechselst du das Gerät, löschst Browserdaten oder setzt das Passwort per E-Mail zurück, sind frühere Nachrichten nicht wiederherstellbar. Das ist der Preis der Forward Secrecy."
           ]
         ]
+      },
+      {
+        "id": "suite",
+        "h": "13. Securmy-Tresor und Werkzeuge",
+        "blocks": [
+          [
+            "p",
+            "Öffne den Tresor über die Schaltfläche 🛡️ in der Seitenleiste. Alles darin wird auf deinem Gerät mit AES-256-GCM verschlüsselt, mit einem Schlüssel, der in deinem Tresor liegt und durch dein Passwort geschützt ist: Der Server erhält nie Dateien, Notizen oder Passwörter."
+          ],
+          [
+            "h3",
+            "Datentresor"
+          ],
+          [
+            "p",
+            "Füge Dateien (bis 100 MB je Datei) im Tab Dateien hinzu. Ist das Kästchen aktiv, werden Fotos vor dem Speichern von Metadaten bereinigt. Jede Datei lässt sich herunterladen, per P2P senden oder löschen."
+          ],
+          [
+            "h3",
+            "P2P-Versand per Link"
+          ],
+          [
+            "p",
+            "Wähle eine Datei und eine Ablaufzeit (10 Minuten oder 1 Stunde): Du erhältst einen Einmal-Link. Die Datei geht direkt zum Empfänger, verschlüsselt mit einem Schlüssel, der nur hinter dem # im Link steht und nie zum Server gelangt. Lass die Seite offen, bis die Übertragung fertig ist."
+          ],
+          [
+            "h3",
+            "Fotos säubern"
+          ],
+          [
+            "p",
+            "Zeichnet das Bild neu und verwirft EXIF, GPS-Position und Vorschaubilder. Funktioniert mit JPEG, PNG und WebP; für andere Formate ist die automatische Bereinigung nicht verfügbar."
+          ],
+          [
+            "h3",
+            "Notizen und Passwörter"
+          ],
+          [
+            "p",
+            "Notizen und Zugangsdaten bleiben im Tresor verschlüsselt. Der Generator erzeugt zufällige Passwörter; kopierst du eines, wird die Zwischenablage nach 20 Sekunden geleert."
+          ],
+          [
+            "h3",
+            "Einmal-Nachrichten"
+          ],
+          [
+            "p",
+            "Wähle neben dem Nachrichtenfeld „Einmal ansehen“. Der Empfänger tippt zum Ansehen: Der Text bleibt 10 Sekunden sichtbar und wird dann auf seinem Gerät und auf dem Server zerstört. Ein Foto vom Bildschirm kann das nicht verhindern."
+          ],
+          [
+            "h3",
+            "Sprach- und Videoanrufe"
+          ],
+          [
+            "p",
+            "Nutze die Schaltflächen 📞 und 🎥 in der Chat-Kopfzeile. Audio und Video laufen direkt zwischen den Geräten, verschlüsselt. Beide sehen einen vierstelligen Code: Vergleicht ihn mündlich; stimmt er überein, wurde der Anruf nicht abgefangen."
+          ],
+          [
+            "h3",
+            "Zwei-Schritt-Bestätigung"
+          ],
+          [
+            "p",
+            "Unter Sicherheit kannst du TOTP-Codes mit einer Authenticator-App aktivieren (Google Authenticator, Aegis, 1Password …). Danach braucht die Anmeldung mit Passwort zusätzlich den sechsstelligen Code. Die biometrische Entsperrung bleibt eine eigene Anmeldemethode."
+          ],
+          [
+            "h3",
+            "Backup und Notfall-Löschung"
+          ],
+          [
+            "p",
+            "Das Backup enthält Dateien, Notizen und Passwörter, verschlüsselt mit einer von dir gewählten Passphrase von mindestens 10 Zeichen: Ohne sie ist es nicht wiederherstellbar. Nachrichten sind nicht enthalten. Die Notfall-Löschung entfernt Schlüssel, Nachrichten-Cache, Dateien, Notizen und Passwörter vom Gerät und ist nicht rückgängig zu machen."
+          ],
+          [
+            "h3",
+            "Grenzen, die du kennen solltest"
+          ],
+          [
+            "ul",
+            [
+              "Der Tresor ist lokal: Dateien, Notizen und Passwörter werden nicht zwischen Geräten synchronisiert; nutze das Backup zum Umziehen.",
+              "Bei P2P-Übertragungen und Anrufen kann die andere Person (und ein öffentlicher STUN-Server) deine IP-Adresse sehen, sofern der Dienst keinen TURN-Server nutzt; in sehr restriktiven Netzen kann die Verbindung scheitern.",
+              "Der Passwort-Manager ist schlicht: Er füllt keine Formulare selbst aus und ersetzt für berufliche Zwecke keinen spezialisierten Manager.",
+              "Verlierst du Passwort und Backup-Passphrase, sind die verschlüsselten Daten nicht wiederherstellbar: Niemand, auch wir nicht, kann sie öffnen."
+            ]
+          ]
+        ]
       }
     ]
   },
   "privacy": {
-    "title": "Datenschutzerklärung — Private Nachrichten",
-    "description": "Datenschutzerklärung des Prototyps Private Nachrichten: welche Daten verarbeitet werden und wie.",
+    "title": "Datenschutzerklärung — Securmy",
+    "description": "Datenschutzerklärung des Prototyps Securmy: welche Daten verarbeitet werden und wie.",
     "h1": "Datenschutzerklärung",
     "sections": [
       [
@@ -416,12 +576,20 @@ module.exports = {
         [
           "Du kannst jederzeit die Löschung der im Prototyp eingegebenen Daten verlangen, indem du über die oben genannten Kontaktmöglichkeiten schreibst."
         ]
+      ],
+      [
+        "Securmy-Funktionen: Tresor, P2P-Versand und Anrufe",
+        [
+          "Tresor-Dateien, Notizen, Passwörter und Backups bleiben auf deinem Gerät, verschlüsselt mit einem Schlüssel, der es nie verlässt: Wir erhalten sie nicht und können sie weder lesen noch wiederherstellen.",
+          "Bei P2P-Übertragungen und Anrufen laufen die Inhalte direkt zwischen den Geräten, verschlüsselt. Der Server verarbeitet nur Verbindungsinformationen (SDP und ICE-Kandidaten), höchstens eine Stunde im Speicher gehalten und dann gelöscht; der andere Teilnehmer und ein öffentlicher STUN-Server können deine IP-Adresse sehen.",
+          "Aktivierst du die Zwei-Schritt-Bestätigung, speichern wir das TOTP-Geheimnis verschlüsselt; Einmal-Nachrichten werden wenige Sekunden nach dem Öffnen vom Server gelöscht."
+        ]
       ]
     ]
   },
   "cookie": {
-    "title": "Cookie-Richtlinie — Private Nachrichten",
-    "description": "Informationen zu den Cookies, die die Präsentationswebsite des Prototyps Private Nachrichten verwendet.",
+    "title": "Cookie-Richtlinie — Securmy",
+    "description": "Informationen zu den Cookies, die die Präsentationswebsite des Prototyps Securmy verwendet.",
     "h1": "Cookie-Richtlinie",
     "sections": [
       [
@@ -457,14 +625,14 @@ module.exports = {
     ]
   },
   "terms": {
-    "title": "Nutzungsbedingungen und Lizenz — Private Nachrichten",
-    "description": "Nutzungsbedingungen und Lizenz für App und Website Private Nachrichten.",
+    "title": "Nutzungsbedingungen und Lizenz — Securmy",
+    "description": "Nutzungsbedingungen und Lizenz für App und Website Securmy.",
     "h1": "Nutzungsbedingungen und Lizenz",
     "sections": [
       [
         "1. Gegenstand und Verantwortlicher",
         [
-          "Diese Bedingungen regeln die Nutzung von App und Website „Private Nachrichten“ (der „Dienst“). Mit Registrierung oder Nutzung akzeptierst du sie. Andernfalls nutze den Dienst nicht."
+          "Diese Bedingungen regeln die Nutzung von App und Website „Securmy“ (der „Dienst“). Mit Registrierung oder Nutzung akzeptierst du sie. Andernfalls nutze den Dienst nicht."
         ]
       ],
       [
@@ -513,6 +681,12 @@ module.exports = {
         "9. Anwendbares Recht und Änderungen",
         [
           "Es gilt italienisches Recht; Verbraucher behalten die Schutzrechte und den Gerichtsstand nach dem italienischen Verbraucherkodex und zwingendem EU-Recht. Wir können diese Bedingungen aktualisieren: wesentliche Änderungen werden im Dienst mitgeteilt. Kontakt: info@simonescaffidi.it."
+        ]
+      ],
+      [
+        "10. Dateifreigabe und Anrufe",
+        [
+          "Du bist für die Dateien, die du teilst, und die Anrufe, die du führst, verantwortlich. Das Teilen rechtswidriger Inhalte oder die Verletzung fremder Rechte ist untersagt. Da Inhalte Ende-zu-Ende-verschlüsselt sind, können wir sie nicht sehen, wir können aber Konten bei begründeten Meldungen sperren. Die Funktionen werden „wie besehen“ bereitgestellt und können sich ändern oder ausgesetzt werden."
         ]
       ]
     ]

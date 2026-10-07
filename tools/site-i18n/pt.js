@@ -2,7 +2,7 @@
 module.exports = {
   "code": "pt",
   "dir": "ltr",
-  "brand": "Mensagens Privadas",
+  "brand": "Securmy",
   "ui": {
     "openApp": "Abrir o app",
     "manual": "Manual",
@@ -24,10 +24,10 @@ module.exports = {
     "owner": "Titular"
   },
   "landing": {
-    "title": "Mensagens Privadas — Chat com perfis múltiplos e chats ocultos",
-    "description": "Chat privado com criptografia de ponta a ponta real, desbloqueio biométrico, perfis múltiplos e chats ocultos. 11 idiomas, sem número de telefone.",
-    "ogTitle": "Mensagens Privadas — Protótipo",
-    "ogDesc": "Criptografia de ponta a ponta, desbloqueio biométrico, perfis múltiplos, chats ocultos e perfil de fachada em 11 idiomas.",
+    "title": "Securmy — Mensagens privadas, cofre de arquivos e envio P2P cifrado",
+    "description": "Chat com criptografia de ponta a ponta real, cofre de arquivos, senhas e notas cifradas, envio P2P por link, chamadas cifradas e verificação em duas etapas. 11 idiomas.",
+    "ogTitle": "Securmy — Segurança, privacidade e confidencialidade",
+    "ogDesc": "Mensagens, arquivos, senhas e chamadas protegidos por criptografia de ponta a ponta: tudo cifrado no seu dispositivo, em 11 idiomas.",
     "badge": "Protótipo funcional",
     "h1": "Um chat em que a senha escolhe o seu perfil",
     "lead": "Sem número de telefone. Digite seu usuário e senha: a senha decide qual perfil abre. Chats ocultos, perfil de cobertura, mensagens que se autodestroem.",
@@ -139,13 +139,86 @@ module.exports = {
         "Biometria que não sai do seu dispositivo",
         "Com WebAuthn/FIDO2 o servidor recebe apenas a chave pública da passkey: o dado biométrico nunca sai do celular ou computador."
       ]
+    ],
+    "suiteTitle": "Mais que um chat: o seu cofre digital",
+    "suiteLead": "O Securmy vai além das mensagens. Tudo o que você guarda ou compartilha é cifrado no seu dispositivo, com o mesmo cofre que protege os seus chats.",
+    "suite": [
+      [
+        "🗄️",
+        "Cofre de arquivos",
+        "Esconda e proteja documentos, fotos e arquivos: cifrados no dispositivo com AES-256 e abertos só pela sua senha ou biometria."
+      ],
+      [
+        "🔗",
+        "Envio P2P por link",
+        "O arquivo vai direto de um dispositivo ao outro, cifrado, sem ser guardado no servidor. Link de uso único com validade."
+      ],
+      [
+        "🧼",
+        "Limpeza de metadados",
+        "Remove a localização GPS, o modelo da câmera e outros dados ocultos das fotos antes de você compartilhá-las."
+      ],
+      [
+        "🔑",
+        "Gerenciador de senhas",
+        "Guarde credenciais no cofre, gere senhas fortes e copie-as: a área de transferência é limpa após 20 segundos."
+      ],
+      [
+        "📝",
+        "Notas cifradas",
+        "Notas privadas cifradas no seu dispositivo, nunca enviadas a nenhum servidor."
+      ],
+      [
+        "👁️",
+        "Mensagens de visualização única",
+        "O destinatário as abre uma só vez: poucos segundos depois são apagadas do servidor e do dispositivo dele."
+      ],
+      [
+        "📞",
+        "Chamadas de voz e vídeo cifradas",
+        "Direto entre os dois dispositivos (DTLS-SRTP), com um código de verificação para comparar em voz alta contra escutas."
+      ],
+      [
+        "🔢",
+        "Verificação em duas etapas",
+        "Códigos TOTP com qualquer app autenticador: mesmo quem descobrir a sua senha não entra."
+      ],
+      [
+        "💾",
+        "Backup cifrado",
+        "Exporte arquivos, notas e senhas num único arquivo cifrado com uma frase secreta que só você conhece."
+      ],
+      [
+        "🚨",
+        "Verificação de segurança e apagamento de emergência",
+        "Uma pontuação mostra o que melhorar; em caso de perigo, um toque apaga do dispositivo chaves, arquivos e senhas."
+      ]
+    ],
+    "roadmapTitle": "Em breve",
+    "roadmapLead": "O que estamos planejando. Ainda não está disponível e não deve ser entendido como data prometida.",
+    "roadmap": [
+      [
+        "🧅",
+        "Rede Tor",
+        "Um endereço .onion do serviço e um modo Tor nos apps nativos, para esconder também a sua localização de rede. Um navegador sozinho não consegue rotear o tráfego pelo Tor: é preciso o Tor Browser ou o app nativo."
+      ],
+      [
+        "📱",
+        "Apps para iOS e Android",
+        "Apps nativos com desbloqueio biométrico, publicados nas lojas com as mesmas garantias de segurança e privacidade do site."
+      ],
+      [
+        "🛰️",
+        "Servidor TURN privado",
+        "Para esconder o seu endereço IP em chamadas e envios P2P e fazê-los funcionar mesmo atrás de redes muito restritivas."
+      ]
     ]
   },
   "manual": {
-    "title": "Manual do usuário — Mensagens Privadas",
+    "title": "Manual do usuário — Securmy",
     "description": "Guia completo: cadastro, acesso com usuário e senha, chats ocultos, criptografia de ponta a ponta, desbloqueio biométrico e idiomas disponíveis.",
     "h1": "Manual do usuário",
-    "lead": "Guia completo de Mensagens Privadas: como se cadastrar, entrar, usar os recursos de privacidade e entender o que este protótipo realmente protege — e o que não protege.",
+    "lead": "Guia completo de Securmy: como se cadastrar, entrar, usar os recursos de privacidade e entender o que este protótipo realmente protege — e o que não protege.",
     "sections": [
       {
         "id": "signup",
@@ -369,12 +442,99 @@ module.exports = {
             "Por segurança, a chave de cada mensagem é apagada assim que você a lê: o texto fica só no cache cifrado deste dispositivo. Se trocar de dispositivo, limpar os dados do navegador ou redefinir a senha por e-mail, as mensagens anteriores não podem ser recuperadas. É o preço da forward secrecy."
           ]
         ]
+      },
+      {
+        "id": "suite",
+        "h": "13. Cofre e ferramentas do Securmy",
+        "blocks": [
+          [
+            "p",
+            "Abra o Cofre pelo botão 🛡️ na barra lateral. Tudo o que ele contém é cifrado no seu dispositivo com AES-256-GCM, com uma chave guardada no seu cofre e protegida pela sua senha: o servidor nunca recebe arquivos, notas ou senhas."
+          ],
+          [
+            "h3",
+            "Cofre de arquivos"
+          ],
+          [
+            "p",
+            "Adicione arquivos (até 100 MB cada) na aba Arquivos. Se a caixa estiver marcada, as fotos têm os metadados removidos antes de serem guardadas. Você pode baixar, enviar por P2P ou excluir cada arquivo."
+          ],
+          [
+            "h3",
+            "Envio P2P por link"
+          ],
+          [
+            "p",
+            "Escolha um arquivo e um prazo de validade (10 minutos ou 1 hora): você recebe um link de uso único. O arquivo vai direto ao destinatário, cifrado com uma chave que fica só depois do # do link e nunca chega ao servidor. Mantenha a página aberta até a transferência terminar."
+          ],
+          [
+            "h3",
+            "Limpar fotos"
+          ],
+          [
+            "p",
+            "Redesenha a imagem descartando EXIF, localização GPS e miniaturas. Funciona com JPEG, PNG e WebP; para outros formatos a limpeza automática não está disponível."
+          ],
+          [
+            "h3",
+            "Notas e senhas"
+          ],
+          [
+            "p",
+            "Notas e credenciais ficam cifradas no cofre. O gerador cria senhas aleatórias; ao copiar uma senha, a área de transferência é limpa após 20 segundos."
+          ],
+          [
+            "h3",
+            "Mensagens de visualização única"
+          ],
+          [
+            "p",
+            "Escolha «Ver uma vez» ao lado do campo da mensagem. O destinatário toca para ver: o texto fica visível por 10 segundos e depois é destruído no dispositivo dele e no servidor. Não impede que quem lê fotografe a tela."
+          ],
+          [
+            "h3",
+            "Chamadas de voz e vídeo"
+          ],
+          [
+            "p",
+            "Use os botões 📞 e 🎥 no cabeçalho do chat. Áudio e vídeo viajam direto entre os dispositivos, cifrados. Os dois veem um código de 4 dígitos: comparem em voz alta; se coincidir, a chamada não foi interceptada."
+          ],
+          [
+            "h3",
+            "Verificação em duas etapas"
+          ],
+          [
+            "p",
+            "Em Segurança você pode ativar códigos TOTP com um app autenticador (Google Authenticator, Aegis, 1Password…). Depois de ativada, entrar com a senha exige também o código de 6 dígitos. O desbloqueio biométrico continua sendo um método de acesso separado."
+          ],
+          [
+            "h3",
+            "Backup e apagamento de emergência"
+          ],
+          [
+            "p",
+            "O backup contém arquivos, notas e senhas cifrados com uma frase secreta de pelo menos 10 caracteres escolhida por você: sem ela não é recuperável. As mensagens não estão incluídas. O apagamento de emergência remove do dispositivo chaves, cache de mensagens, arquivos, notas e senhas e não pode ser desfeito."
+          ],
+          [
+            "h3",
+            "Limites que convém conhecer"
+          ],
+          [
+            "ul",
+            [
+              "O cofre é local: arquivos, notas e senhas não sincronizam entre dispositivos; use o backup para movê-los.",
+              "Nos envios P2P e nas chamadas a outra pessoa (e um servidor STUN público) pode ver o seu endereço IP, a menos que o serviço use um servidor TURN; em redes muito restritivas a conexão pode falhar.",
+              "O gerenciador de senhas é básico: não preenche formulários sozinho e não substitui um gerenciador dedicado para uso profissional.",
+              "Se perder a senha e a frase do backup, os dados cifrados não são recuperáveis: ninguém, nem nós, consegue abri-los."
+            ]
+          ]
+        ]
       }
     ]
   },
   "privacy": {
-    "title": "Política de Privacidade — Mensagens Privadas",
-    "description": "Informações de privacidade do protótipo Mensagens Privadas: quais dados são tratados e como.",
+    "title": "Política de Privacidade — Securmy",
+    "description": "Informações de privacidade do protótipo Securmy: quais dados são tratados e como.",
     "h1": "Política de Privacidade",
     "sections": [
       [
@@ -416,12 +576,20 @@ module.exports = {
         [
           "Você pode pedir a qualquer momento a eliminação dos dados inseridos no protótipo escrevendo pelos contatos indicados acima."
         ]
+      ],
+      [
+        "Funções do Securmy: cofre, envios P2P e chamadas",
+        [
+          "Arquivos, notas, senhas e backups do cofre ficam no seu dispositivo, cifrados com uma chave que nunca sai dele: não os recebemos e não podemos lê-los nem recuperá-los.",
+          "Nos envios P2P e nas chamadas o conteúdo viaja direto entre os dispositivos, cifrado. O servidor trata apenas as informações de conexão (SDP e candidatos ICE), mantidas em memória por no máximo uma hora e depois eliminadas; o outro participante e um servidor STUN público podem ver o seu endereço IP.",
+          "Se ativar a verificação em duas etapas, guardamos o segredo TOTP, cifrado em repouso; as mensagens de visualização única são eliminadas do servidor poucos segundos após serem abertas."
+        ]
       ]
     ]
   },
   "cookie": {
-    "title": "Política de Cookies — Mensagens Privadas",
-    "description": "Informações sobre os cookies usados pelo site de apresentação do protótipo Mensagens Privadas.",
+    "title": "Política de Cookies — Securmy",
+    "description": "Informações sobre os cookies usados pelo site de apresentação do protótipo Securmy.",
     "h1": "Política de Cookies",
     "sections": [
       [
@@ -457,14 +625,14 @@ module.exports = {
     ]
   },
   "terms": {
-    "title": "Termos de serviço e licença — Mensagens Privadas",
-    "description": "Termos de serviço e licença de uso do app e do site Mensagens Privadas.",
+    "title": "Termos de serviço e licença — Securmy",
+    "description": "Termos de serviço e licença de uso do app e do site Securmy.",
     "h1": "Termos de serviço e licença de uso",
     "sections": [
       [
         "1. Objeto e titular",
         [
-          "Estes Termos regem o uso do app e do site «Mensagens Privadas» (o «Serviço»). Ao se registrar ou usar o Serviço, você os aceita. Se não concordar, não o utilize."
+          "Estes Termos regem o uso do app e do site «Securmy» (o «Serviço»). Ao se registrar ou usar o Serviço, você os aceita. Se não concordar, não o utilize."
         ]
       ],
       [
@@ -513,6 +681,12 @@ module.exports = {
         "9. Lei aplicável e alterações",
         [
           "Estes Termos são regidos pela lei italiana; os consumidores mantêm as proteções e o foro previstos no Código do Consumidor italiano e nas normas imperativas da UE. Podemos atualizar estes Termos: alterações relevantes serão comunicadas no Serviço. Contato: info@simonescaffidi.it."
+        ]
+      ],
+      [
+        "10. Compartilhamento de arquivos e chamadas",
+        [
+          "Você é responsável pelos arquivos que compartilha e pelas chamadas que faz. É proibido compartilhar conteúdo ilegal ou violar direitos de terceiros. Como o conteúdo é cifrado de ponta a ponta, não podemos vê-lo, mas podemos suspender contas alvo de denúncias fundamentadas. As funções são fornecidas «como estão» e podem mudar ou ser suspensas."
         ]
       ]
     ]
