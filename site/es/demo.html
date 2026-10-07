@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Demo interactiva — Mensajería Privada</title>
-<meta name="description" content="Prueba Mensajería Privada ahora: acceso por código, chats ocultos, perfil de cobertura, mensajes temporales y cifrado de extremo a extremo. Simulación en el navegador, sin cuenta." />
+<title>Demo interactiva — Securmy</title>
+<meta name="description" content="Prueba Securmy ahora: acceso por código, chats ocultos, perfil de cobertura, mensajes temporales y cifrado de extremo a extremo. Simulación en el navegador, sin cuenta." />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/demo.html" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/demo.html" />
 <link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/demo.html" />
@@ -19,10 +19,13 @@
 <link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/demo.html" />
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/demo.html" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Demo interactiva — Mensajería Privada" />
-<meta property="og:description" content="Prueba Mensajería Privada ahora: acceso por código, chats ocultos, perfil de cobertura, mensajes temporales y cifrado de extremo a extremo. Simulación en el navegador, sin cuenta." />
+<meta property="og:title" content="Demo interactiva — Securmy" />
+<meta property="og:description" content="Prueba Securmy ahora: acceso por código, chats ocultos, perfil de cobertura, mensajes temporales y cifrado de extremo a extremo. Simulación en el navegador, sin cuenta." />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/es/demo.html" />
-<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/icon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/icon-512.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/style.css" />
 </head>
@@ -30,7 +33,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/es/" class="brand"><span class="lock">🔒</span> Mensajería Privada</a>
+    <a href="/es/" class="brand"><img class="logo-mark" src="/icon.svg" width="28" height="28" alt="" /> Securmy</a>
     <div class="header-actions">
       <select class="lang-select" aria-label="Idioma" onchange="location.href=this.value"><option value="/demo.html">Italiano</option><option value="/en/demo.html">English</option><option value="/es/demo.html" selected>Español</option><option value="/fr/demo.html">Français</option><option value="/de/demo.html">Deutsch</option><option value="/pt/demo.html">Português</option><option value="/ar/demo.html">العربية</option><option value="/zh/demo.html">中文</option><option value="/hi/demo.html">हिन्दी</option><option value="/ru/demo.html">Русский</option><option value="/ja/demo.html">日本語</option></select>
       <a href="/es/manual.html" class="btn btn-ghost btn-sm">Manual</a>
@@ -54,12 +57,19 @@
         <li>Oculta un chat desde el menú y escribe <strong>7777</strong> en la búsqueda para recuperarlo.</li>
         <li>Bloquea y vuelve a entrar con usuario <strong>demo</strong> y contraseña <strong>2222</strong>: solo verás el perfil de cobertura.</li>
       </ol>
+      <h2>Luego prueba la Caja fuerte</h2>
+      <ol class="demo-try">
+        <li>Tras iniciar sesión, toca <strong>Caja fuerte</strong> abajo.</li>
+        <li>En <strong>Archivos</strong> añade un archivo y muestra cómo lo vería quien robe el disco: solo datos cifrados.</li>
+        <li>En <strong>Enviar</strong> crea un enlace P2P de un solo uso y mira llegar el archivo sin pasar por el servidor.</li>
+        <li>En <strong>Una vez</strong> envía un mensaje que se destruye tras leerlo y luego activa los controles de <strong>Seguridad</strong>.</li>
+      </ol>
       <p><a href="/app/" class="btn btn-primary">Abrir la app</a></p>
     </div>
     <div id="phone" class="phone" aria-label="Prueba la demo"></div>
   </div>
 </main>
-<script>window.__DEMO_I18N={"nav":"Demo","cta":"Prueba la demo","title":"Demo interactiva — Mensajería Privada","description":"Prueba Mensajería Privada ahora: acceso por código, chats ocultos, perfil de cobertura, mensajes temporales y cifrado de extremo a extremo. Simulación en el navegador, sin cuenta.","h1":"Prueba la demo","lead":"Una simulación interactiva que funciona solo en tu navegador: sin cuenta y sin enviar datos. Para la app real usa el botón «Abrir la app».","notice":"Demo simulada: los mensajes se quedan en tu dispositivo. El cifrado AES-GCM es real, pero los contactos y las respuestas son falsos.","tryTitle":"Qué probar","tryItems":["Entra con usuario \u003cstrong>demo\u003c/strong> y contraseña \u003cstrong>1111\u003c/strong> (perfil personal) o con el botón biométrico.","Abre un chat y envía un mensaje con temporizador de \u003cstrong>30 segundos\u003c/strong>: se autodestruye.","Activa «Vista del servidor» para ver cómo se ve un mensaje cifrado.","Oculta un chat desde el menú y escribe \u003cstrong>7777\u003c/strong> en la búsqueda para recuperarlo.","Bloquea y vuelve a entrar con usuario \u003cstrong>demo\u003c/strong> y contraseña \u003cstrong>2222\u003c/strong>: solo verás el perfil de cobertura."],"userLabel":"Usuario","codeLabel":"Contraseña","codePh":"Ej. 1111","enter":"Entrar","bio":"Desbloquear con huella / Face ID","bioScan":"Verificando biometría…","wrongCode":"Credenciales no válidas. Usa demo + 1111 o 2222.","searchPh":"Buscar (o combinación secreta)","hide":"Ocultar chat","unhide":"Mostrar chat","hiddenTag":"oculto","msgPh":"Escribe un mensaje…","send":"Enviar","timers":["Sin temporizador","30 segundos","5 minutos","1 hora"],"serverView":"Vista del servidor (cifrado)","lockBtn":"Bloquear","e2eTag":"Cifrado de extremo a extremo","expiresIn":"se borra en {s}s","secretFound":"Chats ocultos mostrados","chatsTitle":"Chats","back":"Atrás","empty":"Sin chats","n1":"Anna","m1":"¿Nos vemos mañana a las 18:00?","n2":"Marco","m2":"Te mando los documentos esta noche.","n3":"Luca","m3":"El plan está confirmado, no se lo digas a nadie.","nc":"Mamá","mc":"¡Acuérdate de comprar pan!","replies":["¡Perfecto, hasta luego!","Recibido 👍","Vale, gracias."]};</script>
+<script>window.__DEMO_I18N={"nav":"Demo","cta":"Prueba la demo","title":"Demo interactiva — Securmy","description":"Prueba Securmy ahora: acceso por código, chats ocultos, perfil de cobertura, mensajes temporales y cifrado de extremo a extremo. Simulación en el navegador, sin cuenta.","h1":"Prueba la demo","lead":"Una simulación interactiva que funciona solo en tu navegador: sin cuenta y sin enviar datos. Para la app real usa el botón «Abrir la app».","notice":"Demo simulada: los mensajes se quedan en tu dispositivo. El cifrado AES-GCM es real, pero los contactos y las respuestas son falsos.","tryTitle":"Qué probar","tryItems":["Entra con usuario \u003cstrong>demo\u003c/strong> y contraseña \u003cstrong>1111\u003c/strong> (perfil personal) o con el botón biométrico.","Abre un chat y envía un mensaje con temporizador de \u003cstrong>30 segundos\u003c/strong>: se autodestruye.","Activa «Vista del servidor» para ver cómo se ve un mensaje cifrado.","Oculta un chat desde el menú y escribe \u003cstrong>7777\u003c/strong> en la búsqueda para recuperarlo.","Bloquea y vuelve a entrar con usuario \u003cstrong>demo\u003c/strong> y contraseña \u003cstrong>2222\u003c/strong>: solo verás el perfil de cobertura."],"userLabel":"Usuario","codeLabel":"Contraseña","codePh":"Ej. 1111","enter":"Entrar","bio":"Desbloquear con huella / Face ID","bioScan":"Verificando biometría…","wrongCode":"Credenciales no válidas. Usa demo + 1111 o 2222.","searchPh":"Buscar (o combinación secreta)","hide":"Ocultar chat","unhide":"Mostrar chat","hiddenTag":"oculto","msgPh":"Escribe un mensaje…","send":"Enviar","timers":["Sin temporizador","30 segundos","5 minutos","1 hora"],"serverView":"Vista del servidor (cifrado)","lockBtn":"Bloquear","e2eTag":"Cifrado de extremo a extremo","expiresIn":"se borra en {s}s","secretFound":"Chats ocultos mostrados","chatsTitle":"Chats","back":"Atrás","empty":"Sin chats","n1":"Anna","m1":"¿Nos vemos mañana a las 18:00?","n2":"Marco","m2":"Te mando los documentos esta noche.","n3":"Luca","m3":"El plan está confirmado, no se lo digas a nadie.","nc":"Mamá","mc":"¡Acuérdate de comprar pan!","replies":["¡Perfecto, hasta luego!","Recibido 👍","Vale, gracias."],"sNavChats":"Chats","sNavVault":"Caja fuerte","sTabFiles":"Archivos","sTabPw":"Contraseñas","sTabP2p":"Enviar","sTabOnce":"Una vez","sTabCall":"Llamada","sTabSec":"Seguridad","sAddFile":"Añadir un archivo de prueba","sEnc":"Cifrado","sShowCipher":"Mostrar cómo lo ve el disco","sFilesEmpty":"Sin archivos: añade uno.","sStripped":"Metadatos eliminados (GPS, cámara)","sGen":"Generar contraseña","sCopy":"Copiar","sCopied":"Copiado: el portapapeles se vacía en 20 s","sStrength":"Fuerza","sP2pCreate":"Crear enlace para «contrato.pdf»","sP2pLink":"Enlace de un solo uso, caduca en 10 minutos","sP2pWait":"Esperando al destinatario…","sP2pJoined":"Destinatario conectado","sP2pSending":"Envío directo y cifrado","sP2pDone":"Entregado. El enlace ya no funciona.","sP2pNote":"En la demo la conexión es simulada; en la app real el archivo viaja directamente entre dispositivos.","sOnceSend":"Enviar un mensaje de una sola vista","sOnceTap":"Toca para ver (luego se borra)","sOnceGone":"Mensaje destruido","sOnceText":"El código de la caja fuerte es 4821","sOnceIn":"se destruye en {s}s","sCallStart":"Iniciar una llamada de prueba","sCallRinging":"Llamando…","sCallConnected":"Llamada cifrada","sCallCode":"Código de verificación","sCallHint":"Si los dos códigos coinciden de viva voz, nadie intercepta la llamada.","sCallEnd":"Terminar","sSecTitle":"Revisión de seguridad","sSecLevel":"Nivel de seguridad","sSec1":"Caja fuerte desbloqueada","sSec2":"Contraseña robusta","sSec3":"Verificación en dos pasos","sSec4":"Copia reciente","sSec5":"Claves de contactos verificadas","sSecTap":"Toca un elemento para activarlo","suiteTryTitle":"Luego prueba la Caja fuerte","suiteTry":["Tras iniciar sesión, toca \u003cstrong>Caja fuerte\u003c/strong> abajo.","En \u003cstrong>Archivos\u003c/strong> añade un archivo y muestra cómo lo vería quien robe el disco: solo datos cifrados.","En \u003cstrong>Enviar\u003c/strong> crea un enlace P2P de un solo uso y mira llegar el archivo sin pasar por el servidor.","En \u003cstrong>Una vez\u003c/strong> envía un mensaje que se destruye tras leerlo y luego activa los controles de \u003cstrong>Seguridad\u003c/strong>."]};</script>
 <script src="/demo.js"></script>
 
 <footer class="site-footer">

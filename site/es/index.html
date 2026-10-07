@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Mensajería Privada — Chat con perfiles múltiples y chats ocultos</title>
-<meta name="description" content="Chat privado con cifrado de extremo a extremo real, desbloqueo biométrico, perfiles múltiples y chats ocultos. 11 idiomas, sin número de teléfono." />
+<title>Securmy — Mensajería privada, caja fuerte de archivos y envío P2P cifrado</title>
+<meta name="description" content="Chat con cifrado de extremo a extremo real, caja fuerte de archivos, contraseñas y notas cifradas, envío P2P por enlace, llamadas cifradas y verificación en dos pasos. 11 idiomas." />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/es/" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
 <link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/" />
@@ -19,10 +19,13 @@
 <link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/" />
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Mensajería Privada — Prototipo" />
-<meta property="og:description" content="Cifrado de extremo a extremo, desbloqueo biométrico, perfiles múltiples, chats ocultos y perfil de cobertura en 11 idiomas." />
+<meta property="og:title" content="Securmy — Seguridad, privacidad y confidencialidad" />
+<meta property="og:description" content="Mensajes, archivos, contraseñas y llamadas protegidos con cifrado de extremo a extremo: todo cifrado en tu dispositivo, en 11 idiomas." />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/es/" />
-<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/icon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/icon-512.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/style.css" />
 </head>
@@ -30,7 +33,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/es/" class="brand"><span class="lock">🔒</span> Mensajería Privada</a>
+    <a href="/es/" class="brand"><img class="logo-mark" src="/icon.svg" width="28" height="28" alt="" /> Securmy</a>
     <div class="header-actions">
       <select class="lang-select" aria-label="Idioma" onchange="location.href=this.value"><option value="/">Italiano</option><option value="/en/">English</option><option value="/es/" selected>Español</option><option value="/fr/">Français</option><option value="/de/">Deutsch</option><option value="/pt/">Português</option><option value="/ar/">العربية</option><option value="/zh/">中文</option><option value="/hi/">हिन्दी</option><option value="/ru/">Русский</option><option value="/ja/">日本語</option></select>
       <a href="/es/manual.html" class="btn btn-ghost btn-sm">Manual</a>
@@ -107,6 +110,66 @@
     </div>
   </section>
 
+  <section class="features suite" id="suite">
+    <div class="container">
+      <h2>Más que un chat: tu caja fuerte digital</h2>
+      <p class="sec-lead">Securmy va más allá de la mensajería. Todo lo que guardas o compartes se cifra en tu dispositivo, con la misma caja fuerte que protege tus chats.</p>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="icon">🗄️</div>
+          <h3>Caja fuerte de archivos</h3>
+          <p>Oculta y protege documentos, fotos y archivos: cifrados en tu dispositivo con AES-256 y abiertos solo con tu contraseña o biometría.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🔗</div>
+          <h3>Envío P2P por enlace</h3>
+          <p>El archivo pasa directamente de un dispositivo a otro, cifrado, sin guardarse en el servidor. Enlace de un solo uso con caducidad.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🧼</div>
+          <h3>Limpieza de metadatos</h3>
+          <p>Elimina la ubicación GPS, el modelo de cámara y otros datos ocultos de las fotos antes de compartirlas.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🔑</div>
+          <h3>Gestor de contraseñas</h3>
+          <p>Guarda credenciales en la caja fuerte, genera contraseñas robustas y cópialas: el portapapeles se vacía a los 20 segundos.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">📝</div>
+          <h3>Notas cifradas</h3>
+          <p>Notas privadas cifradas en tu dispositivo, nunca enviadas a ningún servidor.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">👁️</div>
+          <h3>Mensajes de una sola vista</h3>
+          <p>El destinatario los abre una vez: a los pocos segundos se borran del servidor y de su dispositivo.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">📞</div>
+          <h3>Llamadas de voz y vídeo cifradas</h3>
+          <p>Directamente entre los dos dispositivos (DTLS-SRTP), con un código de verificación para comparar de viva voz frente a escuchas.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🔢</div>
+          <h3>Verificación en dos pasos</h3>
+          <p>Códigos TOTP con cualquier app de autenticación: aunque alguien descubra tu contraseña, no entra.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">💾</div>
+          <h3>Copia de seguridad cifrada</h3>
+          <p>Exporta archivos, notas y contraseñas en un único archivo cifrado con una frase secreta que solo tú conoces.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🚨</div>
+          <h3>Revisión de seguridad y borrado de emergencia</h3>
+          <p>Una puntuación te dice qué mejorar; en caso de peligro, un toque borra del dispositivo claves, archivos y contraseñas.</p>
+        </article>
+      </div>
+      <p class="sec-lead"><a href="/es/demo.html" class="btn btn-ghost">Prueba la demo</a></p>
+    </div>
+  </section>
+
   <section class="features security" id="security">
     <div class="container">
       <h2>Seguridad y privacidad: el corazón de la app</h2>
@@ -166,6 +229,30 @@
           <h3>Oculta lo que quieras</h3>
           <p>Escribe la combinación secreta en el buscador para mostrar los chats ocultos cuando lo necesites.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features roadmap" id="roadmap">
+    <div class="container">
+      <h2>Próximamente</h2>
+      <p class="sec-lead">Lo que estamos planificando. Aún no está disponible y no debe entenderse como una fecha prometida.</p>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="icon">🧅</div>
+          <h3>Red Tor</h3>
+          <p>Una dirección .onion del servicio y un modo Tor en las apps nativas, para ocultar también tu ubicación de red. Un navegador por sí solo no puede enrutar el tráfico por Tor: hace falta Tor Browser o la app nativa.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">📱</div>
+          <h3>Apps para iOS y Android</h3>
+          <p>Apps nativas con desbloqueo biométrico, publicadas en las tiendas con las mismas garantías de seguridad y privacidad que el sitio.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🛰️</div>
+          <h3>Servidor TURN privado</h3>
+          <p>Para ocultar tu dirección IP en llamadas y envíos P2P y que funcionen incluso tras redes muy restrictivas.</p>
+        </article>
       </div>
     </div>
   </section>
