@@ -16,7 +16,9 @@ const NAMES = {
   pt: "Português", ar: "العربية", zh: "中文", hi: "हिन्दी", ru: "Русский", ja: "日本語"
 };
 const SITE = path.join(__dirname, "..", "site");
-const PAGES = ["index", "manual", "demo", "privacy", "cookie"];
+const PAGES = ["index", "manual", "demo", "privacy", "cookie", "terms"];
+// Dati del titolare (ditta individuale), uguali in tutte le lingue.
+const OWNER = "Simone Scaffidi Domianello — Piazza Merendino 6, 98071 Capo d'Orlando (ME), Italia — P.IVA IT03507360836 — C.F. SCFSMN83R25G377C — info@simonescaffidi.it — PEC: simone.scaffididomianello@widipec.it";
 const DEMO = require("./site-i18n/demo.js");
 
 const prefix = (l) => (l === "it" ? "" : "/" + l);
@@ -25,6 +27,7 @@ function fileName(l, page) {
   if (page === "demo") return "demo.html";
   if (page === "manual") return l === "it" ? "manuale.html" : "manual.html";
   if (page === "privacy") return "privacy-policy.html";
+  if (page === "terms") return "terms.html";
   return "cookie-policy.html";
 }
 function url(l, page) {
@@ -60,7 +63,7 @@ function validate() {
         if (Array.isArray(rb[1])) chk(Array.isArray(b[1]) && b[1].length === rb[1].length, "lunghezza lista " + s.id + "#" + j, l);
       });
     });
-    ["privacy", "cookie"].forEach((k) => {
+    ["privacy", "cookie", "terms"].forEach((k) => {
       chk(d[k].sections.length === ref[k].sections.length, "numero sezioni " + k, l);
       d[k].sections.forEach((s, i) => {
         chk(s[1].length === ref[k].sections[i][1].length, "paragrafi " + k + " #" + i, l);
@@ -145,6 +148,7 @@ function footer(l, page) {
     '    <nav class="footer-links" aria-label="' + esc(d.ui.legalAria) + '">',
     '      <a href="' + url(l, "manual") + '">' + esc(d.ui.manual) + "</a>",
     '      <a href="' + url(l, "demo") + '">' + esc(DEMO[l].nav) + "</a>",
+    '      <a href="' + url(l, "terms") + '">' + esc(d.ui.terms) + "</a>",
     '      <a href="' + url(l, "privacy") + '">' + esc(d.ui.privacy) + "</a>",
     '      <a href="' + url(l, "cookie") + '">' + esc(d.ui.cookie) + "</a>",
     "    </nav>",
@@ -321,9 +325,11 @@ function demo(l) {
 function legal(l, key, page) {
   const d = dicts[l];
   const P = d[key];
-  const body = P.sections.map((s) =>
-    "  <h2>" + s[0] + "</h2>\n" + s[1].map((p) => "  <p>" + p + "</p>").join("\n")
-  ).join("\n\n");
+  const body = P.sections.map((s, i) => {
+    const paras = s[1].map((p) => "  <p>" + p + "</p>");
+    if (i === 0 && (key === "privacy" || key === "terms")) paras.push("  <p><strong>" + d.ui.owner + ":</strong> " + OWNER + "</p>");
+    return "  <h2>" + s[0] + "</h2>\n" + paras.join("\n");
+  }).join("\n\n");
   const main = [
     '<main class="legal container">',
     "  <h1>" + P.h1 + "</h1>",
@@ -355,7 +361,8 @@ LANGS.forEach((l) => {
     manual: manual(l),
     demo: demo(l),
     privacy: legal(l, "privacy", "privacy"),
-    cookie: legal(l, "cookie", "cookie")
+    cookie: legal(l, "cookie", "cookie"),
+    terms: legal(l, "terms", "terms")
   };
   PAGES.forEach((p) => {
     fs.writeFileSync(path.join(dir, fileName(l, p)), out[p]);
