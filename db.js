@@ -25,7 +25,8 @@ const COLLECTIONS = {
   profiles: (x) => x.id,
   contacts: (x) => x.profileId + "|" + x.contactProfileId,
   chats: (x) => x.id,
-  messages: (x) => x.id
+  messages: (x) => x.id,
+  reports: (x) => x.id
 };
 
 let db = null;
@@ -37,7 +38,7 @@ let timer = null;
 let flushing = Promise.resolve();
 
 function emptyDb() {
-  return { profiles: [], contacts: [], chats: [], messages: [], webauthnChallenges: {} };
+  return { profiles: [], contacts: [], chats: [], messages: [], reports: [], webauthnChallenges: {} };
 }
 
 function normalize(d) {

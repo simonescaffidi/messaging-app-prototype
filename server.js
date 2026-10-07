@@ -308,7 +308,8 @@ function userFails(k) {
 setInterval(() => { for (const k of failedByUser.keys()) userFails(k); }, 5 * 60 * 1000).unref();
 
 app.post("/api/register", registerThrottle, loginThrottle, async (req, res) => {
-  const { email, username, password, isCover } = req.body;
+  const { email, username, password, isCover, acceptTerms } = req.body;
+  if (acceptTerms !== true) return res.status(400).json({ error: "devi accettare i Termini di servizio e la Privacy Policy" });
   if (!email || !username || !password) return res.status(400).json({ error: "email, username e password obbligatori" });
   if (!validEmail(normEmail(email))) return res.status(400).json({ error: "email non valida" });
   const pw = String(password);
@@ -343,6 +344,7 @@ app.post("/api/register", registerThrottle, loginThrottle, async (req, res) => {
     isCover: !!isCover,
     settings: { notifications: "normal" },
     createdAt: Date.now(),
+    termsAcceptedAt: Date.now(),
     publicKey: null,
     webauthnCredentials: []
   };
@@ -650,6 +652,7 @@ app.get("/api/chats", requireAuth, (req, res) => {
       id: c.id,
       with: { profileId: other.id, username: other.username, publicId: other.publicId, publicKey: other.publicKey || null },
       hidden: !!c.hiddenFor[req.profileId],
+      blockedByMe: db.contacts.some((x) => x.profileId === req.profileId && x.contactProfileId === other.id && x.blocked),
       lastMessage: last ? { id: last.id, senderProfileId: last.senderProfileId, iv: last.iv, ciphertext: last.ciphertext, hdr: last.hdr || null, createdAt: last.createdAt } : null
     };
   });
@@ -688,6 +691,9 @@ app.post("/api/messages", requireAuth, (req, res) => {
   const chat = db.chats.find((c) => c.id === chatId && c.memberIds.includes(req.profileId));
   if (!chat) return res.status(404).json({ error: "chat non trovata" });
   if (!iv || !ciphertext) return res.status(400).json({ error: "messaggio cifrato mancante (iv/ciphertext)" });
+  const otherId = chat.memberIds.find((id) => id !== req.profileId);
+  const blocked = db.contacts.some((c) => c.blocked && ((c.profileId === req.profileId && c.contactProfileId === otherId) || (c.profileId === otherId && c.contactProfileId === req.profileId)));
+  if (blocked) return res.status(403).json({ error: "conversazione bloccata" });
 
   const msg = {
     id: uuidv4(),
@@ -729,6 +735,47 @@ app.post("/api/messages/:id/react", requireAuth, (req, res) => {
   }
   res.json({ reactions: msg.reactions });
 });
+
+
+// ---------- SEGNALAZIONI E ELIMINAZIONE ACCOUNT ----------
+// Le segnalazioni NON contengono il testo dei messaggi (sono cifrati end-to-end):
+// solo categoria, nota facoltativa scritta dall'utente e identificativi.
+const REPORT_REASONS = ["spam", "abuse", "illegal", "other"];
+app.post("/api/report", requireAuth, (req, res) => {
+  const { profileId, reason, note } = req.body;
+  if (!REPORT_REASONS.includes(reason)) return res.status(400).json({ error: "motivo non valido" });
+  if (!mailAllowed("report:" + req.profileId, 20)) return res.status(429).json({ error: "troppe segnalazioni" });
+  const db = store.load();
+  const shares = db.chats.some((c) => c.memberIds.includes(req.profileId) && c.memberIds.includes(profileId));
+  if (!shares) return res.status(403).json({ error: "non autorizzato" });
+  db.reports.push({
+    id: uuidv4(), reporterId: req.profileId, reportedId: profileId, reason,
+    note: typeof note === "string" ? note.slice(0, 500) : "", createdAt: Date.now()
+  });
+  const c = db.contacts.find((x) => x.profileId === req.profileId && x.contactProfileId === profileId);
+  if (c) c.blocked = true; // chi segnala blocca automaticamente
+  store.save(db);
+  res.json({ ok: true });
+});
+
+app.post("/api/account/delete", requireAuth, async (req, res) => {
+  const db = store.load();
+  const me = db.profiles.find((p) => p.id === req.profileId);
+  if (!me || !(await verifyPassword(me, String(req.body.password || "")))) {
+    return res.status(403).json({ error: "password errata" });
+  }
+  const id = req.profileId;
+  const chatIds = new Set(db.chats.filter((c) => c.memberIds.includes(id)).map((c) => c.id));
+  db.messages = db.messages.filter((m) => !chatIds.has(m.chatId));
+  db.chats = db.chats.filter((c) => !chatIds.has(c.id));
+  db.contacts = db.contacts.filter((c) => c.profileId !== id && c.contactProfileId !== id);
+  db.reports = db.reports.filter((r) => r.reporterId !== id);
+  db.profiles = db.profiles.filter((p) => p.id !== id);
+  store.sessions.deleteByProfile(id, "");
+  store.save(db);
+  res.json({ ok: true });
+});
+
 
 app.post("/api/settings/notifications", requireAuth, (req, res) => {
   const { mode } = req.body; // normal | no-content | alert-only | off
