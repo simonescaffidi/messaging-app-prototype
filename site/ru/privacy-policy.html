@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Политика конфиденциальности — Приватные сообщения</title>
-<meta name="description" content="Уведомление о конфиденциальности прототипа «Приватные сообщения»: какие данные обрабатываются и как." />
+<title>Политика конфиденциальности — Securmy</title>
+<meta name="description" content="Уведомление о конфиденциальности прототипа «Securmy»: какие данные обрабатываются и как." />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/privacy-policy.html" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/privacy-policy.html" />
 <link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/privacy-policy.html" />
@@ -19,10 +19,13 @@
 <link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/privacy-policy.html" />
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/privacy-policy.html" />
 <meta property="og:type" content="article" />
-<meta property="og:title" content="Политика конфиденциальности — Приватные сообщения" />
-<meta property="og:description" content="Уведомление о конфиденциальности прототипа «Приватные сообщения»: какие данные обрабатываются и как." />
+<meta property="og:title" content="Политика конфиденциальности — Securmy" />
+<meta property="og:description" content="Уведомление о конфиденциальности прототипа «Securmy»: какие данные обрабатываются и как." />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/privacy-policy.html" />
-<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/icon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/icon-512.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/style.css" />
 </head>
@@ -30,7 +33,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/ru/" class="brand"><span class="lock">🔒</span> Приватные сообщения</a>
+    <a href="/ru/" class="brand"><img class="logo-mark" src="/icon.svg" width="28" height="28" alt="" /> Securmy</a>
     <div class="header-actions">
       <select class="lang-select" aria-label="Язык" onchange="location.href=this.value"><option value="/privacy-policy.html">Italiano</option><option value="/en/privacy-policy.html">English</option><option value="/es/privacy-policy.html">Español</option><option value="/fr/privacy-policy.html">Français</option><option value="/de/privacy-policy.html">Deutsch</option><option value="/pt/privacy-policy.html">Português</option><option value="/ar/privacy-policy.html">العربية</option><option value="/zh/privacy-policy.html">中文</option><option value="/hi/privacy-policy.html">हिन्दी</option><option value="/ru/privacy-policy.html" selected>Русский</option><option value="/ja/privacy-policy.html">日本語</option></select>
       <a href="/ru/manual.html" class="btn btn-ghost btn-sm">Руководство</a>
@@ -66,6 +69,11 @@
 
   <h2>Ваши права</h2>
   <p>Вы можете в любое время запросить удаление данных, введённых в прототип, написав по контактам, указанным выше.</p>
+
+  <h2>Функции Securmy: сейф, P2P-передача и звонки</h2>
+  <p>Файлы, заметки, пароли и резервные копии сейфа остаются на вашем устройстве, зашифрованные ключом, который его не покидает: мы их не получаем и не можем ни прочитать, ни восстановить.</p>
+  <p>При P2P-передаче и звонках содержимое идёт напрямую между устройствами в зашифрованном виде. Сервер обрабатывает лишь данные соединения (SDP и ICE-кандидаты), хранит их в памяти не более часа и затем удаляет; другой участник и публичный STUN-сервер могут видеть ваш IP-адрес.</p>
+  <p>Если вы включите двухэтапную проверку, мы храним секрет TOTP в зашифрованном виде; сообщения для однократного просмотра удаляются с сервера через несколько секунд после открытия.</p>
 </main>
 
 <footer class="site-footer">

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Интерактивное демо — Приватные сообщения</title>
-<meta name="description" content="Попробуйте Приватные сообщения: вход по коду, скрытые чаты, профиль-прикрытие, сообщения с таймером и сквозное шифрование. Симуляция в браузере, без аккаунта." />
+<title>Интерактивное демо — Securmy</title>
+<meta name="description" content="Попробуйте Securmy: вход по коду, скрытые чаты, профиль-прикрытие, сообщения с таймером и сквозное шифрование. Симуляция в браузере, без аккаунта." />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/demo.html" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/demo.html" />
 <link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/demo.html" />
@@ -19,10 +19,13 @@
 <link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/demo.html" />
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/demo.html" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Интерактивное демо — Приватные сообщения" />
-<meta property="og:description" content="Попробуйте Приватные сообщения: вход по коду, скрытые чаты, профиль-прикрытие, сообщения с таймером и сквозное шифрование. Симуляция в браузере, без аккаунта." />
+<meta property="og:title" content="Интерактивное демо — Securmy" />
+<meta property="og:description" content="Попробуйте Securmy: вход по коду, скрытые чаты, профиль-прикрытие, сообщения с таймером и сквозное шифрование. Симуляция в браузере, без аккаунта." />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/demo.html" />
-<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/icon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/icon-512.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/style.css" />
 </head>
@@ -30,7 +33,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/ru/" class="brand"><span class="lock">🔒</span> Приватные сообщения</a>
+    <a href="/ru/" class="brand"><img class="logo-mark" src="/icon.svg" width="28" height="28" alt="" /> Securmy</a>
     <div class="header-actions">
       <select class="lang-select" aria-label="Язык" onchange="location.href=this.value"><option value="/demo.html">Italiano</option><option value="/en/demo.html">English</option><option value="/es/demo.html">Español</option><option value="/fr/demo.html">Français</option><option value="/de/demo.html">Deutsch</option><option value="/pt/demo.html">Português</option><option value="/ar/demo.html">العربية</option><option value="/zh/demo.html">中文</option><option value="/hi/demo.html">हिन्दी</option><option value="/ru/demo.html" selected>Русский</option><option value="/ja/demo.html">日本語</option></select>
       <a href="/ru/manual.html" class="btn btn-ghost btn-sm">Руководство</a>
@@ -54,12 +57,19 @@
         <li>Скройте чат через меню, затем введите <strong>7777</strong> в поиске, чтобы вернуть его.</li>
         <li>Заблокируйте и войдите снова с именем <strong>demo</strong> и паролем <strong>2222</strong>: вы увидите только профиль-прикрытие.</li>
       </ol>
+      <h2>Затем попробуйте Сейф</h2>
+      <ol class="demo-try">
+        <li>После входа нажмите <strong>Сейф</strong> внизу.</li>
+        <li>Во вкладке <strong>Файлы</strong> добавьте файл и покажите, что увидит вор диска: только зашифрованные данные.</li>
+        <li>Во вкладке <strong>Отправить</strong> создайте одноразовую P2P-ссылку и посмотрите, как файл приходит мимо сервера.</li>
+        <li>Во вкладке <strong>Один раз</strong> отправьте сообщение, которое уничтожается после прочтения, затем включите проверки в разделе <strong>Безопасность</strong>.</li>
+      </ol>
       <p><a href="/app/" class="btn btn-primary">Открыть приложение</a></p>
     </div>
     <div id="phone" class="phone" aria-label="Попробуйте демо"></div>
   </div>
 </main>
-<script>window.__DEMO_I18N={"nav":"Демо","cta":"Попробовать демо","title":"Интерактивное демо — Приватные сообщения","description":"Попробуйте Приватные сообщения: вход по коду, скрытые чаты, профиль-прикрытие, сообщения с таймером и сквозное шифрование. Симуляция в браузере, без аккаунта.","h1":"Попробуйте демо","lead":"Интерактивная симуляция, которая работает только в вашем браузере: без аккаунта и без отправки данных. Для настоящего приложения нажмите «Открыть приложение».","notice":"Демо-симуляция: сообщения остаются на вашем устройстве. Шифрование AES-GCM настоящее, но контакты и ответы вымышлены.","tryTitle":"Что попробовать","tryItems":["Войдите с именем \u003cstrong>demo\u003c/strong> и паролем \u003cstrong>1111\u003c/strong> (личный профиль) или кнопкой биометрии.","Откройте чат и отправьте сообщение с таймером \u003cstrong>30 секунд\u003c/strong>: оно самоуничтожится.","Включите «Вид сервера», чтобы увидеть, как выглядит зашифрованное сообщение.","Скройте чат через меню, затем введите \u003cstrong>7777\u003c/strong> в поиске, чтобы вернуть его.","Заблокируйте и войдите снова с именем \u003cstrong>demo\u003c/strong> и паролем \u003cstrong>2222\u003c/strong>: вы увидите только профиль-прикрытие."],"userLabel":"Имя пользователя","codeLabel":"Пароль","codePh":"Напр. 1111","enter":"Войти","bio":"Разблокировать отпечатком / Face ID","bioScan":"Проверка биометрии…","wrongCode":"Неверные данные. Используйте demo + 1111 или 2222.","searchPh":"Поиск (или секретная комбинация)","hide":"Скрыть чат","unhide":"Показать чат","hiddenTag":"скрыт","msgPh":"Напишите сообщение…","send":"Отправить","timers":["Без таймера","30 секунд","5 минут","1 час"],"serverView":"Вид сервера (зашифровано)","lockBtn":"Заблокировать","e2eTag":"Сквозное шифрование","expiresIn":"удалится через {s} с","secretFound":"Скрытые чаты показаны","chatsTitle":"Чаты","back":"Назад","empty":"Нет чатов","n1":"Анна","m1":"Увидимся завтра в 18:00?","n2":"Марко","m2":"Отправлю документы сегодня вечером.","n3":"Лука","m3":"План подтверждён, никому не говори.","nc":"Мама","mc":"Не забудь купить хлеб!","replies":["Отлично, до встречи!","Принято 👍","Хорошо, спасибо."]};</script>
+<script>window.__DEMO_I18N={"nav":"Демо","cta":"Попробовать демо","title":"Интерактивное демо — Securmy","description":"Попробуйте Securmy: вход по коду, скрытые чаты, профиль-прикрытие, сообщения с таймером и сквозное шифрование. Симуляция в браузере, без аккаунта.","h1":"Попробуйте демо","lead":"Интерактивная симуляция, которая работает только в вашем браузере: без аккаунта и без отправки данных. Для настоящего приложения нажмите «Открыть приложение».","notice":"Демо-симуляция: сообщения остаются на вашем устройстве. Шифрование AES-GCM настоящее, но контакты и ответы вымышлены.","tryTitle":"Что попробовать","tryItems":["Войдите с именем \u003cstrong>demo\u003c/strong> и паролем \u003cstrong>1111\u003c/strong> (личный профиль) или кнопкой биометрии.","Откройте чат и отправьте сообщение с таймером \u003cstrong>30 секунд\u003c/strong>: оно самоуничтожится.","Включите «Вид сервера», чтобы увидеть, как выглядит зашифрованное сообщение.","Скройте чат через меню, затем введите \u003cstrong>7777\u003c/strong> в поиске, чтобы вернуть его.","Заблокируйте и войдите снова с именем \u003cstrong>demo\u003c/strong> и паролем \u003cstrong>2222\u003c/strong>: вы увидите только профиль-прикрытие."],"userLabel":"Имя пользователя","codeLabel":"Пароль","codePh":"Напр. 1111","enter":"Войти","bio":"Разблокировать отпечатком / Face ID","bioScan":"Проверка биометрии…","wrongCode":"Неверные данные. Используйте demo + 1111 или 2222.","searchPh":"Поиск (или секретная комбинация)","hide":"Скрыть чат","unhide":"Показать чат","hiddenTag":"скрыт","msgPh":"Напишите сообщение…","send":"Отправить","timers":["Без таймера","30 секунд","5 минут","1 час"],"serverView":"Вид сервера (зашифровано)","lockBtn":"Заблокировать","e2eTag":"Сквозное шифрование","expiresIn":"удалится через {s} с","secretFound":"Скрытые чаты показаны","chatsTitle":"Чаты","back":"Назад","empty":"Нет чатов","n1":"Анна","m1":"Увидимся завтра в 18:00?","n2":"Марко","m2":"Отправлю документы сегодня вечером.","n3":"Лука","m3":"План подтверждён, никому не говори.","nc":"Мама","mc":"Не забудь купить хлеб!","replies":["Отлично, до встречи!","Принято 👍","Хорошо, спасибо."],"sNavChats":"Чаты","sNavVault":"Сейф","sTabFiles":"Файлы","sTabPw":"Пароли","sTabP2p":"Отправить","sTabOnce":"Один раз","sTabCall":"Звонок","sTabSec":"Безопасность","sAddFile":"Добавить пробный файл","sEnc":"Зашифровано","sShowCipher":"Показать, как его видит диск","sFilesEmpty":"Файлов нет: добавьте один.","sStripped":"Метаданные удалены (GPS, камера)","sGen":"Создать пароль","sCopy":"Копировать","sCopied":"Скопировано: буфер очистится через 20 с","sStrength":"Надёжность","sP2pCreate":"Создать ссылку для «contract.pdf»","sP2pLink":"Одноразовая ссылка, истекает через 10 минут","sP2pWait":"Ожидание получателя…","sP2pJoined":"Получатель подключился","sP2pSending":"Прямая зашифрованная передача","sP2pDone":"Доставлено. Ссылка больше не работает.","sP2pNote":"В демо соединение имитируется; в настоящем приложении файл идёт напрямую между устройствами.","sOnceSend":"Отправить сообщение для однократного просмотра","sOnceTap":"Нажмите, чтобы посмотреть (потом исчезнет)","sOnceGone":"Сообщение уничтожено","sOnceText":"Код сейфа — 4821","sOnceIn":"уничтожится через {s} с","sCallStart":"Начать пробный звонок","sCallRinging":"Вызов…","sCallConnected":"Зашифрованный звонок","sCallCode":"Код проверки","sCallHint":"Если оба кода совпали голосом, никто не перехватывает звонок.","sCallEnd":"Завершить","sSecTitle":"Проверка безопасности","sSecLevel":"Уровень безопасности","sSec1":"Сейф разблокирован","sSec2":"Надёжный пароль","sSec3":"Двухэтапная проверка","sSec4":"Свежая копия","sSec5":"Ключи контактов проверены","sSecTap":"Нажмите на пункт, чтобы включить","suiteTryTitle":"Затем попробуйте Сейф","suiteTry":["После входа нажмите \u003cstrong>Сейф\u003c/strong> внизу.","Во вкладке \u003cstrong>Файлы\u003c/strong> добавьте файл и покажите, что увидит вор диска: только зашифрованные данные.","Во вкладке \u003cstrong>Отправить\u003c/strong> создайте одноразовую P2P-ссылку и посмотрите, как файл приходит мимо сервера.","Во вкладке \u003cstrong>Один раз\u003c/strong> отправьте сообщение, которое уничтожается после прочтения, затем включите проверки в разделе \u003cstrong>Безопасность\u003c/strong>."]};</script>
 <script src="/demo.js"></script>
 
 <footer class="site-footer">

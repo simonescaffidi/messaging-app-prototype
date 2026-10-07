@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Приватные сообщения — чат с несколькими профилями и скрытыми чатами</title>
-<meta name="description" content="Приватный чат с настоящим сквозным шифрованием, биометрической разблокировкой, несколькими профилями и скрытыми чатами. 11 языков, без номера телефона." />
+<title>Securmy — Приватные сообщения, сейф для файлов и зашифрованная P2P-передача</title>
+<meta name="description" content="Чат со сквозным шифрованием, сейф файлов, зашифрованные пароли и заметки, P2P-передача по ссылке, зашифрованные звонки и двухэтапная проверка. 11 языков." />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
 <link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/" />
@@ -19,10 +19,13 @@
 <link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/" />
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Приватные сообщения — прототип" />
-<meta property="og:description" content="Сквозное шифрование, биометрическая разблокировка, несколько профилей, скрытые чаты и профиль-прикрытие на 11 языках." />
+<meta property="og:title" content="Securmy — Безопасность, приватность и конфиденциальность" />
+<meta property="og:description" content="Сообщения, файлы, пароли и звонки под защитой сквозного шифрования: всё шифруется на вашем устройстве, на 11 языках." />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/ru/" />
-<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/icon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/icon-512.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/style.css" />
 </head>
@@ -30,7 +33,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/ru/" class="brand"><span class="lock">🔒</span> Приватные сообщения</a>
+    <a href="/ru/" class="brand"><img class="logo-mark" src="/icon.svg" width="28" height="28" alt="" /> Securmy</a>
     <div class="header-actions">
       <select class="lang-select" aria-label="Язык" onchange="location.href=this.value"><option value="/">Italiano</option><option value="/en/">English</option><option value="/es/">Español</option><option value="/fr/">Français</option><option value="/de/">Deutsch</option><option value="/pt/">Português</option><option value="/ar/">العربية</option><option value="/zh/">中文</option><option value="/hi/">हिन्दी</option><option value="/ru/" selected>Русский</option><option value="/ja/">日本語</option></select>
       <a href="/ru/manual.html" class="btn btn-ghost btn-sm">Руководство</a>
@@ -107,6 +110,66 @@
     </div>
   </section>
 
+  <section class="features suite" id="suite">
+    <div class="container">
+      <h2>Больше, чем чат: ваш цифровой сейф</h2>
+      <p class="sec-lead">Securmy выходит за рамки переписки. Всё, что вы сохраняете или передаёте, шифруется на вашем устройстве тем же сейфом, который защищает ваши чаты.</p>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="icon">🗄️</div>
+          <h3>Сейф для файлов</h3>
+          <p>Прячьте и защищайте документы, фото и файлы: они шифруются на устройстве по AES-256 и открываются только вашим паролем или биометрией.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🔗</div>
+          <h3>P2P-передача по ссылке</h3>
+          <p>Файл идёт напрямую с устройства на устройство в зашифрованном виде и не хранится на сервере. Одноразовая ссылка со сроком действия.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🧼</div>
+          <h3>Очистка метаданных</h3>
+          <p>Удаляет из фото GPS-координаты, модель камеры и другие скрытые данные перед отправкой.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🔑</div>
+          <h3>Менеджер паролей</h3>
+          <p>Храните учётные данные в сейфе, создавайте надёжные пароли и копируйте их: буфер обмена очищается через 20 секунд.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">📝</div>
+          <h3>Зашифрованные заметки</h3>
+          <p>Личные заметки шифруются на вашем устройстве и никогда не отправляются на сервер.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">👁️</div>
+          <h3>Сообщения для однократного просмотра</h3>
+          <p>Получатель открывает их один раз: через несколько секунд они удаляются с сервера и с его устройства.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">📞</div>
+          <h3>Зашифрованные аудио- и видеозвонки</h3>
+          <p>Напрямую между двумя устройствами (DTLS-SRTP), с кодом проверки, который сверяют голосом, чтобы исключить прослушку.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🔢</div>
+          <h3>Двухэтапная проверка</h3>
+          <p>TOTP-коды в любом приложении-аутентификаторе: даже узнав ваш пароль, злоумышленник не войдёт.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">💾</div>
+          <h3>Зашифрованная резервная копия</h3>
+          <p>Экспортируйте файлы, заметки и пароли в один архив, зашифрованный парольной фразой, которую знаете только вы.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🚨</div>
+          <h3>Проверка безопасности и экстренное удаление</h3>
+          <p>Оценка подскажет, что улучшить; в опасности одно касание удалит с устройства ключи, файлы и пароли.</p>
+        </article>
+      </div>
+      <p class="sec-lead"><a href="/ru/demo.html" class="btn btn-ghost">Попробовать демо</a></p>
+    </div>
+  </section>
+
   <section class="features security" id="security">
     <div class="container">
       <h2>Безопасность и конфиденциальность: суть приложения</h2>
@@ -166,6 +229,30 @@
           <h3>Скрывайте что хотите</h3>
           <p>Введите секретную комбинацию в строке поиска, чтобы показать скрытые чаты, когда это нужно.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features roadmap" id="roadmap">
+    <div class="container">
+      <h2>Скоро</h2>
+      <p class="sec-lead">Наши планы. Пока недоступно и не является обещанием срока.</p>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="icon">🧅</div>
+          <h3>Сеть Tor</h3>
+          <p>Адрес .onion для сервиса и режим Tor в нативных приложениях, чтобы скрыть и ваше сетевое местоположение. Один браузер не может направлять трафик через Tor: нужен Tor Browser или нативное приложение.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">📱</div>
+          <h3>Приложения для iOS и Android</h3>
+          <p>Нативные приложения с биометрической разблокировкой в магазинах — с теми же гарантиями безопасности и приватности, что и на сайте.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🛰️</div>
+          <h3>Собственный TURN-сервер</h3>
+          <p>Чтобы скрывать ваш IP-адрес при звонках и P2P-передаче и чтобы они работали даже в очень ограниченных сетях.</p>
+        </article>
       </div>
     </div>
   </section>
