@@ -107,6 +107,45 @@
     </div>
   </section>
 
+  <section class="features security" id="security">
+    <div class="container">
+      <h2>Seguridad y privacidad: el corazón de la app</h2>
+      <p class="sec-lead">No nos limitamos a decir «está cifrado». Esto es, en concreto, lo que protege tus conversaciones.</p>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="icon">🔄</div>
+          <h3>Una clave nueva para cada mensaje</h3>
+          <p>Cada mensaje tiene una clave de un solo uso (forward secrecy) que se elimina tras leerlo. Si alguien obtuviera tus claves, no podría descifrar los mensajes pasados.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🗝️</div>
+          <h3>Caja fuerte cifrada con tu contraseña</h3>
+          <p>Las claves privadas y los mensajes leídos se cifran en el dispositivo (PBKDF2 + AES-GCM) con tu contraseña: sin ella son ilegibles.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🔍</div>
+          <h3>Verificación de claves y alerta anti-intercepción</h3>
+          <p>Compara de viva voz el número de seguridad con tu contacto. Si su clave cambia, la app te avisa y bloquea el envío hasta que confirmes.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🙈</div>
+          <h3>Un servidor ciego</h3>
+          <p>El servidor solo guarda texto cifrado. El correo y el usuario se cifran en reposo en la base de datos; de las contraseñas solo se guarda un hash (scrypt).</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🛡️</div>
+          <h3>Defensa contra ataques de acceso</h3>
+          <p>Intentos limitados por IP y por usuario, sesiones revocables y cierre de las demás sesiones al cambiar la contraseña.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🫆</div>
+          <h3>Biometría que no sale de tu dispositivo</h3>
+          <p>Con WebAuthn/FIDO2 el servidor solo recibe la clave pública de la passkey: el dato biométrico nunca sale del móvil u ordenador.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <section class="how" id="how-it-works">
     <div class="container">
       <h2>Cómo funciona</h2>
@@ -135,7 +174,7 @@
     <div class="container">
       <h2>Qué es y qué no es</h2>
       <div class="disclaimer-box">
-        <p><strong>Esto es un prototipo funcional</strong>, no un producto terminado. Los mensajes están cifrados de extremo a extremo (ECDH P-256 + AES-GCM de 256 bits, derivación HKDF-SHA256): el servidor nunca ve el texto en claro. El desbloqueo biométrico usa WebAuthn/FIDO2 real. Quedan límites conocidos, explicados sin rodeos en el <a href="/es/manual.html">manual de usuario</a>: aún no hay un ratchet con forward secrecy "al estilo Signal", no hay verificación fuera de banda de las claves públicas (en teoría un servidor malicioso podría sustituirlas), la clave privada permanece en el navegador sin un enclave seguro de hardware y la recuperación de contraseña por correo solo funciona con un correo verificado. Útil para probar la experiencia con seguridad real pero no "a prueba de Estado", todavía no para conversaciones de riesgo muy alto.</p>
+        <p><strong>Este es un prototipo funcional</strong>, no un producto terminado, pero la seguridad es real: cada mensaje tiene una clave nueva que se elimina tras leerlo (forward secrecy), las claves privadas están en una caja fuerte cifrada con tu contraseña, puedes verificar la identidad del contacto con un número de seguridad y recibes un aviso si su clave cambia. El desbloqueo biométrico usa WebAuthn/FIDO2 real. Quedan límites conocidos, explicados sin rodeos en el <a href="/es/manual.html">manual de usuario</a> (metadatos visibles para el servidor, historial ligado al dispositivo, recuperación solo por correo). Aún no está pensado para conversaciones de riesgo extremo.</p>
       </div>
     </div>
   </section>
