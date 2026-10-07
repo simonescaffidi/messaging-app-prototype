@@ -33,7 +33,8 @@ const P2P = (() => {
 
   async function iceConfig() {
     try {
-      const r = await fetch("/api/ice", { cache: "no-store" });
+      const relay = (() => { try { return localStorage.getItem("sm_relay") === "1"; } catch { return false; } })();
+      const r = await fetch("/api/ice" + (relay ? "?relay=1" : ""), { cache: "no-store" });
       const j = await r.json();
       return { iceServers: j.iceServers, iceTransportPolicy: j.relayOnly ? "relay" : "all" };
     } catch { return { iceServers: [{ urls: "stun:stun.l.google.com:19302" }] }; }

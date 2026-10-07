@@ -187,6 +187,14 @@ const E2E = (() => {
     const o = await openWith(k, wrap.w); // lancia se la passphrase e' errata
     return crypto.subtle.importKey("raw", unb64(o.dk), "AES-GCM", false, ["encrypt", "decrypt"]);
   }
+  // Collega un nuovo dispositivo: adotta la chiave dati avvolta con la passphrase di sync.
+  async function adoptDataKey(passphrase, wrap) {
+    const k = await deriveVaultKey(passphrase, unb64(wrap.salt), wrap.iter || PBKDF2_ITER);
+    const o = await openWith(k, wrap.w);
+    S.data.dk = o.dk;
+    await persistVault();
+    S.dk = await crypto.subtle.importKey("raw", unb64(o.dk), "AES-GCM", false, ["encrypt", "decrypt"]);
+  }
   const sealWithKey = (k, obj) => sealWith(k, obj);
   const openWithKey = (k, str) => openWith(k, str);
   async function openBytesWith(k, buf) {
@@ -367,7 +375,7 @@ const E2E = (() => {
     ensurePrekeys, encryptMessage, decryptMessage, rememberSent,
     safetyNumber, checkPeer, acceptPeer, markVerified,
     vaultSeal, vaultOpen, sealBytes, openBytes, wrapDataKey, unwrapDataKey,
-    sealWithKey, openWithKey, openBytesWith, cacheDelete, wipeLocal,
+    sealWithKey, openWithKey, openBytesWith, adoptDataKey, cacheDelete, wipeLocal,
     pid: () => (S ? S.pid : null)
   };
 })();

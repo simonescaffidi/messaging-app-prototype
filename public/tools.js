@@ -38,7 +38,12 @@ const Suite = (() => {
   }
   const wrap = (req) => new Promise((res, rej) => { req.onsuccess = () => res(req.result); req.onerror = () => rej(req.error); });
   async function putItem(it) { const d = await db(); return wrap(d.transaction("items", "readwrite").objectStore("items").put(it)); }
-  async function delItem(key) { const d = await db(); return wrap(d.transaction("items", "readwrite").objectStore("items").delete(key)); }
+  async function delItemRaw(key) { const d = await db(); return wrap(d.transaction("items", "readwrite").objectStore("items").delete(key)); }
+  async function delItem(key) {
+    const d = await db(); const old = await getItem(key);
+    await wrap(d.transaction("items", "readwrite").objectStore("items").delete(key));
+    if (old && old.synced) syncRemoteDelete(old.id);
+  }
   async function getItem(key) { const d = await db(); return wrap(d.transaction("items").objectStore("items").get(key)); }
   async function allItems() {
     const d = await db();
@@ -53,9 +58,9 @@ const Suite = (() => {
     return out.sort((a, b) => (b.it.created || 0) - (a.it.created || 0));
   }
   async function saveMeta(kind, id, meta, blob) {
-    await putItem({ key: pid() + ":" + id, pid: pid(), id, kind, meta: await E2E.vaultSeal(meta), blob: blob || null, created: Date.now() });
+    await putItem({ key: pid() + ":" + id, pid: pid(), id, kind, meta: await E2E.vaultSeal(meta), blob: blob || null, created: Date.now(), u: Date.now() });
   }
-  async function updateMeta(it, meta) { await putItem({ ...it, meta: await E2E.vaultSeal(meta) }); }
+  async function updateMeta(it, meta) { await putItem({ ...it, meta: await E2E.vaultSeal(meta), u: Date.now() }); }
 
   // ------------------------------------------------------------------ utilita'
   function download(blob, name) {
@@ -79,7 +84,7 @@ const Suite = (() => {
   function locked() { return !E2E.isUnlocked(); }
 
   // ------------------------------------------------------------------ pannello
-  const TABS = [["files", "tabFiles"], ["notes", "tabNotes"], ["pw", "tabPw"], ["send", "tabSend"], ["clean", "tabClean"], ["sec", "tabSec"], ["backup", "tabBackup"]];
+  const TABS = [["files", "tabFiles"], ["notes", "tabNotes"], ["pw", "tabPw"], ["send", "tabSend"], ["clean", "tabClean"], ["sec", "tabSec"], ["sync", "syncTab"], ["backup", "tabBackup"]];
   function open(which) {
     if (which) tab = which;
     $("#suite-modal").classList.remove("hidden");
@@ -91,7 +96,7 @@ const Suite = (() => {
     for (const [id, key] of TABS) tabs.append(h("button", { class: id === tab ? "active" : "", onclick: () => { tab = id; render(); } }, t(key)));
     const body = $("#suite-body"); body.innerHTML = "";
     if (locked() && tab !== "sec") { body.append(h("p", { class: "error" }, t("vaultLockedMsg"))); return; }
-    ({ files: tFiles, notes: tNotes, pw: tPw, send: tSend, clean: tClean, sec: tSec, backup: tBackup })[tab](body);
+    ({ files: tFiles, notes: tNotes, pw: tPw, send: tSend, clean: tClean, sec: tSec, sync: tSync, backup: tBackup })[tab](body);
   }
 
   // ------------------------------------------------------------------ File
@@ -284,6 +289,14 @@ const Suite = (() => {
     body.append(h("h3", {}, t("secTitle")), h("p", { class: "hint" }, t("scoreLabel") + ": " + score + "%"), h("div", { class: "score" }, h("div", { style: "width:" + score + "%" })));
     for (const [k, ok, r] of rows) body.append(h("div", { class: "chk" }, h("span", { class: "dot " + (ok ? "ok" : "no") }, ok ? "✓" : "!"), h("span", {}, t(k, r))));
 
+
+    body.append(h("h3", {}, t("ipTitle")), h("p", { class: "hint" }, t("ipHint")));
+    let turn = false; try { turn = (await (await fetch("/api/ice", { cache: "no-store" })).json()).turn; } catch {}
+    const cb = h("input", { type: "checkbox", disabled: !turn });
+    cb.checked = turn && localStorage.getItem("sm_relay") === "1";
+    cb.addEventListener("change", () => localStorage.setItem("sm_relay", cb.checked ? "1" : "0"));
+    body.append(h("label", { class: "chk" }, cb, " " + t("ipLabel")), turn ? "" : h("p", { class: "hint" }, t("ipNoTurn")));
+
     body.append(h("h3", {}, t("tfaTitle")));
     const msg = h("p", { class: "hint" });
     if (me.has2fa) {
@@ -316,6 +329,107 @@ const Suite = (() => {
         try { localStorage.removeItem("webauthn_enrolled"); } catch {}
         alert(t("panicDone")); location.reload();
       } }, t("panicBtn")));
+  }
+
+
+  // ------------------------------------------------------------------ Sync cifrata (a pagamento)
+  // Il server riceve solo oggetti gia' cifrati con la chiave dati del dispositivo. Una
+  // passphrase (distinta dalla password) avvolge quella chiave per collegare altri dispositivi.
+  const u32 = (n) => { const b = new Uint8Array(4); new DataView(b.buffer).setUint32(0, n); return b; };
+  const concat = (...p) => { const o = new Uint8Array(p.reduce((a, x) => a + x.length, 0)); let i = 0; for (const x of p) { o.set(x, i); i += x.length; } return o; };
+  async function rawApi(path, opts = {}) {
+    const r = await fetch(path, { ...opts, headers: { Authorization: "Bearer " + state.token, ...(opts.headers || {}) } });
+    if (!r.ok) { const j = await r.json().catch(() => ({})); const e = new Error(j.error || "errore"); e.status = r.status; throw e; }
+    return r;
+  }
+  function syncRemoteDelete(id) { if (state.token) rawApi("/api/sync/objects/" + id, { method: "DELETE" }).catch(() => {}); }
+  async function packItem(it) {
+    const enc = new TextEncoder().encode(it.meta);
+    return concat(u32(enc.length), enc, it.blob ? new Uint8Array(it.blob) : new Uint8Array(0));
+  }
+  function unpackItem(buf) {
+    const dv = new DataView(buf.buffer, buf.byteOffset, buf.byteLength), n = dv.getUint32(0);
+    return { meta: new TextDecoder().decode(buf.slice(4, 4 + n)), blob: buf.length > 4 + n ? buf.slice(4 + n) : null };
+  }
+  async function syncNow() {
+    const remote = await (await rawApi("/api/sync/objects")).json();
+    const rmap = new Map(remote.filter((x) => x.id !== "_keywrap").map((x) => { let m = {}; try { m = JSON.parse(x.meta); } catch {} return [x.id, { ...x, ...m }]; }));
+    const local = await allItems();
+    let up = 0, down = 0, del = 0;
+    for (const it of local) {
+      const r = rmap.get(it.id);
+      const lu = it.u || it.created || 0;
+      if (!r) {
+        if (it.synced) { await delItemRaw(it.key); del++; continue; } // cancellato su un altro dispositivo
+      } else {
+        const ru = r.u || 0;
+        if (ru > lu) continue; // il remoto e' piu' recente: lo scarichiamo sotto
+        if (ru === lu && it.synced) continue; // invariato
+      }
+      const body = await packItem(it);
+      await rawApi("/api/sync/objects/" + it.id, { method: "PUT", headers: { "Content-Type": "application/octet-stream", "x-meta": JSON.stringify({ k: it.kind, c: it.created, u: lu }) }, body });
+      await putItem({ ...it, synced: true, u: lu }); up++;
+    }
+    const lmap = new Map(local.map((x) => [x.id, x]));
+    for (const [id, r] of rmap) {
+      const it = lmap.get(id);
+      if (it && (it.u || it.created || 0) >= (r.u || 0)) continue;
+      const buf = new Uint8Array(await (await rawApi("/api/sync/objects/" + id)).arrayBuffer());
+      const p = unpackItem(buf);
+      await putItem({ key: pid() + ":" + id, pid: pid(), id, kind: r.k, meta: p.meta, blob: p.blob, created: r.c || Date.now(), u: r.u || r.c || 0, synced: true }); down++;
+    }
+    localStorage.setItem("sm_" + pid() + "_sync", String(Date.now()));
+    return { up, down, del };
+  }
+  async function tSync(body) {
+    if (locked()) { body.append(h("p", { class: "hint" }, t("vaultLockedMsg"))); return; }
+    let st;
+    try { st = await (await rawApi("/api/sync/status")).json(); } catch { body.append(h("p", { class: "hint" }, t("syncOff"))); return; }
+    const msg = h("p", { class: "hint" });
+    const fmtB = (n) => n >= 1073741824 ? (n / 1073741824).toFixed(1) + " GB" : fmtSize(n);
+    body.append(h("p", { class: "hint" }, t("syncIntro")));
+    if (!st.quota) {
+      body.append(h("p", {}, t("syncNeedPlan")));
+      if (!st.billing) body.append(h("p", { class: "hint" }, t("syncPayOff")));
+      else for (const p of st.plans) {
+        const price = new Intl.NumberFormat(I18N.current, { style: "currency", currency: "EUR" }).format(p.cents / 100);
+        body.append(h("button", { class: "primary", onclick: async () => {
+          try { const j = await (await rawApi("/api/sync/checkout", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ plan: p.id }) })).json(); location.href = j.url; }
+          catch (e) { msg.textContent = e.message; }
+        } }, t("syncPlanBuy", { gb: p.gb, price })));
+      }
+      body.append(msg); return;
+    }
+    body.append(h("p", {}, t("syncUsage", { a: fmtB(st.used), b: fmtB(st.quota) })), h("div", { class: "score" }, h("div", { style: "width:" + Math.min(100, Math.round(st.used * 100 / st.quota)) + "%" })));
+    const list = await (await rawApi("/api/sync/objects")).json();
+    const hasWrap = list.some((x) => x.id === "_keywrap");
+    const keyReady = localStorage.getItem("sm_" + pid() + "_synckey") === "1";
+    if (!keyReady) {
+      const pass = h("input", { type: "password", minlength: 10, maxlength: 128, placeholder: t("syncPass"), autocomplete: "new-password" });
+      body.append(pass, h("button", { class: "primary", onclick: async () => {
+        try {
+          if (pass.value.length < 10) { msg.textContent = t("syncPass"); return; }
+          if (!hasWrap) {
+            const w = await E2E.wrapDataKey(pass.value);
+            await rawApi("/api/sync/objects/_keywrap", { method: "PUT", headers: { "Content-Type": "application/octet-stream", "x-meta": JSON.stringify({ k: "wrap" }) }, body: new TextEncoder().encode(JSON.stringify(w)) });
+          } else {
+            if ((await allItems()).length) { msg.textContent = t("syncJoinBlock"); return; }
+            const w = JSON.parse(await (await rawApi("/api/sync/objects/_keywrap")).text());
+            await E2E.adoptDataKey(pass.value, w);
+          }
+          localStorage.setItem("sm_" + pid() + "_synckey", "1"); render();
+        } catch { msg.textContent = t("syncBadPass"); }
+      } }, t(hasWrap ? "syncJoin" : "syncCreate")), msg);
+    } else {
+      body.append(h("p", { class: "hint" }, "✅ " + t("syncKeyReady")),
+        h("button", { class: "primary", onclick: async (e) => {
+          e.target.disabled = true; msg.textContent = "…";
+          try { const r = await syncNow(); msg.textContent = "✓ " + t("syncDone", { up: r.up, down: r.down, del: r.del }); }
+          catch (er) { msg.textContent = er.status === 413 ? t("syncNoSpace") : er.message; }
+          e.target.disabled = false;
+        } }, t("syncNow")), msg);
+    }
+    if (st.billing) body.append(h("button", { onclick: async () => { try { location.href = (await (await rawApi("/api/sync/portal", { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" })).json()).url; } catch (e) { msg.textContent = e.message; } } }, t("syncManage")));
   }
 
   // ------------------------------------------------------------------ Backup cifrato
