@@ -107,6 +107,45 @@
     </div>
   </section>
 
+  <section class="features security" id="security">
+    <div class="container">
+      <h2>Sécurité et confidentialité : le cœur de l'appli</h2>
+      <p class="sec-lead">Nous ne nous contentons pas de dire « c'est chiffré ». Voici concrètement ce qui protège vos conversations.</p>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="icon">🔄</div>
+          <h3>Une nouvelle clé pour chaque message</h3>
+          <p>Chaque message a une clé à usage unique (forward secrecy), supprimée après lecture. Si quelqu'un obtenait vos clés, il ne pourrait pas déchiffrer les messages passés.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🗝️</div>
+          <h3>Coffre chiffré avec votre mot de passe</h3>
+          <p>Les clés privées et les messages lus sont chiffrés sur l'appareil (PBKDF2 + AES-GCM) avec votre mot de passe : sans lui, ils restent illisibles.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🔍</div>
+          <h3>Vérification des clés et alerte anti-interception</h3>
+          <p>Comparez de vive voix le numéro de sécurité avec votre contact. Si sa clé change, l'appli vous prévient et bloque l'envoi tant que vous ne confirmez pas.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🙈</div>
+          <h3>Un serveur aveugle</h3>
+          <p>Le serveur ne conserve que du texte chiffré. L'e-mail et le nom d'utilisateur sont chiffrés au repos dans la base ; les mots de passe ne sont gardés que sous forme de hash (scrypt).</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🛡️</div>
+          <h3>Défense contre les attaques de connexion</h3>
+          <p>Tentatives limitées par IP et par utilisateur, sessions révocables, autres sessions fermées au changement de mot de passe.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🫆</div>
+          <h3>Une biométrie qui ne quitte pas votre appareil</h3>
+          <p>Avec WebAuthn/FIDO2, le serveur ne reçoit que la clé publique de la passkey : la donnée biométrique ne quitte jamais votre téléphone ou ordinateur.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <section class="how" id="how-it-works">
     <div class="container">
       <h2>Comment ça marche</h2>
@@ -135,7 +174,7 @@
     <div class="container">
       <h2>Ce que c'est, ce que ce n'est pas</h2>
       <div class="disclaimer-box">
-        <p><strong>Ceci est un prototype fonctionnel</strong>, pas un produit fini. Les messages sont chiffrés de bout en bout (ECDH P-256 + AES-GCM 256 bits, dérivation HKDF-SHA256) : le serveur ne voit jamais le texte en clair. Le déverrouillage biométrique utilise un vrai WebAuthn/FIDO2. Des limites connues demeurent, exposées sans détour dans le <a href="/fr/manual.html">manuel d'utilisation</a> : il n'y a pas encore de ratchet avec forward secrecy « à la Signal », pas de vérification hors bande des clés publiques (un serveur malveillant pourrait donc, en théorie, les remplacer), la clé privée reste dans le navigateur sans enclave sécurisée matérielle, et la récupération du mot de passe par e-mail ne fonctionne qu'avec une adresse vérifiée. Utile pour tester l'expérience avec une vraie sécurité, mais pas « à l'épreuve d'un État » — pas encore pour des conversations à très haut risque.</p>
+        <p><strong>Ceci est un prototype fonctionnel</strong>, pas un produit fini, mais la sécurité est réelle : chaque message a une nouvelle clé supprimée après lecture (forward secrecy), les clés privées sont dans un coffre chiffré avec votre mot de passe, vous pouvez vérifier l'identité du contact avec un numéro de sécurité et vous êtes averti si sa clé change. Le déverrouillage biométrique utilise un vrai WebAuthn/FIDO2. Des limites connues subsistent, expliquées sans détour dans le <a href="/fr/manual.html">manuel utilisateur</a> (métadonnées visibles du serveur, historique lié à l'appareil, récupération par e-mail uniquement). Il n'est pas encore conçu pour des conversations à très haut risque.</p>
       </div>
     </div>
   </section>

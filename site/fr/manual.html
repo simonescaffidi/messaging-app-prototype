@@ -104,12 +104,18 @@
     <h2>7. Chiffrement de bout en bout : comment il fonctionne vraiment</h2>
     <p>Ce n'est pas un slogan marketing : chaque message est chiffré <strong>dans votre navigateur</strong>, avant d'être envoyé au serveur, selon ce schéma :</p>
     <ol>
-      <li>À la première connexion, votre appareil génère une paire de clés ECDH sur la courbe P-256 (une publique et une privée). La clé publique est envoyée au serveur ; la clé privée reste uniquement dans votre navigateur.</li>
-      <li>Quand vous écrivez à un contact, votre navigateur combine votre clé privée avec sa clé publique (échange ECDH) et dérive, via HKDF-SHA256, une clé symétrique AES-GCM 256 bits propre à ce couple de personnes.</li>
-      <li>Chaque message est chiffré avec cette clé et un nombre aléatoire (IV) différent à chaque fois, puis envoyé au serveur déjà chiffré.</li>
-      <li>Le serveur ne stocke et ne transmet que du texte chiffré : il ne peut pas lire le contenu des messages.</li>
+      <li>À la première connexion, votre appareil génère une paire de clés ECDH (courbe P-256) : la clé publique va au serveur, la privée reste sur l'appareil, chiffrée avec votre mot de passe. Il prépare aussi un lot de clés publiques à usage unique (« prekeys »).</li>
+      <li>Pour chaque message, votre navigateur génère une clé temporaire et récupère sur le serveur UNE prekey à usage unique du contact. Il combine trois échanges ECDH (votre identité, la clé temporaire, la prekey) et dérive avec HKDF-SHA256 une clé AES-GCM de 256 bits valable pour ce seul message.</li>
+      <li>Le message est chiffré avec cette clé et un IV aléatoire ; l'en-tête est authentifié et ne peut donc pas être modifié. Le serveur ne reçoit que du texte chiffré.</li>
+      <li>Le destinataire reconstruit la même clé, lit le message et supprime aussitôt la prekey privée : dès lors, plus personne ne peut le déchiffrer, pas même avec vos clés à long terme.</li>
     </ol>
     <p>C'est le même type de mathématiques (ECDH + AES-GCM) que celui de nombreux protocoles sécurisés modernes, appliqué ici via la Web Crypto API native du navigateur, sans bibliothèque externe.</p>
+    <h3>Forward secrecy : les messages passés restent protégés</h3>
+    <p>Même si quelqu'un obtenait vos clés à long terme (par exemple en volant votre appareil), il ne pourrait pas déchiffrer les messages déjà reçus, car leurs clés ont été supprimées. Le texte déjà lu ne subsiste que dans le cache local chiffré de votre appareil.</p>
+    <h3>Le coffre des clés</h3>
+    <p>Les clés privées, les prekeys et le cache des messages ne sont stockés dans le navigateur que sous forme chiffrée (AES-GCM), avec une clé dérivée de votre mot de passe par PBKDF2-SHA256 (310 000 itérations). Si vous vous connectez par biométrie, le mot de passe est demandé une fois pour ouvrir le coffre. Quand vous changez de mot de passe, le coffre est rechiffré.</p>
+    <h3>Vérifier que c'est bien lui : numéro de sécurité</h3>
+    <p>Dans la discussion, touchez l'icône 🔑 : vous voyez un numéro de 60 chiffres, identique pour vous deux. Comparez-le avec votre contact en personne ou de vive voix : s'il correspond, personne ne s'interpose. Si la clé d'un contact change (nouvel appareil ou interception possible), un avertissement apparaît et l'envoi reste bloqué jusqu'à ce que vous choisissiez « Accepter la nouvelle clé ».</p>
   </section>
 
   <section id="biometric">
@@ -131,12 +137,13 @@
 
   <section id="limits">
     <h2>11. Limites de sécurité déclarées</h2>
-    <p>Par honnêteté, voici ce que ce prototype ne fait <strong>pas encore</strong>, même si le chiffrement est bien réel :</p>
+    <p>Par honnêteté, voici les limites qui subsistent, même si le chiffrement est réel et pas seulement annoncé :</p>
     <ul>
-      <li><strong>Pas de ratchet / forward secrecy</strong> : la clé d'une discussion reste la même tant que les deux personnes ne régénèrent pas leurs clés (contrairement à des protocoles comme Signal, qui changent de clé à chaque message).</li>
-      <li><strong>Pas de vérification hors bande des clés publiques</strong> : il n'y a pas de « numéro de sécurité » à comparer de vive voix avec le contact. En théorie, un serveur malveillant pourrait remplacer une clé publique par la sienne (attaque de l'homme du milieu). Acceptable sur un serveur de confiance pour un prototype ; cette vérification devrait être ajoutée avant tout usage à haut risque.</li>
-      <li><strong>Clé privée dans le navigateur</strong> : elle est enregistrée dans le stockage local du navigateur (localStorage), pas dans une enclave sécurisée matérielle. Quiconque a un accès physique ou logiciel à l'appareil déverrouillé pourrait la lire.</li>
-      <li><strong>Récupération uniquement par e-mail</strong> : si vous perdez le mot de passe et l'accès à l'e-mail vérifié, le profil est irrécupérable. Si vous utilisez plusieurs profils (par exemple un de couverture), utilisez des e-mails différents : un lien de récupération révèle à qui contrôle l'e-mail que le profil existe.</li>
+      <li><strong>Prekeys épuisées</strong> : si un contact reste longtemps hors ligne et n'a plus de clés à usage unique, le message utilise quand même une clé nouvelle mais sans suppression unique, donc avec une forward secrecy plus faible.</li>
+      <li><strong>Messages liés à cet appareil</strong> : par conception, l'historique déchiffré ne se transfère pas. Sur un nouvel appareil ou après une récupération du mot de passe par e-mail, l'ancien coffre est irrécupérable : vous repartez avec une nouvelle identité et vos contacts voient l'avertissement de changement de clé.</li>
+      <li><strong>Le coffre vaut ce que vaut le mot de passe</strong> : choisissez-en un long et unique. Quiconque a votre appareil déjà déverrouillé avec l'appli ouverte peut lire les discussions, comme avec toute appli.</li>
+      <li><strong>Métadonnées visibles du serveur</strong> : expéditeur, heure, réactions et expiration des messages éphémères ne sont pas chiffrés.</li>
+      <li><strong>Récupération par e-mail uniquement</strong> : si vous perdez le mot de passe et l'accès à l'e-mail vérifié, le profil est irrécupérable. Si vous utilisez plusieurs profils (par ex. un de couverture), utilisez des e-mails différents : un lien de récupération révèle à qui contrôle l'e-mail que le profil existe.</li>
     </ul>
   </section>
 
@@ -148,6 +155,8 @@
     <p>Utilisez « Mot de passe oublié ? » sur l'écran de connexion et saisissez e-mail et identifiant : si l'e-mail du profil est vérifié, vous recevez un lien valable 1 heure. Sinon le profil est irrécupérable et doit être recréé. Conservez toujours votre mot de passe dans un gestionnaire de mots de passe.</p>
     <h3>Le déverrouillage biométrique n'apparaît pas</h3>
     <p>Il nécessite un appareil avec Face ID, Touch ID, empreinte ou Windows Hello configuré, un navigateur à jour et une connexion HTTPS (l'application web en production en utilise déjà une). Il doit en outre avoir été activé au moins une fois dans les réglages.</p>
+    <h3>« Message illisible »</h3>
+    <p>Par sécurité, la clé de chaque message est supprimée dès que vous l'avez lu : le texte ne reste que dans le cache chiffré de cet appareil. Si vous changez d'appareil, effacez les données du navigateur ou réinitialisez le mot de passe par e-mail, les messages précédents sont irrécupérables. C'est le prix de la forward secrecy.</p>
   </section>
 </main>
 
