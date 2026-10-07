@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Benutzerhandbuch — Private Nachrichten</title>
+<title>Benutzerhandbuch — Securmy</title>
 <meta name="description" content="Vollständige Anleitung: Registrierung, Anmeldung mit Benutzername und Passwort, versteckte Chats, Ende-zu-Ende-Verschlüsselung, biometrisches Entsperren und verfügbare Sprachen." />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/manual.html" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
@@ -19,10 +19,13 @@
 <link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/manual.html" />
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
 <meta property="og:type" content="article" />
-<meta property="og:title" content="Benutzerhandbuch — Private Nachrichten" />
+<meta property="og:title" content="Benutzerhandbuch — Securmy" />
 <meta property="og:description" content="Vollständige Anleitung: Registrierung, Anmeldung mit Benutzername und Passwort, versteckte Chats, Ende-zu-Ende-Verschlüsselung, biometrisches Entsperren und verfügbare Sprachen." />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/de/manual.html" />
-<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/icon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/icon-512.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/style.css" />
 </head>
@@ -30,7 +33,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/de/" class="brand"><span class="lock">🔒</span> Private Nachrichten</a>
+    <a href="/de/" class="brand"><img class="logo-mark" src="/icon.svg" width="28" height="28" alt="" /> Securmy</a>
     <div class="header-actions">
       <select class="lang-select" aria-label="Sprache" onchange="location.href=this.value"><option value="/manuale.html">Italiano</option><option value="/en/manual.html">English</option><option value="/es/manual.html">Español</option><option value="/fr/manual.html">Français</option><option value="/de/manual.html" selected>Deutsch</option><option value="/pt/manual.html">Português</option><option value="/ar/manual.html">العربية</option><option value="/zh/manual.html">中文</option><option value="/hi/manual.html">हिन्दी</option><option value="/ru/manual.html">Русский</option><option value="/ja/manual.html">日本語</option></select>
       <a href="/de/manual.html" class="btn btn-ghost btn-sm">Handbuch</a>
@@ -42,7 +45,7 @@
 
 <main>
   <h1>Benutzerhandbuch</h1>
-  <p class="lead">Eine vollständige Anleitung zu Private Nachrichten: wie du dich registrierst, anmeldest, die Datenschutzfunktionen nutzt und verstehst, was dieser Prototyp wirklich schützt – und was nicht.</p>
+  <p class="lead">Eine vollständige Anleitung zu Securmy: wie du dich registrierst, anmeldest, die Datenschutzfunktionen nutzt und verstehst, was dieser Prototyp wirklich schützt – und was nicht.</p>
 
   <nav class="toc" aria-label="Inhalt">
     <strong>Inhalt</strong>
@@ -59,6 +62,7 @@
       <li><a href="#mobile">Native Mobile-Apps (iOS/Android)</a></li>
       <li><a href="#limits">Erklärte Sicherheitsgrenzen</a></li>
       <li><a href="#troubleshooting">Fehlerbehebung</a></li>
+      <li><a href="#suite">Securmy-Tresor und Werkzeuge</a></li>
     </ol>
   </nav>
 
@@ -157,6 +161,34 @@
     <p>Sie erfordert ein Gerät mit eingerichtetem Face ID, Touch ID, Fingerabdruck oder Windows Hello, einen aktuellen Browser und eine HTTPS-Verbindung (die Web-App in Produktion nutzt bereits eine). Außerdem muss sie mindestens einmal in den Einstellungen aktiviert worden sein.</p>
     <h3>„Nachricht nicht mehr lesbar“</h3>
     <p>Aus Sicherheitsgründen wird der Schlüssel jeder Nachricht gelöscht, sobald du sie gelesen hast: der Text bleibt nur im verschlüsselten Cache dieses Geräts. Wechselst du das Gerät, löschst Browserdaten oder setzt das Passwort per E-Mail zurück, sind frühere Nachrichten nicht wiederherstellbar. Das ist der Preis der Forward Secrecy.</p>
+  </section>
+
+  <section id="suite">
+    <h2>13. Securmy-Tresor und Werkzeuge</h2>
+    <p>Öffne den Tresor über die Schaltfläche 🛡️ in der Seitenleiste. Alles darin wird auf deinem Gerät mit AES-256-GCM verschlüsselt, mit einem Schlüssel, der in deinem Tresor liegt und durch dein Passwort geschützt ist: Der Server erhält nie Dateien, Notizen oder Passwörter.</p>
+    <h3>Datentresor</h3>
+    <p>Füge Dateien (bis 100 MB je Datei) im Tab Dateien hinzu. Ist das Kästchen aktiv, werden Fotos vor dem Speichern von Metadaten bereinigt. Jede Datei lässt sich herunterladen, per P2P senden oder löschen.</p>
+    <h3>P2P-Versand per Link</h3>
+    <p>Wähle eine Datei und eine Ablaufzeit (10 Minuten oder 1 Stunde): Du erhältst einen Einmal-Link. Die Datei geht direkt zum Empfänger, verschlüsselt mit einem Schlüssel, der nur hinter dem # im Link steht und nie zum Server gelangt. Lass die Seite offen, bis die Übertragung fertig ist.</p>
+    <h3>Fotos säubern</h3>
+    <p>Zeichnet das Bild neu und verwirft EXIF, GPS-Position und Vorschaubilder. Funktioniert mit JPEG, PNG und WebP; für andere Formate ist die automatische Bereinigung nicht verfügbar.</p>
+    <h3>Notizen und Passwörter</h3>
+    <p>Notizen und Zugangsdaten bleiben im Tresor verschlüsselt. Der Generator erzeugt zufällige Passwörter; kopierst du eines, wird die Zwischenablage nach 20 Sekunden geleert.</p>
+    <h3>Einmal-Nachrichten</h3>
+    <p>Wähle neben dem Nachrichtenfeld „Einmal ansehen“. Der Empfänger tippt zum Ansehen: Der Text bleibt 10 Sekunden sichtbar und wird dann auf seinem Gerät und auf dem Server zerstört. Ein Foto vom Bildschirm kann das nicht verhindern.</p>
+    <h3>Sprach- und Videoanrufe</h3>
+    <p>Nutze die Schaltflächen 📞 und 🎥 in der Chat-Kopfzeile. Audio und Video laufen direkt zwischen den Geräten, verschlüsselt. Beide sehen einen vierstelligen Code: Vergleicht ihn mündlich; stimmt er überein, wurde der Anruf nicht abgefangen.</p>
+    <h3>Zwei-Schritt-Bestätigung</h3>
+    <p>Unter Sicherheit kannst du TOTP-Codes mit einer Authenticator-App aktivieren (Google Authenticator, Aegis, 1Password …). Danach braucht die Anmeldung mit Passwort zusätzlich den sechsstelligen Code. Die biometrische Entsperrung bleibt eine eigene Anmeldemethode.</p>
+    <h3>Backup und Notfall-Löschung</h3>
+    <p>Das Backup enthält Dateien, Notizen und Passwörter, verschlüsselt mit einer von dir gewählten Passphrase von mindestens 10 Zeichen: Ohne sie ist es nicht wiederherstellbar. Nachrichten sind nicht enthalten. Die Notfall-Löschung entfernt Schlüssel, Nachrichten-Cache, Dateien, Notizen und Passwörter vom Gerät und ist nicht rückgängig zu machen.</p>
+    <h3>Grenzen, die du kennen solltest</h3>
+    <ul>
+      <li>Der Tresor ist lokal: Dateien, Notizen und Passwörter werden nicht zwischen Geräten synchronisiert; nutze das Backup zum Umziehen.</li>
+      <li>Bei P2P-Übertragungen und Anrufen kann die andere Person (und ein öffentlicher STUN-Server) deine IP-Adresse sehen, sofern der Dienst keinen TURN-Server nutzt; in sehr restriktiven Netzen kann die Verbindung scheitern.</li>
+      <li>Der Passwort-Manager ist schlicht: Er füllt keine Formulare selbst aus und ersetzt für berufliche Zwecke keinen spezialisierten Manager.</li>
+      <li>Verlierst du Passwort und Backup-Passphrase, sind die verschlüsselten Daten nicht wiederherstellbar: Niemand, auch wir nicht, kann sie öffnen.</li>
+    </ul>
   </section>
 </main>
 

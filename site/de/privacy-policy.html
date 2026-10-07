@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Datenschutzerklärung — Private Nachrichten</title>
-<meta name="description" content="Datenschutzerklärung des Prototyps Private Nachrichten: welche Daten verarbeitet werden und wie." />
+<title>Datenschutzerklärung — Securmy</title>
+<meta name="description" content="Datenschutzerklärung des Prototyps Securmy: welche Daten verarbeitet werden und wie." />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/privacy-policy.html" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/privacy-policy.html" />
 <link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/privacy-policy.html" />
@@ -19,10 +19,13 @@
 <link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/privacy-policy.html" />
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/privacy-policy.html" />
 <meta property="og:type" content="article" />
-<meta property="og:title" content="Datenschutzerklärung — Private Nachrichten" />
-<meta property="og:description" content="Datenschutzerklärung des Prototyps Private Nachrichten: welche Daten verarbeitet werden und wie." />
+<meta property="og:title" content="Datenschutzerklärung — Securmy" />
+<meta property="og:description" content="Datenschutzerklärung des Prototyps Securmy: welche Daten verarbeitet werden und wie." />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/de/privacy-policy.html" />
-<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/icon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/icon-512.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/style.css" />
 </head>
@@ -30,7 +33,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/de/" class="brand"><span class="lock">🔒</span> Private Nachrichten</a>
+    <a href="/de/" class="brand"><img class="logo-mark" src="/icon.svg" width="28" height="28" alt="" /> Securmy</a>
     <div class="header-actions">
       <select class="lang-select" aria-label="Sprache" onchange="location.href=this.value"><option value="/privacy-policy.html">Italiano</option><option value="/en/privacy-policy.html">English</option><option value="/es/privacy-policy.html">Español</option><option value="/fr/privacy-policy.html">Français</option><option value="/de/privacy-policy.html" selected>Deutsch</option><option value="/pt/privacy-policy.html">Português</option><option value="/ar/privacy-policy.html">العربية</option><option value="/zh/privacy-policy.html">中文</option><option value="/hi/privacy-policy.html">हिन्दी</option><option value="/ru/privacy-policy.html">Русский</option><option value="/ja/privacy-policy.html">日本語</option></select>
       <a href="/de/manual.html" class="btn btn-ghost btn-sm">Handbuch</a>
@@ -66,6 +69,11 @@
 
   <h2>Deine Rechte</h2>
   <p>Du kannst jederzeit die Löschung der im Prototyp eingegebenen Daten verlangen, indem du über die oben genannten Kontaktmöglichkeiten schreibst.</p>
+
+  <h2>Securmy-Funktionen: Tresor, P2P-Versand und Anrufe</h2>
+  <p>Tresor-Dateien, Notizen, Passwörter und Backups bleiben auf deinem Gerät, verschlüsselt mit einem Schlüssel, der es nie verlässt: Wir erhalten sie nicht und können sie weder lesen noch wiederherstellen.</p>
+  <p>Bei P2P-Übertragungen und Anrufen laufen die Inhalte direkt zwischen den Geräten, verschlüsselt. Der Server verarbeitet nur Verbindungsinformationen (SDP und ICE-Kandidaten), höchstens eine Stunde im Speicher gehalten und dann gelöscht; der andere Teilnehmer und ein öffentlicher STUN-Server können deine IP-Adresse sehen.</p>
+  <p>Aktivierst du die Zwei-Schritt-Bestätigung, speichern wir das TOTP-Geheimnis verschlüsselt; Einmal-Nachrichten werden wenige Sekunden nach dem Öffnen vom Server gelöscht.</p>
 </main>
 
 <footer class="site-footer">

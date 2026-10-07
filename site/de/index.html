@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Private Nachrichten — Chat mit mehreren Profilen und versteckten Chats</title>
-<meta name="description" content="Privater Chat mit echter Ende-zu-Ende-Verschlüsselung, biometrischer Entsperrung, mehreren Profilen und versteckten Chats. 11 Sprachen, keine Telefonnummer." />
+<title>Securmy — Privater Messenger, Datentresor und verschlüsselter P2P-Versand</title>
+<meta name="description" content="Chat mit echter Ende-zu-Ende-Verschlüsselung, Datentresor, verschlüsselte Passwörter und Notizen, P2P-Versand per Link, verschlüsselte Anrufe und Zwei-Schritt-Bestätigung. 11 Sprachen." />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
 <link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/" />
@@ -19,10 +19,13 @@
 <link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/" />
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Private Nachrichten — Prototyp" />
-<meta property="og:description" content="Ende-zu-Ende-Verschlüsselung, biometrische Entsperrung, mehrere Profile, versteckte Chats und Tarnprofil in 11 Sprachen." />
+<meta property="og:title" content="Securmy — Sicherheit, Privatsphäre und Vertraulichkeit" />
+<meta property="og:description" content="Nachrichten, Dateien, Passwörter und Anrufe mit Ende-zu-Ende-Verschlüsselung geschützt: alles auf deinem Gerät verschlüsselt, in 11 Sprachen." />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/de/" />
-<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/icon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/icon-512.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/style.css" />
 </head>
@@ -30,7 +33,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/de/" class="brand"><span class="lock">🔒</span> Private Nachrichten</a>
+    <a href="/de/" class="brand"><img class="logo-mark" src="/icon.svg" width="28" height="28" alt="" /> Securmy</a>
     <div class="header-actions">
       <select class="lang-select" aria-label="Sprache" onchange="location.href=this.value"><option value="/">Italiano</option><option value="/en/">English</option><option value="/es/">Español</option><option value="/fr/">Français</option><option value="/de/" selected>Deutsch</option><option value="/pt/">Português</option><option value="/ar/">العربية</option><option value="/zh/">中文</option><option value="/hi/">हिन्दी</option><option value="/ru/">Русский</option><option value="/ja/">日本語</option></select>
       <a href="/de/manual.html" class="btn btn-ghost btn-sm">Handbuch</a>
@@ -107,6 +110,66 @@
     </div>
   </section>
 
+  <section class="features suite" id="suite">
+    <div class="container">
+      <h2>Mehr als ein Chat: dein digitaler Tresor</h2>
+      <p class="sec-lead">Securmy geht über Messaging hinaus. Alles, was du speicherst oder teilst, wird auf deinem Gerät verschlüsselt – mit demselben Tresor, der auch deine Chats schützt.</p>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="icon">🗄️</div>
+          <h3>Datentresor</h3>
+          <p>Verstecke und schütze Dokumente, Fotos und Dateien: auf dem Gerät mit AES-256 verschlüsselt und nur mit deinem Passwort oder per Biometrie zu öffnen.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🔗</div>
+          <h3>P2P-Versand per Link</h3>
+          <p>Die Datei geht direkt von Gerät zu Gerät, verschlüsselt und ohne Speicherung auf dem Server. Einmal-Link mit Ablaufzeit.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🧼</div>
+          <h3>Metadaten entfernen</h3>
+          <p>Entfernt GPS-Position, Kameramodell und andere versteckte Daten aus Fotos, bevor du sie teilst.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🔑</div>
+          <h3>Passwort-Manager</h3>
+          <p>Speichere Zugangsdaten im Tresor, erzeuge starke Passwörter und kopiere sie: Die Zwischenablage wird nach 20 Sekunden geleert.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">📝</div>
+          <h3>Verschlüsselte Notizen</h3>
+          <p>Private Notizen, auf deinem Gerät verschlüsselt und nie an einen Server gesendet.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">👁️</div>
+          <h3>Einmal-Nachrichten</h3>
+          <p>Der Empfänger öffnet sie nur einmal: Nach wenigen Sekunden werden sie vom Server und von seinem Gerät gelöscht.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">📞</div>
+          <h3>Verschlüsselte Sprach- und Videoanrufe</h3>
+          <p>Direkt zwischen den beiden Geräten (DTLS-SRTP), mit einem Prüfcode zum mündlichen Vergleich gegen Abhören.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🔢</div>
+          <h3>Zwei-Schritt-Bestätigung</h3>
+          <p>TOTP-Codes mit jeder Authenticator-App: Auch wer dein Passwort kennt, kommt nicht hinein.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">💾</div>
+          <h3>Verschlüsseltes Backup</h3>
+          <p>Exportiere Dateien, Notizen und Passwörter in ein einziges Archiv, verschlüsselt mit einer Passphrase, die nur du kennst.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🚨</div>
+          <h3>Sicherheitscheck und Notfall-Löschung</h3>
+          <p>Ein Punktwert zeigt, was zu verbessern ist; in Gefahr löscht ein Tipp Schlüssel, Dateien und Passwörter vom Gerät.</p>
+        </article>
+      </div>
+      <p class="sec-lead"><a href="/de/demo.html" class="btn btn-ghost">Demo testen</a></p>
+    </div>
+  </section>
+
   <section class="features security" id="security">
     <div class="container">
       <h2>Sicherheit und Privatsphäre: das Herz der App</h2>
@@ -166,6 +229,30 @@
           <h3>Verstecken, was du willst</h3>
           <p>Gib die geheime Kombination in die Suchleiste ein, um versteckte Chats bei Bedarf anzuzeigen.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features roadmap" id="roadmap">
+    <div class="container">
+      <h2>Demnächst</h2>
+      <p class="sec-lead">Was wir planen. Noch nicht verfügbar und kein Terminversprechen.</p>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="icon">🧅</div>
+          <h3>Tor-Netzwerk</h3>
+          <p>Eine .onion-Adresse des Dienstes und ein Tor-Modus in den nativen Apps, um auch deinen Netzwerkstandort zu verbergen. Ein reiner Browser kann den Datenverkehr nicht über Tor leiten: Dafür braucht es den Tor Browser oder die native App.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">📱</div>
+          <h3>iOS- und Android-Apps</h3>
+          <p>Native Apps mit biometrischer Entsperrung, in den Stores veröffentlicht – mit denselben Sicherheits- und Datenschutzgarantien wie die Website.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🛰️</div>
+          <h3>Privater TURN-Server</h3>
+          <p>Um deine IP-Adresse bei Anrufen und P2P-Übertragungen zu verbergen und sie auch in sehr restriktiven Netzen zum Laufen zu bringen.</p>
+        </article>
       </div>
     </div>
   </section>

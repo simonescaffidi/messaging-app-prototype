@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Interaktive Demo — Privates Messaging</title>
-<meta name="description" content="Testen Sie Privates Messaging: Code-Login, versteckte Chats, Tarnprofil, zeitgesteuerte Nachrichten und Ende-zu-Ende-Verschlüsselung. Simulation im Browser, ohne Konto." />
+<title>Interaktive Demo — Securmy</title>
+<meta name="description" content="Testen Sie Securmy: Code-Login, versteckte Chats, Tarnprofil, zeitgesteuerte Nachrichten und Ende-zu-Ende-Verschlüsselung. Simulation im Browser, ohne Konto." />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/de/demo.html" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/demo.html" />
 <link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/demo.html" />
@@ -19,10 +19,13 @@
 <link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/demo.html" />
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/demo.html" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Interaktive Demo — Privates Messaging" />
-<meta property="og:description" content="Testen Sie Privates Messaging: Code-Login, versteckte Chats, Tarnprofil, zeitgesteuerte Nachrichten und Ende-zu-Ende-Verschlüsselung. Simulation im Browser, ohne Konto." />
+<meta property="og:title" content="Interaktive Demo — Securmy" />
+<meta property="og:description" content="Testen Sie Securmy: Code-Login, versteckte Chats, Tarnprofil, zeitgesteuerte Nachrichten und Ende-zu-Ende-Verschlüsselung. Simulation im Browser, ohne Konto." />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/de/demo.html" />
-<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/icon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/icon-512.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/style.css" />
 </head>
@@ -30,7 +33,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/de/" class="brand"><span class="lock">🔒</span> Private Nachrichten</a>
+    <a href="/de/" class="brand"><img class="logo-mark" src="/icon.svg" width="28" height="28" alt="" /> Securmy</a>
     <div class="header-actions">
       <select class="lang-select" aria-label="Sprache" onchange="location.href=this.value"><option value="/demo.html">Italiano</option><option value="/en/demo.html">English</option><option value="/es/demo.html">Español</option><option value="/fr/demo.html">Français</option><option value="/de/demo.html" selected>Deutsch</option><option value="/pt/demo.html">Português</option><option value="/ar/demo.html">العربية</option><option value="/zh/demo.html">中文</option><option value="/hi/demo.html">हिन्दी</option><option value="/ru/demo.html">Русский</option><option value="/ja/demo.html">日本語</option></select>
       <a href="/de/manual.html" class="btn btn-ghost btn-sm">Handbuch</a>
@@ -54,12 +57,19 @@
         <li>Verstecken Sie einen Chat im Menü und geben Sie <strong>7777</strong> in die Suche ein, um ihn zurückzuholen.</li>
         <li>Sperre und melde dich mit Benutzername <strong>demo</strong> und Passwort <strong>2222</strong> neu an: Du siehst nur das Tarnprofil.</li>
       </ol>
+      <h2>Probiere danach den Tresor</h2>
+      <ol class="demo-try">
+        <li>Tippe nach dem Login unten auf <strong>Tresor</strong>.</li>
+        <li>Füge unter <strong>Dateien</strong> eine Datei hinzu und zeige, wie ein Festplattendieb sie sähe: nur verschlüsselte Daten.</li>
+        <li>Erstelle unter <strong>Senden</strong> einen Einmal-P2P-Link und sieh zu, wie die Datei ohne Umweg über den Server ankommt.</li>
+        <li>Sende unter <strong>Einmal</strong> eine Nachricht, die sich nach dem Lesen zerstört, und aktiviere dann die Prüfungen unter <strong>Sicherheit</strong>.</li>
+      </ol>
       <p><a href="/app/" class="btn btn-primary">App öffnen</a></p>
     </div>
     <div id="phone" class="phone" aria-label="Demo testen"></div>
   </div>
 </main>
-<script>window.__DEMO_I18N={"nav":"Demo","cta":"Demo testen","title":"Interaktive Demo — Privates Messaging","description":"Testen Sie Privates Messaging: Code-Login, versteckte Chats, Tarnprofil, zeitgesteuerte Nachrichten und Ende-zu-Ende-Verschlüsselung. Simulation im Browser, ohne Konto.","h1":"Demo testen","lead":"Eine interaktive Simulation, die nur in Ihrem Browser läuft: kein Konto, keine Daten werden gesendet. Für die echte App nutzen Sie die Schaltfläche „App öffnen“.","notice":"Simulierte Demo: Nachrichten bleiben auf Ihrem Gerät. Die AES-GCM-Verschlüsselung ist echt, Kontakte und Antworten sind erfunden.","tryTitle":"Das können Sie ausprobieren","tryItems":["Melde dich mit Benutzername \u003cstrong>demo\u003c/strong> und Passwort \u003cstrong>1111\u003c/strong> (persönliches Profil) oder mit der Biometrie-Schaltfläche an.","Öffnen Sie einen Chat und senden Sie eine Nachricht mit \u003cstrong>30-Sekunden\u003c/strong>-Timer: Sie löscht sich selbst.","Aktivieren Sie die „Serveransicht“, um eine verschlüsselte Nachricht zu sehen.","Verstecken Sie einen Chat im Menü und geben Sie \u003cstrong>7777\u003c/strong> in die Suche ein, um ihn zurückzuholen.","Sperre und melde dich mit Benutzername \u003cstrong>demo\u003c/strong> und Passwort \u003cstrong>2222\u003c/strong> neu an: Du siehst nur das Tarnprofil."],"userLabel":"Benutzername","codeLabel":"Passwort","codePh":"z. B. 1111","enter":"Eintreten","bio":"Mit Fingerabdruck / Face ID entsperren","bioScan":"Biometrie wird geprüft…","wrongCode":"Ungültige Zugangsdaten. Nutze demo + 1111 oder 2222.","searchPh":"Suchen (oder Geheimkombination)","hide":"Chat verstecken","unhide":"Chat anzeigen","hiddenTag":"versteckt","msgPh":"Nachricht schreiben…","send":"Senden","timers":["Kein Timer","30 Sekunden","5 Minuten","1 Stunde"],"serverView":"Serveransicht (verschlüsselt)","lockBtn":"Sperren","e2eTag":"Ende-zu-Ende-verschlüsselt","expiresIn":"gelöscht in {s}s","secretFound":"Versteckte Chats angezeigt","chatsTitle":"Chats","back":"Zurück","empty":"Keine Chats","n1":"Anna","m1":"Sehen wir uns morgen um 18 Uhr?","n2":"Marco","m2":"Ich schicke dir die Unterlagen heute Abend.","n3":"Luca","m3":"Der Plan steht, sag es niemandem.","nc":"Mama","mc":"Denk daran, Brot zu kaufen!","replies":["Perfekt, bis später!","Verstanden 👍","In Ordnung, danke."]};</script>
+<script>window.__DEMO_I18N={"nav":"Demo","cta":"Demo testen","title":"Interaktive Demo — Securmy","description":"Testen Sie Securmy: Code-Login, versteckte Chats, Tarnprofil, zeitgesteuerte Nachrichten und Ende-zu-Ende-Verschlüsselung. Simulation im Browser, ohne Konto.","h1":"Demo testen","lead":"Eine interaktive Simulation, die nur in Ihrem Browser läuft: kein Konto, keine Daten werden gesendet. Für die echte App nutzen Sie die Schaltfläche „App öffnen“.","notice":"Simulierte Demo: Nachrichten bleiben auf Ihrem Gerät. Die AES-GCM-Verschlüsselung ist echt, Kontakte und Antworten sind erfunden.","tryTitle":"Das können Sie ausprobieren","tryItems":["Melde dich mit Benutzername \u003cstrong>demo\u003c/strong> und Passwort \u003cstrong>1111\u003c/strong> (persönliches Profil) oder mit der Biometrie-Schaltfläche an.","Öffnen Sie einen Chat und senden Sie eine Nachricht mit \u003cstrong>30-Sekunden\u003c/strong>-Timer: Sie löscht sich selbst.","Aktivieren Sie die „Serveransicht“, um eine verschlüsselte Nachricht zu sehen.","Verstecken Sie einen Chat im Menü und geben Sie \u003cstrong>7777\u003c/strong> in die Suche ein, um ihn zurückzuholen.","Sperre und melde dich mit Benutzername \u003cstrong>demo\u003c/strong> und Passwort \u003cstrong>2222\u003c/strong> neu an: Du siehst nur das Tarnprofil."],"userLabel":"Benutzername","codeLabel":"Passwort","codePh":"z. B. 1111","enter":"Eintreten","bio":"Mit Fingerabdruck / Face ID entsperren","bioScan":"Biometrie wird geprüft…","wrongCode":"Ungültige Zugangsdaten. Nutze demo + 1111 oder 2222.","searchPh":"Suchen (oder Geheimkombination)","hide":"Chat verstecken","unhide":"Chat anzeigen","hiddenTag":"versteckt","msgPh":"Nachricht schreiben…","send":"Senden","timers":["Kein Timer","30 Sekunden","5 Minuten","1 Stunde"],"serverView":"Serveransicht (verschlüsselt)","lockBtn":"Sperren","e2eTag":"Ende-zu-Ende-verschlüsselt","expiresIn":"gelöscht in {s}s","secretFound":"Versteckte Chats angezeigt","chatsTitle":"Chats","back":"Zurück","empty":"Keine Chats","n1":"Anna","m1":"Sehen wir uns morgen um 18 Uhr?","n2":"Marco","m2":"Ich schicke dir die Unterlagen heute Abend.","n3":"Luca","m3":"Der Plan steht, sag es niemandem.","nc":"Mama","mc":"Denk daran, Brot zu kaufen!","replies":["Perfekt, bis später!","Verstanden 👍","In Ordnung, danke."],"sNavChats":"Chats","sNavVault":"Tresor","sTabFiles":"Dateien","sTabPw":"Passwörter","sTabP2p":"Senden","sTabOnce":"Einmal","sTabCall":"Anruf","sTabSec":"Sicherheit","sAddFile":"Testdatei hinzufügen","sEnc":"Verschlüsselt","sShowCipher":"Zeigen, wie die Festplatte es sieht","sFilesEmpty":"Keine Dateien: Füge eine hinzu.","sStripped":"Metadaten entfernt (GPS, Kamera)","sGen":"Passwort erzeugen","sCopy":"Kopieren","sCopied":"Kopiert: Zwischenablage wird in 20 s geleert","sStrength":"Stärke","sP2pCreate":"Link für „vertrag.pdf“ erstellen","sP2pLink":"Einmal-Link, läuft in 10 Minuten ab","sP2pWait":"Warte auf den Empfänger…","sP2pJoined":"Empfänger verbunden","sP2pSending":"Direkte, verschlüsselte Übertragung","sP2pDone":"Zugestellt. Der Link funktioniert nicht mehr.","sP2pNote":"In der Demo wird die Verbindung simuliert; in der echten App geht die Datei direkt zwischen den Geräten.","sOnceSend":"Einmal-Nachricht senden","sOnceTap":"Zum Ansehen tippen (danach weg)","sOnceGone":"Nachricht zerstört","sOnceText":"Der Tresor-Code lautet 4821","sOnceIn":"zerstört in {s}s","sCallStart":"Testanruf starten","sCallRinging":"Es klingelt…","sCallConnected":"Verschlüsselter Anruf","sCallCode":"Prüfcode","sCallHint":"Stimmen beide Codes mündlich überein, hört niemand den Anruf ab.","sCallEnd":"Beenden","sSecTitle":"Sicherheitscheck","sSecLevel":"Sicherheitsstufe","sSec1":"Tresor entsperrt","sSec2":"Starkes Passwort","sSec3":"Zwei-Schritt-Bestätigung","sSec4":"Aktuelles Backup","sSec5":"Kontaktschlüssel verifiziert","sSecTap":"Tippe auf einen Punkt, um ihn zu aktivieren","suiteTryTitle":"Probiere danach den Tresor","suiteTry":["Tippe nach dem Login unten auf \u003cstrong>Tresor\u003c/strong>.","Füge unter \u003cstrong>Dateien\u003c/strong> eine Datei hinzu und zeige, wie ein Festplattendieb sie sähe: nur verschlüsselte Daten.","Erstelle unter \u003cstrong>Senden\u003c/strong> einen Einmal-P2P-Link und sieh zu, wie die Datei ohne Umweg über den Server ankommt.","Sende unter \u003cstrong>Einmal\u003c/strong> eine Nachricht, die sich nach dem Lesen zerstört, und aktiviere dann die Prüfungen unter \u003cstrong>Sicherheit\u003c/strong>."]};</script>
 <script src="/demo.js"></script>
 
 <footer class="site-footer">
