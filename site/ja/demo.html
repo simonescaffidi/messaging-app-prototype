@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>インタラクティブデモ — プライベートメッセージ</title>
-<meta name="description" content="プライベートメッセージを今すぐ体験：コードでログイン、非表示チャット、カバープロフィール、時限メッセージ、エンドツーエンド暗号化。ブラウザ内のシミュレーションでアカウント不要。" />
+<title>インタラクティブデモ — Securmy</title>
+<meta name="description" content="Securmyを今すぐ体験：コードでログイン、非表示チャット、カバープロフィール、時限メッセージ、エンドツーエンド暗号化。ブラウザ内のシミュレーションでアカウント不要。" />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/demo.html" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/demo.html" />
 <link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/demo.html" />
@@ -19,10 +19,13 @@
 <link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/demo.html" />
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/demo.html" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="インタラクティブデモ — プライベートメッセージ" />
-<meta property="og:description" content="プライベートメッセージを今すぐ体験：コードでログイン、非表示チャット、カバープロフィール、時限メッセージ、エンドツーエンド暗号化。ブラウザ内のシミュレーションでアカウント不要。" />
+<meta property="og:title" content="インタラクティブデモ — Securmy" />
+<meta property="og:description" content="Securmyを今すぐ体験：コードでログイン、非表示チャット、カバープロフィール、時限メッセージ、エンドツーエンド暗号化。ブラウザ内のシミュレーションでアカウント不要。" />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/demo.html" />
-<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/icon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/icon-512.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/style.css" />
 </head>
@@ -30,7 +33,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/ja/" class="brand"><span class="lock">🔒</span> プライベートメッセージ</a>
+    <a href="/ja/" class="brand"><img class="logo-mark" src="/icon.svg" width="28" height="28" alt="" /> Securmy</a>
     <div class="header-actions">
       <select class="lang-select" aria-label="言語" onchange="location.href=this.value"><option value="/demo.html">Italiano</option><option value="/en/demo.html">English</option><option value="/es/demo.html">Español</option><option value="/fr/demo.html">Français</option><option value="/de/demo.html">Deutsch</option><option value="/pt/demo.html">Português</option><option value="/ar/demo.html">العربية</option><option value="/zh/demo.html">中文</option><option value="/hi/demo.html">हिन्दी</option><option value="/ru/demo.html">Русский</option><option value="/ja/demo.html" selected>日本語</option></select>
       <a href="/ja/manual.html" class="btn btn-ghost btn-sm">マニュアル</a>
@@ -54,12 +57,19 @@
         <li>メニューからチャットを非表示にし、検索欄に <strong>7777</strong> と入力して再表示します。</li>
         <li>ロックして、ユーザー名 <strong>demo</strong>・パスワード <strong>2222</strong> で再ログイン：カバープロフィールだけが見えます。</li>
       </ol>
+      <h2>次に金庫を試す</h2>
+      <ol class="demo-try">
+        <li>ログイン後、下部の<strong>金庫</strong>をタップします。</li>
+        <li><strong>ファイル</strong>でファイルを追加し、ディスクを盗んだ人に何が見えるか（暗号化データだけ）を確認します。</li>
+        <li><strong>送信</strong>で使い捨てのP2Pリンクを作り、サーバーを経由せずにファイルが届く様子を見ます。</li>
+        <li><strong>一度だけ</strong>で読んだら消えるメッセージを送り、<strong>セキュリティ</strong>のチェックを有効にしてみます。</li>
+      </ol>
       <p><a href="/app/" class="btn btn-primary">アプリを開く</a></p>
     </div>
     <div id="phone" class="phone" aria-label="デモを試す"></div>
   </div>
 </main>
-<script>window.__DEMO_I18N={"nav":"デモ","cta":"デモを試す","title":"インタラクティブデモ — プライベートメッセージ","description":"プライベートメッセージを今すぐ体験：コードでログイン、非表示チャット、カバープロフィール、時限メッセージ、エンドツーエンド暗号化。ブラウザ内のシミュレーションでアカウント不要。","h1":"デモを試す","lead":"お使いのブラウザ内だけで動くインタラクティブなシミュレーションです。アカウント不要で、データは送信されません。本物のアプリは「アプリを開く」からどうぞ。","notice":"シミュレーションのデモ：メッセージは端末内に残ります。AES-GCM暗号化は本物ですが、連絡先と返信は架空です。","tryTitle":"試してみること","tryItems":["ユーザー名 \u003cstrong>demo\u003c/strong>、パスワード \u003cstrong>1111\u003c/strong>（個人プロフィール）か生体認証ボタンでログインします。","チャットを開き、\u003cstrong>30秒\u003c/strong>タイマー付きでメッセージを送信：自動で消えます。","「サーバー表示」をオンにして、暗号化されたメッセージの見え方を確認します。","メニューからチャットを非表示にし、検索欄に \u003cstrong>7777\u003c/strong> と入力して再表示します。","ロックして、ユーザー名 \u003cstrong>demo\u003c/strong>・パスワード \u003cstrong>2222\u003c/strong> で再ログイン：カバープロフィールだけが見えます。"],"userLabel":"ユーザー名","codeLabel":"パスワード","codePh":"例: 1111","enter":"入る","bio":"指紋 / Face IDでロック解除","bioScan":"生体認証を確認中…","wrongCode":"認証情報が無効です。demo + 1111 または 2222 を使ってください。","searchPh":"検索（または秘密の組み合わせ）","hide":"チャットを非表示","unhide":"チャットを表示","hiddenTag":"非表示","msgPh":"メッセージを入力…","send":"送信","timers":["タイマーなし","30秒","5分","1時間"],"serverView":"サーバー表示（暗号化）","lockBtn":"ロック","e2eTag":"エンドツーエンド暗号化","expiresIn":"{s}秒後に削除","secretFound":"非表示チャットを表示しました","chatsTitle":"チャット","back":"戻る","empty":"チャットなし","n1":"アンナ","m1":"明日18時に会える？","n2":"マルコ","m2":"今夜、書類を送るね。","n3":"ルカ","m3":"計画は確定。誰にも言わないで。","nc":"お母さん","mc":"パンを買うのを忘れないでね！","replies":["了解、またね！","受け取った 👍","わかった、ありがとう。"]};</script>
+<script>window.__DEMO_I18N={"nav":"デモ","cta":"デモを試す","title":"インタラクティブデモ — Securmy","description":"Securmyを今すぐ体験：コードでログイン、非表示チャット、カバープロフィール、時限メッセージ、エンドツーエンド暗号化。ブラウザ内のシミュレーションでアカウント不要。","h1":"デモを試す","lead":"お使いのブラウザ内だけで動くインタラクティブなシミュレーションです。アカウント不要で、データは送信されません。本物のアプリは「アプリを開く」からどうぞ。","notice":"シミュレーションのデモ：メッセージは端末内に残ります。AES-GCM暗号化は本物ですが、連絡先と返信は架空です。","tryTitle":"試してみること","tryItems":["ユーザー名 \u003cstrong>demo\u003c/strong>、パスワード \u003cstrong>1111\u003c/strong>（個人プロフィール）か生体認証ボタンでログインします。","チャットを開き、\u003cstrong>30秒\u003c/strong>タイマー付きでメッセージを送信：自動で消えます。","「サーバー表示」をオンにして、暗号化されたメッセージの見え方を確認します。","メニューからチャットを非表示にし、検索欄に \u003cstrong>7777\u003c/strong> と入力して再表示します。","ロックして、ユーザー名 \u003cstrong>demo\u003c/strong>・パスワード \u003cstrong>2222\u003c/strong> で再ログイン：カバープロフィールだけが見えます。"],"userLabel":"ユーザー名","codeLabel":"パスワード","codePh":"例: 1111","enter":"入る","bio":"指紋 / Face IDでロック解除","bioScan":"生体認証を確認中…","wrongCode":"認証情報が無効です。demo + 1111 または 2222 を使ってください。","searchPh":"検索（または秘密の組み合わせ）","hide":"チャットを非表示","unhide":"チャットを表示","hiddenTag":"非表示","msgPh":"メッセージを入力…","send":"送信","timers":["タイマーなし","30秒","5分","1時間"],"serverView":"サーバー表示（暗号化）","lockBtn":"ロック","e2eTag":"エンドツーエンド暗号化","expiresIn":"{s}秒後に削除","secretFound":"非表示チャットを表示しました","chatsTitle":"チャット","back":"戻る","empty":"チャットなし","n1":"アンナ","m1":"明日18時に会える？","n2":"マルコ","m2":"今夜、書類を送るね。","n3":"ルカ","m3":"計画は確定。誰にも言わないで。","nc":"お母さん","mc":"パンを買うのを忘れないでね！","replies":["了解、またね！","受け取った 👍","わかった、ありがとう。"],"sNavChats":"チャット","sNavVault":"金庫","sTabFiles":"ファイル","sTabPw":"パスワード","sTabP2p":"送信","sTabOnce":"一度だけ","sTabCall":"通話","sTabSec":"セキュリティ","sAddFile":"サンプルファイルを追加","sEnc":"暗号化済み","sShowCipher":"ディスク上の見え方を表示","sFilesEmpty":"ファイルがありません。追加してください。","sStripped":"メタデータを削除しました（GPS・カメラ）","sGen":"パスワードを生成","sCopy":"コピー","sCopied":"コピーしました：20秒後にクリップボードを消去","sStrength":"強度","sP2pCreate":"「contract.pdf」のリンクを作成","sP2pLink":"使い捨てリンク、10分で期限切れ","sP2pWait":"受信者を待っています…","sP2pJoined":"受信者が接続しました","sP2pSending":"直接・暗号化送信","sP2pDone":"配信しました。リンクは無効になりました。","sP2pNote":"デモでは接続は模擬です。実際のアプリではファイルは端末間を直接届きます。","sOnceSend":"一度だけ表示のメッセージを送る","sOnceTap":"タップして表示（その後消えます）","sOnceGone":"メッセージは消去されました","sOnceText":"金庫のコードは 4821 です","sOnceIn":"{s}秒後に消去","sCallStart":"テスト通話を開始","sCallRinging":"呼び出し中…","sCallConnected":"暗号化通話","sCallCode":"確認コード","sCallHint":"2つのコードが声で一致すれば、通話は傍受されていません。","sCallEnd":"終了","sSecTitle":"セキュリティチェック","sSecLevel":"安全レベル","sSec1":"金庫を解除済み","sSec2":"強いパスワード","sSec3":"2段階認証","sSec4":"最近のバックアップ","sSec5":"連絡先の鍵を確認済み","sSecTap":"項目をタップして有効にします","suiteTryTitle":"次に金庫を試す","suiteTry":["ログイン後、下部の\u003cstrong>金庫\u003c/strong>をタップします。","\u003cstrong>ファイル\u003c/strong>でファイルを追加し、ディスクを盗んだ人に何が見えるか（暗号化データだけ）を確認します。","\u003cstrong>送信\u003c/strong>で使い捨てのP2Pリンクを作り、サーバーを経由せずにファイルが届く様子を見ます。","\u003cstrong>一度だけ\u003c/strong>で読んだら消えるメッセージを送り、\u003cstrong>セキュリティ\u003c/strong>のチェックを有効にしてみます。"]};</script>
 <script src="/demo.js"></script>
 
 <footer class="site-footer">

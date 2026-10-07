@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>プライベートメッセージ — 複数プロフィールと非表示チャットのチャット</title>
-<meta name="description" content="本物のエンドツーエンド暗号化、生体認証ロック解除、複数プロフィール、非表示チャットを備えたプライベートチャット。11言語対応、電話番号不要。" />
+<title>Securmy — プライベートメッセージ、ファイル金庫、暗号化P2P送信</title>
+<meta name="description" content="本物のエンドツーエンド暗号化チャット、ファイル金庫、暗号化されたパスワードとメモ、リンクでのP2P送信、暗号化通話、2段階認証。11言語対応。" />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
 <link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/" />
@@ -19,10 +19,13 @@
 <link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/" />
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="プライベートメッセージ — プロトタイプ" />
-<meta property="og:description" content="エンドツーエンド暗号化、生体認証、複数プロフィール、非表示チャット、カバープロフィールを11言語で。" />
+<meta property="og:title" content="Securmy — 安全・プライバシー・機密性" />
+<meta property="og:description" content="メッセージ、ファイル、パスワード、通話をエンドツーエンド暗号化で保護：すべてあなたの端末で暗号化。11言語対応。" />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/" />
-<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/icon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/icon-512.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/style.css" />
 </head>
@@ -30,7 +33,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/ja/" class="brand"><span class="lock">🔒</span> プライベートメッセージ</a>
+    <a href="/ja/" class="brand"><img class="logo-mark" src="/icon.svg" width="28" height="28" alt="" /> Securmy</a>
     <div class="header-actions">
       <select class="lang-select" aria-label="言語" onchange="location.href=this.value"><option value="/">Italiano</option><option value="/en/">English</option><option value="/es/">Español</option><option value="/fr/">Français</option><option value="/de/">Deutsch</option><option value="/pt/">Português</option><option value="/ar/">العربية</option><option value="/zh/">中文</option><option value="/hi/">हिन्दी</option><option value="/ru/">Русский</option><option value="/ja/" selected>日本語</option></select>
       <a href="/ja/manual.html" class="btn btn-ghost btn-sm">マニュアル</a>
@@ -107,6 +110,66 @@
     </div>
   </section>
 
+  <section class="features suite" id="suite">
+    <div class="container">
+      <h2>チャットだけではない、あなたのデジタル金庫</h2>
+      <p class="sec-lead">Securmyはメッセージの先へ進みます。保存・共有するものはすべて、チャットを守るのと同じ金庫で端末上で暗号化されます。</p>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="icon">🗄️</div>
+          <h3>ファイル金庫</h3>
+          <p>書類・写真・ファイルを隠して守ります。端末上でAES-256により暗号化され、あなたのパスワードか生体認証でのみ開けます。</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🔗</div>
+          <h3>リンクでのP2P送信</h3>
+          <p>ファイルは暗号化されたまま端末から端末へ直接届き、サーバーには保存されません。期限付きの使い捨てリンク。</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🧼</div>
+          <h3>メタデータの削除</h3>
+          <p>共有する前に、写真からGPS位置・カメラ機種などの隠れた情報を取り除きます。</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🔑</div>
+          <h3>パスワード管理</h3>
+          <p>認証情報を金庫に保存し、強力なパスワードを生成してコピー。クリップボードは20秒後に消去されます。</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">📝</div>
+          <h3>暗号化メモ</h3>
+          <p>個人的なメモを端末上で暗号化。どのサーバーにも送信されません。</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">👁️</div>
+          <h3>一度だけ表示のメッセージ</h3>
+          <p>受信者が開けるのは一度だけ。数秒後にサーバーと相手の端末から削除されます。</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">📞</div>
+          <h3>暗号化された音声・ビデオ通話</h3>
+          <p>2台の端末間で直接（DTLS-SRTP）。盗聴対策に、声で照合する確認コード付き。</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🔢</div>
+          <h3>2段階認証</h3>
+          <p>どの認証アプリでもTOTPコードが使えます。パスワードを知られても侵入されません。</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">💾</div>
+          <h3>暗号化バックアップ</h3>
+          <p>ファイル・メモ・パスワードを、あなただけが知るパスフレーズで暗号化した1つのアーカイブに書き出せます。</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🚨</div>
+          <h3>セキュリティチェックと緊急消去</h3>
+          <p>スコアで改善点がわかり、危険なときはワンタップで端末から鍵・ファイル・パスワードを消去します。</p>
+        </article>
+      </div>
+      <p class="sec-lead"><a href="/ja/demo.html" class="btn btn-ghost">デモを試す</a></p>
+    </div>
+  </section>
+
   <section class="features security" id="security">
     <div class="container">
       <h2>セキュリティとプライバシー：アプリの核心</h2>
@@ -166,6 +229,30 @@
           <h3>必要なものを隠す</h3>
           <p>必要なときは、検索バーに秘密の組み合わせを入力して非表示チャットを表示します。</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features roadmap" id="roadmap">
+    <div class="container">
+      <h2>近日公開予定</h2>
+      <p class="sec-lead">計画中の内容です。まだ利用できず、日付をお約束するものではありません。</p>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="icon">🧅</div>
+          <h3>Torネットワーク</h3>
+          <p>サービスの.onionアドレスとネイティブアプリのTorモードで、ネットワーク上の位置も隠します。ブラウザ単体では通信をTor経由にできません。Tor Browserまたはネイティブアプリが必要です。</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">📱</div>
+          <h3>iOS・Androidアプリ</h3>
+          <p>生体認証で解除できるネイティブアプリを、サイトと同じ安全性とプライバシー保証でストアに公開します。</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🛰️</div>
+          <h3>専用TURNサーバー</h3>
+          <p>通話やP2P送信でIPアドレスを隠し、制限の厳しいネットワークの内側でも動作させるためのものです。</p>
+        </article>
       </div>
     </div>
   </section>

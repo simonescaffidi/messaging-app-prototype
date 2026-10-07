@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>プライバシーポリシー — プライベートメッセージ</title>
-<meta name="description" content="プライベートメッセージのプロトタイプに関するプライバシー通知：どのデータをどのように扱うか。" />
+<title>プライバシーポリシー — Securmy</title>
+<meta name="description" content="Securmyのプロトタイプに関するプライバシー通知：どのデータをどのように扱うか。" />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/privacy-policy.html" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/privacy-policy.html" />
 <link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/privacy-policy.html" />
@@ -19,10 +19,13 @@
 <link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/privacy-policy.html" />
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/privacy-policy.html" />
 <meta property="og:type" content="article" />
-<meta property="og:title" content="プライバシーポリシー — プライベートメッセージ" />
-<meta property="og:description" content="プライベートメッセージのプロトタイプに関するプライバシー通知：どのデータをどのように扱うか。" />
+<meta property="og:title" content="プライバシーポリシー — Securmy" />
+<meta property="og:description" content="Securmyのプロトタイプに関するプライバシー通知：どのデータをどのように扱うか。" />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/privacy-policy.html" />
-<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/icon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/icon-512.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/style.css" />
 </head>
@@ -30,7 +33,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/ja/" class="brand"><span class="lock">🔒</span> プライベートメッセージ</a>
+    <a href="/ja/" class="brand"><img class="logo-mark" src="/icon.svg" width="28" height="28" alt="" /> Securmy</a>
     <div class="header-actions">
       <select class="lang-select" aria-label="言語" onchange="location.href=this.value"><option value="/privacy-policy.html">Italiano</option><option value="/en/privacy-policy.html">English</option><option value="/es/privacy-policy.html">Español</option><option value="/fr/privacy-policy.html">Français</option><option value="/de/privacy-policy.html">Deutsch</option><option value="/pt/privacy-policy.html">Português</option><option value="/ar/privacy-policy.html">العربية</option><option value="/zh/privacy-policy.html">中文</option><option value="/hi/privacy-policy.html">हिन्दी</option><option value="/ru/privacy-policy.html">Русский</option><option value="/ja/privacy-policy.html" selected>日本語</option></select>
       <a href="/ja/manual.html" class="btn btn-ghost btn-sm">マニュアル</a>
@@ -66,6 +69,11 @@
 
   <h2>あなたの権利</h2>
   <p>上記の連絡先からご連絡いただければ、プロトタイプに入力したデータの削除をいつでも請求できます。</p>
+
+  <h2>Securmyの機能：金庫、P2P送信、通話</h2>
+  <p>金庫のファイル、メモ、パスワード、バックアップは端末の外に出ない鍵で暗号化されて端末内に残ります。当社は受け取らず、読むことも復元することもできません。</p>
+  <p>P2P送信と通話では、内容は端末間を直接、暗号化されて流れます。サーバーが扱うのは接続情報（SDPとICE候補）のみで、メモリ上に最長1時間保持した後に削除します。相手と公開STUNサーバーにはあなたのIPアドレスが見える場合があります。</p>
+  <p>2段階認証を有効にした場合、TOTPの秘密鍵を暗号化して保存します。一度だけ表示のメッセージは、開封の数秒後にサーバーから削除されます。</p>
 </main>
 
 <footer class="site-footer">

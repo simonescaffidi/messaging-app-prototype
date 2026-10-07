@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>ユーザーマニュアル — プライベートメッセージ</title>
+<title>ユーザーマニュアル — Securmy</title>
 <meta name="description" content="完全ガイド：登録、ユーザー名とパスワードでのログイン、非表示チャット、エンドツーエンド暗号化、生体認証ロック解除、対応言語。" />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/manual.html" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
@@ -19,10 +19,13 @@
 <link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/manual.html" />
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
 <meta property="og:type" content="article" />
-<meta property="og:title" content="ユーザーマニュアル — プライベートメッセージ" />
+<meta property="og:title" content="ユーザーマニュアル — Securmy" />
 <meta property="og:description" content="完全ガイド：登録、ユーザー名とパスワードでのログイン、非表示チャット、エンドツーエンド暗号化、生体認証ロック解除、対応言語。" />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/manual.html" />
-<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/icon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/icon-512.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/style.css" />
 </head>
@@ -30,7 +33,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/ja/" class="brand"><span class="lock">🔒</span> プライベートメッセージ</a>
+    <a href="/ja/" class="brand"><img class="logo-mark" src="/icon.svg" width="28" height="28" alt="" /> Securmy</a>
     <div class="header-actions">
       <select class="lang-select" aria-label="言語" onchange="location.href=this.value"><option value="/manuale.html">Italiano</option><option value="/en/manual.html">English</option><option value="/es/manual.html">Español</option><option value="/fr/manual.html">Français</option><option value="/de/manual.html">Deutsch</option><option value="/pt/manual.html">Português</option><option value="/ar/manual.html">العربية</option><option value="/zh/manual.html">中文</option><option value="/hi/manual.html">हिन्दी</option><option value="/ru/manual.html">Русский</option><option value="/ja/manual.html" selected>日本語</option></select>
       <a href="/ja/manual.html" class="btn btn-ghost btn-sm">マニュアル</a>
@@ -42,7 +45,7 @@
 
 <main>
   <h1>ユーザーマニュアル</h1>
-  <p class="lead">プライベートメッセージの完全ガイド：登録とログインの方法、プライバシー機能の使い方、そしてこのプロトタイプが実際に何を守り、何を守らないのかを説明します。</p>
+  <p class="lead">Securmyの完全ガイド：登録とログインの方法、プライバシー機能の使い方、そしてこのプロトタイプが実際に何を守り、何を守らないのかを説明します。</p>
 
   <nav class="toc" aria-label="目次">
     <strong>目次</strong>
@@ -59,6 +62,7 @@
       <li><a href="#mobile">ネイティブモバイルアプリ（iOS/Android）</a></li>
       <li><a href="#limits">明示している安全性の制限</a></li>
       <li><a href="#troubleshooting">トラブルシューティング</a></li>
+      <li><a href="#suite">Securmy 金庫とツール</a></li>
     </ol>
   </nav>
 
@@ -157,6 +161,34 @@
     <p>Face ID、Touch ID、指紋、またはWindows Helloが設定された端末、最新のブラウザ、HTTPS接続（本番のウェブアプリはすでに使用しています）が必要です。また、設定で少なくとも一度は有効にしておく必要があります。</p>
     <h3>「メッセージが読めなくなった」</h3>
     <p>安全のため、各メッセージの鍵は読んだ直後に削除されます。テキストはこの端末の暗号化キャッシュにのみ残ります。端末を変える、ブラウザデータを消去する、メールでパスワードをリセットすると、以前のメッセージは復元できません。これが前方秘匿性の代償です。</p>
+  </section>
+
+  <section id="suite">
+    <h2>13. Securmy 金庫とツール</h2>
+    <p>サイドバーの 🛡️ ボタンから金庫を開きます。中身はすべて端末上でAES-256-GCMにより暗号化され、鍵は金庫内に保管されてパスワードで守られます。サーバーがファイル・メモ・パスワードを受け取ることはありません。</p>
+    <h3>ファイル金庫</h3>
+    <p>「ファイル」タブでファイルを追加します（1件あたり最大100 MB）。チェックが入っていれば、保存前に写真のメタデータが削除されます。各ファイルはダウンロード、P2P送信、削除ができます。</p>
+    <h3>リンクでのP2P送信</h3>
+    <p>ファイルと有効期限（10分または1時間）を選ぶと、使い捨てリンクが得られます。ファイルは受信者へ直接届き、リンクの # の後ろにだけある鍵で暗号化され、その鍵がサーバーに届くことはありません。転送が終わるまでページを開いたままにしてください。</p>
+    <h3>写真を整える</h3>
+    <p>画像を描き直して、EXIF・GPS位置・サムネイルを破棄します。JPEG、PNG、WebPに対応。それ以外の形式では自動削除はできません。</p>
+    <h3>メモとパスワード</h3>
+    <p>メモと認証情報は金庫内で暗号化されたまま保たれます。ジェネレーターがランダムなパスワードを作成し、コピーするとクリップボードは20秒後に消去されます。</p>
+    <h3>一度だけ表示のメッセージ</h3>
+    <p>メッセージ欄の横で「一度だけ表示」を選びます。受信者がタップして見ると、テキストは10秒間表示され、その後相手の端末とサーバー上で消去されます。画面を撮影されることは防げません。</p>
+    <h3>音声・ビデオ通話</h3>
+    <p>チャットのヘッダーにある 📞 と 🎥 のボタンを使います。音声と映像は端末間を直接、暗号化されて流れます。双方に4桁のコードが表示されるので、声で照合してください。一致すれば傍受されていません。</p>
+    <h3>2段階認証</h3>
+    <p>「セキュリティ」で、認証アプリ（Google Authenticator、Aegis、1Passwordなど）によるTOTPコードを有効にできます。有効にすると、パスワードでのログインに6桁のコードも必要になります。生体認証での解除は別のログイン方法として残ります。</p>
+    <h3>バックアップと緊急消去</h3>
+    <p>バックアップには、ご自身で決めた10文字以上のパスフレーズで暗号化したファイル・メモ・パスワードが含まれ、パスフレーズがなければ復元できません。メッセージは含まれません。緊急消去は端末から鍵・メッセージのキャッシュ・ファイル・メモ・パスワードを削除し、元に戻せません。</p>
+    <h3>知っておくべき制限</h3>
+    <ul>
+      <li>金庫は端末内のものです。ファイル・メモ・パスワードは端末間で同期されません。移すにはバックアップを使ってください。</li>
+      <li>P2P送信と通話では、サービスがTURNサーバーを使わない限り、相手（と公開STUNサーバー）にIPアドレスが見えます。制限の厳しいネットワークでは接続に失敗することがあります。</li>
+      <li>パスワード管理は基本機能のみです。フォームへの自動入力はせず、業務用途では専用の管理ツールの代わりにはなりません。</li>
+      <li>パスワードとバックアップのパスフレーズを両方失うと、暗号化データは復元できません。誰にも、私たちにも開けません。</li>
+    </ul>
   </section>
 </main>
 
