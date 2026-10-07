@@ -107,6 +107,45 @@
     </div>
   </section>
 
+  <section class="features security" id="security">
+    <div class="container">
+      <h2>セキュリティとプライバシー：アプリの核心</h2>
+      <p class="sec-lead">「暗号化されています」と言うだけではありません。あなたの会話を守る仕組みを具体的に説明します。</p>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="icon">🔄</div>
+          <h3>メッセージごとに新しい鍵</h3>
+          <p>各メッセージには使い捨ての鍵（前方秘匿性）があり、読んだ後に削除されます。たとえ鍵を入手されても、過去のメッセージは復号できません。</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🗝️</div>
+          <h3>パスワードで暗号化された金庫</h3>
+          <p>秘密鍵と既読メッセージは、あなたのパスワードで端末上で暗号化されます（PBKDF2 + AES-GCM）。パスワードなしでは読めません。</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🔍</div>
+          <h3>鍵の確認と盗聴警告</h3>
+          <p>安全番号を相手と声で照合します。相手の鍵が変わるとアプリが警告し、確認するまで送信をブロックします。</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🙈</div>
+          <h3>何も見えないサーバー</h3>
+          <p>サーバーは暗号文だけを保存します。メールとユーザー名はデータベース内で暗号化され、パスワードはハッシュ（scrypt）のみです。</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🛡️</div>
+          <h3>ログイン攻撃への防御</h3>
+          <p>IPアドレスとユーザー名ごとに試行回数を制限し、セッションは取り消し可能。パスワード変更時は他のセッションを終了します。</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🫆</div>
+          <h3>端末から出ない生体認証</h3>
+          <p>WebAuthn/FIDO2ではサーバーはパスキーの公開鍵だけを受け取ります。生体データがスマホやパソコンの外に出ることはありません。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <section class="how" id="how-it-works">
     <div class="container">
       <h2>仕組み</h2>
@@ -135,7 +174,7 @@
     <div class="container">
       <h2>これは何か、何ではないか</h2>
       <div class="disclaimer-box">
-        <p><strong>これは動作するプロトタイプ</strong>であり、完成品ではありません。メッセージはエンドツーエンドで暗号化されます（ECDH P-256 + 256ビットAES-GCM、鍵導出はHKDF-SHA256）。サーバーが平文を見ることはありません。生体認証ロック解除には本物のWebAuthn/FIDO2を使用します。既知の制限も残っており、<a href="/ja/manual.html">ユーザーマニュアル</a>で率直に説明しています。「Signalのような」前方秘匿性を持つラチェットはまだなく、公開鍵の帯域外検証もないため（理論上は悪意あるサーバーが鍵をすり替えられます）、秘密鍵はハードウェアのセキュアエンクレーブなしでブラウザに保存され、メールによるパスワード再設定は確認済みのメールアドレスでのみ機能します。本物の安全性で使い心地を試すには十分ですが「国家レベルの攻撃にも耐える」わけではなく、極めて高いリスクの会話にはまだ向きません。</p>
+        <p><strong>これは動作するプロトタイプ</strong>であり完成品ではありませんが、セキュリティは本物です。各メッセージに読後に削除される新しい鍵（前方秘匿性）、パスワードで暗号化された金庫に置かれる秘密鍵、安全番号による相手の確認、鍵が変わった際の警告があります。生体認証ロック解除は本物のWebAuthn/FIDO2です。既知の制限は<a href="/ja/manual.html">ユーザーマニュアル</a>で率直に説明しています（サーバーに見えるメタデータ、端末に紐づく履歴、メールのみの回復）。極めて高リスクな会話向けにはまだ設計されていません。</p>
       </div>
     </div>
   </section>
