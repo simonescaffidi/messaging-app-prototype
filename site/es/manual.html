@@ -184,8 +184,8 @@
     <p>La copia contiene archivos, notas y contraseñas cifrados con una frase secreta de al menos 10 caracteres que eliges tú: sin ella no se puede recuperar. Los mensajes no se incluyen. El borrado de emergencia elimina del dispositivo claves, caché de mensajes, archivos, notas y contraseñas y no se puede deshacer.</p>
     <h3>Límites que conviene conocer</h3>
     <ul>
-      <li>La caja fuerte es local: archivos, notas y contraseñas no se sincronizan entre dispositivos; usa la copia de seguridad para moverlos.</li>
-      <li>En los envíos P2P y las llamadas la otra persona (y un servidor STUN público) puede ver tu dirección IP, salvo que el servicio use un servidor TURN; en redes muy restrictivas la conexión puede fallar.</li>
+      <li>La sincronización entre dispositivos es opcional y de pago (paquetes de espacio): los datos siguen cifrados en tu dispositivo y el servidor no tiene la clave. Sin plan, la caja fuerte es solo local; la copia de seguridad sigue sirviendo para moverla.</li>
+      <li>Para ocultar tu IP en envíos P2P y llamadas activa Seguridad → Protección de IP (relay cifrado), donde el servicio tenga un servidor TURN. Sin relay la otra persona puede ver tu IP y en redes muy restrictivas la conexión puede fallar.</li>
       <li>El gestor de contraseñas es básico: no rellena formularios por sí solo y no sustituye a un gestor dedicado para uso profesional.</li>
       <li>Si pierdes la contraseña y la frase de la copia, los datos cifrados no se pueden recuperar: nadie, ni siquiera nosotros, puede abrirlos.</li>
     </ul>
