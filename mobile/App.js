@@ -110,6 +110,13 @@ export default function App() {
           // WebAuthn, entrambi richiesti in un contesto sicuro (https).
           originWhitelist={["https://*"]}
           allowsBackForwardNavigationGestures
+          // Chiamate cifrate (WebRTC), invio P2P e download della cassaforte
+          allowsInlineMediaPlayback
+          mediaPlaybackRequiresUserAction={false}
+          mediaCapturePermissionGrantType="grant"
+          allowFileAccess={false}
+          setSupportMultipleWindows={false}
+          onShouldStartLoadWithRequest={(r) => r.url.startsWith(new URL(APP_URL).origin) || r.url.startsWith("blob:") || r.url.startsWith("about:")}
         />
       </SafeAreaView>
     </View>

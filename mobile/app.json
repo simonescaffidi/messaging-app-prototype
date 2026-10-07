@@ -9,17 +9,28 @@
     "splash": {
       "backgroundColor": "#0f1115"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "it.simonescaffidi.messaggistica",
       "infoPlist": {
-        "NSFaceIDUsageDescription": "Usa Face ID per sbloccare rapidamente i tuoi profili di Securmy."
+        "NSFaceIDUsageDescription": "Usa Face ID per sbloccare rapidamente i tuoi profili di Securmy.",
+        "NSCameraUsageDescription": "La fotocamera serve per le videochiamate cifrate e per scegliere foto da proteggere.",
+        "NSMicrophoneUsageDescription": "Il microfono serve per le chiamate cifrate.",
+        "NSPhotoLibraryUsageDescription": "Serve per aggiungere foto e file alla tua cassaforte."
       }
     },
     "android": {
       "package": "it.simonescaffidi.messaggistica",
-      "permissions": ["USE_BIOMETRIC", "USE_FINGERPRINT"],
+      "permissions": [
+        "USE_BIOMETRIC",
+        "USE_FINGERPRINT",
+        "CAMERA",
+        "RECORD_AUDIO",
+        "MODIFY_AUDIO_SETTINGS"
+      ],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#0f1115"
@@ -30,6 +41,8 @@
         "projectId": "DA-IMPOSTARE-DOPO-EAS-INIT"
       }
     },
-    "plugins": ["expo-local-authentication"]
+    "plugins": [
+      "expo-local-authentication"
+    ]
   }
 }
