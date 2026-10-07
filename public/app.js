@@ -101,6 +101,44 @@ async function doLogin() {
   }
 }
 
+// ---------- RECUPERO PASSWORD / VERIFICA EMAIL ----------
+function showAuthPanel(id) {
+  $$("#auth-screen .tab-panel").forEach((p) => p.classList.remove("active"));
+  $("#" + id).classList.add("active");
+}
+$("#link-forgot").addEventListener("click", (e) => { e.preventDefault(); $("#auth-notice").textContent = ""; showAuthPanel("tab-forgot"); });
+$("#btn-forgot-back").addEventListener("click", () => { $("#auth-notice").textContent = ""; showAuthPanel("tab-login"); });
+$("#btn-forgot-send").addEventListener("click", async () => {
+  const email = $("#forgot-email").value.trim();
+  const username = $("#forgot-username").value.trim();
+  if (!email || !username) return;
+  try { await api("/api/password/forgot", { method: "POST", body: JSON.stringify({ email, username }) }); } catch (e) {}
+  $("#auth-notice").textContent = I18N.t("forgotSent");
+});
+let resetToken = null;
+$("#btn-reset-set").addEventListener("click", async () => {
+  const password = $("#reset-password").value;
+  try {
+    await api("/api/password/reset", { method: "POST", body: JSON.stringify({ token: resetToken, password }) });
+    $("#reset-password").value = "";
+    $("#auth-notice").textContent = I18N.t("resetDone");
+    showAuthPanel("tab-login");
+  } catch (e) { $("#auth-notice").textContent = e.message; }
+});
+(async function handleEmailLinks() {
+  const q = new URLSearchParams(location.search);
+  if (q.get("reset")) {
+    resetToken = q.get("reset");
+    showAuthPanel("tab-reset");
+  } else if (q.get("verify")) {
+    try {
+      await api("/api/email/verify", { method: "POST", body: JSON.stringify({ token: q.get("verify") }) });
+      $("#auth-notice").textContent = I18N.t("verifyOk");
+    } catch (e) { $("#auth-notice").textContent = I18N.t("verifyFail"); }
+  }
+  if (q.get("reset") || q.get("verify")) history.replaceState(null, "", location.pathname);
+})();
+
 // ---------- LOGIN (biometrico) ----------
 async function refreshBiometricLoginButton() {
   const btn = $("#btn-biometric-login");
@@ -255,7 +293,28 @@ $("#btn-add-contact-confirm").addEventListener("click", async () => {
 $("#btn-settings").addEventListener("click", () => {
   $("#settings-notifications").value = state.me.settings?.notifications || "normal";
   updateBiometricSettingsUI();
+  refreshSettingsAccount();
   $("#settings-modal").classList.remove("hidden");
+});
+function refreshSettingsAccount() {
+  const me = state.me || {};
+  $("#email-status").textContent = me.emailVerified ? I18N.t("emailVerifiedLabel") : I18N.t("emailNotVerified");
+  $("#btn-resend-verify").classList.toggle("hidden", !!me.emailVerified);
+  $("#weak-pw-notice").classList.toggle("hidden", !me.weakPassword);
+  $("#change-pw-status").textContent = "";
+}
+$("#btn-resend-verify").addEventListener("click", async () => {
+  try { await api("/api/email/resend", { method: "POST", body: "{}" }); $("#email-status").textContent = I18N.t("verifySent"); }
+  catch (e) { $("#email-status").textContent = e.message; }
+});
+$("#btn-change-password").addEventListener("click", async () => {
+  try {
+    await api("/api/password/change", { method: "POST", body: JSON.stringify({ oldPassword: $("#old-password").value, newPassword: $("#new-password").value }) });
+    $("#old-password").value = ""; $("#new-password").value = "";
+    if (state.me) state.me.weakPassword = false;
+    $("#weak-pw-notice").classList.add("hidden");
+    $("#change-pw-status").textContent = I18N.t("pwChanged");
+  } catch (e) { $("#change-pw-status").textContent = e.message; }
 });
 $("#btn-settings-cancel").addEventListener("click", () => $("#settings-modal").classList.add("hidden"));
 $("#btn-settings-save").addEventListener("click", async () => {

@@ -33,7 +33,27 @@
       <button id="btn-biometric-login" class="secondary hidden" data-i18n="btnBiometricLogin">🔐 Sblocca con biometria</button>
       <p class="hint" data-i18n="loginHint">Ogni codice apre automaticamente il profilo associato. Nessuna schermata di scelta.</p>
       <p id="login-error" class="error"></p>
+      <p><a href="#" id="link-forgot" class="hint" data-i18n="forgotLink">Password dimenticata?</a></p>
     </div>
+
+    <div id="tab-forgot" class="tab-panel">
+      <h2 data-i18n="forgotTitle">Recupera password</h2>
+      <label data-i18n="regEmailLabel">Email</label>
+      <input id="forgot-email" type="email" autocomplete="email" />
+      <label data-i18n="loginUserLabel">Username</label>
+      <input id="forgot-username" type="text" autocomplete="username" spellcheck="false" />
+      <button id="btn-forgot-send" class="primary" data-i18n="btnSendReset">Invia link di recupero</button>
+      <button id="btn-forgot-back" class="secondary" data-i18n="btnBack">Indietro</button>
+    </div>
+
+    <div id="tab-reset" class="tab-panel">
+      <h2 data-i18n="resetTitle">Nuova password</h2>
+      <label data-i18n="newPasswordLabel">Nuova password</label>
+      <input id="reset-password" type="password" minlength="8" maxlength="128" autocomplete="new-password" />
+      <button id="btn-reset-set" class="primary" data-i18n="btnSetPassword">Imposta password</button>
+    </div>
+
+    <p id="auth-notice" class="hint"></p>
 
     <div id="tab-register" class="tab-panel">
       <label data-i18n="regEmailLabel">Email</label>
@@ -139,6 +159,17 @@
       <option value="alert-only" data-i18n="notifAlertOnly">Solo avviso</option>
       <option value="off" data-i18n="notifOff">Disattivate</option>
     </select>
+
+    <label class="settings-divider" data-i18n="regEmailLabel">Email</label>
+    <p id="email-status" class="hint"></p>
+    <button id="btn-resend-verify" type="button" class="hidden" data-i18n="btnResendVerify">Invia di nuovo la verifica</button>
+
+    <label class="settings-divider" data-i18n="changePwTitle">Cambia password</label>
+    <p id="weak-pw-notice" class="error hidden" data-i18n="weakPwNotice">La tua password è debole: cambiala qui sotto.</p>
+    <input id="old-password" type="password" maxlength="128" autocomplete="current-password" data-i18n-placeholder="oldPasswordLabel" placeholder="Password attuale" />
+    <input id="new-password" type="password" minlength="8" maxlength="128" autocomplete="new-password" data-i18n-placeholder="newPasswordLabel" placeholder="Nuova password" />
+    <button id="btn-change-password" type="button" data-i18n="btnChangePassword">Cambia password</button>
+    <p id="change-pw-status" class="hint"></p>
 
     <label class="settings-divider" data-i18n="biometricSectionLabel">Sblocco biometrico</label>
     <button id="btn-enable-biometric" type="button" data-i18n="btnEnableBiometric">Attiva sblocco con Face ID / impronta</button>
