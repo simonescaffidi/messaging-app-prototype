@@ -192,6 +192,16 @@ module.exports = {
         "🚨",
         "Sicherheitscheck und Notfall-Löschung",
         "Ein Punktwert zeigt, was zu verbessern ist; in Gefahr löscht ein Tipp Schlüssel, Dateien und Passwörter vom Gerät."
+      ],
+      [
+        "☁️",
+        "Verschlüsselte Synchronisierung (kostenpflichtig)",
+        "Synchronisiere deinen Tresor zwischen deinen Geräten mit Speicherpaketen (5, 25 oder 100 GB pro Monat). Der Server speichert nur bereits verschlüsselte Daten: Der Schlüssel bleibt auf deinen Geräten. Ohne Tarif bleibt alles lokal."
+      ],
+      [
+        "🛰️",
+        "IP-Schutz per Relay",
+        "Mit einem verschlüsselten Relay (TURN) kannst du deine IP-Adresse bei Anrufen und P2P-Übertragungen verbergen und sie auch in sehr restriktiven Netzwerken nutzen."
       ]
     ],
     "roadmapTitle": "Demnächst",
@@ -200,17 +210,12 @@ module.exports = {
       [
         "🧅",
         "Tor-Netzwerk",
-        "Eine .onion-Adresse des Dienstes und ein Tor-Modus in den nativen Apps, um auch deinen Netzwerkstandort zu verbergen. Ein reiner Browser kann den Datenverkehr nicht über Tor leiten: Dafür braucht es den Tor Browser oder die native App."
+        "Der Dienst kann als .onion-Adresse bereitgestellt werden: Die Installationsdateien sind fertig (Self-Hosting) und werden auf Anfrage aktiviert. Der Tor Browser deaktiviert WebRTC, daher funktionieren P2P-Übertragungen und Anrufe nicht über Tor; Nachrichten, Tresor und Sync schon."
       ],
       [
         "📱",
         "iOS- und Android-Apps",
         "Native Apps mit biometrischer Entsperrung, in den Stores veröffentlicht – mit denselben Sicherheits- und Datenschutzgarantien wie die Website."
-      ],
-      [
-        "🛰️",
-        "Privater TURN-Server",
-        "Um deine IP-Adresse bei Anrufen und P2P-Übertragungen zu verbergen und sie auch in sehr restriktiven Netzen zum Laufen zu bringen."
       ]
     ]
   },
@@ -522,8 +527,8 @@ module.exports = {
           [
             "ul",
             [
-              "Der Tresor ist lokal: Dateien, Notizen und Passwörter werden nicht zwischen Geräten synchronisiert; nutze das Backup zum Umziehen.",
-              "Bei P2P-Übertragungen und Anrufen kann die andere Person (und ein öffentlicher STUN-Server) deine IP-Adresse sehen, sofern der Dienst keinen TURN-Server nutzt; in sehr restriktiven Netzen kann die Verbindung scheitern.",
+              "Die Synchronisierung zwischen Geräten ist optional und kostenpflichtig (Speicherpakete): Die Daten bleiben auf deinem Gerät verschlüsselt, der Server hat den Schlüssel nicht. Ohne Tarif bleibt der Tresor nur lokal; ein Backup dient weiterhin zum Umzug.",
+              "Um deine IP bei P2P-Übertragungen und Anrufen zu verbergen, aktiviere Sicherheit → IP-Schutz (verschlüsseltes Relay), sofern der Dienst einen TURN-Server hat. Ohne Relay kann die andere Person deine IP sehen, und in sehr restriktiven Netzwerken kann die Verbindung scheitern.",
               "Der Passwort-Manager ist schlicht: Er füllt keine Formulare selbst aus und ersetzt für berufliche Zwecke keinen spezialisierten Manager.",
               "Verlierst du Passwort und Backup-Passphrase, sind die verschlüsselten Daten nicht wiederherstellbar: Niemand, auch wir nicht, kann sie öffnen."
             ]
@@ -581,6 +586,7 @@ module.exports = {
         "Securmy-Funktionen: Tresor, P2P-Versand und Anrufe",
         [
           "Tresor-Dateien, Notizen, Passwörter und Backups bleiben auf deinem Gerät, verschlüsselt mit einem Schlüssel, der es nie verlässt: Wir erhalten sie nicht und können sie weder lesen noch wiederherstellen.",
+          "Synchronisierung (nur mit kostenpflichtigem Tarif): Der Server speichert Dateien, Notizen und Passwörter bereits auf deinem Gerät verschlüsselt, ohne den Schlüssel zum Öffnen, bis du oder dein Konto sie löschen. Für Zahlungen nutzen wir Stripe: Wir sehen und speichern deine Kartendaten nicht.",
           "Bei P2P-Übertragungen und Anrufen laufen die Inhalte direkt zwischen den Geräten, verschlüsselt. Der Server verarbeitet nur Verbindungsinformationen (SDP und ICE-Kandidaten), höchstens eine Stunde im Speicher gehalten und dann gelöscht; der andere Teilnehmer und ein öffentlicher STUN-Server können deine IP-Adresse sehen.",
           "Aktivierst du die Zwei-Schritt-Bestätigung, speichern wir das TOTP-Geheimnis verschlüsselt; Einmal-Nachrichten werden wenige Sekunden nach dem Öffnen vom Server gelöscht."
         ]

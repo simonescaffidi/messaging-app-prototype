@@ -192,6 +192,16 @@ module.exports = {
         "🚨",
         "Revisión de seguridad y borrado de emergencia",
         "Una puntuación te dice qué mejorar; en caso de peligro, un toque borra del dispositivo claves, archivos y contraseñas."
+      ],
+      [
+        "☁️",
+        "Sincronización cifrada (de pago)",
+        "Sincroniza la caja fuerte entre tus dispositivos con paquetes de espacio (5, 25 o 100 GB al mes). El servidor solo guarda datos ya cifrados: la clave permanece en tus dispositivos. Sin plan, todo queda en local."
+      ],
+      [
+        "🛰️",
+        "Protección de IP con relay",
+        "Con un relay cifrado (TURN) puedes ocultar tu dirección IP en llamadas y envíos P2P, y hacer que funcionen incluso en redes muy restrictivas."
       ]
     ],
     "roadmapTitle": "Próximamente",
@@ -200,17 +210,12 @@ module.exports = {
       [
         "🧅",
         "Red Tor",
-        "Una dirección .onion del servicio y un modo Tor en las apps nativas, para ocultar también tu ubicación de red. Un navegador por sí solo no puede enrutar el tráfico por Tor: hace falta Tor Browser o la app nativa."
+        "El servicio puede exponerse como dirección .onion: los archivos de instalación están listos (autoalojamiento) y se activan bajo petición. Tor Browser desactiva WebRTC, así que los envíos P2P y las llamadas no funcionan por Tor; mensajes, caja fuerte y sync sí."
       ],
       [
         "📱",
         "Apps para iOS y Android",
         "Apps nativas con desbloqueo biométrico, publicadas en las tiendas con las mismas garantías de seguridad y privacidad que el sitio."
-      ],
-      [
-        "🛰️",
-        "Servidor TURN privado",
-        "Para ocultar tu dirección IP en llamadas y envíos P2P y que funcionen incluso tras redes muy restrictivas."
       ]
     ]
   },
@@ -522,8 +527,8 @@ module.exports = {
           [
             "ul",
             [
-              "La caja fuerte es local: archivos, notas y contraseñas no se sincronizan entre dispositivos; usa la copia de seguridad para moverlos.",
-              "En los envíos P2P y las llamadas la otra persona (y un servidor STUN público) puede ver tu dirección IP, salvo que el servicio use un servidor TURN; en redes muy restrictivas la conexión puede fallar.",
+              "La sincronización entre dispositivos es opcional y de pago (paquetes de espacio): los datos siguen cifrados en tu dispositivo y el servidor no tiene la clave. Sin plan, la caja fuerte es solo local; la copia de seguridad sigue sirviendo para moverla.",
+              "Para ocultar tu IP en envíos P2P y llamadas activa Seguridad → Protección de IP (relay cifrado), donde el servicio tenga un servidor TURN. Sin relay la otra persona puede ver tu IP y en redes muy restrictivas la conexión puede fallar.",
               "El gestor de contraseñas es básico: no rellena formularios por sí solo y no sustituye a un gestor dedicado para uso profesional.",
               "Si pierdes la contraseña y la frase de la copia, los datos cifrados no se pueden recuperar: nadie, ni siquiera nosotros, puede abrirlos."
             ]
@@ -581,6 +586,7 @@ module.exports = {
         "Funciones de Securmy: caja fuerte, envíos P2P y llamadas",
         [
           "Los archivos, notas, contraseñas y copias de la caja fuerte permanecen en tu dispositivo, cifrados con una clave que nunca sale de él: no los recibimos y no podemos leerlos ni recuperarlos.",
+          "Sincronización (solo con plan de pago): el servidor guarda archivos, notas y contraseñas ya cifrados en tu dispositivo, sin la clave para abrirlos, hasta que tú o tu cuenta los eliminéis. Para los pagos usamos Stripe: no vemos ni guardamos los datos de tu tarjeta.",
           "En los envíos P2P y las llamadas el contenido viaja directamente entre dispositivos, cifrado. El servidor solo trata la información de conexión (SDP y candidatos ICE), conservada en memoria como máximo una hora y luego eliminada; el otro participante y un servidor STUN público pueden ver tu dirección IP.",
           "Si activas la verificación en dos pasos conservamos el secreto TOTP, cifrado en reposo; los mensajes de una sola vista se eliminan del servidor pocos segundos después de abrirse."
         ]

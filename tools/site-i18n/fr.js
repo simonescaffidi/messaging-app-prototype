@@ -192,6 +192,16 @@ module.exports = {
         "🚨",
         "Contrôle de sécurité et effacement d'urgence",
         "Un score vous dit quoi améliorer ; en cas de danger, un geste efface de l'appareil clés, fichiers et mots de passe."
+      ],
+      [
+        "☁️",
+        "Synchronisation chiffrée (payante)",
+        "Synchronisez le coffre entre vos appareils avec des packs d'espace (5, 25 ou 100 Go par mois). Le serveur ne conserve que des données déjà chiffrées : la clé reste sur vos appareils. Sans offre, tout reste local."
+      ],
+      [
+        "🛰️",
+        "Protection de l'IP par relais",
+        "Avec un relais chiffré (TURN), vous pouvez masquer votre adresse IP pendant les appels et envois P2P, et les faire fonctionner même sur des réseaux très restrictifs."
       ]
     ],
     "roadmapTitle": "Bientôt",
@@ -200,17 +210,12 @@ module.exports = {
       [
         "🧅",
         "Réseau Tor",
-        "Une adresse .onion du service et un mode Tor dans les applis natives, pour masquer aussi votre position réseau. Un navigateur seul ne peut pas faire passer le trafic par Tor : il faut Tor Browser ou l'appli native."
+        "Le service peut être exposé en adresse .onion : les fichiers d'installation sont prêts (auto-hébergement) et activés sur demande. Tor Browser désactive WebRTC, donc les envois P2P et les appels ne fonctionnent pas via Tor ; messages, coffre et sync oui."
       ],
       [
         "📱",
         "Applis iOS et Android",
         "Applis natives avec déverrouillage biométrique, publiées sur les stores avec les mêmes garanties de sécurité et de confidentialité que le site."
-      ],
-      [
-        "🛰️",
-        "Serveur TURN privé",
-        "Pour masquer votre adresse IP pendant les appels et envois P2P et les faire fonctionner même derrière des réseaux très restrictifs."
       ]
     ]
   },
@@ -522,8 +527,8 @@ module.exports = {
           [
             "ul",
             [
-              "Le coffre est local : fichiers, notes et mots de passe ne se synchronisent pas entre appareils ; utilisez la sauvegarde pour les déplacer.",
-              "Dans les envois P2P et les appels, l'autre personne (et un serveur STUN public) peut voir votre adresse IP, sauf si le service utilise un serveur TURN ; sur des réseaux très restrictifs, la connexion peut échouer.",
+              "La synchronisation entre appareils est facultative et payante (packs d'espace) : les données restent chiffrées sur votre appareil et le serveur n'a pas la clé. Sans offre, le coffre reste local ; la sauvegarde sert toujours à le déplacer.",
+              "Pour masquer votre IP lors des envois P2P et des appels, activez Sécurité → Protection de l'IP (relais chiffré), là où le service dispose d'un serveur TURN. Sans relais, l'autre personne peut voir votre IP et, sur des réseaux très restrictifs, la connexion peut échouer.",
               "Le gestionnaire de mots de passe est basique : il ne remplit pas les formulaires seul et ne remplace pas un gestionnaire dédié pour un usage professionnel.",
               "Si vous perdez votre mot de passe et la phrase de sauvegarde, les données chiffrées sont irrécupérables : personne, pas même nous, ne peut les ouvrir."
             ]
@@ -581,6 +586,7 @@ module.exports = {
         "Fonctions Securmy : coffre, envois P2P et appels",
         [
           "Fichiers, notes, mots de passe et sauvegardes du coffre restent sur votre appareil, chiffrés par une clé qui n'en sort jamais : nous ne les recevons pas et ne pouvons ni les lire ni les récupérer.",
+          "Synchronisation (offre payante uniquement) : le serveur conserve fichiers, notes et mots de passe déjà chiffrés sur votre appareil, sans la clé pour les ouvrir, jusqu'à leur suppression par vous ou avec le compte. Pour les paiements nous utilisons Stripe : nous ne voyons ni ne conservons les données de votre carte.",
           "Pour les envois P2P et les appels, le contenu circule directement entre appareils, chiffré. Le serveur ne traite que les informations de connexion (SDP et candidats ICE), conservées en mémoire au plus une heure puis supprimées ; l'autre participant et un serveur STUN public peuvent voir votre adresse IP.",
           "Si vous activez la vérification en deux étapes, nous conservons le secret TOTP, chiffré au repos ; les messages à vue unique sont supprimés du serveur quelques secondes après leur ouverture."
         ]

@@ -192,6 +192,16 @@ module.exports = {
         "🚨",
         "Security check and emergency wipe",
         "A score tells you what to improve; in danger, one tap erases keys, files and passwords from the device."
+      ],
+      [
+        "☁️",
+        "Encrypted sync (paid)",
+        "Sync your vault across your devices with storage packs (5, 25 or 100 GB per month). The server only keeps data that is already encrypted: the key stays on your devices. Without a plan, everything stays local."
+      ],
+      [
+        "🛰️",
+        "IP protection with a relay",
+        "With an encrypted relay (TURN) you can hide your IP address during calls and P2P transfers, and make them work even on very restrictive networks."
       ]
     ],
     "roadmapTitle": "Coming soon",
@@ -200,17 +210,12 @@ module.exports = {
       [
         "🧅",
         "Tor network",
-        "A .onion address for the service and a Tor mode in the native apps, to hide your network location too. A plain browser cannot route traffic over Tor: you need Tor Browser or the native app."
+        "The service can be exposed as a .onion address: the setup files are ready (self-hosting) and are enabled on request. Tor Browser disables WebRTC, so P2P transfers and calls do not work over Tor; messages, vault and sync do."
       ],
       [
         "📱",
         "iOS and Android apps",
         "Native apps with biometric unlock, published in the stores with the same security and privacy guarantees as the website."
-      ],
-      [
-        "🛰️",
-        "Private TURN server",
-        "To hide your IP address during calls and P2P transfers and make them work even behind very restrictive networks."
       ]
     ]
   },
@@ -522,8 +527,8 @@ module.exports = {
           [
             "ul",
             [
-              "The vault is local: files, notes and passwords do not sync between devices; use the backup to move them.",
-              "In P2P transfers and calls the other person (and a public STUN server) can see your IP address, unless the service uses a TURN server; on very restrictive networks the connection may fail.",
+              "Cross-device sync is optional and paid (storage packs): data stays encrypted on your device and the server does not have the key. Without a plan the vault stays local-only; backups are still how you move it by hand.",
+              "To hide your IP in P2P transfers and calls, turn on Security → IP protection (encrypted relay), where the service has a TURN server. Without a relay the other person can see your IP, and on very restrictive networks the connection may fail.",
               "The password manager is basic: it does not fill in forms by itself and does not replace a dedicated manager for professional use.",
               "If you lose your password and the backup passphrase, the encrypted data cannot be recovered: nobody, not even us, can open it."
             ]
@@ -581,6 +586,7 @@ module.exports = {
         "Securmy features: vault, P2P transfers and calls",
         [
           "Vault files, notes, passwords and backups stay on your device, encrypted with a key that never leaves it: we do not receive them and cannot read or recover them.",
+          "Sync (paid plan only): the server stores files, notes and passwords already encrypted on your device, without the key to open them, until you or your account delete them. For payments we use Stripe: we neither see nor store your card details.",
           "For P2P transfers and calls, the content travels directly between devices, encrypted. The server only handles connection information (SDP and ICE candidates), kept in memory for at most one hour and then deleted; the other participant and a public STUN server can see your IP address.",
           "If you enable two-step verification we store the TOTP secret, encrypted at rest; view-once messages are deleted from the server a few seconds after being opened."
         ]

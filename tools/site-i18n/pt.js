@@ -192,6 +192,16 @@ module.exports = {
         "🚨",
         "Verificação de segurança e apagamento de emergência",
         "Uma pontuação mostra o que melhorar; em caso de perigo, um toque apaga do dispositivo chaves, arquivos e senhas."
+      ],
+      [
+        "☁️",
+        "Sincronização cifrada (paga)",
+        "Sincronize o cofre entre os seus dispositivos com pacotes de espaço (5, 25 ou 100 GB por mês). O servidor só guarda dados já cifrados: a chave fica nos seus dispositivos. Sem plano, tudo fica local."
+      ],
+      [
+        "🛰️",
+        "Proteção de IP com relay",
+        "Com um relay cifrado (TURN) pode ocultar o seu endereço IP em chamadas e envios P2P, e fazê-los funcionar mesmo em redes muito restritivas."
       ]
     ],
     "roadmapTitle": "Em breve",
@@ -200,17 +210,12 @@ module.exports = {
       [
         "🧅",
         "Rede Tor",
-        "Um endereço .onion do serviço e um modo Tor nos apps nativos, para esconder também a sua localização de rede. Um navegador sozinho não consegue rotear o tráfego pelo Tor: é preciso o Tor Browser ou o app nativo."
+        "O serviço pode ser exposto como endereço .onion: os ficheiros de instalação estão prontos (self-hosting) e ativam-se a pedido. O Tor Browser desativa o WebRTC, por isso envios P2P e chamadas não funcionam via Tor; mensagens, cofre e sync sim."
       ],
       [
         "📱",
         "Apps para iOS e Android",
         "Apps nativos com desbloqueio biométrico, publicados nas lojas com as mesmas garantias de segurança e privacidade do site."
-      ],
-      [
-        "🛰️",
-        "Servidor TURN privado",
-        "Para esconder o seu endereço IP em chamadas e envios P2P e fazê-los funcionar mesmo atrás de redes muito restritivas."
       ]
     ]
   },
@@ -522,8 +527,8 @@ module.exports = {
           [
             "ul",
             [
-              "O cofre é local: arquivos, notas e senhas não sincronizam entre dispositivos; use o backup para movê-los.",
-              "Nos envios P2P e nas chamadas a outra pessoa (e um servidor STUN público) pode ver o seu endereço IP, a menos que o serviço use um servidor TURN; em redes muito restritivas a conexão pode falhar.",
+              "A sincronização entre dispositivos é opcional e paga (pacotes de espaço): os dados continuam cifrados no seu dispositivo e o servidor não tem a chave. Sem plano, o cofre fica só local; o backup continua a servir para o mover.",
+              "Para ocultar o seu IP em envios P2P e chamadas, ative Segurança → Proteção de IP (relay cifrado), onde o serviço tenha um servidor TURN. Sem relay, a outra pessoa pode ver o seu IP e, em redes muito restritivas, a ligação pode falhar.",
               "O gerenciador de senhas é básico: não preenche formulários sozinho e não substitui um gerenciador dedicado para uso profissional.",
               "Se perder a senha e a frase do backup, os dados cifrados não são recuperáveis: ninguém, nem nós, consegue abri-los."
             ]
@@ -581,6 +586,7 @@ module.exports = {
         "Funções do Securmy: cofre, envios P2P e chamadas",
         [
           "Arquivos, notas, senhas e backups do cofre ficam no seu dispositivo, cifrados com uma chave que nunca sai dele: não os recebemos e não podemos lê-los nem recuperá-los.",
+          "Sincronização (só com plano pago): o servidor guarda ficheiros, notas e senhas já cifrados no seu dispositivo, sem a chave para os abrir, até que você ou a sua conta os elimine. Para pagamentos usamos o Stripe: não vemos nem guardamos os dados do seu cartão.",
           "Nos envios P2P e nas chamadas o conteúdo viaja direto entre os dispositivos, cifrado. O servidor trata apenas as informações de conexão (SDP e candidatos ICE), mantidas em memória por no máximo uma hora e depois eliminadas; o outro participante e um servidor STUN público podem ver o seu endereço IP.",
           "Se ativar a verificação em duas etapas, guardamos o segredo TOTP, cifrado em repouso; as mensagens de visualização única são eliminadas do servidor poucos segundos após serem abertas."
         ]

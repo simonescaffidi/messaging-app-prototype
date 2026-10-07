@@ -192,6 +192,16 @@ module.exports = {
         "🚨",
         "Controllo di sicurezza e cancellazione di emergenza",
         "Un punteggio ti dice cosa migliorare; in caso di pericolo, un tocco cancella dal dispositivo chiavi, file e password."
+      ],
+      [
+        "☁️",
+        "Sincronizzazione cifrata (a pagamento)",
+        "Sincronizza la cassaforte tra i tuoi dispositivi con pacchetti di spazio (5, 25 o 100 GB al mese). Il server conserva solo dati già cifrati: la chiave resta nei tuoi dispositivi. Senza piano, tutto resta locale."
+      ],
+      [
+        "🛰️",
+        "Protezione IP con relay",
+        "Con un relay cifrato (TURN) puoi nascondere il tuo indirizzo IP durante chiamate e invii P2P, e farli funzionare anche su reti molto restrittive."
       ]
     ],
     "roadmapTitle": "In arrivo",
@@ -200,17 +210,12 @@ module.exports = {
       [
         "🧅",
         "Rete Tor",
-        "Un indirizzo .onion del servizio e una modalità Tor nelle app native, per nascondere anche la tua posizione di rete. Nel solo browser non è possibile instradare il traffico su Tor: serve Tor Browser o l'app nativa."
+        "Il servizio può essere esposto come indirizzo .onion: i file di installazione sono pronti (self-hosting) e si attivano su richiesta. Con Tor Browser WebRTC è disattivato, quindi invii P2P e chiamate non funzionano via Tor; messaggi, cassaforte e sync sì."
       ],
       [
         "📱",
         "App per iOS e Android",
         "App native con sblocco biometrico, pubblicate negli store con le stesse garanzie di sicurezza e privacy del sito."
-      ],
-      [
-        "🛰️",
-        "Server TURN privato",
-        "Per nascondere l'indirizzo IP durante chiamate e invii P2P e farli funzionare anche dietro reti molto restrittive."
       ]
     ]
   },
@@ -522,8 +527,8 @@ module.exports = {
           [
             "ul",
             [
-              "La cassaforte è locale: file, note e password non si sincronizzano tra dispositivi; usa il backup per spostarli.",
-              "Nell'invio P2P e nelle chiamate l'altra persona (e un server STUN pubblico) può vedere il tuo indirizzo IP, a meno che il servizio non usi un server TURN; con reti molto restrittive la connessione può fallire.",
+              "La sincronizzazione tra dispositivi è facoltativa e a pagamento (pacchetti di spazio): i dati restano cifrati nel dispositivo e il server non ha la chiave. Senza un piano la cassaforte resta solo locale; il backup serve comunque per spostarla.",
+              "Per nascondere il tuo IP in invii P2P e chiamate attiva Sicurezza → Protezione IP (relay cifrato), dove il servizio ha un server TURN. Senza relay l'altra persona può vedere il tuo IP e su reti molto restrittive la connessione può fallire.",
               "Il gestore di password è essenziale: non compila i moduli da solo e non sostituisce un gestore dedicato per usi professionali.",
               "Se perdi la password e la frase del backup, i dati cifrati non sono recuperabili: nessuno, nemmeno noi, può aprirli."
             ]
@@ -581,6 +586,7 @@ module.exports = {
         "Funzioni Securmy: cassaforte, invii P2P e chiamate",
         [
           "Cassaforte file, note, password e backup restano nel tuo dispositivo, cifrati con una chiave che non lasciamo mai uscire: non li riceviamo, non possiamo leggerli né recuperarli.",
+          "Sincronizzazione (solo con piano a pagamento): il server conserva file, note e password già cifrati nel tuo dispositivo, senza la chiave per aprirli, fino alla cancellazione da parte tua o dell'account. Per i pagamenti usiamo Stripe: non vediamo né conserviamo i dati della tua carta.",
           "Per gli invii P2P e le chiamate i contenuti viaggiano direttamente tra i dispositivi, cifrati. Il server tratta solo le informazioni di connessione (SDP e candidati ICE), tenute in memoria per al massimo un'ora e poi eliminate; l'altro partecipante e un server STUN pubblico possono vedere il tuo indirizzo IP.",
           "Se attivi la verifica in due passaggi conserviamo il segreto TOTP, cifrato a riposo; i messaggi a visualizzazione singola vengono eliminati dal server pochi secondi dopo l'apertura."
         ]
