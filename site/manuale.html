@@ -71,7 +71,7 @@
       <li><strong>ID pubblico</strong>: è quello che condividi con le persone che vuoi aggiungere come contatti. Non rivela la tua email.</li>
       <li><strong>Combinazione segreta</strong>: serve per rivelare le chat nascoste (vedi la sezione dedicata).</li>
     </ul>
-    <p class="warn">Se perdi la password, perdi l'accesso al profilo: non esiste ancora un recupero via email reale (vedi "Limiti di sicurezza dichiarati").</p>
+    <p class="warn">Se perdi la password puoi reimpostarla via email, ma solo se l'email del profilo è stata verificata. Senza password e senza email verificata il profilo non è recuperabile.</p>
   </section>
 
   <section id="profiles">
@@ -136,7 +136,7 @@
       <li><strong>Nessun ratchet / forward secrecy</strong>: la chiave di una chat resta la stessa finché entrambe le persone non rigenerano le proprie chiavi (diversamente da protocolli come Signal, che cambiano chiave a ogni messaggio).</li>
       <li><strong>Nessuna verifica fuori banda delle chiavi pubbliche</strong>: non c'è un "numero di sicurezza" da confrontare a voce con il contatto. In teoria, un server malevolo potrebbe sostituire una chiave pubblica con la propria (attacco man-in-the-middle). Su un server fidato per un prototipo va bene; prima di un uso ad alto rischio andrebbe aggiunta questa verifica.</li>
       <li><strong>Chiave privata nel browser</strong>: è salvata nella memoria locale del browser (localStorage), non in un secure enclave hardware. Chi ha accesso fisico o software al dispositivo sbloccato potrebbe leggerla.</li>
-      <li><strong>Nessun invio email reale</strong>: la registrazione funziona, ma non c'è ancora un servizio email collegato per un eventuale recupero account via "magic link".</li>
+      <li><strong>Recupero solo via email</strong>: se perdi sia la password sia l'accesso all'email verificata, il profilo non è recuperabile. Se usi più profili (ad esempio uno di copertura), usa email diverse: un link di recupero rivela a chi controlla l'email che il profilo esiste.</li>
     </ul>
   </section>
 
@@ -145,7 +145,7 @@
     <h3>"Non riesco a cifrare: il contatto non ha ancora una chiave pubblica"</h3>
     <p>Succede se il tuo contatto non ha ancora effettuato l'accesso dopo l'ultimo aggiornamento dell'app (la chiave viene generata e caricata automaticamente al login). Chiedigli di accedere una volta: dopo potrai scrivergli normalmente.</p>
     <h3>"Ho perso la password"</h3>
-    <p>Al momento non esiste un recupero automatico: è necessario registrare un nuovo profilo. Conserva sempre la password in un gestore di password.</p>
+    <p>Vai in «Password dimenticata?» nella schermata di accesso, inserisci email e username: se l'email del profilo è verificata ricevi un link valido 1 ora. Se l'email non era verificata, il profilo non è recuperabile e va creato di nuovo. Conserva sempre la password in un gestore di password.</p>
     <h3>Lo sblocco biometrico non appare</h3>
     <p>Richiede un dispositivo con Face ID, Touch ID, impronta o Windows Hello configurato, un browser aggiornato e una connessione HTTPS (la webapp in produzione la usa già). Deve inoltre essere stato attivato almeno una volta dalle impostazioni.</p>
   </section>
