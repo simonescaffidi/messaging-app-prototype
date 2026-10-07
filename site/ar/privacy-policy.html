@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>سياسة الخصوصية — مراسلة خاصة</title>
-<meta name="description" content="بيان الخصوصية للنموذج الأولي مراسلة خاصة: ما البيانات التي تُعالج وكيف." />
+<title>سياسة الخصوصية — Securmy</title>
+<meta name="description" content="بيان الخصوصية للنموذج الأولي Securmy: ما البيانات التي تُعالج وكيف." />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/privacy-policy.html" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/privacy-policy.html" />
 <link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/privacy-policy.html" />
@@ -19,10 +19,13 @@
 <link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/privacy-policy.html" />
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/privacy-policy.html" />
 <meta property="og:type" content="article" />
-<meta property="og:title" content="سياسة الخصوصية — مراسلة خاصة" />
-<meta property="og:description" content="بيان الخصوصية للنموذج الأولي مراسلة خاصة: ما البيانات التي تُعالج وكيف." />
+<meta property="og:title" content="سياسة الخصوصية — Securmy" />
+<meta property="og:description" content="بيان الخصوصية للنموذج الأولي Securmy: ما البيانات التي تُعالج وكيف." />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/privacy-policy.html" />
-<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/icon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/icon-512.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/style.css" />
 </head>
@@ -30,7 +33,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/ar/" class="brand"><span class="lock">🔒</span> مراسلة خاصة</a>
+    <a href="/ar/" class="brand"><img class="logo-mark" src="/icon.svg" width="28" height="28" alt="" /> Securmy</a>
     <div class="header-actions">
       <select class="lang-select" aria-label="اللغة" onchange="location.href=this.value"><option value="/privacy-policy.html">Italiano</option><option value="/en/privacy-policy.html">English</option><option value="/es/privacy-policy.html">Español</option><option value="/fr/privacy-policy.html">Français</option><option value="/de/privacy-policy.html">Deutsch</option><option value="/pt/privacy-policy.html">Português</option><option value="/ar/privacy-policy.html" selected>العربية</option><option value="/zh/privacy-policy.html">中文</option><option value="/hi/privacy-policy.html">हिन्दी</option><option value="/ru/privacy-policy.html">Русский</option><option value="/ja/privacy-policy.html">日本語</option></select>
       <a href="/ar/manual.html" class="btn btn-ghost btn-sm">الدليل</a>
@@ -66,6 +69,11 @@
 
   <h2>حقوقك</h2>
   <p>يمكنك في أي وقت طلب حذف البيانات المُدخلة في النموذج الأولي بالكتابة عبر وسائل الاتصال المذكورة أعلاه.</p>
+
+  <h2>ميزات Securmy: الخزنة وإرسال P2P والمكالمات</h2>
+  <p>تبقى ملفات الخزنة وملاحظاتها وكلمات مرورها ونسخها الاحتياطية على جهازك مشفّرة بمفتاح لا يغادره: لا نستلمها ولا نستطيع قراءتها أو استرجاعها.</p>
+  <p>في إرسال P2P والمكالمات ينتقل المحتوى مباشرة بين الجهازين مشفّرًا. لا يعالج الخادم سوى معلومات الاتصال (SDP ومرشّحو ICE) ويحتفظ بها في الذاكرة ساعة على الأكثر ثم يحذفها؛ ويستطيع الطرف الآخر وخادم STUN عام رؤية عنوان IP الخاص بك.</p>
+  <p>إذا فعّلت التحقق بخطوتين فإننا نحفظ سرّ TOTP مشفّرًا؛ وتُحذف رسائل العرض لمرة واحدة من الخادم بعد ثوانٍ من فتحها.</p>
 </main>
 
 <footer class="site-footer">

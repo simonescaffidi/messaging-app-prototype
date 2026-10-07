@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>عرض تجريبي تفاعلي — المراسلة الخاصة</title>
-<meta name="description" content="جرّب المراسلة الخاصة الآن: الدخول بالرمز، محادثات مخفية، ملف تمويه، رسائل مؤقتة وتشفير من طرف إلى طرف. محاكاة داخل المتصفح بدون حساب." />
+<title>عرض تجريبي تفاعلي — Securmy</title>
+<meta name="description" content="جرّب Securmy الآن: الدخول بالرمز، محادثات مخفية، ملف تمويه، رسائل مؤقتة وتشفير من طرف إلى طرف. محاكاة داخل المتصفح بدون حساب." />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/demo.html" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/demo.html" />
 <link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/demo.html" />
@@ -19,10 +19,13 @@
 <link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/demo.html" />
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/demo.html" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="عرض تجريبي تفاعلي — المراسلة الخاصة" />
-<meta property="og:description" content="جرّب المراسلة الخاصة الآن: الدخول بالرمز، محادثات مخفية، ملف تمويه، رسائل مؤقتة وتشفير من طرف إلى طرف. محاكاة داخل المتصفح بدون حساب." />
+<meta property="og:title" content="عرض تجريبي تفاعلي — Securmy" />
+<meta property="og:description" content="جرّب Securmy الآن: الدخول بالرمز، محادثات مخفية، ملف تمويه، رسائل مؤقتة وتشفير من طرف إلى طرف. محاكاة داخل المتصفح بدون حساب." />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/demo.html" />
-<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/icon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/icon-512.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/style.css" />
 </head>
@@ -30,7 +33,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/ar/" class="brand"><span class="lock">🔒</span> مراسلة خاصة</a>
+    <a href="/ar/" class="brand"><img class="logo-mark" src="/icon.svg" width="28" height="28" alt="" /> Securmy</a>
     <div class="header-actions">
       <select class="lang-select" aria-label="اللغة" onchange="location.href=this.value"><option value="/demo.html">Italiano</option><option value="/en/demo.html">English</option><option value="/es/demo.html">Español</option><option value="/fr/demo.html">Français</option><option value="/de/demo.html">Deutsch</option><option value="/pt/demo.html">Português</option><option value="/ar/demo.html" selected>العربية</option><option value="/zh/demo.html">中文</option><option value="/hi/demo.html">हिन्दी</option><option value="/ru/demo.html">Русский</option><option value="/ja/demo.html">日本語</option></select>
       <a href="/ar/manual.html" class="btn btn-ghost btn-sm">الدليل</a>
@@ -54,12 +57,19 @@
         <li>أخفِ محادثة من القائمة ثم اكتب <strong>7777</strong> في البحث لإظهارها.</li>
         <li>اقفل ثم ادخل مجددًا باسم المستخدم <strong>demo</strong> وكلمة المرور <strong>2222</strong>: سترى الملف التمويهي فقط.</li>
       </ol>
+      <h2>ثم جرّب الخزنة</h2>
+      <ol class="demo-try">
+        <li>بعد تسجيل الدخول المس <strong>الخزنة</strong> في الأسفل.</li>
+        <li>في <strong>الملفات</strong> أضف ملفًا وأظهر كيف يراه من يسرق القرص: بيانات مشفّرة فقط.</li>
+        <li>في <strong>إرسال</strong> أنشئ رابط P2P لمرة واحدة وشاهد الملف يصل دون المرور بالخادم.</li>
+        <li>في <strong>مرة واحدة</strong> أرسل رسالة تُدمَّر بعد قراءتها، ثم فعّل الفحوصات في <strong>الأمان</strong>.</li>
+      </ol>
       <p><a href="/app/" class="btn btn-primary">افتح التطبيق</a></p>
     </div>
     <div id="phone" class="phone" aria-label="جرّب العرض التجريبي"></div>
   </div>
 </main>
-<script>window.__DEMO_I18N={"nav":"عرض تجريبي","cta":"جرّب العرض التجريبي","title":"عرض تجريبي تفاعلي — المراسلة الخاصة","description":"جرّب المراسلة الخاصة الآن: الدخول بالرمز، محادثات مخفية، ملف تمويه، رسائل مؤقتة وتشفير من طرف إلى طرف. محاكاة داخل المتصفح بدون حساب.","h1":"جرّب العرض التجريبي","lead":"محاكاة تفاعلية تعمل داخل متصفحك فقط: بلا حساب ودون إرسال أي بيانات. للتطبيق الحقيقي استخدم زر «افتح التطبيق».","notice":"عرض تجريبي محاكى: تبقى الرسائل على جهازك. تشفير AES-GCM حقيقي، لكن جهات الاتصال والردود وهمية.","tryTitle":"ما الذي يمكنك تجربته","tryItems":["ادخل باسم المستخدم \u003cstrong>demo\u003c/strong> وكلمة المرور \u003cstrong>1111\u003c/strong> (الملف الشخصي) أو بزر البصمة.","افتح محادثة وأرسل رسالة بمؤقّت \u003cstrong>30 ثانية\u003c/strong>: تُحذف تلقائيًا.","فعّل «عرض الخادم» لترى شكل الرسالة المشفّرة.","أخفِ محادثة من القائمة ثم اكتب \u003cstrong>7777\u003c/strong> في البحث لإظهارها.","اقفل ثم ادخل مجددًا باسم المستخدم \u003cstrong>demo\u003c/strong> وكلمة المرور \u003cstrong>2222\u003c/strong>: سترى الملف التمويهي فقط."],"userLabel":"اسم المستخدم","codeLabel":"كلمة المرور","codePh":"مثال: 1111","enter":"دخول","bio":"افتح ببصمة الإصبع / Face ID","bioScan":"جارٍ التحقق من البصمة…","wrongCode":"بيانات غير صحيحة. استخدم demo مع 1111 أو 2222.","searchPh":"بحث (أو التركيبة السرية)","hide":"إخفاء المحادثة","unhide":"إظهار المحادثة","hiddenTag":"مخفية","msgPh":"اكتب رسالة…","send":"إرسال","timers":["بدون مؤقّت","30 ثانية","5 دقائق","ساعة واحدة"],"serverView":"عرض الخادم (مشفّر)","lockBtn":"قفل","e2eTag":"مشفّر من طرف إلى طرف","expiresIn":"تُحذف خلال {s} ث","secretFound":"تم إظهار المحادثات المخفية","chatsTitle":"المحادثات","back":"رجوع","empty":"لا توجد محادثات","n1":"آنا","m1":"نلتقي غدًا الساعة 6 مساءً؟","n2":"ماركو","m2":"سأرسل لك المستندات الليلة.","n3":"لوكا","m3":"الخطة مؤكدة، لا تخبر أحدًا.","nc":"ماما","mc":"لا تنسَ شراء الخبز!","replies":["ممتاز، أراك لاحقًا!","وصلت 👍","حسنًا، شكرًا."]};</script>
+<script>window.__DEMO_I18N={"nav":"عرض تجريبي","cta":"جرّب العرض التجريبي","title":"عرض تجريبي تفاعلي — Securmy","description":"جرّب Securmy الآن: الدخول بالرمز، محادثات مخفية، ملف تمويه، رسائل مؤقتة وتشفير من طرف إلى طرف. محاكاة داخل المتصفح بدون حساب.","h1":"جرّب العرض التجريبي","lead":"محاكاة تفاعلية تعمل داخل متصفحك فقط: بلا حساب ودون إرسال أي بيانات. للتطبيق الحقيقي استخدم زر «افتح التطبيق».","notice":"عرض تجريبي محاكى: تبقى الرسائل على جهازك. تشفير AES-GCM حقيقي، لكن جهات الاتصال والردود وهمية.","tryTitle":"ما الذي يمكنك تجربته","tryItems":["ادخل باسم المستخدم \u003cstrong>demo\u003c/strong> وكلمة المرور \u003cstrong>1111\u003c/strong> (الملف الشخصي) أو بزر البصمة.","افتح محادثة وأرسل رسالة بمؤقّت \u003cstrong>30 ثانية\u003c/strong>: تُحذف تلقائيًا.","فعّل «عرض الخادم» لترى شكل الرسالة المشفّرة.","أخفِ محادثة من القائمة ثم اكتب \u003cstrong>7777\u003c/strong> في البحث لإظهارها.","اقفل ثم ادخل مجددًا باسم المستخدم \u003cstrong>demo\u003c/strong> وكلمة المرور \u003cstrong>2222\u003c/strong>: سترى الملف التمويهي فقط."],"userLabel":"اسم المستخدم","codeLabel":"كلمة المرور","codePh":"مثال: 1111","enter":"دخول","bio":"افتح ببصمة الإصبع / Face ID","bioScan":"جارٍ التحقق من البصمة…","wrongCode":"بيانات غير صحيحة. استخدم demo مع 1111 أو 2222.","searchPh":"بحث (أو التركيبة السرية)","hide":"إخفاء المحادثة","unhide":"إظهار المحادثة","hiddenTag":"مخفية","msgPh":"اكتب رسالة…","send":"إرسال","timers":["بدون مؤقّت","30 ثانية","5 دقائق","ساعة واحدة"],"serverView":"عرض الخادم (مشفّر)","lockBtn":"قفل","e2eTag":"مشفّر من طرف إلى طرف","expiresIn":"تُحذف خلال {s} ث","secretFound":"تم إظهار المحادثات المخفية","chatsTitle":"المحادثات","back":"رجوع","empty":"لا توجد محادثات","n1":"آنا","m1":"نلتقي غدًا الساعة 6 مساءً؟","n2":"ماركو","m2":"سأرسل لك المستندات الليلة.","n3":"لوكا","m3":"الخطة مؤكدة، لا تخبر أحدًا.","nc":"ماما","mc":"لا تنسَ شراء الخبز!","replies":["ممتاز، أراك لاحقًا!","وصلت 👍","حسنًا، شكرًا."],"sNavChats":"المحادثات","sNavVault":"الخزنة","sTabFiles":"الملفات","sTabPw":"كلمات المرور","sTabP2p":"إرسال","sTabOnce":"مرة واحدة","sTabCall":"مكالمة","sTabSec":"الأمان","sAddFile":"أضف ملف تجربة","sEnc":"مشفّر","sShowCipher":"أظهر كيف يراه القرص","sFilesEmpty":"لا ملفات: أضف ملفًا.","sStripped":"أُزيلت البيانات الوصفية (GPS، الكاميرا)","sGen":"ولّد كلمة مرور","sCopy":"نسخ","sCopied":"تم النسخ: تُمسح الحافظة بعد 20 ثانية","sStrength":"القوة","sP2pCreate":"أنشئ رابطًا لـ «contract.pdf»","sP2pLink":"رابط لمرة واحدة، ينتهي بعد 10 دقائق","sP2pWait":"في انتظار المستلم…","sP2pJoined":"المستلم متصل","sP2pSending":"إرسال مباشر ومشفّر","sP2pDone":"تم التسليم. الرابط لم يعد يعمل.","sP2pNote":"في العرض التجريبي الاتصال محاكى؛ وفي التطبيق الحقيقي ينتقل الملف مباشرة بين الجهازين.","sOnceSend":"أرسل رسالة تُعرض مرة واحدة","sOnceTap":"المس للعرض (ثم تختفي)","sOnceGone":"دُمِّرت الرسالة","sOnceText":"رمز الخزنة هو 4821","sOnceIn":"تُدمَّر بعد {s} ث","sCallStart":"ابدأ مكالمة تجريبية","sCallRinging":"جارٍ الاتصال…","sCallConnected":"مكالمة مشفّرة","sCallCode":"رمز التحقق","sCallHint":"إن تطابق الرمزان شفهيًا فلا أحد يعترض المكالمة.","sCallEnd":"إنهاء","sSecTitle":"فحص الأمان","sSecLevel":"مستوى الأمان","sSec1":"الخزنة مفتوحة","sSec2":"كلمة مرور قوية","sSec3":"التحقق بخطوتين","sSec4":"نسخة احتياطية حديثة","sSec5":"مفاتيح جهات الاتصال موثَّقة","sSecTap":"المس عنصرًا لتفعيله","suiteTryTitle":"ثم جرّب الخزنة","suiteTry":["بعد تسجيل الدخول المس \u003cstrong>الخزنة\u003c/strong> في الأسفل.","في \u003cstrong>الملفات\u003c/strong> أضف ملفًا وأظهر كيف يراه من يسرق القرص: بيانات مشفّرة فقط.","في \u003cstrong>إرسال\u003c/strong> أنشئ رابط P2P لمرة واحدة وشاهد الملف يصل دون المرور بالخادم.","في \u003cstrong>مرة واحدة\u003c/strong> أرسل رسالة تُدمَّر بعد قراءتها، ثم فعّل الفحوصات في \u003cstrong>الأمان\u003c/strong>."]};</script>
 <script src="/demo.js"></script>
 
 <footer class="site-footer">

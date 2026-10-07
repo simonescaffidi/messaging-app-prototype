@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>مراسلة خاصة — دردشة بملفات شخصية متعددة ومحادثات مخفية</title>
-<meta name="description" content="دردشة خاصة بتشفير حقيقي من طرف إلى طرف، وفتح بالبصمة الحيوية، وملفات شخصية متعددة ومحادثات مخفية. 11 لغة وبدون رقم هاتف." />
+<title>Securmy — مراسلة خاصة وخزنة ملفات وإرسال P2P مشفّر</title>
+<meta name="description" content="محادثات بتشفير حقيقي من طرف إلى طرف، وخزنة ملفات، وكلمات مرور وملاحظات مشفّرة، وإرسال P2P عبر رابط، ومكالمات مشفّرة، وتحقق بخطوتين. 11 لغة." />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
 <link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/" />
@@ -19,10 +19,13 @@
 <link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/" />
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="مراسلة خاصة — نموذج أولي" />
-<meta property="og:description" content="تشفير من طرف إلى طرف، فتح بالبصمة الحيوية، ملفات شخصية متعددة، محادثات مخفية وملف تمويهي بـ 11 لغة." />
+<meta property="og:title" content="Securmy — الأمان والخصوصية والسرّية" />
+<meta property="og:description" content="رسائل وملفات وكلمات مرور ومكالمات محمية بالتشفير من طرف إلى طرف: كل شيء مشفّر على جهازك، بـ 11 لغة." />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/" />
-<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/icon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/icon-512.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/style.css" />
 </head>
@@ -30,7 +33,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/ar/" class="brand"><span class="lock">🔒</span> مراسلة خاصة</a>
+    <a href="/ar/" class="brand"><img class="logo-mark" src="/icon.svg" width="28" height="28" alt="" /> Securmy</a>
     <div class="header-actions">
       <select class="lang-select" aria-label="اللغة" onchange="location.href=this.value"><option value="/">Italiano</option><option value="/en/">English</option><option value="/es/">Español</option><option value="/fr/">Français</option><option value="/de/">Deutsch</option><option value="/pt/">Português</option><option value="/ar/" selected>العربية</option><option value="/zh/">中文</option><option value="/hi/">हिन्दी</option><option value="/ru/">Русский</option><option value="/ja/">日本語</option></select>
       <a href="/ar/manual.html" class="btn btn-ghost btn-sm">الدليل</a>
@@ -107,6 +110,66 @@
     </div>
   </section>
 
+  <section class="features suite" id="suite">
+    <div class="container">
+      <h2>أكثر من محادثة: خزنتك الرقمية</h2>
+      <p class="sec-lead">يتجاوز Securmy المراسلة. كل ما تحفظه أو تشاركه يُشفَّر على جهازك، بالخزنة نفسها التي تحمي محادثاتك.</p>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="icon">🗄️</div>
+          <h3>خزنة الملفات</h3>
+          <p>أخفِ مستنداتك وصورك وملفاتك واحمِها: مشفّرة على جهازك بـ AES-256 ولا تُفتح إلا بكلمة مرورك أو بصمتك.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🔗</div>
+          <h3>إرسال P2P عبر رابط</h3>
+          <p>ينتقل الملف مباشرة من جهاز إلى آخر مشفّرًا دون أن يُخزَّن على الخادم. رابط لمرة واحدة بمدة صلاحية.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🧼</div>
+          <h3>تنظيف البيانات الوصفية</h3>
+          <p>يزيل موقع GPS وطراز الكاميرا وبيانات مخفية أخرى من الصور قبل مشاركتها.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🔑</div>
+          <h3>مدير كلمات المرور</h3>
+          <p>احفظ بيانات الدخول في الخزنة، وولّد كلمات مرور قوية وانسخها: تُمسح الحافظة بعد 20 ثانية.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">📝</div>
+          <h3>ملاحظات مشفّرة</h3>
+          <p>ملاحظات خاصة مشفّرة على جهازك ولا تُرسل إلى أي خادم.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">👁️</div>
+          <h3>رسائل تُعرض مرة واحدة</h3>
+          <p>يفتحها المستلم مرة واحدة فقط: بعد ثوانٍ تُحذف من الخادم ومن جهازه.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">📞</div>
+          <h3>مكالمات صوتية ومرئية مشفّرة</h3>
+          <p>مباشرة بين الجهازين (DTLS-SRTP)، مع رمز تحقق تقارنه شفهيًا للحماية من التنصت.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🔢</div>
+          <h3>التحقق بخطوتين</h3>
+          <p>رموز TOTP مع أي تطبيق مصادقة: حتى من يكتشف كلمة مرورك لا يستطيع الدخول.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">💾</div>
+          <h3>نسخة احتياطية مشفّرة</h3>
+          <p>صدّر الملفات والملاحظات وكلمات المرور في أرشيف واحد مشفّر بعبارة سرية لا يعرفها غيرك.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🚨</div>
+          <h3>فحص الأمان والمسح الطارئ</h3>
+          <p>تُظهر لك درجة ما يجب تحسينه؛ وعند الخطر تمسح لمسة واحدة المفاتيح والملفات وكلمات المرور من الجهاز.</p>
+        </article>
+      </div>
+      <p class="sec-lead"><a href="/ar/demo.html" class="btn btn-ghost">جرّب العرض التجريبي</a></p>
+    </div>
+  </section>
+
   <section class="features security" id="security">
     <div class="container">
       <h2>الأمان والخصوصية: قلب التطبيق</h2>
@@ -166,6 +229,30 @@
           <h3>أخفِ ما تشاء</h3>
           <p>اكتب التركيبة السرية في شريط البحث لإظهار المحادثات المخفية عند الحاجة.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features roadmap" id="roadmap">
+    <div class="container">
+      <h2>قريبًا</h2>
+      <p class="sec-lead">ما نخطط له. غير متاح بعد ولا يُعدّ وعدًا بموعد محدد.</p>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="icon">🧅</div>
+          <h3>شبكة Tor</h3>
+          <p>عنوان .onion للخدمة ووضع Tor في التطبيقات الأصلية لإخفاء موقعك على الشبكة أيضًا. لا يستطيع المتصفح وحده توجيه الحركة عبر Tor: يلزم Tor Browser أو التطبيق الأصلي.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">📱</div>
+          <h3>تطبيقات iOS وAndroid</h3>
+          <p>تطبيقات أصلية بفتح القفل بالبصمة، منشورة في المتاجر بنفس ضمانات الأمان والخصوصية التي يقدمها الموقع.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🛰️</div>
+          <h3>خادم TURN خاص</h3>
+          <p>لإخفاء عنوان IP الخاص بك أثناء المكالمات وعمليات الإرسال P2P وتشغيلها حتى خلف الشبكات الشديدة التقييد.</p>
+        </article>
       </div>
     </div>
   </section>

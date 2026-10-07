@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>دليل المستخدم — مراسلة خاصة</title>
+<title>دليل المستخدم — Securmy</title>
 <meta name="description" content="دليل كامل: التسجيل، الدخول باسم المستخدم وكلمة المرور، المحادثات المخفية، التشفير من طرف إلى طرف، الفتح البيومتري واللغات المتاحة." />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/manual.html" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
@@ -19,10 +19,13 @@
 <link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/manual.html" />
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
 <meta property="og:type" content="article" />
-<meta property="og:title" content="دليل المستخدم — مراسلة خاصة" />
+<meta property="og:title" content="دليل المستخدم — Securmy" />
 <meta property="og:description" content="دليل كامل: التسجيل، الدخول باسم المستخدم وكلمة المرور، المحادثات المخفية، التشفير من طرف إلى طرف، الفتح البيومتري واللغات المتاحة." />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/ar/manual.html" />
-<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/icon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/icon-512.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/style.css" />
 </head>
@@ -30,7 +33,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/ar/" class="brand"><span class="lock">🔒</span> مراسلة خاصة</a>
+    <a href="/ar/" class="brand"><img class="logo-mark" src="/icon.svg" width="28" height="28" alt="" /> Securmy</a>
     <div class="header-actions">
       <select class="lang-select" aria-label="اللغة" onchange="location.href=this.value"><option value="/manuale.html">Italiano</option><option value="/en/manual.html">English</option><option value="/es/manual.html">Español</option><option value="/fr/manual.html">Français</option><option value="/de/manual.html">Deutsch</option><option value="/pt/manual.html">Português</option><option value="/ar/manual.html" selected>العربية</option><option value="/zh/manual.html">中文</option><option value="/hi/manual.html">हिन्दी</option><option value="/ru/manual.html">Русский</option><option value="/ja/manual.html">日本語</option></select>
       <a href="/ar/manual.html" class="btn btn-ghost btn-sm">الدليل</a>
@@ -42,7 +45,7 @@
 
 <main>
   <h1>دليل المستخدم</h1>
-  <p class="lead">دليل كامل لتطبيق مراسلة خاصة: كيف تسجّل وتدخل وتستخدم ميزات الخصوصية، وتفهم ما الذي يحميه هذا النموذج الأولي فعلًا وما الذي لا يحميه.</p>
+  <p class="lead">دليل كامل لتطبيق Securmy: كيف تسجّل وتدخل وتستخدم ميزات الخصوصية، وتفهم ما الذي يحميه هذا النموذج الأولي فعلًا وما الذي لا يحميه.</p>
 
   <nav class="toc" aria-label="المحتويات">
     <strong>المحتويات</strong>
@@ -59,6 +62,7 @@
       <li><a href="#mobile">تطبيقات الجوال الأصلية (iOS/Android)</a></li>
       <li><a href="#limits">حدود الأمان المعلنة</a></li>
       <li><a href="#troubleshooting">حل المشكلات</a></li>
+      <li><a href="#suite">خزنة Securmy وأدواتها</a></li>
     </ol>
   </nav>
 
@@ -157,6 +161,34 @@
     <p>يتطلب جهازًا مهيّأً بـ Face ID أو Touch ID أو البصمة أو Windows Hello، ومتصفحًا محدّثًا، واتصال HTTPS (تطبيق الويب في الإنتاج يستخدمه بالفعل). ويجب أيضًا أن يكون قد فُعِّل مرة واحدة على الأقل من الإعدادات.</p>
     <h3>«لم تعد الرسالة قابلة للقراءة»</h3>
     <p>لأسباب أمنية يُحذف مفتاح كل رسالة فور قراءتها: يبقى النص فقط في الذاكرة المشفّرة لهذا الجهاز. إذا غيّرت الجهاز أو مسحت بيانات المتصفح أو أعدت تعيين كلمة المرور عبر البريد فلا يمكن استعادة الرسائل السابقة. هذا ثمن السرية المستقبلية.</p>
+  </section>
+
+  <section id="suite">
+    <h2>13. خزنة Securmy وأدواتها</h2>
+    <p>افتح الخزنة من الزر 🛡️ في الشريط الجانبي. كل ما فيها مشفّر على جهازك بـ AES-256-GCM بمفتاح محفوظ في خزنتك ومحمي بكلمة مرورك: لا يستلم الخادم أبدًا ملفات أو ملاحظات أو كلمات مرور.</p>
+    <h3>خزنة الملفات</h3>
+    <p>أضف ملفات (حتى 100 ميغابايت لكل ملف) من تبويب الملفات. إذا كان المربع مفعّلًا تُزال البيانات الوصفية من الصور قبل حفظها. يمكنك تنزيل كل ملف أو إرساله عبر P2P أو حذفه.</p>
+    <h3>إرسال P2P عبر رابط</h3>
+    <p>اختر ملفًا ومدة صلاحية (10 دقائق أو ساعة): تحصل على رابط لمرة واحدة. ينتقل الملف مباشرة إلى المستلم مشفّرًا بمفتاح موجود فقط بعد الرمز # في الرابط ولا يصل إلى الخادم أبدًا. أبقِ الصفحة مفتوحة حتى ينتهي النقل.</p>
+    <h3>تنظيف الصور</h3>
+    <p>يعيد رسم الصورة مع تجاهل EXIF وموقع GPS والصور المصغّرة. يعمل مع JPEG وPNG وWebP؛ أما الصيغ الأخرى فالتنظيف التلقائي غير متاح لها.</p>
+    <h3>الملاحظات وكلمات المرور</h3>
+    <p>تبقى الملاحظات وبيانات الدخول مشفّرة في الخزنة. ينشئ المولّد كلمات مرور عشوائية؛ وعند نسخ كلمة مرور تُمسح الحافظة بعد 20 ثانية.</p>
+    <h3>رسائل تُعرض مرة واحدة</h3>
+    <p>اختر «عرض لمرة واحدة» بجانب حقل الرسالة. يلمس المستلم ليرى: يبقى النص ظاهرًا 10 ثوانٍ ثم يُدمَّر على جهازه وعلى الخادم. لا يمنع ذلك القارئ من تصوير الشاشة.</p>
+    <h3>المكالمات الصوتية والمرئية</h3>
+    <p>استخدم الزرين 📞 و🎥 في ترويسة المحادثة. ينتقل الصوت والفيديو مباشرة بين الجهازين مشفّرين. يرى الطرفان رمزًا من 4 أرقام: قارناه شفهيًا؛ إن تطابق فالمكالمة لم تُعترَض.</p>
+    <h3>التحقق بخطوتين</h3>
+    <p>في قسم الأمان يمكنك تفعيل رموز TOTP مع تطبيق مصادقة (Google Authenticator أو Aegis أو 1Password…). بعد التفعيل يتطلب الدخول بكلمة المرور أيضًا الرمز المكوّن من 6 أرقام. يبقى فتح القفل بالبصمة طريقة دخول منفصلة.</p>
+    <h3>النسخ الاحتياطي والمسح الطارئ</h3>
+    <p>تحتوي النسخة الاحتياطية على ملفات وملاحظات وكلمات مرور مشفّرة بعبارة سرية من 10 أحرف على الأقل تختارها أنت: بدونها لا يمكن استرجاعها. الرسائل غير مشمولة. يزيل المسح الطارئ من الجهاز المفاتيح وذاكرة الرسائل والملفات والملاحظات وكلمات المرور ولا يمكن التراجع عنه.</p>
+    <h3>حدود يجب معرفتها</h3>
+    <ul>
+      <li>الخزنة محلية: لا تتزامن الملفات والملاحظات وكلمات المرور بين الأجهزة؛ استخدم النسخة الاحتياطية لنقلها.</li>
+      <li>في إرسال P2P والمكالمات يستطيع الطرف الآخر (وخادم STUN عام) رؤية عنوان IP الخاص بك ما لم تستخدم الخدمة خادم TURN؛ وقد يفشل الاتصال في الشبكات الشديدة التقييد.</li>
+      <li>مدير كلمات المرور أساسي: لا يملأ النماذج تلقائيًا ولا يغني عن مدير متخصص للاستخدام المهني.</li>
+      <li>إن فقدت كلمة المرور وعبارة النسخة الاحتياطية فلا يمكن استرجاع البيانات المشفّرة: لا أحد، حتى نحن، يستطيع فتحها.</li>
+    </ul>
   </section>
 </main>
 
