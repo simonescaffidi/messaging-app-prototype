@@ -9,8 +9,7 @@ const state = {
   comboUnlocked: false,
   replyTo: null,
   ws: null,
-  myKeyPair: null,       // { privateKey, publicKey, publicJwk } - E2E.getOrCreateKeyPair()
-  chatKeys: {}           // chatId -> CryptoKey AES-GCM derivata (cache in memoria, mai persistita)
+  peerStatus: {}         // chatId -> { status: new|same|changed, verified }
 };
 
 const $ = (sel) => document.querySelector(sel);
@@ -95,7 +94,8 @@ async function doLogin() {
     const data = await api("/api/login", { method: "POST", body: JSON.stringify({ username, password }) });
     state.token = data.token;
     state.me = data.profile;
-    await enterApp();
+    state.loginUsername = username;
+    await enterApp(password);
   } catch (e) {
     $("#login-error").textContent = e.message && /tentativi/.test(e.message) ? e.message : I18N.t("loginError");
   }
@@ -154,45 +154,86 @@ $("#btn-biometric-login").addEventListener("click", async () => {
     const data = await WebAuthnUnlock.login(api);
     state.token = data.token;
     state.me = data.profile;
-    await enterApp();
+    await enterApp(null);
   } catch (e) {
     $("#login-error").textContent = e.message || "Sblocco biometrico non riuscito";
   }
 });
 
-// ---------- CHIAVI E2E ----------
-async function ensureMyKeys() {
-  state.myKeyPair = await E2E.getOrCreateKeyPair(state.me.publicId);
+// ---------- CHIAVI E2E (cassaforte + forward secrecy) ----------
+async function openVault(password) {
+  let r;
   try {
-    await api("/api/me/publickey", { method: "POST", body: JSON.stringify({ publicKeyJwk: state.myKeyPair.publicJwk }) });
-  } catch {
-    // non bloccante: se il server non e' raggiungibile ora, si riprovera' al prossimo login
+    r = await E2E.unlock(state.me.publicId, password);
+  } catch (e) {
+    if (e.message !== "bad-password") throw e;
+    // password valida sul server ma cassaforte non apribile (es. dopo il recupero password): nuova identita'
+    r = await E2E.resetVault(state.me.publicId, password);
   }
+  try { await api("/api/me/publickey", { method: "POST", body: JSON.stringify({ publicKeyJwk: r.publicJwk }) }); } catch {}
+  await E2E.ensurePrekeys(api);
 }
 
-async function getChatKey(chat) {
-  if (state.chatKeys[chat.id]) return state.chatKeys[chat.id];
-  if (!chat.with.publicKey) return null; // il contatto non ha ancora generato/caricato una chiave
-  const peerKey = await E2E.importPeerPublicKey(chat.with.publicKey);
-  const key = await E2E.deriveChatKey(state.myKeyPair.privateKey, peerKey, state.me.publicId, chat.with.publicId);
-  state.chatKeys[chat.id] = key;
-  return key;
+async function ensureMyKeys(password) {
+  if (password) return openVault(password);
+  // accesso biometrico: la password serve per aprire la cassaforte cifrata
+  await new Promise((resolve) => {
+    $("#unlock-error").textContent = "";
+    $("#unlock-password").value = "";
+    $("#unlock-modal").classList.remove("hidden");
+    $("#unlock-password").focus();
+    const submit = async () => {
+      const pw = $("#unlock-password").value;
+      if (!pw) return;
+      try {
+        if (!E2E.hasVault(state.me.publicId)) {
+          // nessuna cassaforte su questo dispositivo: verifico la password sul server prima di crearla
+          const chk = await fetch("/api/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ username: state.me.username, password: pw }) });
+          if (!chk.ok) throw new Error("bad");
+          await openVault(pw);
+        } else {
+          await E2E.unlock(state.me.publicId, pw);
+          try { await api("/api/me/publickey", { method: "POST", body: JSON.stringify({ publicKeyJwk: E2E.myPublicJwk() }) }); } catch {}
+          await E2E.ensurePrekeys(api);
+        }
+        $("#unlock-modal").classList.add("hidden");
+        cleanup(); resolve();
+      } catch (e) { $("#unlock-error").textContent = I18N.t("unlockError"); }
+    };
+    const onKey = (e) => { if (e.key === "Enter") submit(); };
+    const onSkip = () => { $("#unlock-modal").classList.add("hidden"); cleanup(); resolve(); };
+    function cleanup() { $("#btn-unlock").removeEventListener("click", submit); $("#unlock-password").removeEventListener("keydown", onKey); $("#btn-unlock-skip").removeEventListener("click", onSkip); }
+    $("#btn-unlock").addEventListener("click", submit);
+    $("#unlock-password").addEventListener("keydown", onKey);
+    $("#btn-unlock-skip").addEventListener("click", onSkip);
+  });
+}
+
+async function refreshPeerStatus(chat) {
+  if (!chat.with.publicKey) { state.peerStatus[chat.id] = { status: "none", verified: false }; return; }
+  state.peerStatus[chat.id] = await E2E.checkPeer(state.me.publicId, chat.with.publicId, chat.with.publicKey);
 }
 
 async function decryptMessage(chat, m) {
   if (m._plain !== undefined) return m._plain;
   if (!m.iv || !m.ciphertext) { m._plain = m.text || ""; return m._plain; } // messaggi legacy pre-E2E
-  const key = await getChatKey(chat);
-  m._plain = key ? await E2E.decrypt(key, m.iv, m.ciphertext) : "🔒 (chiave non ancora disponibile)";
-  return m._plain;
+  const r = await E2E.decryptMessage({
+    m, mine: m.senderProfileId === state.me.id, peerIdentity: chat.with.publicKey,
+    myId: state.me.publicId, peerId: chat.with.publicId,
+    exp: m.selfDestructAt ? new Date(m.selfDestructAt).getTime() : 0
+  });
+  if (r.state === "ok") { m._plain = r.text; return r.text; }
+  if (r.state === "locked") return "🔒 " + I18N.t("msgLocked");
+  if (r.state === "nokey") return "🔒 …";
+  return "🔒 " + I18N.t("msgGone"); // non salvo: potrebbe diventare leggibile dopo lo sblocco
 }
 
-async function enterApp() {
+async function enterApp(password) {
   $("#auth-screen").classList.add("hidden");
   $("#app-screen").classList.remove("hidden");
   $("#me-username").textContent = state.me.username + (state.me.isCover ? " (copertura)" : "");
   $("#me-publicid").textContent = state.me.publicId;
-  await ensureMyKeys();
+  await ensureMyKeys(password);
   connectWs();
   await loadChats();
 }
@@ -203,7 +244,8 @@ $("#btn-logout").addEventListener("click", () => {
   state.me = null;
   state.chats = [];
   state.activeChatId = null;
-  state.chatKeys = {};
+  state.peerStatus = {};
+  E2E.lock();
   if (state.ws) state.ws.close();
   $("#app-screen").classList.add("hidden");
   $("#auth-screen").classList.remove("hidden");
@@ -310,6 +352,7 @@ $("#btn-resend-verify").addEventListener("click", async () => {
 $("#btn-change-password").addEventListener("click", async () => {
   try {
     await api("/api/password/change", { method: "POST", body: JSON.stringify({ oldPassword: $("#old-password").value, newPassword: $("#new-password").value }) });
+    try { await E2E.rewrap($("#new-password").value); } catch {}
     $("#old-password").value = ""; $("#new-password").value = "";
     if (state.me) state.me.weakPassword = false;
     $("#weak-pw-notice").classList.add("hidden");
@@ -366,6 +409,8 @@ async function openChat(chatId) {
   $("#chat-view").classList.remove("hidden");
   $("#chat-with-name").textContent = chat.with.username;
   $("#btn-toggle-hide").textContent = chat.hidden ? "👁️" : "🙈";
+  await refreshPeerStatus(chat);
+  renderKeyBanner(chat);
 
   const data = await api(`/api/chats/${chatId}/messages`);
   const container = $("#messages");
@@ -466,17 +511,20 @@ $("#message-form").addEventListener("submit", async (e) => {
   const chat = state.chats.find((c) => c.id === state.activeChatId);
   const selfDestructSeconds = $("#destruct-select").value ? Number($("#destruct-select").value) : null;
 
-  const key = chat ? await getChatKey(chat) : null;
-  if (!key) {
-    alert("Impossibile cifrare: il contatto non ha ancora generato una chiave pubblica (deve accedere almeno una volta dopo l'aggiornamento).");
-    return;
-  }
-  const { iv, ciphertext } = await E2E.encrypt(key, text);
+  if (!E2E.isUnlocked()) { alert(I18N.t("msgLocked")); return; }
+  if (!chat || !chat.with.publicKey) { alert(I18N.t("noPeerKey")); return; }
+  await refreshPeerStatus(chat);
+  if (state.peerStatus[chat.id].status === "changed") { renderKeyBanner(chat); return; }
+  const { iv, ciphertext, hdr } = await E2E.encryptMessage({
+    peerIdentity: chat.with.publicKey, myId: state.me.publicId, peerId: chat.with.publicId, plaintext: text,
+    claim: async () => (await api("/api/prekeys/claim/" + chat.with.profileId, { method: "POST", body: "{}" })).prekey
+  });
 
   const data = await api("/api/messages", {
     method: "POST",
-    body: JSON.stringify({ chatId: state.activeChatId, iv, ciphertext, replyTo: state.replyTo, selfDestructSeconds })
+    body: JSON.stringify({ chatId: state.activeChatId, iv, ciphertext, hdr, replyTo: state.replyTo, selfDestructSeconds })
   });
+  await E2E.rememberSent(data.message.id, text, selfDestructSeconds ? Date.now() + selfDestructSeconds * 1000 : 0);
   data.message._plain = text; // evita di dover decifrare il proprio messaggio appena inviato
   await appendMessage(data.message, true, chat);
   input.value = "";
@@ -490,3 +538,43 @@ function escapeHtml(str) {
   div.textContent = str;
   return div.innerHTML;
 }
+
+// ---------- VERIFICA CHIAVI (numero di sicurezza + avviso cambio chiave) ----------
+function renderKeyBanner(chat) {
+  const st = state.peerStatus[chat.id] || {};
+  const b = $("#key-banner");
+  if (st.status === "changed") {
+    b.classList.remove("hidden");
+    b.innerHTML = "";
+    const t = document.createElement("span");
+    t.textContent = "⚠️ " + I18N.t("keyChangedBanner");
+    const btn = document.createElement("button");
+    btn.textContent = I18N.t("btnAcceptKey");
+    btn.addEventListener("click", async () => {
+      await E2E.acceptPeer(state.me.publicId, chat.with.publicId, chat.with.publicKey);
+      await refreshPeerStatus(chat); renderKeyBanner(chat);
+    });
+    b.appendChild(t); b.appendChild(btn);
+  } else { b.classList.add("hidden"); b.innerHTML = ""; }
+  $("#btn-verify").textContent = st.verified ? "✅" : "🔑";
+}
+
+$("#btn-verify").addEventListener("click", async () => {
+  const chat = state.chats.find((c) => c.id === state.activeChatId);
+  if (!chat) return;
+  const mine = E2E.myPublicJwk();
+  if (!mine || !chat.with.publicKey) { alert(I18N.t("noPeerKey")); return; }
+  $("#verify-name").textContent = chat.with.username;
+  $("#verify-number").textContent = await E2E.safetyNumber(mine, chat.with.publicKey);
+  const st = state.peerStatus[chat.id] || {};
+  $("#verify-state").textContent = st.verified ? "✅ " + I18N.t("verifiedBadge") : I18N.t("notVerifiedBadge");
+  $("#verify-modal").classList.remove("hidden");
+});
+$("#btn-verify-close").addEventListener("click", () => $("#verify-modal").classList.add("hidden"));
+$("#btn-verify-mark").addEventListener("click", async () => {
+  const chat = state.chats.find((c) => c.id === state.activeChatId);
+  if (!chat) return;
+  await E2E.markVerified(state.me.publicId, chat.with.publicId, chat.with.publicKey);
+  await refreshPeerStatus(chat); renderKeyBanner(chat);
+  $("#verify-modal").classList.add("hidden");
+});

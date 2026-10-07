@@ -112,9 +112,11 @@
       <div class="chat-header">
         <strong id="chat-with-name"></strong>
         <div class="chat-header-actions">
+          <button id="btn-verify" data-i18n-title="verifyTitle" title="Verifica chiave">🔑</button>
           <button id="btn-toggle-hide" data-i18n-title="chatHideTitle" title="Nascondi/mostra questa chat">🙈</button>
         </div>
       </div>
+      <div id="key-banner" class="key-banner hidden"></div>
       <div id="messages" class="messages"></div>
       <div id="reply-preview" class="reply-preview hidden">
         <span id="reply-preview-text"></span>
@@ -132,6 +134,35 @@
       </form>
     </div>
   </main>
+</div>
+
+<!-- MODALE SBLOCCO CASSAFORTE (accesso biometrico) -->
+<div id="unlock-modal" class="modal hidden">
+  <div class="modal-card">
+    <h2 data-i18n="unlockTitle">Sblocca la cassaforte</h2>
+    <p data-i18n="unlockText">Inserisci la password per aprire le tue chiavi cifrate su questo dispositivo.</p>
+    <input id="unlock-password" type="password" maxlength="128" autocomplete="current-password" />
+    <p id="unlock-error" class="error"></p>
+    <div class="modal-actions">
+      <button id="btn-unlock-skip" data-i18n="btnUnlockSkip">Più tardi</button>
+      <button id="btn-unlock" class="primary" data-i18n="btnUnlock">Sblocca</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODALE VERIFICA CHIAVE -->
+<div id="verify-modal" class="modal hidden">
+  <div class="modal-card">
+    <h2 data-i18n="verifyTitle">Verifica la chiave</h2>
+    <p><strong id="verify-name"></strong></p>
+    <p data-i18n="verifyHint">Confronta questo numero con quello del tuo contatto, di persona o a voce. Se coincide, nessuno sta intercettando la conversazione.</p>
+    <p id="verify-number" class="safety-number"></p>
+    <p id="verify-state" class="hint"></p>
+    <div class="modal-actions">
+      <button id="btn-verify-close" data-i18n="btnClose">Chiudi</button>
+      <button id="btn-verify-mark" class="primary" data-i18n="btnMarkVerified">Segna come verificato</button>
+    </div>
+  </div>
 </div>
 
 <!-- MODALE AGGIUNGI CONTATTO -->
