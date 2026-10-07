@@ -1,4 +1,4 @@
-# Prototipo — Messaggistica Privata
+# Prototipo — Securmy
 
 Webapp dimostrativa basata su `Progetto_App_Messaggistica_v1.txt`. Implementa il meccanismo distintivo del progetto (username + password = profilo, chat nascoste, profilo di copertura) su una base di chat funzionante e in tempo reale.
 
@@ -42,3 +42,11 @@ Apri `http://localhost:3000` in due schede/browser diversi per simulare due uten
 1. Validare il concept con utenti reali su questo prototipo.
 2. Scrivere la v2 del documento (monetizzazione, funzioni premium).
 3. Se si procede sul serio: audit di sicurezza esterno, eventuale libreria Signal Protocol (Double Ratchet) e — se l'obiettivo è mobile — portare l'auth per-codice e le chat nascoste su Kotlin/Swift nativi, dove biometria e Secure Enclave/Keystore sono disponibili.
+
+## Securmy Suite (cassaforte e strumenti)
+
+Oltre alla chat, la webapp include (menu 🛡️): cassaforte file cifrata (AES-256-GCM, IndexedDB), note e gestore di password, pulizia dei metadati delle foto, invio file P2P via link monouso (WebRTC, chiave solo nel frammento `#`), messaggi a visualizzazione singola, chiamate audio/video cifrate (WebRTC DTLS-SRTP con codice di verifica), verifica in due passaggi TOTP, backup cifrato con frase segreta, controllo di sicurezza e cancellazione di emergenza.
+
+File principali: `public/tools.js` (suite), `public/p2pcore.js` + `public/p2p.html` (P2P), `public/calls.js` (chiamate), `public/i18n-suite.js` (11 lingue). Il server fa solo segnalazione (endpoint `/api/p2p*`, WebSocket `call-*`, `/api/ice`) e gestisce il TOTP (`/api/2fa/*`).
+
+Variabili opzionali: `TURN_URL`, `TURN_USER`, `TURN_PASS`, `TURN_RELAY_ONLY=1` per usare un server TURN proprio (nasconde l'IP e migliora la connessione). Tor: in roadmap (indirizzo .onion e modalita' Tor nelle app native).

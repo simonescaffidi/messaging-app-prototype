@@ -136,8 +136,8 @@ function baseUrl() {
   return "http://localhost:" + (process.env.PORT || 3000);
 }
 const MAIL_TEXT = {
-  verify: { subject: "Conferma la tua email — Messaggistica Privata", body: (u) => "Apri questo link per confermare la tua email (valido 24 ore):\n\n" + u + "\n\nSe non sei stato tu, ignora questo messaggio." },
-  reset:  { subject: "Reimposta la password — Messaggistica Privata", body: (u, id) => "Hai chiesto di reimpostare la password del profilo " + id + ". Apri questo link (valido 1 ora):\n\n" + u + "\n\nSe non sei stato tu, ignora questo messaggio: la password resta invariata." }
+  verify: { subject: "Conferma la tua email — Securmy", body: (u) => "Apri questo link per confermare la tua email (valido 24 ore):\n\n" + u + "\n\nSe non sei stato tu, ignora questo messaggio." },
+  reset:  { subject: "Reimposta la password — Securmy", body: (u, id) => "Hai chiesto di reimpostare la password del profilo " + id + ". Apri questo link (valido 1 ora):\n\n" + u + "\n\nSe non sei stato tu, ignora questo messaggio: la password resta invariata." }
 };
 async function sendMail(to, kind, link, label) {
   const t = MAIL_TEXT[kind];
@@ -152,7 +152,7 @@ async function sendMail(to, kind, link, label) {
       method: "POST",
       headers: { "Authorization": "Bearer " + key, "Content-Type": "application/json" },
       body: JSON.stringify({
-        from: process.env.EMAIL_FROM || "Messaggistica Privata <onboarding@resend.dev>",
+        from: process.env.EMAIL_FROM || "Securmy <onboarding@resend.dev>",
         to: [to], subject: t.subject, text: t.body(link, label)
       })
     });
@@ -246,7 +246,8 @@ function publicProfile(p) {
     publicKey: p.publicKey || null,
     hasBiometric: !!(p.webauthnCredentials && p.webauthnCredentials.length),
     emailVerified: !!p.emailVerified,
-    weakPassword: !!p.legacyWeakCode
+    weakPassword: !!p.legacyWeakCode,
+    has2fa: !!p.totpEnc
   };
 }
 
@@ -265,7 +266,7 @@ function rpInfo(req) {
   return {
     rpID: host,
     origin: `${proto}://${req.headers.host}`,
-    rpName: "Messaggistica Privata"
+    rpName: "Securmy"
   };
 }
 
@@ -397,6 +398,18 @@ app.post("/api/login", loginThrottle, async (req, res) => {
     delete profile.accessCodeHash;
     if (pw.length >= PASSWORD_MIN) delete profile.legacyWeakCode; else profile.legacyWeakCode = true;
     store.save(store.load());
+  }
+  if (profile.totpEnc) {
+    const code = String(req.body.totp || "").trim();
+    if (!code) return res.json({ need2fa: true });
+    let secret = null; try { secret = decryptField(profile.totpEnc); } catch (e) {}
+    const step = secret ? totpCheck(secret, code) : null;
+    if (step === null || step <= (profile.totpLast || 0)) {
+      registerFail(req.ip); userFails(key).push(Date.now());
+      await new Promise((r) => setTimeout(r, 400));
+      return res.status(401).json({ error: "codice di verifica non valido" });
+    }
+    profile.totpLast = step; store.save(store.load());
   }
   const token = uuidv4();
   sessions.set(token, profile.id);
@@ -920,6 +933,168 @@ app.post("/api/webauthn/disable", requireAuth, (req, res) => {
   res.json({ ok: true });
 });
 
+// ---------- MESSAGGI A VISUALIZZAZIONE SINGOLA ----------
+// Il destinatario, dopo aver aperto il messaggio, ne avvia la distruzione: il server lo
+// elimina dopo pochi secondi (il testo e' comunque cifrato end-to-end).
+app.post("/api/messages/:id/burn", requireAuth, (req, res) => {
+  const db = store.load();
+  const msg = db.messages.find((m) => m.id === req.params.id);
+  if (!msg) return res.status(404).json({ error: "messaggio non trovato" });
+  const chat = db.chats.find((c) => c.id === msg.chatId && c.memberIds.includes(req.profileId));
+  if (!chat) return res.status(403).json({ error: "non autorizzato" });
+  if (msg.senderProfileId === req.profileId) return res.status(403).json({ error: "solo il destinatario" });
+  const sec = Math.min(60, Math.max(5, Number(req.body.seconds) || 10));
+  const at = Date.now() + sec * 1000;
+  if (!msg.selfDestructAt || msg.selfDestructAt > at) msg.selfDestructAt = at;
+  store.save(db);
+  for (const memberId of chat.memberIds) {
+    broadcastToProfile(memberId, { type: "burn", chatId: chat.id, messageId: msg.id, at: msg.selfDestructAt });
+  }
+  res.json({ ok: true, at: msg.selfDestructAt });
+});
+
+// ---------- VERIFICA IN DUE PASSAGGI (TOTP, RFC 6238) ----------
+// Il segreto e' cifrato a riposo (AES-256-GCM). Compatibile con qualsiasi app di
+// autenticazione (Google Authenticator, Aegis, 1Password...).
+const B32 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
+function b32encode(buf) {
+  let bits = 0, val = 0, out = "";
+  for (const b of buf) { val = (val << 8) | b; bits += 8; while (bits >= 5) { out += B32[(val >>> (bits - 5)) & 31]; bits -= 5; } }
+  if (bits > 0) out += B32[(val << (5 - bits)) & 31];
+  return out;
+}
+function b32decode(str) {
+  let bits = 0, val = 0; const out = [];
+  for (const ch of String(str).toUpperCase().replace(/=+$/, "")) {
+    const i = B32.indexOf(ch); if (i < 0) continue;
+    val = (val << 5) | i; bits += 5;
+    if (bits >= 8) { out.push((val >>> (bits - 8)) & 255); bits -= 8; }
+  }
+  return Buffer.from(out);
+}
+function totpAt(secretB32, step) {
+  const buf = Buffer.alloc(8); buf.writeBigUInt64BE(BigInt(step));
+  const h = crypto.createHmac("sha1", b32decode(secretB32)).update(buf).digest();
+  const o = h[h.length - 1] & 15;
+  const n = ((h[o] & 0x7f) << 24) | (h[o + 1] << 16) | (h[o + 2] << 8) | h[o + 3];
+  return String(n % 1000000).padStart(6, "0");
+}
+// ritorna lo step valido (finestra +-1) oppure null
+function totpCheck(secretB32, code) {
+  const c = String(code || "").replace(/\s/g, "");
+  if (!/^\d{6}$/.test(c)) return null;
+  const now = Math.floor(Date.now() / 30000);
+  for (const d of [0, -1, 1]) {
+    const exp = Buffer.from(totpAt(secretB32, now + d)), got = Buffer.from(c);
+    if (crypto.timingSafeEqual(exp, got)) return now + d;
+  }
+  return null;
+}
+app.post("/api/2fa/setup", requireAuth, (req, res) => {
+  const db = store.load();
+  const p = db.profiles.find((x) => x.id === req.profileId);
+  if (p.totpEnc) return res.status(409).json({ error: "gia' attiva" });
+  const secret = b32encode(crypto.randomBytes(20));
+  p.totpPendingEnc = encryptField(secret);
+  store.save(db);
+  const uri = "otpauth://totp/Securmy:" + encodeURIComponent(p.username) + "?secret=" + secret + "&issuer=Securmy&algorithm=SHA1&digits=6&period=30";
+  res.json({ secret, uri });
+});
+app.post("/api/2fa/enable", requireAuth, (req, res) => {
+  const db = store.load();
+  const p = db.profiles.find((x) => x.id === req.profileId);
+  if (!p.totpPendingEnc) return res.status(400).json({ error: "avvia prima la configurazione" });
+  let secret; try { secret = decryptField(p.totpPendingEnc); } catch { return res.status(400).json({ error: "configurazione non valida" }); }
+  const step = totpCheck(secret, req.body.code);
+  if (step === null) { registerFail(req.ip); return res.status(400).json({ error: "codice non valido" }); }
+  p.totpEnc = p.totpPendingEnc; p.totpLast = step; delete p.totpPendingEnc;
+  store.save(db);
+  res.json({ ok: true });
+});
+app.post("/api/2fa/disable", requireAuth, async (req, res) => {
+  const db = store.load();
+  const p = db.profiles.find((x) => x.id === req.profileId);
+  if (!p.totpEnc) return res.json({ ok: true });
+  if (!(await verifyPassword(p, String(req.body.password || "")))) { registerFail(req.ip); return res.status(403).json({ error: "password errata" }); }
+  let secret; try { secret = decryptField(p.totpEnc); } catch { secret = null; }
+  if (!secret || totpCheck(secret, req.body.code) === null) { registerFail(req.ip); return res.status(403).json({ error: "codice non valido" }); }
+  delete p.totpEnc; delete p.totpLast;
+  store.save(db);
+  res.json({ ok: true });
+});
+
+// ---------- INVIO FILE PEER-TO-PEER VIA LINK (solo segnalazione) ----------
+// Il file NON passa dal server: viaggia direttamente tra i due dispositivi (WebRTC) ed
+// e' cifrato con una chiave che sta solo nel frammento (#) del link, mai inviato al server.
+// Qui transitano soltanto le informazioni di connessione (SDP), per al massimo 1 ora.
+const p2pSessions = new Map(); // id -> { owner, offer, answer, joined, expires }
+function rate(key, max, ms) {
+  const now = Date.now();
+  const list = (rateHits.get(key) || []).filter((t) => now - t < ms);
+  if (list.length >= max) { rateHits.set(key, list); return false; }
+  list.push(now); rateHits.set(key, list); return true;
+}
+const rateHits = new Map();
+setInterval(() => {
+  const now = Date.now();
+  for (const [id, s] of p2pSessions) if (s.expires < now) p2pSessions.delete(id);
+  for (const k of rateHits.keys()) rate(k, Infinity, 3600 * 1000);
+}, 60 * 1000).unref();
+const P2P_ID = /^[A-Za-z0-9_-]{22}$/;
+app.post("/api/p2p", requireAuth, (req, res) => {
+  const mine = [...p2pSessions.values()].filter((s) => s.owner === req.profileId && s.expires > Date.now()).length;
+  if (mine >= 5 || p2pSessions.size >= 2000) return res.status(429).json({ error: "troppi link attivi" });
+  const minutes = [10, 60].includes(Number(req.body.minutes)) ? Number(req.body.minutes) : 10;
+  const id = crypto.randomBytes(16).toString("base64url");
+  p2pSessions.set(id, { owner: req.profileId, offer: null, answer: null, joined: false, expires: Date.now() + minutes * 60 * 1000 });
+  res.json({ id, expires: p2pSessions.get(id).expires });
+});
+app.post("/api/p2p/:id/offer", requireAuth, (req, res) => {
+  const s = p2pSessions.get(req.params.id);
+  if (!s || s.owner !== req.profileId || s.expires < Date.now()) return res.status(404).json({ error: "link scaduto" });
+  if (typeof req.body.sdp !== "string" || req.body.sdp.length > 60000) return res.status(400).json({ error: "dati non validi" });
+  s.offer = req.body.sdp;
+  res.json({ ok: true });
+});
+app.get("/api/p2p/:id/state", requireAuth, (req, res) => {
+  const s = p2pSessions.get(req.params.id);
+  if (!s || s.owner !== req.profileId || s.expires < Date.now()) return res.status(404).json({ error: "link scaduto" });
+  res.set("Cache-Control", "no-store");
+  res.json({ joined: s.joined, answer: s.answer });
+});
+app.delete("/api/p2p/:id", requireAuth, (req, res) => {
+  const s = p2pSessions.get(req.params.id);
+  if (s && s.owner === req.profileId) p2pSessions.delete(req.params.id);
+  res.json({ ok: true });
+});
+// parte pubblica (il destinatario non ha bisogno di un account)
+app.get("/api/p2p/:id/offer", (req, res) => {
+  res.set("Cache-Control", "no-store");
+  if (!P2P_ID.test(req.params.id) || !rate("p2pget:" + req.ip, 120, 10 * 60 * 1000)) return res.status(404).json({ error: "link non valido" });
+  const s = p2pSessions.get(req.params.id);
+  if (!s || s.expires < Date.now() || s.answer) return res.status(404).json({ error: "link scaduto o gia' usato" });
+  if (!s.offer) return res.status(425).json({ error: "il mittente non e' ancora pronto" });
+  s.joined = true;
+  res.json({ sdp: s.offer, expires: s.expires });
+});
+app.post("/api/p2p/:id/answer", (req, res) => {
+  if (!P2P_ID.test(req.params.id) || !rate("p2ppost:" + req.ip, 30, 10 * 60 * 1000)) return res.status(404).json({ error: "link non valido" });
+  const s = p2pSessions.get(req.params.id);
+  if (!s || s.expires < Date.now() || s.answer || !s.offer) return res.status(404).json({ error: "link scaduto o gia' usato" });
+  if (typeof req.body.sdp !== "string" || req.body.sdp.length > 60000) return res.status(400).json({ error: "dati non validi" });
+  s.answer = req.body.sdp; // un solo destinatario: da qui in poi il link non e' piu' utilizzabile
+  res.json({ ok: true });
+});
+
+// Server ICE per P2P e chiamate. STUN pubblico di default; un TURN proprio (TURN_URL,
+// TURN_USER, TURN_PASS) nasconde l'IP dei partecipanti e funziona anche dietro NAT rigidi.
+app.get("/api/ice", (req, res) => {
+  const servers = [{ urls: "stun:stun.l.google.com:19302" }];
+  if (process.env.TURN_URL) servers.push({ urls: process.env.TURN_URL.split(","), username: process.env.TURN_USER || "", credential: process.env.TURN_PASS || "" });
+  res.set("Cache-Control", "no-store");
+  res.json({ iceServers: servers, relayOnly: !!process.env.TURN_URL && process.env.TURN_RELAY_ONLY === "1" });
+});
+
 // ---------- WEBSOCKET ----------
 
 wss.on("connection", (ws) => {
@@ -938,6 +1113,19 @@ wss.on("connection", (ws) => {
       boundProfileId = profileId;
       if (!sockets.has(profileId)) sockets.set(profileId, new Set());
       sockets.get(profileId).add(ws);
+      return;
+    }
+    // segnalazione chiamate cifrate (WebRTC DTLS-SRTP): inoltro solo tra contatti con chat attiva e non bloccati
+    if (boundProfileId && ["call-offer", "call-answer", "call-ice", "call-end", "call-reject"].includes(data.type) && typeof data.to === "string") {
+      if (!rate("ws:" + boundProfileId, 240, 60 * 1000)) return;
+      const db = store.load();
+      const shares = db.chats.some((c) => c.memberIds.includes(boundProfileId) && c.memberIds.includes(data.to));
+      const blocked = db.contacts.some((c) => c.blocked && ((c.profileId === boundProfileId && c.contactProfileId === data.to) || (c.profileId === data.to && c.contactProfileId === boundProfileId)));
+      if (!shares || blocked) return;
+      const me = db.profiles.find((p) => p.id === boundProfileId);
+      const payload = JSON.stringify(data.payload || null);
+      if (payload.length > 60000) return;
+      broadcastToProfile(data.to, { type: data.type, from: boundProfileId, fromName: me ? me.username : "", payload: data.payload || null, video: !!data.video });
     }
   });
 
