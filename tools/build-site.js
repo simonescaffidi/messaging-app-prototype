@@ -49,6 +49,8 @@ function validate() {
     chk(d.landing.features.length === ref.landing.features.length, "numero features", l);
     chk(d.landing.steps.length === ref.landing.steps.length, "numero steps", l);
     chk(Array.isArray(d.landing.security) && d.landing.security.length === ref.landing.security.length, "numero card sicurezza", l);
+    chk(Array.isArray(d.landing.suite) && d.landing.suite.length === ref.landing.suite.length, "numero card suite", l);
+    chk(Array.isArray(d.landing.roadmap) && d.landing.roadmap.length === ref.landing.roadmap.length, "numero voci roadmap", l);
     chk(d.landing.disclaimerHtml.includes("{manualUrl}"), "manca {manualUrl}", l);
     chk(d.ui.cookieBanner.text.includes("{privacyUrl}") && d.ui.cookieBanner.text.includes("{cookieUrl}"), "banner: placeholder", l);
     chk(d.manual.sections.length === ref.manual.sections.length, "numero sezioni manuale", l);
@@ -105,7 +107,10 @@ function head(l, page, title, description, ogType) {
     '<meta property="og:title" content="' + esc(ogTitle) + '" />',
     '<meta property="og:description" content="' + esc(ogDesc) + '" />',
     '<meta property="og:url" content="' + BASE + url(l, page) + '" />',
-    '<meta property="og:image" content="' + BASE + '/og-image.svg" />',
+    '<meta property="og:image" content="' + BASE + '/og-image.png" />',
+    '<link rel="icon" type="image/svg+xml" href="/icon.svg" />',
+    '<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />',
+    '<link rel="apple-touch-icon" href="/icon-512.png" />',
     '<meta name="twitter:card" content="summary_large_image" />',
     '<link rel="stylesheet" href="/style.css" />',
     "</head>"
@@ -120,7 +125,7 @@ function header(l, page) {
   return [
     '<header class="site-header">',
     '  <div class="container">',
-    '    <a href="' + url(l, "index") + '" class="brand"><span class="lock">🔒</span> ' + esc(d.brand) + "</a>",
+    '    <a href="' + url(l, "index") + '" class="brand"><img class="logo-mark" src="/icon.svg" width="28" height="28" alt="" /> ' + esc(d.brand) + "</a>",
     '    <div class="header-actions">',
     '      <select class="lang-select" aria-label="' + esc(d.ui.langAria) + '" onchange="location.href=this.value">' + options + "</select>",
     '      <a href="' + url(l, "manual") + '" class="btn btn-ghost btn-sm">' + esc(d.ui.manual) + "</a>",
@@ -188,6 +193,12 @@ function landing(l) {
   const security = L.security.map((f) =>
     '        <article class="feature-card">\n          <div class="icon">' + f[0] + "</div>\n          <h3>" + f[1] + "</h3>\n          <p>" + f[2] + "</p>\n        </article>"
   ).join("\n");
+  const suite = L.suite.map((f) =>
+    '        <article class="feature-card">\n          <div class="icon">' + f[0] + "</div>\n          <h3>" + f[1] + "</h3>\n          <p>" + f[2] + "</p>\n        </article>"
+  ).join("\n");
+  const roadmap = L.roadmap.map((f) =>
+    '        <article class="feature-card">\n          <div class="icon">' + f[0] + "</div>\n          <h3>" + f[1] + "</h3>\n          <p>" + f[2] + "</p>\n        </article>"
+  ).join("\n");
   const steps = L.steps.map((s) =>
     '        <div class="step">\n          <h3>' + s[0] + "</h3>\n          <p>" + s[1] + "</p>\n        </div>"
   ).join("\n");
@@ -215,6 +226,17 @@ function landing(l) {
     "    </div>",
     "  </section>",
     "",
+    '  <section class="features suite" id="suite">',
+    '    <div class="container">',
+    "      <h2>" + L.suiteTitle + "</h2>",
+    '      <p class="sec-lead">' + L.suiteLead + "</p>",
+    '      <div class="feature-grid">',
+    suite,
+    "      </div>",
+    '      <p class="sec-lead"><a href="' + url(l, "demo") + '" class="btn btn-ghost">' + DEMO[l].cta + "</a></p>",
+    "    </div>",
+    "  </section>",
+    "",
     '  <section class="features security" id="security">',
     '    <div class="container">',
     "      <h2>" + L.secTitle + "</h2>",
@@ -230,6 +252,16 @@ function landing(l) {
     "      <h2>" + L.howTitle + "</h2>",
     '      <div class="steps">',
     steps,
+    "      </div>",
+    "    </div>",
+    "  </section>",
+    "",
+    '  <section class="features roadmap" id="roadmap">',
+    '    <div class="container">',
+    "      <h2>" + L.roadmapTitle + "</h2>",
+    '      <p class="sec-lead">' + L.roadmapLead + "</p>",
+    '      <div class="feature-grid">',
+    roadmap,
     "      </div>",
     "    </div>",
     "  </section>",
@@ -299,6 +331,7 @@ function manual(l) {
 function demo(l) {
   const D = DEMO[l];
   const items = D.tryItems.map((x) => "        <li>" + x + "</li>").join("\n");
+  const items2 = D.suiteTry.map((x) => "        <li>" + x + "</li>").join("\n");
   const i18n = JSON.stringify(D).replace(/</g, "\\u003c");
   const main = [
     "<main>",
@@ -310,6 +343,10 @@ function demo(l) {
     "      <h2>" + D.tryTitle + "</h2>",
     '      <ol class="demo-try">',
     items,
+    "      </ol>",
+    "      <h2>" + D.suiteTryTitle + "</h2>",
+    '      <ol class="demo-try">',
+    items2,
     "      </ol>",
     '      <p><a href="/app/" class="btn btn-primary">' + esc(dicts[l].ui.openApp) + "</a></p>",
     "    </div>",
