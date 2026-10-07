@@ -10,6 +10,7 @@
     "express": "^4.19.2",
     "ws": "^8.18.0",
     "uuid": "^9.0.1",
-    "@simplewebauthn/server": "^13.1.2"
+    "@simplewebauthn/server": "^13.1.2",
+    "pg": "^8.13.0"
   }
 }

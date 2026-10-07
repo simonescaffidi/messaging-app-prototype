@@ -31,8 +31,8 @@ app.use("/app", express.static(path.join(__dirname, "public")));
 const server = http.createServer(app);
 const wss = new WebSocketServer({ server });
 
-// sessioni in memoria: token -> profileId
-const sessions = new Map();
+// sessioni persistenti (Postgres): token -> profileId, scadenza 30 giorni
+const sessions = store.sessions;
 // socket per profilo: profileId -> Set<ws>
 const sockets = new Map();
 
@@ -97,10 +97,91 @@ function registerThrottle(req, res, next) {
   next();
 }
 
+
+// ---------- EMAIL: cifratura a riposo, invio (Resend), token ----------
+// L'email e' cifrata con AES-256-GCM (chiave DATA_KEY, variabile d'ambiente segreta) e
+// indicizzata con un HMAC (emailHash) per poterla cercare senza conservarla in chiaro.
+const DATA_KEY_RAW = process.env.DATA_KEY || "";
+if (!DATA_KEY_RAW) console.warn("ATTENZIONE: DATA_KEY non impostata, uso una chiave derivata (impostala su Railway).");
+const DATA_KEY = crypto.createHash("sha256").update("datakey:" + (DATA_KEY_RAW || PEPPER)).digest();
+const HASH_KEY = crypto.createHash("sha256").update("emailhash:" + (DATA_KEY_RAW || PEPPER)).digest();
+function normEmail(e) { return String(e || "").trim().toLowerCase(); }
+function validEmail(e) { return /^[^\s@]{1,64}@[^\s@]{1,255}\.[^\s@]{2,}$/.test(e) && e.length <= 254; }
+function emailHash(e) { return crypto.createHmac("sha256", HASH_KEY).update(normEmail(e)).digest("hex"); }
+function encryptEmail(e) {
+  const iv = crypto.randomBytes(12);
+  const c = crypto.createCipheriv("aes-256-gcm", DATA_KEY, iv);
+  const ct = Buffer.concat([c.update(normEmail(e), "utf8"), c.final()]);
+  return { iv: iv.toString("base64"), ct: ct.toString("base64"), tag: c.getAuthTag().toString("base64") };
+}
+function decryptEmail(enc) {
+  const d = crypto.createDecipheriv("aes-256-gcm", DATA_KEY, Buffer.from(enc.iv, "base64"));
+  d.setAuthTag(Buffer.from(enc.tag, "base64"));
+  return Buffer.concat([d.update(Buffer.from(enc.ct, "base64")), d.final()]).toString("utf8");
+}
+function setProfileEmail(p, email) {
+  p.emailEnc = encryptEmail(email);
+  p.emailHash = emailHash(email);
+  delete p.email;
+}
+function profileEmail(p) {
+  try { return p.emailEnc ? decryptEmail(p.emailEnc) : (p.email || null); } catch (e) { return null; }
+}
+function sha256hex(x) { return crypto.createHash("sha256").update(x).digest("hex"); }
+function newToken() { return crypto.randomBytes(32).toString("hex"); }
+
+function baseUrl() {
+  if (process.env.APP_BASE_URL) return process.env.APP_BASE_URL.replace(/\/$/, "");
+  if (process.env.RAILWAY_PUBLIC_DOMAIN) return "https://" + process.env.RAILWAY_PUBLIC_DOMAIN;
+  return "http://localhost:" + (process.env.PORT || 3000);
+}
+const MAIL_TEXT = {
+  verify: { subject: "Conferma la tua email — Messaggistica Privata", body: (u) => "Apri questo link per confermare la tua email (valido 24 ore):\n\n" + u + "\n\nSe non sei stato tu, ignora questo messaggio." },
+  reset:  { subject: "Reimposta la password — Messaggistica Privata", body: (u, id) => "Hai chiesto di reimpostare la password del profilo " + id + ". Apri questo link (valido 1 ora):\n\n" + u + "\n\nSe non sei stato tu, ignora questo messaggio: la password resta invariata." }
+};
+async function sendMail(to, kind, link, label) {
+  const t = MAIL_TEXT[kind];
+  const key = process.env.RESEND_API_KEY;
+  if (!key) {
+    console.warn("Email non inviata (RESEND_API_KEY mancante): tipo " + kind);
+    if (!process.env.RAILWAY_ENVIRONMENT) console.log("[dev] link " + kind + ": " + link);
+    return false;
+  }
+  try {
+    const r = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { "Authorization": "Bearer " + key, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        from: process.env.EMAIL_FROM || "Messaggistica Privata <onboarding@resend.dev>",
+        to: [to], subject: t.subject, text: t.body(link, label)
+      })
+    });
+    if (!r.ok) console.error("Resend errore " + r.status + ": " + (await r.text()).slice(0, 200));
+    return r.ok;
+  } catch (e) { console.error("Resend:", e.message); return false; }
+}
+async function sendVerification(profile) {
+  const token = newToken();
+  profile.verifyTokenHash = sha256hex(token);
+  profile.verifyExp = Date.now() + 24 * 3600 * 1000;
+  store.save(store.load());
+  return sendMail(profileEmail(profile), "verify", baseUrl() + "/app/?verify=" + token, profile.publicId);
+}
+
+// Throttle generico per le email (anti-spam): max N richieste/ora per chiave.
+const mailHits = new Map();
+function mailAllowed(key, max) {
+  const now = Date.now();
+  const list = (mailHits.get(key) || []).filter((t) => now - t < 3600 * 1000);
+  if (list.length >= max) { mailHits.set(key, list); return false; }
+  list.push(now); mailHits.set(key, list); return true;
+}
+setInterval(() => { for (const k of mailHits.keys()) mailAllowed(k, Infinity); }, 10 * 60 * 1000).unref();
+
 // Migrazione: i profili creati con la vecchia versione avevano il codice in chiaro.
 // Li convertiamo in hash e rimuoviamo il testo in chiaro. I codici a 6 cifre
 // restano validi (e protetti dal limite di tentativi) ma vengono marcati "deboli".
-(function migrateLegacyCodes() {
+function migrateLegacyCodes() {
   const db = store.load();
   let changed = false;
   for (const p of db.profiles) {
@@ -111,8 +192,11 @@ function registerThrottle(req, res, next) {
       changed = true;
     }
   }
+  for (const p of db.profiles) {
+    if (p.email) { setProfileEmail(p, p.email); p.emailVerified = false; changed = true; }
+  }
   if (changed) store.save(db);
-})();
+}
 function randomPublicId() {
   return randomCode(8, "ABCDEFGHJKLMNPQRSTUVWXYZ23456789");
 }
@@ -137,7 +221,9 @@ function publicProfile(p) {
     isCover: p.isCover,
     settings: p.settings,
     publicKey: p.publicKey || null,
-    hasBiometric: !!(p.webauthnCredentials && p.webauthnCredentials.length)
+    hasBiometric: !!(p.webauthnCredentials && p.webauthnCredentials.length),
+    emailVerified: !!p.emailVerified,
+    weakPassword: !!p.legacyWeakCode
   };
 }
 
@@ -201,6 +287,7 @@ setInterval(() => { for (const k of failedByUser.keys()) userFails(k); }, 5 * 60
 app.post("/api/register", registerThrottle, loginThrottle, async (req, res) => {
   const { email, username, password, isCover } = req.body;
   if (!email || !username || !password) return res.status(400).json({ error: "email, username e password obbligatori" });
+  if (!validEmail(normEmail(email))) return res.status(400).json({ error: "email non valida" });
   const pw = String(password);
   if (pw.length < PASSWORD_MIN || pw.length > PASSWORD_MAX) {
     return res.status(400).json({ error: "la password deve avere almeno " + PASSWORD_MIN + " caratteri" });
@@ -224,7 +311,7 @@ app.post("/api/register", registerThrottle, loginThrottle, async (req, res) => {
   const passHash = (await scryptAsync(pw, passSalt)).toString("hex");
   const profile = {
     id: uuidv4(),
-    email,
+    emailVerified: false,
     username: String(username).trim(),
     publicId: randomPublicId(),
     passSalt: passSalt.toString("hex"),
@@ -236,8 +323,10 @@ app.post("/api/register", registerThrottle, loginThrottle, async (req, res) => {
     publicKey: null,
     webauthnCredentials: []
   };
+  setProfileEmail(profile, email);
   db.profiles.push(profile);
   store.save(db);
+  if (mailAllowed("verify:" + req.ip, 10)) sendVerification(profile); // asincrono: non blocca la risposta
 
   // La combinazione segreta viene mostrata UNA VOLTA sola.
   res.json({
@@ -274,9 +363,113 @@ app.post("/api/login", loginThrottle, async (req, res) => {
     return res.status(401).json({ error: "credenziali non valide" });
   }
 
+  // Profilo legacy (codice HMAC): conosciamo ora la password in chiaro, quindi la
+  // convertiamo subito in hash scrypt e rimuoviamo l'hash HMAC.
+  if (!profile.passHash && profile.accessCodeHash) {
+    const salt = crypto.randomBytes(16);
+    profile.passSalt = salt.toString("hex");
+    profile.passHash = (await scryptAsync(pw, salt)).toString("hex");
+    delete profile.accessCodeHash;
+    if (pw.length >= PASSWORD_MIN) delete profile.legacyWeakCode; else profile.legacyWeakCode = true;
+    store.save(store.load());
+  }
   const token = uuidv4();
   sessions.set(token, profile.id);
   res.json({ token, profile: publicProfile(profile) });
+});
+
+// ---------- EMAIL: verifica, recupero e cambio password ----------
+
+app.post("/api/email/verify", loginThrottle, (req, res) => {
+  const token = String(req.body.token || "");
+  const h = sha256hex(token);
+  const db = store.load();
+  const p = db.profiles.find((x) => x.verifyTokenHash && x.verifyTokenHash === h);
+  if (!p || (p.verifyExp || 0) < Date.now()) { registerFail(req.ip); return res.status(400).json({ error: "link non valido o scaduto" }); }
+  p.emailVerified = true;
+  delete p.verifyTokenHash; delete p.verifyExp;
+  store.save(db);
+  res.json({ ok: true });
+});
+
+app.post("/api/email/resend", requireAuth, async (req, res) => {
+  const db = store.load();
+  const p = db.profiles.find((x) => x.id === req.profileId);
+  if (p.emailVerified) return res.json({ ok: true });
+  if (!mailAllowed("resend:" + p.id, 3)) return res.status(429).json({ error: "troppe richieste, riprova piu' tardi" });
+  await sendVerification(p);
+  res.json({ ok: true });
+});
+
+// Recupero: risposta SEMPRE identica (non rivela se email/username esistono).
+// Solo i profili con email verificata possono essere recuperati.
+app.post("/api/password/forgot", async (req, res) => {
+  const email = normEmail(req.body.email);
+  const key = userKey(req.body.username);
+  res.json({ ok: true });
+  if (!validEmail(email) || !key) return;
+  if (!mailAllowed("forgot-ip:" + req.ip, 5) || !mailAllowed("forgot-mail:" + emailHash(email), 3)) return;
+  const db = store.load();
+  const eh = emailHash(email);
+  const matches = db.profiles.filter((p) => p.emailHash === eh && p.emailVerified && userKey(p.username) === key).slice(0, 5);
+  for (const p of matches) {
+    const token = newToken();
+    p.resetTokenHash = sha256hex(token);
+    p.resetExp = Date.now() + 3600 * 1000;
+    store.save(db);
+    await sendMail(email, "reset", baseUrl() + "/app/?reset=" + token, p.publicId);
+  }
+});
+
+app.post("/api/password/reset", loginThrottle, async (req, res) => {
+  const token = String(req.body.token || "");
+  const pw = String(req.body.password || "");
+  if (pw.length < PASSWORD_MIN || pw.length > PASSWORD_MAX) {
+    return res.status(400).json({ error: "la password deve avere almeno " + PASSWORD_MIN + " caratteri" });
+  }
+  const h = sha256hex(token);
+  const db = store.load();
+  const p = db.profiles.find((x) => x.resetTokenHash && x.resetTokenHash === h);
+  if (!p || (p.resetExp || 0) < Date.now()) { registerFail(req.ip); return res.status(400).json({ error: "link non valido o scaduto" }); }
+  for (const o of db.profiles) {
+    if (o.id !== p.id && userKey(o.username) === userKey(p.username) && await verifyPassword(o, pw)) {
+      return res.status(409).json({ error: "scegli una password diversa" });
+    }
+  }
+  const salt = crypto.randomBytes(16);
+  p.passSalt = salt.toString("hex");
+  p.passHash = (await scryptAsync(pw, salt)).toString("hex");
+  delete p.accessCodeHash; delete p.legacyWeakCode; delete p.resetTokenHash; delete p.resetExp;
+  store.save(db);
+  sessions.deleteByProfile(p.id); // chiude tutte le sessioni aperte
+  res.json({ ok: true });
+});
+
+app.post("/api/password/change", requireAuth, async (req, res) => {
+  const oldPw = String(req.body.oldPassword || "");
+  const pw = String(req.body.newPassword || "");
+  if (pw.length < PASSWORD_MIN || pw.length > PASSWORD_MAX) {
+    return res.status(400).json({ error: "la password deve avere almeno " + PASSWORD_MIN + " caratteri" });
+  }
+  const db = store.load();
+  const p = db.profiles.find((x) => x.id === req.profileId);
+  if (!(await verifyPassword(p, oldPw))) {
+    registerFail(req.ip);
+    await new Promise((r) => setTimeout(r, 400));
+    return res.status(401).json({ error: "password attuale errata" });
+  }
+  for (const o of db.profiles) {
+    if (o.id !== p.id && userKey(o.username) === userKey(p.username) && await verifyPassword(o, pw)) {
+      return res.status(409).json({ error: "scegli una password diversa" });
+    }
+  }
+  const salt = crypto.randomBytes(16);
+  p.passSalt = salt.toString("hex");
+  p.passHash = (await scryptAsync(pw, salt)).toString("hex");
+  delete p.accessCodeHash; delete p.legacyWeakCode;
+  store.save(db);
+  sessions.deleteByProfile(p.id, req.token); // chiude le altre sessioni, mantiene questa
+  res.json({ ok: true });
 });
 
 app.get("/api/me", requireAuth, (req, res) => {
@@ -643,4 +836,13 @@ wss.on("connection", (ws) => {
 });
 
 const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => console.log(`Server avviato su http://localhost:${PORT}`));
+store.init().then(() => {
+  migrateLegacyCodes();
+  server.listen(PORT, () => console.log(`Server avviato su http://localhost:${PORT}`));
+}).catch((e) => { console.error("Avvio fallito:", e); process.exit(1); });
+
+async function shutdown() {
+  try { await store.close(); } finally { process.exit(0); }
+}
+process.on("SIGTERM", shutdown);
+process.on("SIGINT", shutdown);
