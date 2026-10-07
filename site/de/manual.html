@@ -184,8 +184,8 @@
     <p>Das Backup enthält Dateien, Notizen und Passwörter, verschlüsselt mit einer von dir gewählten Passphrase von mindestens 10 Zeichen: Ohne sie ist es nicht wiederherstellbar. Nachrichten sind nicht enthalten. Die Notfall-Löschung entfernt Schlüssel, Nachrichten-Cache, Dateien, Notizen und Passwörter vom Gerät und ist nicht rückgängig zu machen.</p>
     <h3>Grenzen, die du kennen solltest</h3>
     <ul>
-      <li>Der Tresor ist lokal: Dateien, Notizen und Passwörter werden nicht zwischen Geräten synchronisiert; nutze das Backup zum Umziehen.</li>
-      <li>Bei P2P-Übertragungen und Anrufen kann die andere Person (und ein öffentlicher STUN-Server) deine IP-Adresse sehen, sofern der Dienst keinen TURN-Server nutzt; in sehr restriktiven Netzen kann die Verbindung scheitern.</li>
+      <li>Die Synchronisierung zwischen Geräten ist optional und kostenpflichtig (Speicherpakete): Die Daten bleiben auf deinem Gerät verschlüsselt, der Server hat den Schlüssel nicht. Ohne Tarif bleibt der Tresor nur lokal; ein Backup dient weiterhin zum Umzug.</li>
+      <li>Um deine IP bei P2P-Übertragungen und Anrufen zu verbergen, aktiviere Sicherheit → IP-Schutz (verschlüsseltes Relay), sofern der Dienst einen TURN-Server hat. Ohne Relay kann die andere Person deine IP sehen, und in sehr restriktiven Netzwerken kann die Verbindung scheitern.</li>
       <li>Der Passwort-Manager ist schlicht: Er füllt keine Formulare selbst aus und ersetzt für berufliche Zwecke keinen spezialisierten Manager.</li>
       <li>Verlierst du Passwort und Backup-Passphrase, sind die verschlüsselten Daten nicht wiederherstellbar: Niemand, auch wir nicht, kann sie öffnen.</li>
     </ul>
