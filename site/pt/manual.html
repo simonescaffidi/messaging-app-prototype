@@ -184,8 +184,8 @@
     <p>O backup contém arquivos, notas e senhas cifrados com uma frase secreta de pelo menos 10 caracteres escolhida por você: sem ela não é recuperável. As mensagens não estão incluídas. O apagamento de emergência remove do dispositivo chaves, cache de mensagens, arquivos, notas e senhas e não pode ser desfeito.</p>
     <h3>Limites que convém conhecer</h3>
     <ul>
-      <li>O cofre é local: arquivos, notas e senhas não sincronizam entre dispositivos; use o backup para movê-los.</li>
-      <li>Nos envios P2P e nas chamadas a outra pessoa (e um servidor STUN público) pode ver o seu endereço IP, a menos que o serviço use um servidor TURN; em redes muito restritivas a conexão pode falhar.</li>
+      <li>A sincronização entre dispositivos é opcional e paga (pacotes de espaço): os dados continuam cifrados no seu dispositivo e o servidor não tem a chave. Sem plano, o cofre fica só local; o backup continua a servir para o mover.</li>
+      <li>Para ocultar o seu IP em envios P2P e chamadas, ative Segurança → Proteção de IP (relay cifrado), onde o serviço tenha um servidor TURN. Sem relay, a outra pessoa pode ver o seu IP e, em redes muito restritivas, a ligação pode falhar.</li>
       <li>O gerenciador de senhas é básico: não preenche formulários sozinho e não substitui um gerenciador dedicado para uso profissional.</li>
       <li>Se perder a senha e a frase do backup, os dados cifrados não são recuperáveis: ninguém, nem nós, consegue abri-los.</li>
     </ul>
