@@ -71,7 +71,7 @@
       <li><strong>Öffentliche ID</strong>: die gibst du an Personen weiter, die du als Kontakte hinzufügen möchtest. Sie verrät nicht deine E-Mail.</li>
       <li><strong>Geheime Kombination</strong>: dient dazu, versteckte Chats anzuzeigen (siehe eigener Abschnitt).</li>
     </ul>
-    <p class="warn">Wenn du das Passwort verlierst, verlierst du den Zugriff auf das Profil: Eine echte Wiederherstellung per E-Mail gibt es noch nicht (siehe „Deklarierte Sicherheitsgrenzen“).</p>
+    <p class="warn">Wenn du das Passwort verlierst, kannst du es per E-Mail zurücksetzen, aber nur wenn die E-Mail des Profils bestätigt wurde. Ohne Passwort und ohne bestätigte E-Mail ist das Profil nicht wiederherstellbar.</p>
   </section>
 
   <section id="profiles">
@@ -136,7 +136,7 @@
       <li><strong>Kein Ratchet / keine Forward Secrecy</strong>: Der Schlüssel eines Chats bleibt gleich, bis beide Personen ihre Schlüssel neu erzeugen (anders als bei Protokollen wie Signal, die den Schlüssel mit jeder Nachricht wechseln).</li>
       <li><strong>Keine Out-of-Band-Prüfung der öffentlichen Schlüssel</strong>: Es gibt keine „Sicherheitsnummer“, die du mündlich mit dem Kontakt vergleichen könntest. Theoretisch könnte ein böswilliger Server einen öffentlichen Schlüssel durch seinen eigenen ersetzen (Man-in-the-Middle-Angriff). Für einen Prototyp auf einem vertrauenswürdigen Server in Ordnung; vor einem Einsatz mit hohem Risiko sollte diese Prüfung ergänzt werden.</li>
       <li><strong>Privater Schlüssel im Browser</strong>: Er liegt im lokalen Speicher des Browsers (localStorage), nicht in einer Hardware-Secure-Enclave. Wer physischen oder softwareseitigen Zugriff auf das entsperrte Gerät hat, könnte ihn lesen.</li>
-      <li><strong>Kein echter E-Mail-Versand</strong>: Die Registrierung funktioniert, aber es ist noch kein E-Mail-Dienst für eine mögliche Kontowiederherstellung per „Magic Link“ angebunden.</li>
+      <li><strong>Wiederherstellung nur per E-Mail</strong>: Verlierst du Passwort und Zugriff auf die bestätigte E-Mail, ist das Profil nicht wiederherstellbar. Nutzt du mehrere Profile (z. B. ein Tarnprofil), verwende verschiedene E-Mails: Ein Wiederherstellungslink verrät dem, der die E-Mail kontrolliert, dass das Profil existiert.</li>
     </ul>
   </section>
 
@@ -145,7 +145,7 @@
     <h3>„Verschlüsselung nicht möglich: Der Kontakt hat noch keinen öffentlichen Schlüssel“</h3>
     <p>Das passiert, wenn sich dein Kontakt seit dem letzten App-Update nicht angemeldet hat (der Schlüssel wird bei der Anmeldung automatisch erzeugt und hochgeladen). Bitte ihn, sich einmal anzumelden – danach kannst du ihm normal schreiben.</p>
     <h3>„Ich habe mein Passwort verloren“</h3>
-    <p>Derzeit gibt es keine automatische Wiederherstellung: Du musst ein neues Profil registrieren. Bewahre das Passwort immer in einem Passwortmanager auf.</p>
+    <p>Nutze „Passwort vergessen?“ auf dem Anmeldebildschirm und gib E-Mail und Benutzernamen ein: Ist die E-Mail des Profils bestätigt, erhältst du einen 1 Stunde gültigen Link. Sonst ist das Profil nicht wiederherstellbar und muss neu angelegt werden. Bewahre das Passwort immer in einem Passwortmanager auf.</p>
     <h3>Die biometrische Entsperrung erscheint nicht</h3>
     <p>Sie erfordert ein Gerät mit eingerichtetem Face ID, Touch ID, Fingerabdruck oder Windows Hello, einen aktuellen Browser und eine HTTPS-Verbindung (die Web-App in Produktion nutzt bereits eine). Außerdem muss sie mindestens einmal in den Einstellungen aktiviert worden sein.</p>
   </section>

@@ -51,16 +51,16 @@
   <p>Diese Website verwendet keine Analyse- oder Tracking-Tools von Drittanbietern. Gespeichert werden nur die von dir gewählten Cookie-Einstellungen (siehe Cookie-Richtlinie), lokal in deinem Browser.</p>
 
   <h2>Vom Prototyp (/app) erhobene Daten</h2>
-  <p>Für den Messaging-Prototyp legst du ein Profil mit E-Mail, Benutzername und Passwort an. Auf dem Server gespeichert werden: E-Mail, Benutzername, Passwort-Hash, öffentliche ID, Kombination für versteckte Chats, hinzugefügte Kontakte, dein öffentlicher Verschlüsselungsschlüssel und die gesendeten Nachrichten.</p>
+  <p>Für den Messaging-Prototyp legst du ein Profil mit E-Mail, Benutzername und Passwort an. Auf dem Server (PostgreSQL-Datenbank) gespeichert werden: E-Mail (verschlüsselt), Benutzername, Passwort-Hash, öffentliche ID, Kombination für versteckte Chats, hinzugefügte Kontakte, dein öffentlicher Verschlüsselungsschlüssel, aktive Sitzungen und gesendete Nachrichten.</p>
   <p><strong>Nachrichten:</strong> Der Inhalt wird vor dem Senden im Browser Ende-zu-Ende-verschlüsselt; der Server speichert nur Geheimtext und kann ihn nicht lesen. Metadaten (Absender, Uhrzeit, Reaktionen, Ablauf zeitgesteuerter Nachrichten) bleiben unverschlüsselt.</p>
   <p><strong>Biometrische Entsperrung:</strong> Wenn du sie aktivierst, wird auf dem Server nur der öffentliche Schlüssel des Passkeys (WebAuthn) gespeichert. Biometrische Daten verlassen nie dein Gerät. Dein privater Verschlüsselungsschlüssel bleibt im Browser (localStorage).</p>
-  <p><strong>Wichtig:</strong> Dies ist ein Demonstrationsprototyp: E-Mail und Benutzername werden unverschlüsselt gespeichert und der Dienst erreicht nicht den Standard eines Produktivprodukts. Passwörter werden nicht im Klartext gespeichert (nur ein gesalzener scrypt-Hash) und fehlgeschlagene Anmeldeversuche werden pro IP-Adresse und pro Benutzername begrenzt. Gib keine echten sensiblen Informationen ein: Verwende Testdaten.</p>
+  <p><strong>Wichtig:</strong> Dies ist ein Demonstrationsprototyp und der Dienst erreicht nicht den Standard eines Produktivprodukts. Die E-Mail wird im Ruhezustand verschlüsselt (AES-256-GCM) und nur für Bestätigung und Passwort-Wiederherstellung genutzt; der Benutzername bleibt im Klartext, weil die Anmeldung ihn braucht. Passwörter werden nicht im Klartext gespeichert (nur ein gesalzener scrypt-Hash) und fehlgeschlagene Anmeldeversuche werden pro IP-Adresse und Benutzername begrenzt. Gib keine echten sensiblen Informationen ein: Verwende Testdaten.</p>
 
   <h2>Zweck der Verarbeitung</h2>
   <p>Die Daten dienen ausschließlich dazu, die Demo zum Laufen zu bringen (Authentifizierung, Nachrichten, Kontakte). Sie werden nicht an Dritte weitergegeben und nicht für Werbeprofile verwendet.</p>
 
   <h2>Speicherdauer</h2>
-  <p>Die Daten des Prototyps können jederzeit bei Updates oder Zurücksetzungen der Demo ohne Vorankündigung gelöscht werden.</p>
+  <p>Die Daten werden in einer dauerhaften Datenbank gespeichert, bis du das Profil löschst; bei Updates oder Demo-Resets können sie dennoch ohne Vorankündigung gelöscht werden.</p>
 
   <h2>Deine Rechte</h2>
   <p>Du kannst jederzeit die Löschung der im Prototyp eingegebenen Daten verlangen, indem du über die oben genannten Kontaktmöglichkeiten schreibst.</p>
