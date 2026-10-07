@@ -45,6 +45,7 @@ function validate() {
     chk(d.code === l, "code non coincide", l);
     chk(d.landing.features.length === ref.landing.features.length, "numero features", l);
     chk(d.landing.steps.length === ref.landing.steps.length, "numero steps", l);
+    chk(Array.isArray(d.landing.security) && d.landing.security.length === ref.landing.security.length, "numero card sicurezza", l);
     chk(d.landing.disclaimerHtml.includes("{manualUrl}"), "manca {manualUrl}", l);
     chk(d.ui.cookieBanner.text.includes("{privacyUrl}") && d.ui.cookieBanner.text.includes("{cookieUrl}"), "banner: placeholder", l);
     chk(d.manual.sections.length === ref.manual.sections.length, "numero sezioni manuale", l);
@@ -180,6 +181,9 @@ function landing(l) {
   const features = L.features.map((f) =>
     '        <article class="feature-card">\n          <div class="icon">' + f[0] + "</div>\n          <h3>" + f[1] + "</h3>\n          <p>" + f[2] + "</p>\n        </article>"
   ).join("\n");
+  const security = L.security.map((f) =>
+    '        <article class="feature-card">\n          <div class="icon">' + f[0] + "</div>\n          <h3>" + f[1] + "</h3>\n          <p>" + f[2] + "</p>\n        </article>"
+  ).join("\n");
   const steps = L.steps.map((s) =>
     '        <div class="step">\n          <h3>' + s[0] + "</h3>\n          <p>" + s[1] + "</p>\n        </div>"
   ).join("\n");
@@ -203,6 +207,16 @@ function landing(l) {
     "      <h2>" + L.featuresTitle + "</h2>",
     '      <div class="feature-grid">',
     features,
+    "      </div>",
+    "    </div>",
+    "  </section>",
+    "",
+    '  <section class="features security" id="security">',
+    '    <div class="container">',
+    "      <h2>" + L.secTitle + "</h2>",
+    '      <p class="sec-lead">' + L.secLead + "</p>",
+    '      <div class="feature-grid">',
+    security,
     "      </div>",
     "    </div>",
     "  </section>",
