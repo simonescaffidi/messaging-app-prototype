@@ -3,7 +3,11 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Messaggistica Privata — Prototipo</title>
+<title>Securmy — Messaggistica privata e cassaforte cifrata</title>
+<link rel="icon" type="image/svg+xml" href="icon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="favicon.png" />
+<link rel="apple-touch-icon" href="icon-512.png" />
+<meta name="theme-color" content="#0f1115" />
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -16,7 +20,8 @@
 <!-- SCHERMATA AUTH -->
 <div id="auth-screen" class="screen">
   <div class="auth-card">
-    <h1 data-i18n="appTitle">🔒 Messaggistica Privata</h1>
+    <img src="icon.svg" alt="Securmy" width="64" height="64" class="auth-logo" />
+    <h1 data-i18n="appTitle">Securmy</h1>
     <p class="subtitle" data-i18n="subtitle">Prototipo — nessuna crittografia reale, solo demo funzionale</p>
 
     <div class="tabs">
@@ -29,6 +34,10 @@
       <input id="login-username" type="text" maxlength="40" autocapitalize="none" spellcheck="false" autocomplete="username" />
       <label data-i18n="loginPassLabel">Password</label>
       <input id="login-password" type="password" maxlength="128" autocomplete="current-password" />
+      <div id="login-totp-row" class="hidden">
+        <label data-i18n="tfaCodeLabel">Codice di verifica</label>
+        <input id="login-totp" type="text" inputmode="numeric" maxlength="6" autocomplete="one-time-code" />
+      </div>
       <button id="btn-login" class="primary" data-i18n="btnLogin">Entra</button>
       <button id="btn-biometric-login" class="secondary hidden" data-i18n="btnBiometricLogin">🔐 Sblocca con biometria</button>
       <p class="hint" data-i18n="loginHint">Ogni codice apre automaticamente il profilo associato. Nessuna schermata di scelta.</p>
@@ -103,6 +112,7 @@
 
     <div class="sidebar-actions">
       <button id="btn-add-contact" data-i18n="btnAddContact">+ Aggiungi contatto</button>
+      <button id="btn-suite" data-i18n-title="suiteTitle" title="Cassaforte Securmy">🛡️</button>
       <button id="btn-settings">⚙️</button>
     </div>
 
@@ -116,6 +126,8 @@
       <div class="chat-header">
         <strong id="chat-with-name"></strong>
         <div class="chat-header-actions">
+          <button id="btn-call-audio" data-i18n-title="callAudio" title="Chiamata audio cifrata">📞</button>
+          <button id="btn-call-video" data-i18n-title="callVideo" title="Videochiamata cifrata">🎥</button>
           <button id="btn-block" data-i18n-title="blockTitle" title="Blocca o segnala">🚫</button>
           <button id="btn-verify" data-i18n-title="verifyTitle" title="Verifica chiave">🔑</button>
           <button id="btn-toggle-hide" data-i18n-title="chatHideTitle" title="Nascondi/mostra questa chat">🙈</button>
@@ -133,12 +145,22 @@
           <option value="30" data-i18n="destruct30">Autodistrutto 30s</option>
           <option value="300" data-i18n="destruct300">Autodistrutto 5m</option>
           <option value="3600" data-i18n="destruct3600">Autodistrutto 1h</option>
+          <option value="once" data-i18n="destructOnce">👁 Visualizzazione singola</option>
         </select>
         <input id="message-input" type="text" data-i18n-placeholder="messagePlaceholder" placeholder="Scrivi un messaggio..." autocomplete="off" />
         <button type="submit" class="primary" data-i18n="btnSend">Invia</button>
       </form>
     </div>
   </main>
+</div>
+
+<!-- SUITE: cassaforte file, note, password, P2P, sicurezza, backup -->
+<div id="suite-modal" class="modal hidden">
+  <div class="modal-card suite-card">
+    <div class="suite-head"><h2 data-i18n="suiteTitle">Cassaforte Securmy</h2><button id="suite-close" type="button">✕</button></div>
+    <div id="suite-tabs" class="suite-tabs"></div>
+    <div id="suite-body"></div>
+  </div>
 </div>
 
 <!-- MODALE SBLOCCO CASSAFORTE (accesso biometrico) -->
@@ -245,7 +267,11 @@
 
 <script src="i18n.js"></script>
 <script src="crypto.js"></script>
+<script src="i18n-suite.js"></script>
 <script src="webauthn.js"></script>
+<script src="p2pcore.js"></script>
+<script src="tools.js"></script>
+<script src="calls.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

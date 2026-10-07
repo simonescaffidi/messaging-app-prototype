@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="referrer" content="no-referrer" />
+<title>Securmy — File</title>
+<link rel="icon" type="image/svg+xml" href="icon.svg" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div id="lang-switcher" class="lang-switcher"><select id="lang-select" title="Lingua / Language"></select></div>
+<div class="screen">
+  <div class="auth-card p2p-card">
+    <img src="icon.svg" alt="Securmy" width="64" height="64" class="auth-logo" />
+    <h1 data-i18n="p2pTitle">Ricevi un file</h1>
+    <p class="hint" data-i18n="p2pKeyNote">Il file è cifrato: la chiave è solo nel link.</p>
+    <p id="p2p-status" class="subtitle"></p>
+    <div id="p2p-file" class="p2p-file hidden"><strong id="p2p-name"></strong> <span id="p2p-size" class="hint"></span></div>
+    <progress id="p2p-bar" class="hidden" value="0" max="100"></progress>
+    <button id="p2p-save" class="primary hidden" data-i18n="p2pSave">Salva file</button>
+    <p id="p2p-close" class="hint hidden" data-i18n="p2pClose">Puoi chiudere questa pagina dopo aver salvato il file.</p>
+    <p class="hint"><a href="/app/" data-i18n="p2pOpenApp">Apri Securmy</a></p>
+  </div>
+</div>
+<script src="i18n.js"></script>
+<script src="i18n-suite.js"></script>
+<script src="p2pcore.js"></script>
+<script src="p2p.js"></script>
+</body>
+</html>

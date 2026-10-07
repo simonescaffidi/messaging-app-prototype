@@ -62,12 +62,13 @@ $("#btn-register").addEventListener("click", async () => {
   const password = $("#reg-password").value;
   const isCover = $("#reg-cover").checked;
   $("#register-error").textContent = "";
+  if (!$("#reg-terms").checked) { $("#register-error").textContent = I18N.t("termsRequired"); return; }
   if (!email || !username || password.length < 8) {
     $("#register-error").textContent = I18N.t("regEmailLabel") + " / " + I18N.t("regUsernameLabel") + " / " + I18N.t("regPasswordLabel") + " (min. 8)";
     return;
   }
   try {
-    const data = await api("/api/register", { method: "POST", body: JSON.stringify({ email, username, password, isCover }) });
+    const data = await api("/api/register", { method: "POST", body: JSON.stringify({ email, username, password, isCover, acceptTerms: true }) });
     $("#reg-password").value = "";
     $("#cred-publicid").textContent = data.publicId;
     $("#cred-combo").textContent = data.secretCombo;
@@ -91,13 +92,21 @@ async function doLogin() {
   const password = $("#login-password").value;
   $("#login-error").textContent = "";
   try {
-    const data = await api("/api/login", { method: "POST", body: JSON.stringify({ username, password }) });
+    const totp = $("#login-totp").value.trim();
+    const data = await api("/api/login", { method: "POST", body: JSON.stringify({ username, password, totp: totp || undefined }) });
+    if (data.need2fa) {
+      $("#login-totp-row").classList.remove("hidden");
+      $("#login-totp").focus();
+      $("#login-error").textContent = I18N.t("tfaNeeded");
+      return;
+    }
+    $("#login-totp").value = ""; $("#login-totp-row").classList.add("hidden");
     state.token = data.token;
     state.me = data.profile;
     state.loginUsername = username;
     await enterApp(password);
   } catch (e) {
-    $("#login-error").textContent = e.message && /tentativi/.test(e.message) ? e.message : I18N.t("loginError");
+    $("#login-error").textContent = e.message && /tentativi|verifica/.test(e.message) ? e.message : I18N.t("loginError");
   }
 }
 
@@ -245,6 +254,7 @@ $("#btn-logout").addEventListener("click", () => {
   state.chats = [];
   state.activeChatId = null;
   state.peerStatus = {};
+  Suite.reset(); Calls.hangup(false);
   E2E.lock();
   if (state.ws) state.ws.close();
   $("#app-screen").classList.add("hidden");
@@ -264,10 +274,15 @@ function connectWs() {
   state.ws.addEventListener("message", (evt) => {
     const data = JSON.parse(evt.data);
     if (data.type === "message") {
-      if (data.chatId === state.activeChatId) appendMessage(data.message);
-      loadChats(false);
+      // i miei messaggi li mostra la risposta all'invio (la cache locale e' pronta solo dopo)
+      if (data.chatId === state.activeChatId && data.message.senderProfileId !== state.me.id) appendMessage(data.message);
+      loadChats(true, $("#search-box").value.trim());
     } else if (data.type === "reaction") {
       updateReactionsUI(data.messageId, data.reactions);
+    } else if (data.type === "burn") {
+      onBurn(data);
+    } else if (typeof data.type === "string" && data.type.startsWith("call-")) {
+      Calls.onSignal(data);
     }
   });
 }
@@ -300,6 +315,7 @@ async function renderChatList() {
     let previewText = I18N.t("chatEmpty");
     if (c.lastMessage) {
       previewText = await decryptMessage(c, c.lastMessage);
+      if (typeof previewText === "string" && previewText.startsWith(ONCE)) previewText = I18N.t("onceSent");
     }
     const el = document.createElement("div");
     el.className = "chat-item" + (c.id === state.activeChatId ? " active" : "");
@@ -411,6 +427,7 @@ async function openChat(chatId) {
   $("#btn-toggle-hide").textContent = chat.hidden ? "👁️" : "🙈";
   await refreshPeerStatus(chat);
   renderKeyBanner(chat);
+  refreshBlockUI(chat);
 
   const data = await api(`/api/chats/${chatId}/messages`);
   const container = $("#messages");
@@ -433,6 +450,7 @@ async function appendMessage(m, scroll = true, chatOverride = null) {
   if (m.chatId && m.chatId !== state.activeChatId) return;
   const chat = chatOverride || state.chats.find((c) => c.id === state.activeChatId);
   const container = $("#messages");
+  if ([...container.children].some((r) => r.dataset && r.dataset.id === m.id)) return; // gia' presente
   const mine = m.senderProfileId === state.me.id;
   const row = document.createElement("div");
   row.className = "msg-row " + (mine ? "me" : "other");
@@ -447,9 +465,10 @@ async function appendMessage(m, scroll = true, chatOverride = null) {
     replyHtml = `<div class="msg-reply-ref">↩ ${escapeHtml(text.slice(0, 60))}</div>`;
   }
 
+  const isOnce = typeof plainText === "string" && plainText.startsWith(ONCE);
   row.innerHTML = `
     ${replyHtml}
-    <div class="bubble">${escapeHtml(plainText)}</div>
+    <div class="bubble">${escapeHtml(isOnce ? "" : plainText)}</div>
     <div class="msg-meta">${new Date(m.createdAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}${m.selfDestructAt ? " · 💣" : ""}</div>
     <div class="msg-reactions" data-msgid="${m.id}"></div>
     <div class="msg-actions">
@@ -459,6 +478,8 @@ async function appendMessage(m, scroll = true, chatOverride = null) {
     </div>
   `;
   container.appendChild(row);
+  if (isOnce) renderOnce(row, m, mine, plainText);
+  if (m.selfDestructAt) { const left = new Date(m.selfDestructAt).getTime() - Date.now(); if (left > 0 && left < 2147483000) setTimeout(() => row.remove(), left); }
   renderReactions(m.id, m.reactions || {});
 
   row.querySelector(".btn-reply").addEventListener("click", () => setReply(m, plainText));
@@ -503,35 +524,63 @@ $("#btn-cancel-reply").addEventListener("click", () => {
 });
 
 // ---------- INVIO MESSAGGIO (cifrato end-to-end) ----------
-$("#message-form").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const input = $("#message-input");
-  const text = input.value.trim();
-  if (!text || !state.activeChatId) return;
+const ONCE = "\u0001ONCE\u0001"; // marcatore (dentro il testo cifrato) dei messaggi a visualizzazione singola
+async function sendText(text, mode) {
+  if (!text || !state.activeChatId) return false;
   const chat = state.chats.find((c) => c.id === state.activeChatId);
-  const selfDestructSeconds = $("#destruct-select").value ? Number($("#destruct-select").value) : null;
-
-  if (!E2E.isUnlocked()) { alert(I18N.t("msgLocked")); return; }
-  if (!chat || !chat.with.publicKey) { alert(I18N.t("noPeerKey")); return; }
+  const once = mode === "once";
+  const selfDestructSeconds = once ? 7 * 24 * 3600 : (mode ? Number(mode) : null);
+  if (!E2E.isUnlocked()) { alert(I18N.t("msgLocked")); return false; }
+  if (!chat || !chat.with.publicKey) { alert(I18N.t("noPeerKey")); return false; }
   await refreshPeerStatus(chat);
-  if (state.peerStatus[chat.id].status === "changed") { renderKeyBanner(chat); return; }
+  if (state.peerStatus[chat.id].status === "changed") { renderKeyBanner(chat); return false; }
+  const plaintext = once ? ONCE + text : text;
   const { iv, ciphertext, hdr } = await E2E.encryptMessage({
-    peerIdentity: chat.with.publicKey, myId: state.me.publicId, peerId: chat.with.publicId, plaintext: text,
+    peerIdentity: chat.with.publicKey, myId: state.me.publicId, peerId: chat.with.publicId, plaintext,
     claim: async () => (await api("/api/prekeys/claim/" + chat.with.profileId, { method: "POST", body: "{}" })).prekey
   });
-
   const data = await api("/api/messages", {
     method: "POST",
     body: JSON.stringify({ chatId: state.activeChatId, iv, ciphertext, hdr, replyTo: state.replyTo, selfDestructSeconds })
   });
-  await E2E.rememberSent(data.message.id, text, selfDestructSeconds ? Date.now() + selfDestructSeconds * 1000 : 0);
-  data.message._plain = text; // evita di dover decifrare il proprio messaggio appena inviato
+  await E2E.rememberSent(data.message.id, plaintext, selfDestructSeconds ? Date.now() + selfDestructSeconds * 1000 : 0);
+  data.message._plain = plaintext; // evita di dover decifrare il proprio messaggio appena inviato
   await appendMessage(data.message, true, chat);
-  input.value = "";
   state.replyTo = null;
   $("#reply-preview").classList.add("hidden");
   await loadChats(false);
+  return true;
+}
+$("#message-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const input = $("#message-input");
+  const text = input.value.trim();
+  if (!text) return;
+  if (await sendText(text, $("#destruct-select").value)) input.value = "";
 });
+
+// ---------- VISUALIZZAZIONE SINGOLA ----------
+function onBurn(d) {
+  const row = document.querySelector('.msg-row[data-id="' + d.messageId + '"]');
+  if (!row) return;
+  if (row.classList.contains("me")) { const b = row.querySelector(".bubble"); b.textContent = I18N.t("onceSeen"); }
+  setTimeout(() => row.remove(), Math.max(0, d.at - Date.now()));
+}
+function renderOnce(row, m, mine, plainText) {
+  const bubble = row.querySelector(".bubble");
+  const body = plainText.slice(ONCE.length);
+  if (mine) { bubble.textContent = I18N.t("onceSent"); return; }
+  const btn = document.createElement("button");
+  btn.className = "once-btn"; btn.textContent = I18N.t("onceTap");
+  btn.addEventListener("click", async () => {
+    bubble.textContent = body;
+    try { await api("/api/messages/" + m.id + "/burn", { method: "POST", body: JSON.stringify({ seconds: 10 }) }); } catch {}
+    E2E.cacheDelete(m.id); m._plain = undefined;
+    let left = 10;
+    const tm = setInterval(() => { left--; if (left <= 0) { clearInterval(tm); bubble.textContent = I18N.t("onceGone"); setTimeout(() => row.remove(), 1500); } }, 1000);
+  });
+  bubble.textContent = ""; bubble.appendChild(btn);
+}
 
 function escapeHtml(str) {
   const div = document.createElement("div");
@@ -578,3 +627,64 @@ $("#btn-verify-mark").addEventListener("click", async () => {
   await refreshPeerStatus(chat); renderKeyBanner(chat);
   $("#verify-modal").classList.add("hidden");
 });
+
+// ---------- LINK LEGALI (seguono la lingua dell'app) ----------
+function updateLegalLinks() {
+  const pre = I18N.current === "it" ? "" : "/" + I18N.current;
+  $("#terms-link").href = pre + "/terms.html";
+  $("#privacy-link").href = pre + "/privacy-policy.html";
+}
+updateLegalLinks();
+document.addEventListener("change", (e) => { if (e.target && e.target.id === "lang-select") setTimeout(updateLegalLinks, 0); });
+
+// ---------- ELIMINA ACCOUNT ----------
+$("#btn-delete-account").addEventListener("click", async () => {
+  const pw = prompt(I18N.t("deleteAccountConfirm"));
+  if (!pw) return;
+  try {
+    await api("/api/account/delete", { method: "POST", body: JSON.stringify({ password: pw }) });
+    ["e2e_keypair_", "vault_", "pc_", "peerfp_"].forEach((p) => {
+      for (let i = localStorage.length - 1; i >= 0; i--) { const k = localStorage.key(i); if (k && k.includes(p) && k.includes(state.me.publicId)) localStorage.removeItem(k); }
+    });
+    alert(I18N.t("accountDeleted"));
+    location.reload();
+  } catch (e) { $("#change-pw-status").textContent = e.message; }
+});
+
+// ---------- BLOCCA / SEGNALA ----------
+function currentChat() { return state.chats.find((c) => c.id === state.activeChatId); }
+function refreshBlockUI(chat) {
+  $("#btn-block-toggle").textContent = chat.blockedByMe ? I18N.t("btnUnblock") : I18N.t("btnBlock");
+  $("#message-form").classList.toggle("disabled", !!chat.blockedByMe);
+  $("#message-input").disabled = !!chat.blockedByMe;
+  $("#message-input").placeholder = chat.blockedByMe ? I18N.t("blockedNotice") : I18N.t("messagePlaceholder");
+}
+$("#btn-block").addEventListener("click", () => {
+  const chat = currentChat(); if (!chat) return;
+  $("#block-name").textContent = chat.with.username;
+  $("#block-status").textContent = "";
+  refreshBlockUI(chat);
+  $("#block-modal").classList.remove("hidden");
+});
+$("#btn-block-close").addEventListener("click", () => $("#block-modal").classList.add("hidden"));
+$("#btn-block-toggle").addEventListener("click", async () => {
+  const chat = currentChat(); if (!chat) return;
+  await api(`/api/contacts/${chat.with.profileId}/block`, { method: "POST", body: JSON.stringify({ blocked: !chat.blockedByMe }) });
+  chat.blockedByMe = !chat.blockedByMe;
+  refreshBlockUI(chat);
+});
+$("#btn-report").addEventListener("click", async () => {
+  const chat = currentChat(); if (!chat) return;
+  try {
+    await api("/api/report", { method: "POST", body: JSON.stringify({ profileId: chat.with.profileId, reason: $("#report-reason").value }) });
+    chat.blockedByMe = true; refreshBlockUI(chat);
+    $("#block-status").textContent = I18N.t("reportSent");
+  } catch (e) { $("#block-status").textContent = e.message; }
+});
+
+// ---------- SUITE E CHIAMATE ----------
+Suite.init({ sendInChat: (link) => { if (state.activeChatId) sendText(link, ""); else alert(I18N.t("noChatOpen")); } });
+Calls.init((msg) => { if (state.ws && state.ws.readyState === 1) state.ws.send(JSON.stringify(msg)); });
+$("#btn-call-audio").addEventListener("click", () => { const c = currentChat(); if (c) Calls.start(c, false); });
+$("#btn-call-video").addEventListener("click", () => { const c = currentChat(); if (c) Calls.start(c, true); });
+document.addEventListener("change", (e) => { if (e.target && e.target.id === "lang-select" && !$("#suite-modal").classList.contains("hidden")) setTimeout(() => Suite.render(), 0); });

@@ -101,6 +101,7 @@ const E2E = (() => {
       } catch { throw new Error("bad-password"); }
       S = { pid, key, data };
       await loadIdentity();
+      await ensureDataKey();
       purgeExpiredCache(pid);
       return { publicJwk: S.identity.publicJwk, created: false, migrated: false };
     }
@@ -118,6 +119,7 @@ const E2E = (() => {
     await persistVault();
     if (legacy) ls.del("e2e_keypair_" + pid); // la chiave in chiaro non deve restare nel dispositivo
     await loadIdentity();
+    await ensureDataKey();
     return { publicJwk: S.identity.publicJwk, created: !migrated, migrated };
   }
 
@@ -148,6 +150,57 @@ const E2E = (() => {
     ls.set(vaultKeyName(S.pid), JSON.stringify({ v: 2, salt: b64(salt), iter: PBKDF2_ITER, iv: "", ct: "" }));
     await persistVault();
     return true;
+  }
+
+
+  // ---------------- chiave dati (cassaforte file, note, password, backup) ----------------
+  // Una chiave AES-256 casuale, custodita DENTRO la cassaforte cifrata: cosi' un cambio
+  // password non obbliga a ricifrare tutti i file.
+  async function ensureDataKey() {
+    if (!S.data.dk) {
+      S.data.dk = b64(crypto.getRandomValues(new Uint8Array(32)));
+      await persistVault();
+    }
+    S.dk = await crypto.subtle.importKey("raw", unb64(S.data.dk), "AES-GCM", false, ["encrypt", "decrypt"]);
+  }
+  const needDk = () => { if (!S || !S.dk) throw new Error("locked"); return S.dk; };
+  const vaultSeal = (obj) => sealWith(needDk(), obj);
+  const vaultOpen = (str) => openWith(needDk(), str);
+  async function sealBytes(bytes) {
+    const iv = crypto.getRandomValues(new Uint8Array(12));
+    const ct = new Uint8Array(await crypto.subtle.encrypt({ name: "AES-GCM", iv }, needDk(), bytes));
+    const out = new Uint8Array(12 + ct.length); out.set(iv, 0); out.set(ct, 12);
+    return out;
+  }
+  async function openBytes(buf) {
+    const u = new Uint8Array(buf);
+    return new Uint8Array(await crypto.subtle.decrypt({ name: "AES-GCM", iv: u.slice(0, 12) }, needDk(), u.slice(12)));
+  }
+  // Backup: la chiave dati viene avvolta con una passphrase scelta dall'utente.
+  async function wrapDataKey(passphrase) {
+    const salt = crypto.getRandomValues(new Uint8Array(16));
+    const k = await deriveVaultKey(passphrase, salt, PBKDF2_ITER);
+    return { salt: b64(salt), iter: PBKDF2_ITER, w: await sealWith(k, { dk: S.data.dk }) };
+  }
+  async function unwrapDataKey(passphrase, wrap) {
+    const k = await deriveVaultKey(passphrase, unb64(wrap.salt), wrap.iter || PBKDF2_ITER);
+    const o = await openWith(k, wrap.w); // lancia se la passphrase e' errata
+    return crypto.subtle.importKey("raw", unb64(o.dk), "AES-GCM", false, ["encrypt", "decrypt"]);
+  }
+  const sealWithKey = (k, obj) => sealWith(k, obj);
+  const openWithKey = (k, str) => openWith(k, str);
+  async function openBytesWith(k, buf) {
+    const u = new Uint8Array(buf);
+    return new Uint8Array(await crypto.subtle.decrypt({ name: "AES-GCM", iv: u.slice(0, 12) }, k, u.slice(12)));
+  }
+  function cacheDelete(mid) { if (S) ls.del(cacheName(S.pid, mid)); }
+  // Cancellazione di emergenza: toglie dal dispositivo chiavi, cache e cassaforte file.
+  function wipeLocal(pid) {
+    for (let i = localStorage.length - 1; i >= 0; i--) {
+      const k = localStorage.key(i);
+      if (k && (k === "vault_" + pid || k.startsWith("pc_" + pid + "_") || k.startsWith("peerfp_" + pid + "_") || k.startsWith("sm_" + pid))) ls.del(k);
+    }
+    S = null;
   }
 
   const hasVault = (pid) => !!ls.get(vaultKeyName(pid));
@@ -312,6 +365,9 @@ const E2E = (() => {
   return {
     unlock, resetVault, rewrap, hasVault, isUnlocked, lock, myPublicJwk,
     ensurePrekeys, encryptMessage, decryptMessage, rememberSent,
-    safetyNumber, checkPeer, acceptPeer, markVerified
+    safetyNumber, checkPeer, acceptPeer, markVerified,
+    vaultSeal, vaultOpen, sealBytes, openBytes, wrapDataKey, unwrapDataKey,
+    sealWithKey, openWithKey, openBytesWith, cacheDelete, wipeLocal,
+    pid: () => (S ? S.pid : null)
   };
 })();
