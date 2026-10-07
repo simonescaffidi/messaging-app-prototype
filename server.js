@@ -18,9 +18,10 @@ const {
   verifyAuthenticationResponse
 } = require("@simplewebauthn/server");
 
+const syncMod = require("./sync");
 const app = express();
 app.set("trust proxy", 1); // dietro il proxy di Railway: req.ip e' l'IP reale del client
-app.use(express.json({ limit: "256kb" }));
+app.use(express.json({ limit: "256kb", verify: (req, _res, buf) => { if (req.url.startsWith("/api/stripe/")) req.rawBody = buf; } }));
 
 // Sito di presentazione (landing IT/EN) servito sulla root.
 app.use(express.static(path.join(__dirname, "site")));
@@ -786,6 +787,7 @@ app.post("/api/account/delete", requireAuth, async (req, res) => {
   db.profiles = db.profiles.filter((p) => p.id !== id);
   store.sessions.deleteByProfile(id, "");
   store.save(db);
+  syncApi.onAccountDelete(id).catch(() => {});
   res.json({ ok: true });
 });
 
@@ -1088,12 +1090,13 @@ app.post("/api/p2p/:id/answer", (req, res) => {
 
 // Server ICE per P2P e chiamate. STUN pubblico di default; un TURN proprio (TURN_URL,
 // TURN_USER, TURN_PASS) nasconde l'IP dei partecipanti e funziona anche dietro NAT rigidi.
-app.get("/api/ice", (req, res) => {
-  const servers = [{ urls: "stun:stun.l.google.com:19302" }];
-  if (process.env.TURN_URL) servers.push({ urls: process.env.TURN_URL.split(","), username: process.env.TURN_USER || "", credential: process.env.TURN_PASS || "" });
+app.get("/api/ice", async (req, res) => {
+  const { servers, turn } = await syncMod.iceServers();
   res.set("Cache-Control", "no-store");
-  res.json({ iceServers: servers, relayOnly: !!process.env.TURN_URL && process.env.TURN_RELAY_ONLY === "1" });
+  const relay = turn && (process.env.TURN_RELAY_ONLY === "1" || req.query.relay === "1");
+  res.json({ iceServers: servers, turn, relayOnly: !!relay });
 });
+const syncApi = syncMod.mount(app, { requireAuth, store, rate, baseUrl, express });
 
 // ---------- WEBSOCKET ----------
 

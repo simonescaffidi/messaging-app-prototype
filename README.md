@@ -50,3 +50,11 @@ Oltre alla chat, la webapp include (menu 🛡️): cassaforte file cifrata (AES-
 File principali: `public/tools.js` (suite), `public/p2pcore.js` + `public/p2p.html` (P2P), `public/calls.js` (chiamate), `public/i18n-suite.js` (11 lingue). Il server fa solo segnalazione (endpoint `/api/p2p*`, WebSocket `call-*`, `/api/ice`) e gestisce il TOTP (`/api/2fa/*`).
 
 Variabili opzionali: `TURN_URL`, `TURN_USER`, `TURN_PASS`, `TURN_RELAY_ONLY=1` per usare un server TURN proprio (nasconde l'IP e migliora la connessione). Tor: in roadmap (indirizzo .onion e modalita' Tor nelle app native).
+
+## Sincronizzazione cifrata, TURN e Tor (opzioni)
+
+Variabili d'ambiente su Railway (tutte facoltative):
+
+- **TURN gestito**: `CF_TURN_KEY_ID` + `CF_TURN_API_TOKEN` (Cloudflare Realtime) oppure `METERED_APP` + `METERED_API_KEY` (Metered). In alternativa un coturn proprio: `TURN_URL` + `TURN_SECRET` (vedi `deploy/`). `TURN_RELAY_ONLY=1` forza il relay per tutti.
+- **Sync a pagamento** (richiede PostgreSQL): `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET` (webhook su `/api/stripe/webhook`, eventi `checkout.session.completed`, `customer.subscription.updated`, `customer.subscription.deleted`), `SYNC_PRICES` (centesimi/mese per 5, 25, 100 GB; default `199,499,1499`).
+- **Tor**: file pronti in `deploy/` (docker compose con coturn e servizio onion).

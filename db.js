@@ -212,4 +212,5 @@ async function close() {
   if (pool) { await flush(); await pool.end(); }
 }
 
-module.exports = { init, load, save, flush, close, sessions, setProfileCodec };
+const query = (...a) => pool.query(...a);
+module.exports = { init, load, save, flush, close, sessions, setProfileCodec, query, hasPg: () => !!pool };
