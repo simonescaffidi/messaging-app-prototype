@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>交互式演示 — 私密消息</title>
-<meta name="description" content="立即体验私密消息：代码登录、隐藏聊天、掩护档案、限时消息和端到端加密。浏览器内模拟，无需账号。" />
+<title>交互式演示 — Securmy</title>
+<meta name="description" content="立即体验Securmy：代码登录、隐藏聊天、掩护档案、限时消息和端到端加密。浏览器内模拟，无需账号。" />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/demo.html" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/demo.html" />
 <link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/demo.html" />
@@ -19,10 +19,13 @@
 <link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/demo.html" />
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/demo.html" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="交互式演示 — 私密消息" />
-<meta property="og:description" content="立即体验私密消息：代码登录、隐藏聊天、掩护档案、限时消息和端到端加密。浏览器内模拟，无需账号。" />
+<meta property="og:title" content="交互式演示 — Securmy" />
+<meta property="og:description" content="立即体验Securmy：代码登录、隐藏聊天、掩护档案、限时消息和端到端加密。浏览器内模拟，无需账号。" />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/demo.html" />
-<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/icon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/icon-512.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/style.css" />
 </head>
@@ -30,7 +33,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/zh/" class="brand"><span class="lock">🔒</span> 私密通讯</a>
+    <a href="/zh/" class="brand"><img class="logo-mark" src="/icon.svg" width="28" height="28" alt="" /> Securmy</a>
     <div class="header-actions">
       <select class="lang-select" aria-label="语言" onchange="location.href=this.value"><option value="/demo.html">Italiano</option><option value="/en/demo.html">English</option><option value="/es/demo.html">Español</option><option value="/fr/demo.html">Français</option><option value="/de/demo.html">Deutsch</option><option value="/pt/demo.html">Português</option><option value="/ar/demo.html">العربية</option><option value="/zh/demo.html" selected>中文</option><option value="/hi/demo.html">हिन्दी</option><option value="/ru/demo.html">Русский</option><option value="/ja/demo.html">日本語</option></select>
       <a href="/zh/manual.html" class="btn btn-ghost btn-sm">手册</a>
@@ -54,12 +57,19 @@
         <li>在菜单中隐藏一个聊天，再在搜索框输入 <strong>7777</strong> 让它重新出现。</li>
         <li>锁定后用用户名 <strong>demo</strong> 和密码 <strong>2222</strong> 重新登录：只会看到伪装资料。</li>
       </ol>
+      <h2>然后试试保险库</h2>
+      <ol class="demo-try">
+        <li>登录后点击底部的<strong>保险库</strong>。</li>
+        <li>在<strong>文件</strong>中添加文件，查看偷走磁盘的人会看到什么：只有加密数据。</li>
+        <li>在<strong>发送</strong>中创建一次性 P2P 链接，看着文件不经服务器送达。</li>
+        <li>在<strong>阅后即焚</strong>中发送读后自毁的消息，再到<strong>安全</strong>中打开各项检查。</li>
+      </ol>
       <p><a href="/app/" class="btn btn-primary">打开应用</a></p>
     </div>
     <div id="phone" class="phone" aria-label="试用演示"></div>
   </div>
 </main>
-<script>window.__DEMO_I18N={"nav":"演示","cta":"试用演示","title":"交互式演示 — 私密消息","description":"立即体验私密消息：代码登录、隐藏聊天、掩护档案、限时消息和端到端加密。浏览器内模拟，无需账号。","h1":"试用演示","lead":"仅在您的浏览器中运行的交互式模拟：无需账号，不发送任何数据。要使用真正的应用，请点击“打开应用”。","notice":"模拟演示：消息只保存在您的设备上。AES-GCM 加密是真实的，但联系人和回复都是虚构的。","tryTitle":"可以试试这些","tryItems":["用用户名 \u003cstrong>demo\u003c/strong> 和密码 \u003cstrong>1111\u003c/strong>（个人资料）登录，或使用生物识别按钮。","打开聊天，发送一条 \u003cstrong>30 秒\u003c/strong>计时的消息：它会自动销毁。","开启“服务器视图”，查看加密消息的样子。","在菜单中隐藏一个聊天，再在搜索框输入 \u003cstrong>7777\u003c/strong> 让它重新出现。","锁定后用用户名 \u003cstrong>demo\u003c/strong> 和密码 \u003cstrong>2222\u003c/strong> 重新登录：只会看到伪装资料。"],"userLabel":"用户名","codeLabel":"密码","codePh":"例如 1111","enter":"进入","bio":"用指纹 / Face ID 解锁","bioScan":"正在验证生物识别…","wrongCode":"凭据无效。请使用 demo + 1111 或 2222。","searchPh":"搜索（或输入秘密组合）","hide":"隐藏聊天","unhide":"显示聊天","hiddenTag":"已隐藏","msgPh":"输入消息…","send":"发送","timers":["不计时","30 秒","5 分钟","1 小时"],"serverView":"服务器视图（已加密）","lockBtn":"锁定","e2eTag":"端到端加密","expiresIn":"{s} 秒后删除","secretFound":"已显示隐藏的聊天","chatsTitle":"聊天","back":"返回","empty":"没有聊天","n1":"安娜","m1":"明天下午6点见？","n2":"马可","m2":"今晚我把文件发给你。","n3":"卢卡","m3":"计划已确定，别告诉任何人。","nc":"妈妈","mc":"记得买面包！","replies":["好的，回头见！","收到 👍","好，谢谢。"]};</script>
+<script>window.__DEMO_I18N={"nav":"演示","cta":"试用演示","title":"交互式演示 — Securmy","description":"立即体验Securmy：代码登录、隐藏聊天、掩护档案、限时消息和端到端加密。浏览器内模拟，无需账号。","h1":"试用演示","lead":"仅在您的浏览器中运行的交互式模拟：无需账号，不发送任何数据。要使用真正的应用，请点击“打开应用”。","notice":"模拟演示：消息只保存在您的设备上。AES-GCM 加密是真实的，但联系人和回复都是虚构的。","tryTitle":"可以试试这些","tryItems":["用用户名 \u003cstrong>demo\u003c/strong> 和密码 \u003cstrong>1111\u003c/strong>（个人资料）登录，或使用生物识别按钮。","打开聊天，发送一条 \u003cstrong>30 秒\u003c/strong>计时的消息：它会自动销毁。","开启“服务器视图”，查看加密消息的样子。","在菜单中隐藏一个聊天，再在搜索框输入 \u003cstrong>7777\u003c/strong> 让它重新出现。","锁定后用用户名 \u003cstrong>demo\u003c/strong> 和密码 \u003cstrong>2222\u003c/strong> 重新登录：只会看到伪装资料。"],"userLabel":"用户名","codeLabel":"密码","codePh":"例如 1111","enter":"进入","bio":"用指纹 / Face ID 解锁","bioScan":"正在验证生物识别…","wrongCode":"凭据无效。请使用 demo + 1111 或 2222。","searchPh":"搜索（或输入秘密组合）","hide":"隐藏聊天","unhide":"显示聊天","hiddenTag":"已隐藏","msgPh":"输入消息…","send":"发送","timers":["不计时","30 秒","5 分钟","1 小时"],"serverView":"服务器视图（已加密）","lockBtn":"锁定","e2eTag":"端到端加密","expiresIn":"{s} 秒后删除","secretFound":"已显示隐藏的聊天","chatsTitle":"聊天","back":"返回","empty":"没有聊天","n1":"安娜","m1":"明天下午6点见？","n2":"马可","m2":"今晚我把文件发给你。","n3":"卢卡","m3":"计划已确定，别告诉任何人。","nc":"妈妈","mc":"记得买面包！","replies":["好的，回头见！","收到 👍","好，谢谢。"],"sNavChats":"聊天","sNavVault":"保险库","sTabFiles":"文件","sTabPw":"密码","sTabP2p":"发送","sTabOnce":"阅后即焚","sTabCall":"通话","sTabSec":"安全","sAddFile":"添加示例文件","sEnc":"已加密","sShowCipher":"显示磁盘看到的样子","sFilesEmpty":"暂无文件：请添加一个。","sStripped":"已移除元数据（GPS、相机）","sGen":"生成密码","sCopy":"复制","sCopied":"已复制：剪贴板 20 秒后清空","sStrength":"强度","sP2pCreate":"为“contract.pdf”创建链接","sP2pLink":"一次性链接，10 分钟后失效","sP2pWait":"等待收件人…","sP2pJoined":"收件人已连接","sP2pSending":"直连加密传输","sP2pDone":"已送达。链接已失效。","sP2pNote":"演示中连接为模拟；在真实应用中，文件直接在设备之间传输。","sOnceSend":"发送阅后即焚消息","sOnceTap":"点击查看（之后消失）","sOnceGone":"消息已销毁","sOnceText":"保险库密码是 4821","sOnceIn":"{s} 秒后销毁","sCallStart":"发起测试通话","sCallRinging":"呼叫中…","sCallConnected":"加密通话","sCallCode":"验证码","sCallHint":"两个验证码口头一致，就说明没人截获通话。","sCallEnd":"结束","sSecTitle":"安全检查","sSecLevel":"安全等级","sSec1":"保险库已解锁","sSec2":"强密码","sSec3":"两步验证","sSec4":"近期备份","sSec5":"联系人密钥已验证","sSecTap":"点击条目即可启用","suiteTryTitle":"然后试试保险库","suiteTry":["登录后点击底部的\u003cstrong>保险库\u003c/strong>。","在\u003cstrong>文件\u003c/strong>中添加文件，查看偷走磁盘的人会看到什么：只有加密数据。","在\u003cstrong>发送\u003c/strong>中创建一次性 P2P 链接，看着文件不经服务器送达。","在\u003cstrong>阅后即焚\u003c/strong>中发送读后自毁的消息，再到\u003cstrong>安全\u003c/strong>中打开各项检查。"]};</script>
 <script src="/demo.js"></script>
 
 <footer class="site-footer">

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>隐私政策 — 私密通讯</title>
-<meta name="description" content="私密通讯原型的隐私说明：处理哪些数据以及如何处理。" />
+<title>隐私政策 — Securmy</title>
+<meta name="description" content="Securmy原型的隐私说明：处理哪些数据以及如何处理。" />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/privacy-policy.html" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/privacy-policy.html" />
 <link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/privacy-policy.html" />
@@ -19,10 +19,13 @@
 <link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/privacy-policy.html" />
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/privacy-policy.html" />
 <meta property="og:type" content="article" />
-<meta property="og:title" content="隐私政策 — 私密通讯" />
-<meta property="og:description" content="私密通讯原型的隐私说明：处理哪些数据以及如何处理。" />
+<meta property="og:title" content="隐私政策 — Securmy" />
+<meta property="og:description" content="Securmy原型的隐私说明：处理哪些数据以及如何处理。" />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/privacy-policy.html" />
-<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/icon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/icon-512.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/style.css" />
 </head>
@@ -30,7 +33,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/zh/" class="brand"><span class="lock">🔒</span> 私密通讯</a>
+    <a href="/zh/" class="brand"><img class="logo-mark" src="/icon.svg" width="28" height="28" alt="" /> Securmy</a>
     <div class="header-actions">
       <select class="lang-select" aria-label="语言" onchange="location.href=this.value"><option value="/privacy-policy.html">Italiano</option><option value="/en/privacy-policy.html">English</option><option value="/es/privacy-policy.html">Español</option><option value="/fr/privacy-policy.html">Français</option><option value="/de/privacy-policy.html">Deutsch</option><option value="/pt/privacy-policy.html">Português</option><option value="/ar/privacy-policy.html">العربية</option><option value="/zh/privacy-policy.html" selected>中文</option><option value="/hi/privacy-policy.html">हिन्दी</option><option value="/ru/privacy-policy.html">Русский</option><option value="/ja/privacy-policy.html">日本語</option></select>
       <a href="/zh/manual.html" class="btn btn-ghost btn-sm">手册</a>
@@ -66,6 +69,11 @@
 
   <h2>你的权利</h2>
   <p>你可以随时通过上述联系方式提出删除你在原型中输入的数据的请求。</p>
+
+  <h2>Securmy 功能：保险库、点对点传输和通话</h2>
+  <p>保险库中的文件、笔记、密码和备份留在你的设备上，用永不离开设备的密钥加密：我们不会接收，也无法读取或恢复。</p>
+  <p>点对点传输和通话的内容在设备之间直接加密传输。服务器只处理连接信息（SDP 和 ICE 候选），最多在内存中保留一小时后删除；对方和公共 STUN 服务器可以看到你的 IP 地址。</p>
+  <p>如果启用两步验证，我们会保存加密存储的 TOTP 密钥；阅后即焚消息在打开几秒后从服务器删除。</p>
 </main>
 
 <footer class="site-footer">

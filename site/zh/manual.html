@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>用户手册 — 私密通讯</title>
+<title>用户手册 — Securmy</title>
 <meta name="description" content="完整指南：注册、用户名与密码登录、隐藏聊天、端到端加密、生物识别解锁和可用语言。" />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/manual.html" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
@@ -19,10 +19,13 @@
 <link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/manual.html" />
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
 <meta property="og:type" content="article" />
-<meta property="og:title" content="用户手册 — 私密通讯" />
+<meta property="og:title" content="用户手册 — Securmy" />
 <meta property="og:description" content="完整指南：注册、用户名与密码登录、隐藏聊天、端到端加密、生物识别解锁和可用语言。" />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/zh/manual.html" />
-<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/icon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/icon-512.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/style.css" />
 </head>
@@ -30,7 +33,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/zh/" class="brand"><span class="lock">🔒</span> 私密通讯</a>
+    <a href="/zh/" class="brand"><img class="logo-mark" src="/icon.svg" width="28" height="28" alt="" /> Securmy</a>
     <div class="header-actions">
       <select class="lang-select" aria-label="语言" onchange="location.href=this.value"><option value="/manuale.html">Italiano</option><option value="/en/manual.html">English</option><option value="/es/manual.html">Español</option><option value="/fr/manual.html">Français</option><option value="/de/manual.html">Deutsch</option><option value="/pt/manual.html">Português</option><option value="/ar/manual.html">العربية</option><option value="/zh/manual.html" selected>中文</option><option value="/hi/manual.html">हिन्दी</option><option value="/ru/manual.html">Русский</option><option value="/ja/manual.html">日本語</option></select>
       <a href="/zh/manual.html" class="btn btn-ghost btn-sm">手册</a>
@@ -42,7 +45,7 @@
 
 <main>
   <h1>用户手册</h1>
-  <p class="lead">私密通讯完整指南：如何注册、登录、使用隐私功能，并了解这个原型真正保护什么、不保护什么。</p>
+  <p class="lead">Securmy完整指南：如何注册、登录、使用隐私功能，并了解这个原型真正保护什么、不保护什么。</p>
 
   <nav class="toc" aria-label="目录">
     <strong>目录</strong>
@@ -59,6 +62,7 @@
       <li><a href="#mobile">原生移动应用（iOS/Android）</a></li>
       <li><a href="#limits">已声明的安全限制</a></li>
       <li><a href="#troubleshooting">故障排除</a></li>
+      <li><a href="#suite">Securmy 保险库与工具</a></li>
     </ol>
   </nav>
 
@@ -157,6 +161,34 @@
     <p>需要设备已设置 Face ID、Touch ID、指纹或 Windows Hello，浏览器为最新版本，并使用 HTTPS 连接（正式环境的网页应用已使用）。此外，还必须至少在设置中启用过一次。</p>
     <h3>“消息已无法读取”</h3>
     <p>出于安全，每条消息的密钥在你读过后立即删除：文字只保留在此设备的加密缓存中。若更换设备、清除浏览器数据或通过邮件重置密码，之前的消息将无法恢复。这是前向保密的代价。</p>
+  </section>
+
+  <section id="suite">
+    <h2>13. Securmy 保险库与工具</h2>
+    <p>点击侧边栏的 🛡️ 按钮打开保险库。其中的一切都在你的设备上用 AES-256-GCM 加密，密钥存放在你的保险库并由密码保护：服务器永远收不到文件、笔记或密码。</p>
+    <h3>文件保险库</h3>
+    <p>在“文件”标签页添加文件（每个最大 100 MB）。勾选时，照片会在保存前清除元数据。每个文件都可以下载、通过 P2P 发送或删除。</p>
+    <h3>链接点对点传输</h3>
+    <p>选择文件和有效期（10 分钟或 1 小时），得到一次性链接。文件直接发送给收件人，用只存在于链接 # 之后的密钥加密，永远不会到达服务器。传输完成前请保持页面打开。</p>
+    <h3>清理照片</h3>
+    <p>重新绘制图像，丢弃 EXIF、GPS 位置和缩略图。支持 JPEG、PNG 和 WebP；其他格式无法自动清理。</p>
+    <h3>笔记和密码</h3>
+    <p>笔记和账号信息始终以加密形式保存在保险库中。生成器会创建随机密码；复制密码后，剪贴板将在 20 秒后清空。</p>
+    <h3>阅后即焚消息</h3>
+    <p>在消息输入框旁选择“阅后即焚”。收件人点击查看：文本保持可见 10 秒，随后在其设备和服务器上销毁。这无法阻止读者拍摄屏幕。</p>
+    <h3>语音和视频通话</h3>
+    <p>使用聊天标题栏中的 📞 和 🎥 按钮。音频和视频在设备之间直接加密传输。双方会看到 4 位验证码：请口头核对，一致说明通话未被截获。</p>
+    <h3>两步验证</h3>
+    <p>在“安全”中，你可以通过验证器应用（Google Authenticator、Aegis、1Password 等）启用 TOTP 验证码。启用后，用密码登录还需输入 6 位验证码。生物识别解锁仍是独立的登录方式。</p>
+    <h3>备份与紧急清除</h3>
+    <p>备份包含用你自选的至少 10 个字符的口令加密的文件、笔记和密码：没有口令就无法恢复。消息不包含在内。紧急清除会从设备上移除密钥、消息缓存、文件、笔记和密码，且无法撤销。</p>
+    <h3>需要了解的限制</h3>
+    <ul>
+      <li>保险库是本地的：文件、笔记和密码不会在设备间同步；请用备份来迁移。</li>
+      <li>在点对点传输和通话中，对方（以及公共 STUN 服务器）可以看到你的 IP 地址，除非服务使用 TURN 服务器；在限制严格的网络中连接可能失败。</li>
+      <li>密码管理器功能基础：不会自动填写表单，也不能替代专业场景下的专用管理器。</li>
+      <li>如果丢失密码和备份口令，加密数据将无法恢复：任何人，包括我们，都无法打开。</li>
+    </ul>
   </section>
 </main>
 
