@@ -104,12 +104,18 @@
     <h2>7. End-to-end encryption: how it actually works</h2>
     <p>This isn't a marketing slogan: every message is encrypted <strong>in your browser</strong>, before it's sent to the server, using this scheme:</p>
     <ol>
-      <li>On first login, your device generates an ECDH key pair on curve P-256 (one public, one private). The public key is uploaded to the server; the private key stays only in your browser.</li>
-      <li>When you message a contact, your browser combines your private key with their public key (an ECDH exchange) and derives, via HKDF-SHA256, a 256-bit AES-GCM symmetric key specific to that pair of people.</li>
-      <li>Each message is encrypted with that key and a different random number (an IV) every time, then sent to the server already encrypted.</li>
-      <li>The server only stores and transmits ciphertext: it cannot read the content of your messages.</li>
+      <li>On first sign-in your device generates an ECDH key pair (P-256 curve): the public key goes to the server, the private key stays on the device, encrypted with your password. It also prepares a batch of one-time public keys ("prekeys").</li>
+      <li>For every message, your browser generates a temporary key and fetches ONE one-time prekey of your contact from the server. It combines three ECDH exchanges (your identity, the temporary key, the prekey) and derives with HKDF-SHA256 a 256-bit AES-GCM key valid for that message only.</li>
+      <li>The message is encrypted with that key and a random IV; the header is authenticated, so it can't be tampered with. The server only receives ciphertext.</li>
+      <li>The recipient rebuilds the same key, reads the message and immediately deletes the private prekey: from then on the message can't be decrypted by anyone, not even with your long-term keys.</li>
     </ol>
     <p>This is the same type of math (ECDH + AES-GCM) used by many modern secure protocols, applied here through the browser's native Web Crypto API, with no external libraries.</p>
+    <h3>Forward secrecy: past messages stay safe</h3>
+    <p>Even if someone obtained your long-term keys (for example by stealing your device), they couldn't decrypt messages you have already received, because their keys were deleted. Text you have already read stays only in your device's encrypted local cache.</p>
+    <h3>The key vault</h3>
+    <p>Private keys, prekeys and the message cache are stored in the browser only in encrypted form (AES-GCM), using a key derived from your password with PBKDF2-SHA256 (310,000 iterations). If you sign in with biometrics, you are asked for your password once to open the vault. When you change your password, the vault is re-encrypted.</p>
+    <h3>Check it's really them: safety number</h3>
+    <p>In a chat tap the 🔑 icon: you see a 60-digit number, identical for both of you. Compare it with your contact in person or by voice: if it matches, nobody is interfering. If a contact's key changes (new device or possible interception), a warning appears and sending stays blocked until you choose "Accept new key".</p>
   </section>
 
   <section id="biometric">
@@ -131,12 +137,13 @@
 
   <section id="limits">
     <h2>11. Stated security limits</h2>
-    <p>In the interest of honesty, here's what this prototype does <strong>not</strong> do yet, even though the encryption itself is real:</p>
+    <p>For honesty, here are the limits that remain, even though the encryption is real and not just claimed:</p>
     <ul>
-      <li><strong>No ratchet / forward secrecy</strong>: a chat's key stays the same until both people regenerate their keys (unlike protocols such as Signal, which rotate keys with every message).</li>
-      <li><strong>No out-of-band verification of public keys</strong>: there's no "safety number" to compare out loud with a contact. In theory, a malicious server could swap in its own public key (a man-in-the-middle attack). Fine on a trusted server for a prototype; this verification should be added before any high-risk use.</li>
-      <li><strong>Private key lives in the browser</strong>: it's stored in the browser's local storage, not in a hardware secure enclave. Anyone with physical or software access to your unlocked device could read it.</li>
-      <li><strong>Recovery by email only</strong>: if you lose both the password and access to the verified email, the profile cannot be recovered. If you use several profiles (for example a cover one), use different emails: a recovery link reveals to whoever controls the email that the profile exists.</li>
+      <li><strong>Prekeys running out</strong>: if a contact stays offline for long and runs out of one-time keys, the message still uses a new key but without one-time deletion, so forward secrecy is weaker.</li>
+      <li><strong>Messages tied to this device</strong>: by design, decrypted history doesn't move. On a new device or after an email password recovery the previous vault can't be recovered: you start with a new identity and contacts see the key-change warning.</li>
+      <li><strong>The vault is only as strong as the password</strong>: choose a long, unique one. Anyone with your already unlocked device and the app open can read chats, as with any app.</li>
+      <li><strong>Metadata visible to the server</strong>: sender, time, reactions and expiry of timed messages are not encrypted.</li>
+      <li><strong>Email-only recovery</strong>: if you lose both the password and access to the verified email, the profile can't be recovered. If you use several profiles (e.g. a cover one), use different emails: a recovery link reveals to whoever controls the email that the profile exists.</li>
     </ul>
   </section>
 
@@ -148,6 +155,8 @@
     <p>Use "Forgot password?" on the login screen and enter your email and username: if the profile's email is verified you receive a link valid for 1 hour. If the email was not verified the profile cannot be recovered and must be created again. Always keep your password in a password manager.</p>
     <h3>Biometric unlock doesn't show up</h3>
     <p>It requires a device with Face ID, Touch ID, a fingerprint sensor, or Windows Hello set up, an up-to-date browser, and an HTTPS connection (the production webapp already uses one). It also needs to have been enabled at least once from settings.</p>
+    <h3>"Message no longer readable"</h3>
+    <p>For safety each message's key is deleted as soon as you've read it: the text remains only in this device's encrypted cache. If you change device, clear browser data or reset your password via email, earlier messages can't be recovered. That's the price of forward secrecy.</p>
   </section>
 </main>
 

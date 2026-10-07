@@ -107,6 +107,45 @@
     </div>
   </section>
 
+  <section class="features security" id="security">
+    <div class="container">
+      <h2>Security and privacy: the heart of the app</h2>
+      <p class="sec-lead">We don't just say "it's encrypted". Here is, concretely, what protects your conversations.</p>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="icon">🔄</div>
+          <h3>A new key for every message</h3>
+          <p>Each message has a one-time key (forward secrecy), deleted after reading. If someone ever got hold of your keys, they still couldn't decrypt past messages.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🗝️</div>
+          <h3>Vault encrypted with your password</h3>
+          <p>Private keys and read messages are encrypted on the device (PBKDF2 + AES-GCM) with your password: without it they stay unreadable.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🔍</div>
+          <h3>Key verification and anti-interception alert</h3>
+          <p>Compare the safety number with your contact by voice. If their key changes, the app warns you and blocks sending until you confirm.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🙈</div>
+          <h3>A blind server</h3>
+          <p>The server stores only ciphertext. Email and username are encrypted at rest in the database; passwords are kept only as a hash (scrypt).</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🛡️</div>
+          <h3>Defence against login attacks</h3>
+          <p>Attempts limited per IP address and per username, revocable sessions, other sessions closed when you change your password.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🫆</div>
+          <h3>Biometrics that never leave your device</h3>
+          <p>With WebAuthn/FIDO2 the server only receives the passkey's public key: biometric data never leaves your phone or computer.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <section class="how" id="how-it-works">
     <div class="container">
       <h2>How it works</h2>
@@ -135,7 +174,7 @@
     <div class="container">
       <h2>What it is, what it isn't</h2>
       <div class="disclaimer-box">
-        <p><strong>This is a functional prototype</strong>, not a finished product. Messages are end-to-end encrypted (ECDH P-256 + 256-bit AES-GCM, HKDF-SHA256 key derivation): the server never sees the plaintext. Biometric unlock uses real WebAuthn/FIDO2. Some known limits remain, spelled out plainly in the <a href="/en/manual.html">user manual</a>: there's no Signal-style ratchet with forward secrecy yet, no out-of-band verification of public keys (so in theory a malicious server could swap one), the private key stays in the browser without a hardware secure enclave, and password recovery by email only works with a verified email address. Good for trying the experience with real security that isn't yet "nation-state proof" — not yet for extremely high-risk conversations.</p>
+        <p><strong>This is a working prototype</strong>, not a finished product, but the security is real: every message has a new key deleted after reading (forward secrecy), private keys sit in a vault encrypted with your password, you can verify your contact's identity with a safety number and you get a warning if their key changes. Biometric unlock uses real WebAuthn/FIDO2. Known limits remain, explained plainly in the <a href="/en/manual.html">user manual</a> (metadata visible to the server, history tied to the device, email-only recovery). It is not yet meant for extremely high-risk conversations.</p>
       </div>
     </div>
   </section>
