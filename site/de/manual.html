@@ -104,12 +104,18 @@
     <h2>7. Ende-zu-Ende-Verschlüsselung: wie sie wirklich funktioniert</h2>
     <p>Das ist kein Marketing-Slogan: Jede Nachricht wird <strong>in deinem Browser</strong> verschlüsselt, bevor sie an den Server geht, nach diesem Schema:</p>
     <ol>
-      <li>Bei der ersten Anmeldung erzeugt dein Gerät ein ECDH-Schlüsselpaar auf der Kurve P-256 (einen öffentlichen und einen privaten Schlüssel). Der öffentliche Schlüssel wird auf den Server geladen; der private bleibt nur in deinem Browser.</li>
-      <li>Wenn du einem Kontakt schreibst, kombiniert dein Browser deinen privaten Schlüssel mit dessen öffentlichem Schlüssel (ECDH-Austausch) und leitet per HKDF-SHA256 einen symmetrischen 256-Bit-AES-GCM-Schlüssel ab, der speziell für dieses Personenpaar gilt.</li>
-      <li>Jede Nachricht wird mit diesem Schlüssel und jedes Mal einer anderen Zufallszahl (IV) verschlüsselt und dann bereits verschlüsselt an den Server gesendet.</li>
-      <li>Der Server speichert und überträgt nur Geheimtext: Er kann den Inhalt deiner Nachrichten nicht lesen.</li>
+      <li>Bei der ersten Anmeldung erzeugt dein Gerät ein ECDH-Schlüsselpaar (Kurve P-256): der öffentliche Schlüssel geht an den Server, der private bleibt auf dem Gerät, mit deinem Passwort verschlüsselt. Außerdem bereitet es einen Vorrat öffentlicher Einmalschlüssel („Prekeys“) vor.</li>
+      <li>Für jede Nachricht erzeugt dein Browser einen temporären Schlüssel und holt EINEN Einmal-Prekey des Kontakts vom Server. Er kombiniert drei ECDH-Austausche (deine Identität, den temporären Schlüssel, den Prekey) und leitet mit HKDF-SHA256 einen 256-Bit-AES-GCM-Schlüssel ab, der nur für diese Nachricht gilt.</li>
+      <li>Die Nachricht wird mit diesem Schlüssel und einem zufälligen IV verschlüsselt; der Header ist authentifiziert und kann nicht verändert werden. Der Server erhält nur Chiffretext.</li>
+      <li>Der Empfänger rekonstruiert denselben Schlüssel, liest die Nachricht und löscht sofort den privaten Prekey: ab dann kann niemand sie mehr entschlüsseln, auch nicht mit deinen Langzeitschlüsseln.</li>
     </ol>
     <p>Das ist dieselbe Art von Mathematik (ECDH + AES-GCM), die viele moderne sichere Protokolle nutzen – hier über die native Web Crypto API des Browsers angewendet, ohne externe Bibliotheken.</p>
+    <h3>Forward Secrecy: vergangene Nachrichten bleiben sicher</h3>
+    <p>Selbst wenn jemand deine Langzeitschlüssel erlangt (z. B. durch Diebstahl des Geräts), kann er bereits empfangene Nachrichten nicht entschlüsseln, denn deren Schlüssel wurden gelöscht. Bereits gelesener Text bleibt nur im verschlüsselten lokalen Cache deines Geräts.</p>
+    <h3>Der Schlüsseltresor</h3>
+    <p>Private Schlüssel, Prekeys und der Nachrichten-Cache werden im Browser nur verschlüsselt (AES-GCM) gespeichert, mit einem aus deinem Passwort per PBKDF2-SHA256 (310.000 Iterationen) abgeleiteten Schlüssel. Meldest du dich per Biometrie an, wirst du einmal nach dem Passwort gefragt, um den Tresor zu öffnen. Bei einer Passwortänderung wird der Tresor neu verschlüsselt.</p>
+    <h3>Prüfen, ob er es wirklich ist: Sicherheitsnummer</h3>
+    <p>Tippe im Chat auf das 🔑-Symbol: du siehst eine 60-stellige Nummer, für beide gleich. Vergleiche sie mit deinem Kontakt persönlich oder mündlich: Stimmt sie überein, mischt sich niemand ein. Ändert sich der Schlüssel eines Kontakts (neues Gerät oder mögliches Abhören), erscheint eine Warnung und das Senden bleibt gesperrt, bis du „Neuen Schlüssel akzeptieren“ wählst.</p>
   </section>
 
   <section id="biometric">
@@ -131,12 +137,13 @@
 
   <section id="limits">
     <h2>11. Erklärte Sicherheitsgrenzen</h2>
-    <p>Aus Ehrlichkeit: Das kann dieser Prototyp <strong>noch nicht</strong>, auch wenn die Verschlüsselung echt ist:</p>
+    <p>Der Ehrlichkeit halber die Grenzen, die bleiben – obwohl die Verschlüsselung echt und nicht nur behauptet ist:</p>
     <ul>
-      <li><strong>Kein Ratchet / keine Forward Secrecy</strong>: Der Schlüssel eines Chats bleibt gleich, bis beide Personen ihre Schlüssel neu erzeugen (anders als bei Protokollen wie Signal, die den Schlüssel mit jeder Nachricht wechseln).</li>
-      <li><strong>Keine Out-of-Band-Prüfung der öffentlichen Schlüssel</strong>: Es gibt keine „Sicherheitsnummer“, die du mündlich mit dem Kontakt vergleichen könntest. Theoretisch könnte ein böswilliger Server einen öffentlichen Schlüssel durch seinen eigenen ersetzen (Man-in-the-Middle-Angriff). Für einen Prototyp auf einem vertrauenswürdigen Server in Ordnung; vor einem Einsatz mit hohem Risiko sollte diese Prüfung ergänzt werden.</li>
-      <li><strong>Privater Schlüssel im Browser</strong>: Er liegt im lokalen Speicher des Browsers (localStorage), nicht in einer Hardware-Secure-Enclave. Wer physischen oder softwareseitigen Zugriff auf das entsperrte Gerät hat, könnte ihn lesen.</li>
-      <li><strong>Wiederherstellung nur per E-Mail</strong>: Verlierst du Passwort und Zugriff auf die bestätigte E-Mail, ist das Profil nicht wiederherstellbar. Nutzt du mehrere Profile (z. B. ein Tarnprofil), verwende verschiedene E-Mails: Ein Wiederherstellungslink verrät dem, der die E-Mail kontrolliert, dass das Profil existiert.</li>
+      <li><strong>Prekeys aufgebraucht</strong>: Ist ein Kontakt lange offline und hat keine Einmalschlüssel mehr, nutzt die Nachricht trotzdem einen neuen Schlüssel, aber ohne Einmal-Löschung – die Forward Secrecy ist dann schwächer.</li>
+      <li><strong>Nachrichten an dieses Gerät gebunden</strong>: Der entschlüsselte Verlauf wandert bewusst nicht mit. Auf einem neuen Gerät oder nach einer Passwort-Wiederherstellung per E-Mail ist der frühere Tresor nicht wiederherstellbar: du startest mit neuer Identität, deine Kontakte sehen die Warnung zum Schlüsselwechsel.</li>
+      <li><strong>Der Tresor ist so stark wie das Passwort</strong>: Wähle ein langes, einzigartiges. Wer dein bereits entsperrtes Gerät mit geöffneter App hat, kann die Chats lesen – wie bei jeder App.</li>
+      <li><strong>Metadaten für den Server sichtbar</strong>: Absender, Zeit, Reaktionen und Ablauf zeitlich begrenzter Nachrichten sind nicht verschlüsselt.</li>
+      <li><strong>Wiederherstellung nur per E-Mail</strong>: Verlierst du Passwort und Zugang zur bestätigten E-Mail, ist das Profil nicht wiederherstellbar. Nutzt du mehrere Profile (z. B. ein Tarnprofil), verwende verschiedene E-Mails: Ein Wiederherstellungslink verrät dem E-Mail-Inhaber, dass das Profil existiert.</li>
     </ul>
   </section>
 
@@ -148,6 +155,8 @@
     <p>Nutze „Passwort vergessen?“ auf dem Anmeldebildschirm und gib E-Mail und Benutzernamen ein: Ist die E-Mail des Profils bestätigt, erhältst du einen 1 Stunde gültigen Link. Sonst ist das Profil nicht wiederherstellbar und muss neu angelegt werden. Bewahre das Passwort immer in einem Passwortmanager auf.</p>
     <h3>Die biometrische Entsperrung erscheint nicht</h3>
     <p>Sie erfordert ein Gerät mit eingerichtetem Face ID, Touch ID, Fingerabdruck oder Windows Hello, einen aktuellen Browser und eine HTTPS-Verbindung (die Web-App in Produktion nutzt bereits eine). Außerdem muss sie mindestens einmal in den Einstellungen aktiviert worden sein.</p>
+    <h3>„Nachricht nicht mehr lesbar“</h3>
+    <p>Aus Sicherheitsgründen wird der Schlüssel jeder Nachricht gelöscht, sobald du sie gelesen hast: der Text bleibt nur im verschlüsselten Cache dieses Geräts. Wechselst du das Gerät, löschst Browserdaten oder setzt das Passwort per E-Mail zurück, sind frühere Nachrichten nicht wiederherstellbar. Das ist der Preis der Forward Secrecy.</p>
   </section>
 </main>
 

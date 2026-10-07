@@ -107,6 +107,45 @@
     </div>
   </section>
 
+  <section class="features security" id="security">
+    <div class="container">
+      <h2>Sicherheit und Privatsphäre: das Herz der App</h2>
+      <p class="sec-lead">Wir sagen nicht nur „verschlüsselt“. Hier steht konkret, was deine Unterhaltungen schützt.</p>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="icon">🔄</div>
+          <h3>Für jede Nachricht ein neuer Schlüssel</h3>
+          <p>Jede Nachricht hat einen Einmalschlüssel (Forward Secrecy), der nach dem Lesen gelöscht wird. Selbst wenn jemand deine Schlüssel erlangt, kann er frühere Nachrichten nicht entschlüsseln.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🗝️</div>
+          <h3>Tresor, mit deinem Passwort verschlüsselt</h3>
+          <p>Private Schlüssel und gelesene Nachrichten werden auf dem Gerät (PBKDF2 + AES-GCM) mit deinem Passwort verschlüsselt: ohne es bleiben sie unlesbar.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🔍</div>
+          <h3>Schlüsselprüfung und Abhör-Warnung</h3>
+          <p>Vergleiche die Sicherheitsnummer mündlich mit deinem Kontakt. Ändert sich sein Schlüssel, warnt dich die App und blockiert das Senden, bis du bestätigst.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🙈</div>
+          <h3>Ein blinder Server</h3>
+          <p>Der Server speichert nur Chiffretext. E-Mail und Benutzername sind in der Datenbank verschlüsselt; Passwörter liegen nur als Hash (scrypt) vor.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🛡️</div>
+          <h3>Schutz vor Login-Angriffen</h3>
+          <p>Versuche pro IP-Adresse und Benutzername begrenzt, widerrufbare Sitzungen, andere Sitzungen enden bei Passwortänderung.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🫆</div>
+          <h3>Biometrie, die dein Gerät nie verlässt</h3>
+          <p>Mit WebAuthn/FIDO2 erhält der Server nur den öffentlichen Schlüssel der Passkey: biometrische Daten verlassen nie dein Handy oder deinen Computer.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <section class="how" id="how-it-works">
     <div class="container">
       <h2>So funktioniert es</h2>
@@ -135,7 +174,7 @@
     <div class="container">
       <h2>Was es ist, was nicht</h2>
       <div class="disclaimer-box">
-        <p><strong>Dies ist ein funktionaler Prototyp</strong>, kein fertiges Produkt. Nachrichten sind Ende-zu-Ende-verschlüsselt (ECDH P-256 + 256-Bit-AES-GCM, Schlüsselableitung per HKDF-SHA256): Der Server sieht nie den Klartext. Die biometrische Entsperrung nutzt echtes WebAuthn/FIDO2. Bekannte Einschränkungen bleiben und werden im <a href="/de/manual.html">Benutzerhandbuch</a> offen benannt: Es gibt noch keinen Ratchet mit Forward Secrecy „wie bei Signal“, keine Out-of-Band-Prüfung der öffentlichen Schlüssel (ein böswilliger Server könnte sie theoretisch austauschen), der private Schlüssel bleibt im Browser ohne Hardware-Secure-Enclave, und die Passwort-Wiederherstellung per E-Mail funktioniert nur mit bestätigter E-Mail-Adresse. Geeignet, um das Nutzungserlebnis mit echter, aber nicht „staatssicherer“ Sicherheit auszuprobieren – noch nicht für Gespräche mit sehr hohem Risiko.</p>
+        <p><strong>Dies ist ein funktionsfähiger Prototyp</strong>, kein fertiges Produkt, aber die Sicherheit ist echt: jede Nachricht hat einen neuen Schlüssel, der nach dem Lesen gelöscht wird (Forward Secrecy), private Schlüssel liegen in einem mit deinem Passwort verschlüsselten Tresor, du kannst die Identität des Kontakts per Sicherheitsnummer prüfen und wirst gewarnt, wenn sich sein Schlüssel ändert. Die biometrische Entsperrung nutzt echtes WebAuthn/FIDO2. Bekannte Grenzen bleiben, offen erklärt im <a href="/de/manual.html">Benutzerhandbuch</a> (Metadaten für den Server sichtbar, Verlauf ans Gerät gebunden, Wiederherstellung nur per E-Mail). Für Gespräche mit extrem hohem Risiko ist er noch nicht gedacht.</p>
       </div>
     </div>
   </section>
