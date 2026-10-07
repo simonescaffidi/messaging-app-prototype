@@ -1,4 +1,4 @@
-# App nativa iOS / Android — Messaggistica Privata
+# App nativa iOS / Android — Securmy
 
 Questa cartella contiene lo scaffold **Expo/React Native** per pubblicare
 l'app come app nativa su App Store e Google Play, oltre alla versione web

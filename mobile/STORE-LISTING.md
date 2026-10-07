@@ -31,3 +31,14 @@ Metadati visibili al server, storico legato al dispositivo, recupero solo via em
 - Dati raccolti: email (cifrata, per verifica/recupero), username (cifrato), messaggi (solo cifrati), identificativi di sessione.
 - Nessun tracciamento, nessuna pubblicita', nessuna vendita di dati a terzi.
 - Dati cifrati in transito (HTTPS/WSS) e a riposo; possibilita' di richiedere la cancellazione.
+
+## Securmy — messaggistica privata e cassaforte cifrata (testi aggiornati)
+Sottotitolo: "Messaggi, file e password al sicuro"
+- Cassaforte file e note cifrate nel dispositivo (AES-256), sblocco con biometria.
+- Invio file peer-to-peer via link monouso, senza passare dal server.
+- Pulizia dei metadati delle foto (GPS, fotocamera).
+- Gestore di password con generatore; appunti svuotati dopo 20 secondi.
+- Messaggi a visualizzazione singola e a tempo; chiamate audio e video cifrate.
+- Verifica in due passaggi (TOTP), backup cifrato, cancellazione di emergenza.
+- Sicurezza, privacy e riservatezza: nessun numero di telefono, nessun tracciamento.
+Nota store: le chiamate usano microfono/fotocamera (descrizioni permessi richieste); l'IP puo' essere visibile all'altro partecipante senza TURN.

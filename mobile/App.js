@@ -5,7 +5,7 @@ import * as LocalAuthentication from "expo-local-authentication";
 import { WebView } from "react-native-webview";
 import { APP_URL } from "./config";
 
-// Wrapper nativo iOS/Android per la webapp "Messaggistica Privata".
+// Wrapper nativo iOS/Android per la webapp "Securmy".
 // La webapp e' gia' completa (login a codice, E2E, WebAuthn, i18n in 11
 // lingue): questo involucro nativo aggiunge solo
 //  1) un blocco biometrico di sistema all'apertura dell'app (facoltativo,
@@ -34,7 +34,7 @@ export default function App() {
         return;
       }
       const result = await LocalAuthentication.authenticateAsync({
-        promptMessage: "Sblocca Messaggistica Privata",
+        promptMessage: "Sblocca Securmy",
         disableDeviceFallback: false,
         cancelLabel: "Annulla"
       });
@@ -70,7 +70,7 @@ export default function App() {
     return (
       <SafeAreaView style={styles.center}>
         <StatusBar style="light" />
-        <Text style={styles.title}>🔒 Messaggistica Privata</Text>
+        <Text style={styles.title}>🔒 Securmy</Text>
         {authError ? <Text style={styles.error}>{authError}</Text> : null}
         <TouchableOpacity style={styles.button} onPress={tryUnlock}>
           <Text style={styles.buttonText}>Sblocca</Text>

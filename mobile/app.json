@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Messaggistica Privata",
-    "slug": "messaggistica-privata",
+    "name": "Securmy",
+    "slug": "securmy",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -14,13 +14,14 @@
       "supportsTablet": true,
       "bundleIdentifier": "it.simonescaffidi.messaggistica",
       "infoPlist": {
-        "NSFaceIDUsageDescription": "Usa Face ID per sbloccare rapidamente i tuoi profili di Messaggistica Privata."
+        "NSFaceIDUsageDescription": "Usa Face ID per sbloccare rapidamente i tuoi profili di Securmy."
       }
     },
     "android": {
       "package": "it.simonescaffidi.messaggistica",
       "permissions": ["USE_BIOMETRIC", "USE_FINGERPRINT"],
       "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#0f1115"
       }
     },
