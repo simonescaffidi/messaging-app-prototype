@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Private Messaging — Chat with multiple profiles and hidden chats</title>
-<meta name="description" content="Private chat with real end-to-end encryption, biometric unlock, multiple profiles and hidden chats. 11 languages, no phone number." />
+<title>Securmy — Private messaging, file vault and encrypted P2P transfer</title>
+<meta name="description" content="Chat with real end-to-end encryption, file vault, encrypted passwords and notes, P2P link transfer, encrypted calls and two-step verification. 11 languages." />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
 <link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/" />
@@ -19,10 +19,13 @@
 <link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/" />
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Private Messaging — Prototype" />
-<meta property="og:description" content="End-to-end encryption, biometric unlock, multiple profiles, hidden chats and a cover profile in 11 languages." />
+<meta property="og:title" content="Securmy — Security, privacy and confidentiality" />
+<meta property="og:description" content="Messages, files, passwords and calls protected by end-to-end encryption: everything encrypted on your device, in 11 languages." />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/en/" />
-<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/icon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/icon-512.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/style.css" />
 </head>
@@ -30,7 +33,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/en/" class="brand"><span class="lock">🔒</span> Private Messaging</a>
+    <a href="/en/" class="brand"><img class="logo-mark" src="/icon.svg" width="28" height="28" alt="" /> Securmy</a>
     <div class="header-actions">
       <select class="lang-select" aria-label="Language" onchange="location.href=this.value"><option value="/">Italiano</option><option value="/en/" selected>English</option><option value="/es/">Español</option><option value="/fr/">Français</option><option value="/de/">Deutsch</option><option value="/pt/">Português</option><option value="/ar/">العربية</option><option value="/zh/">中文</option><option value="/hi/">हिन्दी</option><option value="/ru/">Русский</option><option value="/ja/">日本語</option></select>
       <a href="/en/manual.html" class="btn btn-ghost btn-sm">Manual</a>
@@ -107,6 +110,66 @@
     </div>
   </section>
 
+  <section class="features suite" id="suite">
+    <div class="container">
+      <h2>More than a chat: your digital vault</h2>
+      <p class="sec-lead">Securmy goes beyond messaging. Everything you save or share is encrypted on your device, using the same vault that protects your chats.</p>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="icon">🗄️</div>
+          <h3>File vault</h3>
+          <p>Hide and protect documents, photos and files: encrypted on your device with AES-256 and opened only by your password or biometrics.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🔗</div>
+          <h3>P2P transfer by link</h3>
+          <p>The file goes straight from one device to the other, encrypted, never stored on the server. One-time link with an expiry.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🧼</div>
+          <h3>Metadata cleaning</h3>
+          <p>Removes GPS location, camera model and other hidden data from photos before you share them.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🔑</div>
+          <h3>Password manager</h3>
+          <p>Store credentials in the vault, generate strong passwords and copy them: the clipboard is cleared after 20 seconds.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">📝</div>
+          <h3>Encrypted notes</h3>
+          <p>Private notes encrypted on your device, never sent to any server.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">👁️</div>
+          <h3>View-once messages</h3>
+          <p>The recipient opens them once: after a few seconds they are deleted from the server and from their device.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">📞</div>
+          <h3>Encrypted voice and video calls</h3>
+          <p>Directly between the two devices (DTLS-SRTP), with a verification code to compare out loud against eavesdropping.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🔢</div>
+          <h3>Two-step verification</h3>
+          <p>TOTP codes with any authenticator app: even someone who discovers your password cannot get in.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">💾</div>
+          <h3>Encrypted backup</h3>
+          <p>Export files, notes and passwords into a single archive encrypted with a passphrase only you know.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🚨</div>
+          <h3>Security check and emergency wipe</h3>
+          <p>A score tells you what to improve; in danger, one tap erases keys, files and passwords from the device.</p>
+        </article>
+      </div>
+      <p class="sec-lead"><a href="/en/demo.html" class="btn btn-ghost">Try the demo</a></p>
+    </div>
+  </section>
+
   <section class="features security" id="security">
     <div class="container">
       <h2>Security and privacy: the heart of the app</h2>
@@ -166,6 +229,30 @@
           <h3>Hide what you want</h3>
           <p>Type the secret combination into the search bar to reveal hidden chats when you need them.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features roadmap" id="roadmap">
+    <div class="container">
+      <h2>Coming soon</h2>
+      <p class="sec-lead">What we are planning. It is not available yet and should not be taken as a promised date.</p>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="icon">🧅</div>
+          <h3>Tor network</h3>
+          <p>A .onion address for the service and a Tor mode in the native apps, to hide your network location too. A plain browser cannot route traffic over Tor: you need Tor Browser or the native app.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">📱</div>
+          <h3>iOS and Android apps</h3>
+          <p>Native apps with biometric unlock, published in the stores with the same security and privacy guarantees as the website.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🛰️</div>
+          <h3>Private TURN server</h3>
+          <p>To hide your IP address during calls and P2P transfers and make them work even behind very restrictive networks.</p>
+        </article>
       </div>
     </div>
   </section>

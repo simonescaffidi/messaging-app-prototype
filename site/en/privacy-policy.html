@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Privacy Policy — Private Messaging</title>
-<meta name="description" content="Privacy notice for the Private Messaging prototype: what data is processed and how." />
+<title>Privacy Policy — Securmy</title>
+<meta name="description" content="Privacy notice for the Securmy prototype: what data is processed and how." />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/privacy-policy.html" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/privacy-policy.html" />
 <link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/privacy-policy.html" />
@@ -19,10 +19,13 @@
 <link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/privacy-policy.html" />
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/privacy-policy.html" />
 <meta property="og:type" content="article" />
-<meta property="og:title" content="Privacy Policy — Private Messaging" />
-<meta property="og:description" content="Privacy notice for the Private Messaging prototype: what data is processed and how." />
+<meta property="og:title" content="Privacy Policy — Securmy" />
+<meta property="og:description" content="Privacy notice for the Securmy prototype: what data is processed and how." />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/en/privacy-policy.html" />
-<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/icon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/icon-512.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/style.css" />
 </head>
@@ -30,7 +33,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/en/" class="brand"><span class="lock">🔒</span> Private Messaging</a>
+    <a href="/en/" class="brand"><img class="logo-mark" src="/icon.svg" width="28" height="28" alt="" /> Securmy</a>
     <div class="header-actions">
       <select class="lang-select" aria-label="Language" onchange="location.href=this.value"><option value="/privacy-policy.html">Italiano</option><option value="/en/privacy-policy.html" selected>English</option><option value="/es/privacy-policy.html">Español</option><option value="/fr/privacy-policy.html">Français</option><option value="/de/privacy-policy.html">Deutsch</option><option value="/pt/privacy-policy.html">Português</option><option value="/ar/privacy-policy.html">العربية</option><option value="/zh/privacy-policy.html">中文</option><option value="/hi/privacy-policy.html">हिन्दी</option><option value="/ru/privacy-policy.html">Русский</option><option value="/ja/privacy-policy.html">日本語</option></select>
       <a href="/en/manual.html" class="btn btn-ghost btn-sm">Manual</a>
@@ -66,6 +69,11 @@
 
   <h2>Your rights</h2>
   <p>You can request deletion of the data entered in the prototype at any time by writing via the contact details above.</p>
+
+  <h2>Securmy features: vault, P2P transfers and calls</h2>
+  <p>Vault files, notes, passwords and backups stay on your device, encrypted with a key that never leaves it: we do not receive them and cannot read or recover them.</p>
+  <p>For P2P transfers and calls, the content travels directly between devices, encrypted. The server only handles connection information (SDP and ICE candidates), kept in memory for at most one hour and then deleted; the other participant and a public STUN server can see your IP address.</p>
+  <p>If you enable two-step verification we store the TOTP secret, encrypted at rest; view-once messages are deleted from the server a few seconds after being opened.</p>
 </main>
 
 <footer class="site-footer">

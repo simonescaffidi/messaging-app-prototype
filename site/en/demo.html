@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Interactive demo — Private Messaging</title>
-<meta name="description" content="Try Private Messaging now: code login, hidden chats, cover profile, timed messages and end-to-end encryption. Browser simulation, no account needed." />
+<title>Interactive demo — Securmy</title>
+<meta name="description" content="Try Securmy now: code login, hidden chats, cover profile, timed messages and end-to-end encryption. Browser simulation, no account needed." />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/demo.html" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/demo.html" />
 <link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/demo.html" />
@@ -19,10 +19,13 @@
 <link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/demo.html" />
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/demo.html" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Interactive demo — Private Messaging" />
-<meta property="og:description" content="Try Private Messaging now: code login, hidden chats, cover profile, timed messages and end-to-end encryption. Browser simulation, no account needed." />
+<meta property="og:title" content="Interactive demo — Securmy" />
+<meta property="og:description" content="Try Securmy now: code login, hidden chats, cover profile, timed messages and end-to-end encryption. Browser simulation, no account needed." />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/en/demo.html" />
-<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/icon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/icon-512.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/style.css" />
 </head>
@@ -30,7 +33,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/en/" class="brand"><span class="lock">🔒</span> Private Messaging</a>
+    <a href="/en/" class="brand"><img class="logo-mark" src="/icon.svg" width="28" height="28" alt="" /> Securmy</a>
     <div class="header-actions">
       <select class="lang-select" aria-label="Language" onchange="location.href=this.value"><option value="/demo.html">Italiano</option><option value="/en/demo.html" selected>English</option><option value="/es/demo.html">Español</option><option value="/fr/demo.html">Français</option><option value="/de/demo.html">Deutsch</option><option value="/pt/demo.html">Português</option><option value="/ar/demo.html">العربية</option><option value="/zh/demo.html">中文</option><option value="/hi/demo.html">हिन्दी</option><option value="/ru/demo.html">Русский</option><option value="/ja/demo.html">日本語</option></select>
       <a href="/en/manual.html" class="btn btn-ghost btn-sm">Manual</a>
@@ -54,12 +57,19 @@
         <li>Hide a chat from the menu, then type <strong>7777</strong> in search to bring it back.</li>
         <li>Lock and log back in with username <strong>demo</strong> and password <strong>2222</strong>: you will only see the cover profile.</li>
       </ol>
+      <h2>Then try the Vault</h2>
+      <ol class="demo-try">
+        <li>After logging in, tap <strong>Vault</strong> at the bottom.</li>
+        <li>In <strong>Files</strong> add a file and show how someone stealing the disk would see it: only encrypted data.</li>
+        <li>In <strong>Send</strong> create a one-time P2P link and watch the file arrive without touching the server.</li>
+        <li>In <strong>View once</strong> send a message that self-destructs after reading, then switch on the checks in <strong>Security</strong>.</li>
+      </ol>
       <p><a href="/app/" class="btn btn-primary">Open the app</a></p>
     </div>
     <div id="phone" class="phone" aria-label="Try the demo"></div>
   </div>
 </main>
-<script>window.__DEMO_I18N={"nav":"Demo","cta":"Try the demo","title":"Interactive demo — Private Messaging","description":"Try Private Messaging now: code login, hidden chats, cover profile, timed messages and end-to-end encryption. Browser simulation, no account needed.","h1":"Try the demo","lead":"An interactive simulation that runs only in your browser: no account, no data sent. For the real app use the “Open the app” button.","notice":"Simulated demo: messages stay on your device. AES-GCM encryption is real, but contacts and replies are fake.","tryTitle":"What to try","tryItems":["Log in with username \u003cstrong>demo\u003c/strong> and password \u003cstrong>1111\u003c/strong> (personal profile) or with the biometric button.","Open a chat and send a message with a \u003cstrong>30-second\u003c/strong> timer: it self-destructs.","Turn on “Server view” to see how an encrypted message looks.","Hide a chat from the menu, then type \u003cstrong>7777\u003c/strong> in search to bring it back.","Lock and log back in with username \u003cstrong>demo\u003c/strong> and password \u003cstrong>2222\u003c/strong>: you will only see the cover profile."],"userLabel":"Username","codeLabel":"Password","codePh":"e.g. 1111","enter":"Enter","bio":"Unlock with fingerprint / Face ID","bioScan":"Verifying biometrics…","wrongCode":"Invalid credentials. Use demo + 1111 or 2222.","searchPh":"Search (or secret combination)","hide":"Hide chat","unhide":"Show chat","hiddenTag":"hidden","msgPh":"Write a message…","send":"Send","timers":["No timer","30 seconds","5 minutes","1 hour"],"serverView":"Server view (encrypted)","lockBtn":"Lock","e2eTag":"End-to-end encrypted","expiresIn":"deletes in {s}s","secretFound":"Hidden chats shown","chatsTitle":"Chats","back":"Back","empty":"No chats","n1":"Anna","m1":"See you tomorrow at 6pm?","n2":"Marco","m2":"I'll send you the documents tonight.","n3":"Luca","m3":"The plan is confirmed, don't tell anyone.","nc":"Mom","mc":"Remember to buy bread!","replies":["Perfect, see you later!","Got it 👍","Okay, thanks."]};</script>
+<script>window.__DEMO_I18N={"nav":"Demo","cta":"Try the demo","title":"Interactive demo — Securmy","description":"Try Securmy now: code login, hidden chats, cover profile, timed messages and end-to-end encryption. Browser simulation, no account needed.","h1":"Try the demo","lead":"An interactive simulation that runs only in your browser: no account, no data sent. For the real app use the “Open the app” button.","notice":"Simulated demo: messages stay on your device. AES-GCM encryption is real, but contacts and replies are fake.","tryTitle":"What to try","tryItems":["Log in with username \u003cstrong>demo\u003c/strong> and password \u003cstrong>1111\u003c/strong> (personal profile) or with the biometric button.","Open a chat and send a message with a \u003cstrong>30-second\u003c/strong> timer: it self-destructs.","Turn on “Server view” to see how an encrypted message looks.","Hide a chat from the menu, then type \u003cstrong>7777\u003c/strong> in search to bring it back.","Lock and log back in with username \u003cstrong>demo\u003c/strong> and password \u003cstrong>2222\u003c/strong>: you will only see the cover profile."],"userLabel":"Username","codeLabel":"Password","codePh":"e.g. 1111","enter":"Enter","bio":"Unlock with fingerprint / Face ID","bioScan":"Verifying biometrics…","wrongCode":"Invalid credentials. Use demo + 1111 or 2222.","searchPh":"Search (or secret combination)","hide":"Hide chat","unhide":"Show chat","hiddenTag":"hidden","msgPh":"Write a message…","send":"Send","timers":["No timer","30 seconds","5 minutes","1 hour"],"serverView":"Server view (encrypted)","lockBtn":"Lock","e2eTag":"End-to-end encrypted","expiresIn":"deletes in {s}s","secretFound":"Hidden chats shown","chatsTitle":"Chats","back":"Back","empty":"No chats","n1":"Anna","m1":"See you tomorrow at 6pm?","n2":"Marco","m2":"I'll send you the documents tonight.","n3":"Luca","m3":"The plan is confirmed, don't tell anyone.","nc":"Mom","mc":"Remember to buy bread!","replies":["Perfect, see you later!","Got it 👍","Okay, thanks."],"sNavChats":"Chats","sNavVault":"Vault","sTabFiles":"Files","sTabPw":"Passwords","sTabP2p":"Send","sTabOnce":"View once","sTabCall":"Call","sTabSec":"Security","sAddFile":"Add a sample file","sEnc":"Encrypted","sShowCipher":"Show how the disk sees it","sFilesEmpty":"No files: add one.","sStripped":"Metadata removed (GPS, camera)","sGen":"Generate password","sCopy":"Copy","sCopied":"Copied: clipboard clears in 20 s","sStrength":"Strength","sP2pCreate":"Create link for “contract.pdf”","sP2pLink":"One-time link, expires in 10 minutes","sP2pWait":"Waiting for the recipient…","sP2pJoined":"Recipient connected","sP2pSending":"Direct, encrypted transfer","sP2pDone":"Delivered. The link no longer works.","sP2pNote":"In the demo the connection is simulated; in the real app the file travels directly between devices.","sOnceSend":"Send a view-once message","sOnceTap":"Tap to view (then it vanishes)","sOnceGone":"Message destroyed","sOnceText":"The vault code is 4821","sOnceIn":"destroyed in {s}s","sCallStart":"Start a test call","sCallRinging":"Calling…","sCallConnected":"Encrypted call","sCallCode":"Verification code","sCallHint":"If the two codes match out loud, nobody is intercepting the call.","sCallEnd":"End","sSecTitle":"Security check","sSecLevel":"Security level","sSec1":"Vault unlocked","sSec2":"Strong password","sSec3":"Two-step verification","sSec4":"Recent backup","sSec5":"Contact keys verified","sSecTap":"Tap an item to enable it","suiteTryTitle":"Then try the Vault","suiteTry":["After logging in, tap \u003cstrong>Vault\u003c/strong> at the bottom.","In \u003cstrong>Files\u003c/strong> add a file and show how someone stealing the disk would see it: only encrypted data.","In \u003cstrong>Send\u003c/strong> create a one-time P2P link and watch the file arrive without touching the server.","In \u003cstrong>View once\u003c/strong> send a message that self-destructs after reading, then switch on the checks in \u003cstrong>Security\u003c/strong>."]};</script>
 <script src="/demo.js"></script>
 
 <footer class="site-footer">

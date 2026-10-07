@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>User manual — Private Messaging</title>
+<title>User manual — Securmy</title>
 <meta name="description" content="Complete guide: sign-up, username and password login, hidden chats, end-to-end encryption, biometric unlock and available languages." />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/manual.html" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
@@ -19,10 +19,13 @@
 <link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/manual.html" />
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
 <meta property="og:type" content="article" />
-<meta property="og:title" content="User manual — Private Messaging" />
+<meta property="og:title" content="User manual — Securmy" />
 <meta property="og:description" content="Complete guide: sign-up, username and password login, hidden chats, end-to-end encryption, biometric unlock and available languages." />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/en/manual.html" />
-<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/icon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/icon-512.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/style.css" />
 </head>
@@ -30,7 +33,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/en/" class="brand"><span class="lock">🔒</span> Private Messaging</a>
+    <a href="/en/" class="brand"><img class="logo-mark" src="/icon.svg" width="28" height="28" alt="" /> Securmy</a>
     <div class="header-actions">
       <select class="lang-select" aria-label="Language" onchange="location.href=this.value"><option value="/manuale.html">Italiano</option><option value="/en/manual.html" selected>English</option><option value="/es/manual.html">Español</option><option value="/fr/manual.html">Français</option><option value="/de/manual.html">Deutsch</option><option value="/pt/manual.html">Português</option><option value="/ar/manual.html">العربية</option><option value="/zh/manual.html">中文</option><option value="/hi/manual.html">हिन्दी</option><option value="/ru/manual.html">Русский</option><option value="/ja/manual.html">日本語</option></select>
       <a href="/en/manual.html" class="btn btn-ghost btn-sm">Manual</a>
@@ -42,7 +45,7 @@
 
 <main>
   <h1>User manual</h1>
-  <p class="lead">A complete guide to Private Messaging: how to sign up, log in, use the privacy features, and understand what this prototype really protects — and what it doesn't.</p>
+  <p class="lead">A complete guide to Securmy: how to sign up, log in, use the privacy features, and understand what this prototype really protects — and what it doesn't.</p>
 
   <nav class="toc" aria-label="Contents">
     <strong>Contents</strong>
@@ -59,6 +62,7 @@
       <li><a href="#mobile">Native mobile apps (iOS/Android)</a></li>
       <li><a href="#limits">Stated security limits</a></li>
       <li><a href="#troubleshooting">Troubleshooting</a></li>
+      <li><a href="#suite">Securmy vault and tools</a></li>
     </ol>
   </nav>
 
@@ -157,6 +161,34 @@
     <p>It requires a device with Face ID, Touch ID, a fingerprint sensor, or Windows Hello set up, an up-to-date browser, and an HTTPS connection (the production webapp already uses one). It also needs to have been enabled at least once from settings.</p>
     <h3>"Message no longer readable"</h3>
     <p>For safety each message's key is deleted as soon as you've read it: the text remains only in this device's encrypted cache. If you change device, clear browser data or reset your password via email, earlier messages can't be recovered. That's the price of forward secrecy.</p>
+  </section>
+
+  <section id="suite">
+    <h2>13. Securmy vault and tools</h2>
+    <p>Open the Vault from the 🛡️ button in the sidebar. Everything inside is encrypted on your device with AES-256-GCM, using a key kept in your vault and protected by your password: the server never receives files, notes or passwords.</p>
+    <h3>File vault</h3>
+    <p>Add files (up to 100 MB each) from the Files tab. If the box is ticked, photos are stripped of metadata before being saved. You can download, send via P2P or delete each file.</p>
+    <h3>P2P transfer by link</h3>
+    <p>Pick a file and an expiry time (10 minutes or 1 hour): you get a one-time link. The file travels straight to the recipient, encrypted with a key that sits only after the # in the link and never reaches the server. Keep the page open until the transfer finishes.</p>
+    <h3>Clean photos</h3>
+    <p>Redraws the image, discarding EXIF, GPS location and thumbnails. Works with JPEG, PNG and WebP; for other formats automatic cleaning is not available.</p>
+    <h3>Notes and passwords</h3>
+    <p>Notes and credentials stay encrypted in the vault. The generator creates random passwords; when you copy a password, the clipboard is cleared after 20 seconds.</p>
+    <h3>View-once messages</h3>
+    <p>Choose “View once” next to the message field. The recipient taps to see: the text stays visible for 10 seconds, then is destroyed on their device and on the server. It cannot stop a reader from photographing the screen.</p>
+    <h3>Voice and video calls</h3>
+    <p>Use the 📞 and 🎥 buttons in the chat header. Audio and video travel directly between the devices, encrypted. Both sides see a 4-digit code: compare it out loud; if it matches, the call has not been intercepted.</p>
+    <h3>Two-step verification</h3>
+    <p>In Security you can enable TOTP codes with an authenticator app (Google Authenticator, Aegis, 1Password…). Once enabled, signing in with your password also requires the 6-digit code. Biometric unlock remains a separate sign-in method.</p>
+    <h3>Backup and emergency wipe</h3>
+    <p>The backup holds files, notes and passwords encrypted with a passphrase of at least 10 characters that you choose: without it, it cannot be recovered. Messages are not included. The emergency wipe removes keys, message cache, files, notes and passwords from the device and cannot be undone.</p>
+    <h3>Limits to know</h3>
+    <ul>
+      <li>The vault is local: files, notes and passwords do not sync between devices; use the backup to move them.</li>
+      <li>In P2P transfers and calls the other person (and a public STUN server) can see your IP address, unless the service uses a TURN server; on very restrictive networks the connection may fail.</li>
+      <li>The password manager is basic: it does not fill in forms by itself and does not replace a dedicated manager for professional use.</li>
+      <li>If you lose your password and the backup passphrase, the encrypted data cannot be recovered: nobody, not even us, can open it.</li>
+    </ul>
   </section>
 </main>
 
