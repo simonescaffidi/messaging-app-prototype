@@ -51,16 +51,16 @@
   <p>Este sitio no utiliza herramientas de analítica ni de seguimiento de terceros. Solo se guardan las preferencias de cookies que elijas (consulta la Política de cookies), de forma local en tu navegador.</p>
 
   <h2>Datos recogidos por el prototipo (/app)</h2>
-  <p>Para usar el prototipo de mensajería creas un perfil con correo, usuario y contraseña. En el servidor se guardan: correo, usuario, hash de la contraseña, ID público, combinación de chats ocultos, contactos añadidos, tu clave pública de cifrado y los mensajes enviados.</p>
+  <p>Para usar el prototipo de mensajería creas un perfil con correo, usuario y contraseña. En el servidor (base de datos PostgreSQL) se guardan: correo (cifrado), usuario, hash de la contraseña, ID público, combinación de chats ocultos, contactos añadidos, tu clave pública de cifrado, las sesiones activas y los mensajes enviados.</p>
   <p><strong>Mensajes:</strong> el contenido se cifra de extremo a extremo en el navegador antes de enviarse; el servidor conserva solo texto cifrado y no puede leerlo. Los metadatos (remitente, hora, reacciones, caducidad de los mensajes temporales) permanecen sin cifrar.</p>
   <p><strong>Desbloqueo biométrico:</strong> si lo activas, en el servidor solo se guarda la clave pública de la passkey (WebAuthn). Los datos biométricos nunca salen de tu dispositivo. Tu clave privada de cifrado permanece en el navegador (localStorage).</p>
-  <p><strong>Importante:</strong> es un prototipo de demostración: el correo y el usuario se guardan sin cifrar y el servicio no cumple los estándares de un producto en producción. Las contraseñas no se guardan en claro (solo un hash scrypt con sal) y los intentos fallidos de acceso se limitan por dirección IP y por usuario. No introduzcas información sensible real: usa datos de prueba.</p>
+  <p><strong>Importante:</strong> es un prototipo de demostración y el servicio no cumple los estándares de un producto en producción. El correo se cifra en reposo (AES-256-GCM) y se usa solo para verificación y recuperación de contraseña; el usuario queda en claro porque el acceso lo necesita. Las contraseñas no se guardan en claro (solo un hash scrypt con sal) y los intentos fallidos se limitan por dirección IP y por usuario. No introduzcas información sensible real: usa datos de prueba.</p>
 
   <h2>Finalidad del tratamiento</h2>
   <p>Los datos sirven exclusivamente para que funcione la demo (autenticación, mensajería, contactos). No se ceden a terceros ni se usan para perfilado publicitario.</p>
 
   <h2>Conservación</h2>
-  <p>Los datos del prototipo pueden eliminarse en cualquier momento con motivo de actualizaciones o reinicios de la demo, sin previo aviso.</p>
+  <p>Los datos se conservan en una base de datos persistente hasta que borres el perfil; durante actualizaciones o reinicios de la demo pueden borrarse sin previo aviso.</p>
 
   <h2>Tus derechos</h2>
   <p>Puedes solicitar en cualquier momento la eliminación de los datos introducidos en el prototipo escribiendo a través de los contactos indicados arriba.</p>

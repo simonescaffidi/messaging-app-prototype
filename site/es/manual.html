@@ -71,7 +71,7 @@
       <li><strong>ID público</strong>: es lo que compartes con las personas a las que quieres añadir como contactos. No revela tu correo.</li>
       <li><strong>Combinación secreta</strong>: sirve para mostrar los chats ocultos (consulta la sección correspondiente).</li>
     </ul>
-    <p class="warn">Si pierdes la contraseña, pierdes el acceso al perfil: aún no existe recuperación real por correo (ver "Límites de seguridad declarados").</p>
+    <p class="warn">Si pierdes la contraseña puedes restablecerla por correo, pero solo si el correo del perfil está verificado. Sin contraseña y sin correo verificado el perfil no se puede recuperar.</p>
   </section>
 
   <section id="profiles">
@@ -136,7 +136,7 @@
       <li><strong>Sin ratchet / forward secrecy</strong>: la clave de un chat se mantiene igual hasta que ambas personas regeneran sus claves (a diferencia de protocolos como Signal, que cambian de clave con cada mensaje).</li>
       <li><strong>Sin verificación fuera de banda de las claves públicas</strong>: no hay un "número de seguridad" para comparar de viva voz con el contacto. En teoría, un servidor malicioso podría sustituir una clave pública por la suya (ataque de intermediario). En un servidor de confianza y para un prototipo es aceptable; antes de un uso de alto riesgo habría que añadir esta verificación.</li>
       <li><strong>Clave privada en el navegador</strong>: se guarda en el almacenamiento local del navegador (localStorage), no en un enclave seguro de hardware. Quien tenga acceso físico o de software al dispositivo desbloqueado podría leerla.</li>
-      <li><strong>Sin envío real de correos</strong>: el registro funciona, pero todavía no hay un servicio de correo conectado para una posible recuperación de cuenta mediante "magic link".</li>
+      <li><strong>Recuperación solo por correo</strong>: si pierdes la contraseña y el acceso al correo verificado, el perfil no se puede recuperar. Si usas varios perfiles (por ejemplo uno de cobertura), usa correos distintos: un enlace de recuperación revela a quien controla el correo que el perfil existe.</li>
     </ul>
   </section>
 
@@ -145,7 +145,7 @@
     <h3>"No puedo cifrar: el contacto aún no tiene clave pública"</h3>
     <p>Ocurre si tu contacto no ha iniciado sesión desde la última actualización de la app (la clave se genera y se sube automáticamente al iniciar sesión). Pídele que acceda una vez: después podrás escribirle con normalidad.</p>
     <h3>"He perdido la contraseña"</h3>
-    <p>Por ahora no hay recuperación automática: hay que registrar un perfil nuevo. Guarda siempre la contraseña en un gestor de contraseñas.</p>
+    <p>Usa «¿Olvidaste la contraseña?» en la pantalla de acceso e indica correo y usuario: si el correo del perfil está verificado recibes un enlace válido 1 hora. Si no estaba verificado, el perfil no es recuperable y hay que crearlo de nuevo. Guarda siempre la contraseña en un gestor de contraseñas.</p>
     <h3>No aparece el desbloqueo biométrico</h3>
     <p>Requiere un dispositivo con Face ID, Touch ID, huella o Windows Hello configurado, un navegador actualizado y una conexión HTTPS (la aplicación web en producción ya la usa). Además, debe haberse activado al menos una vez desde los ajustes.</p>
   </section>
