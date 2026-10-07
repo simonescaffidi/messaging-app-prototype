@@ -66,6 +66,10 @@
         <input id="reg-cover" type="checkbox" />
         <span data-i18n="regCoverLabel">Crea come profilo di copertura (innocuo)</span>
       </label>
+      <label class="checkbox-row">
+        <input id="reg-terms" type="checkbox" />
+        <span><span data-i18n="regTermsLabel">Ho letto e accetto:</span> <a id="terms-link" href="/terms.html" target="_blank" rel="noopener" data-i18n="termsLinkText">Termini di servizio</a> · <a id="privacy-link" href="/privacy-policy.html" target="_blank" rel="noopener" data-i18n="privacyLinkText">Privacy Policy</a></span>
+      </label>
       <button id="btn-register" class="primary" data-i18n="btnRegister">Crea profilo</button>
       <p id="register-error" class="error"></p>
     </div>
@@ -112,6 +116,7 @@
       <div class="chat-header">
         <strong id="chat-with-name"></strong>
         <div class="chat-header-actions">
+          <button id="btn-block" data-i18n-title="blockTitle" title="Blocca o segnala">🚫</button>
           <button id="btn-verify" data-i18n-title="verifyTitle" title="Verifica chiave">🔑</button>
           <button id="btn-toggle-hide" data-i18n-title="chatHideTitle" title="Nascondi/mostra questa chat">🙈</button>
         </div>
@@ -165,6 +170,26 @@
   </div>
 </div>
 
+<!-- MODALE BLOCCA / SEGNALA -->
+<div id="block-modal" class="modal hidden">
+  <div class="modal-card">
+    <h2 id="block-name"></h2>
+    <button id="btn-block-toggle" type="button"></button>
+    <label class="settings-divider" data-i18n="reportTitle">Segnala questo contatto</label>
+    <select id="report-reason">
+      <option value="spam" data-i18n="reportSpam">Spam</option>
+      <option value="abuse" data-i18n="reportAbuse">Molestie o abusi</option>
+      <option value="illegal" data-i18n="reportIllegal">Contenuti illegali</option>
+      <option value="other" data-i18n="reportOther">Altro</option>
+    </select>
+    <p id="block-status" class="hint"></p>
+    <div class="modal-actions">
+      <button id="btn-block-close" data-i18n="btnClose">Chiudi</button>
+      <button id="btn-report" class="primary" data-i18n="btnReport">Segnala e blocca</button>
+    </div>
+  </div>
+</div>
+
 <!-- MODALE AGGIUNGI CONTATTO -->
 <div id="add-contact-modal" class="modal hidden">
   <div class="modal-card">
@@ -201,6 +226,10 @@
     <input id="new-password" type="password" minlength="8" maxlength="128" autocomplete="new-password" data-i18n-placeholder="newPasswordLabel" placeholder="Nuova password" />
     <button id="btn-change-password" type="button" data-i18n="btnChangePassword">Cambia password</button>
     <p id="change-pw-status" class="hint"></p>
+
+    <label class="settings-divider" data-i18n="deleteAccountTitle">Elimina account</label>
+    <p class="hint" data-i18n="deleteAccountHint"></p>
+    <button id="btn-delete-account" type="button" class="danger" data-i18n="btnDeleteAccount">Elimina il mio account</button>
 
     <label class="settings-divider" data-i18n="biometricSectionLabel">Sblocco biometrico</label>
     <button id="btn-enable-biometric" type="button" data-i18n="btnEnableBiometric">Attiva sblocco con Face ID / impronta</button>
