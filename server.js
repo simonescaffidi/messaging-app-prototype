@@ -178,6 +178,29 @@ function mailAllowed(key, max) {
 }
 setInterval(() => { for (const k of mailHits.keys()) mailAllowed(k, Infinity); }, 10 * 60 * 1000).unref();
 
+
+// Username cifrato a riposo nel database (in memoria resta in chiaro per il login e la ricerca).
+function encryptField(str) {
+  const iv = crypto.randomBytes(12);
+  const c = crypto.createCipheriv("aes-256-gcm", DATA_KEY, iv);
+  const ct = Buffer.concat([c.update(String(str), "utf8"), c.final()]);
+  return { iv: iv.toString("base64"), ct: ct.toString("base64"), tag: c.getAuthTag().toString("base64") };
+}
+function decryptField(enc) { return decryptEmail(enc); }
+store.setProfileCodec({
+  encode(p) {
+    const o = Object.assign({}, p);
+    if (o.username !== undefined) { o.usernameEnc = encryptField(o.username); delete o.username; }
+    return o;
+  },
+  decode(o) {
+    const p = Object.assign({}, o);
+    if (p.usernameEnc) { try { p.username = decryptField(p.usernameEnc); } catch (e) { p.username = "?"; } delete p.usernameEnc; }
+    return p;
+  },
+  isEncoded(o) { return !!o.usernameEnc; }
+});
+
 // Migrazione: i profili creati con la vecchia versione avevano il codice in chiaro.
 // Li convertiamo in hash e rimuoviamo il testo in chiaro. I codici a 6 cifre
 // restano validi (e protetti dal limite di tentativi) ma vengono marcati "deboli".
@@ -502,7 +525,48 @@ app.get("/api/profile/:profileId/publickey", requireAuth, (req, res) => {
   res.json({ publicKey: profile.publicKey || null });
 });
 
+
+// ---------- PREKEY (forward secrecy) ----------
+// Ogni client carica un lotto di chiavi pubbliche monouso ("prekey"). Per ogni
+// messaggio il mittente ne preleva UNA (il server la elimina subito) e deriva una
+// chiave nuova con X3DH (3 scambi ECDH). Il destinatario, dopo aver decifrato,
+// cancella la corrispondente chiave privata: il messaggio non e' piu' decifrabile
+// nemmeno con le chiavi di lungo periodo.
+const PREKEY_MAX = 100;
+app.post("/api/prekeys", requireAuth, (req, res) => {
+  const keys = Array.isArray(req.body.keys) ? req.body.keys : [];
+  const db = store.load();
+  const p = db.profiles.find((x) => x.id === req.profileId);
+  p.prekeys = p.prekeys || [];
+  for (const k of keys) {
+    if (p.prekeys.length >= PREKEY_MAX) break;
+    if (!k || typeof k.id !== "string" || k.id.length > 64 || !k.pub || k.pub.kty !== "EC") continue;
+    if (p.prekeys.some((x) => x.id === k.id)) continue;
+    p.prekeys.push({ id: k.id, pub: { kty: k.pub.kty, crv: k.pub.crv, x: k.pub.x, y: k.pub.y } });
+  }
+  store.save(db);
+  res.json({ count: p.prekeys.length });
+});
+
+app.get("/api/prekeys/count", requireAuth, (req, res) => {
+  const p = store.load().profiles.find((x) => x.id === req.profileId);
+  res.json({ count: (p.prekeys || []).length });
+});
+
+app.post("/api/prekeys/claim/:profileId", requireAuth, (req, res) => {
+  if (!mailAllowed("claim:" + req.profileId, 600)) return res.status(429).json({ error: "troppe richieste" });
+  const db = store.load();
+  const shares = db.chats.some((c) => c.memberIds.includes(req.profileId) && c.memberIds.includes(req.params.profileId));
+  if (!shares) return res.status(403).json({ error: "non autorizzato" });
+  const target = db.profiles.find((x) => x.id === req.params.profileId);
+  if (!target) return res.status(404).json({ error: "profilo non trovato" });
+  const k = (target.prekeys || []).shift() || null; // monouso: rimossa alla consegna
+  if (k) store.save(db);
+  res.json({ prekey: k });
+});
+
 // ---------- CONTATTI ----------
+
 
 app.get("/api/contacts", requireAuth, (req, res) => {
   const db = store.load();
@@ -586,7 +650,7 @@ app.get("/api/chats", requireAuth, (req, res) => {
       id: c.id,
       with: { profileId: other.id, username: other.username, publicId: other.publicId, publicKey: other.publicKey || null },
       hidden: !!c.hiddenFor[req.profileId],
-      lastMessage: last ? { iv: last.iv, ciphertext: last.ciphertext, createdAt: last.createdAt } : null
+      lastMessage: last ? { id: last.id, senderProfileId: last.senderProfileId, iv: last.iv, ciphertext: last.ciphertext, hdr: last.hdr || null, createdAt: last.createdAt } : null
     };
   });
   res.json({ chats: result, comboUnlocked: !!comboUnlocked });
@@ -619,6 +683,7 @@ app.get("/api/chats/:chatId/messages", requireAuth, (req, res) => {
 
 app.post("/api/messages", requireAuth, (req, res) => {
   const { chatId, iv, ciphertext, replyTo, selfDestructSeconds } = req.body;
+  const hdr = typeof req.body.hdr === "string" && req.body.hdr.length <= 2000 ? req.body.hdr : null;
   const db = store.load();
   const chat = db.chats.find((c) => c.id === chatId && c.memberIds.includes(req.profileId));
   if (!chat) return res.status(404).json({ error: "chat non trovata" });
@@ -630,6 +695,7 @@ app.post("/api/messages", requireAuth, (req, res) => {
     senderProfileId: req.profileId,
     iv,
     ciphertext,
+    hdr, // intestazione E2E v2 (chiave effimera + id prekey), in chiaro: non contiene segreti
     replyTo: replyTo || null,
     reactions: {},
     createdAt: Date.now(),

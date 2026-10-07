@@ -21,17 +21,24 @@ Apri `http://localhost:3000` in due schede/browser diversi per simulare due uten
 - **Messaggi**: testo in tempo reale (WebSocket), risposte, reazioni, messaggi con autodistruzione a tempo.
 - **Chat nascoste**: nella chat apri il menu e premi "nascondi". La chat sparisce dalla lista. Digitando la combinazione segreta nella barra di ricerca, le chat nascoste tornano visibili (livello 2 di sicurezza).
 
-## Cosa NON c'è (di proposito, per restare un prototipo)
+## Sicurezza (punto di forza del progetto)
 
-- Nessuna crittografia E2E reale (niente X3DH/Double Ratchet/LibSignal) — i messaggi sono in chiaro sul server.
-- Nessun invio email reale per il magic link.
-- Nessuna biometria (Face ID / impronta) — è una feature nativa mobile, non simulabile in webapp.
-- Nessun multi-device, backup cifrato, chiamate.
-- I codici di accesso sono salvati in chiaro nello storage (`data.json`) — andrebbero hashati.
-- Storage su file JSON, non un database vero (ok per demo, non per produzione o scala).
+- **E2E con forward secrecy**: chiave nuova per ogni messaggio (X3DH semplificato con prekey monouso, ECDH P-256 + HKDF + AES-GCM); la prekey privata viene eliminata dopo la lettura.
+- **Cassaforte cifrata con la password** (PBKDF2-SHA256 310k + AES-GCM): identita' privata, prekey e cache dei messaggi letti non sono mai in chiaro nel dispositivo.
+- **Verifica chiavi**: numero di sicurezza a 60 cifre + avviso (e blocco invio) se la chiave di un contatto cambia.
+- **Server cieco**: solo testo cifrato; email e username cifrati a riposo (AES-256-GCM) in Postgres; password con hash scrypt; limiti di tentativi per IP e username.
+- **Biometria WebAuthn/FIDO2**: il server vede solo la chiave pubblica della passkey.
+
+## Limiti dichiarati
+
+- Metadati (mittente, orario, reazioni, scadenze) visibili al server.
+- Storico decifrato legato al dispositivo; dopo il recupero password via email la cassaforte precedente non e' recuperabile.
+- Se un contatto esaurisce le prekey, si usa la sua identita' al posto della prekey (forward secrecy piu' debole).
+- Recupero account solo via email verificata (serve `RESEND_API_KEY` su Railway).
+- Prototipo: non ancora pensato per conversazioni ad altissimo rischio.
 
 ## Prossimi passi ragionevoli
 
 1. Validare il concept con utenti reali su questo prototipo.
 2. Scrivere la v2 del documento (monetizzazione, funzioni premium).
-3. Se si procede sul serio: sostituire lo storage con Postgres, aggiungere hashing dei codici, valutare libreria Signal Protocol per la crittografia reale, e — se l'obiettivo è mobile — portare l'auth per-codice e le chat nascoste su Kotlin/Swift nativi, dove biometria e Secure Enclave/Keystore sono disponibili.
+3. Se si procede sul serio: audit di sicurezza esterno, eventuale libreria Signal Protocol (Double Ratchet) e — se l'obiettivo è mobile — portare l'auth per-codice e le chat nascoste su Kotlin/Swift nativi, dove biometria e Secure Enclave/Keystore sono disponibili.

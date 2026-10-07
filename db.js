@@ -29,6 +29,7 @@ const COLLECTIONS = {
 };
 
 let db = null;
+let profileCodec = null; // { encode, decode, isEncoded }: cifratura a riposo di alcuni campi del profilo
 let pool = null;
 const persisted = {}; // collection -> Map(key -> json string)
 let persistedChallenges = "";
@@ -48,6 +49,8 @@ function normalize(d) {
   }
   return d;
 }
+
+function setProfileCodec(c) { profileCodec = c; }
 
 // ---------- sessioni (persistenti) ----------
 const sessionMap = new Map(); // token -> { profileId, exp }
@@ -103,8 +106,15 @@ async function init() {
   for (const k of Object.keys(COLLECTIONS)) persisted[k] = new Map();
   for (const r of rows) {
     if (!COLLECTIONS[r.collection]) continue;
-    db[r.collection].push(r.data);
-    persisted[r.collection].set(r.key, JSON.stringify(r.data));
+    let item = r.data;
+    let stored = JSON.stringify(item); // confronto sul testo in chiaro
+    if (r.collection === "profiles" && profileCodec) {
+      const encoded = profileCodec.isEncoded(item);
+      item = profileCodec.decode(item);
+      stored = encoded ? JSON.stringify(item) : ""; // "" => riscrive cifrato al prossimo flush
+    }
+    db[r.collection].push(item);
+    persisted[r.collection].set(r.key, stored);
   }
   const ch = (await pool.query("SELECT data FROM kv WHERE key='webauthnChallenges'")).rows[0];
   if (ch) { db.webauthnChallenges = ch.data; persistedChallenges = JSON.stringify(ch.data); }
@@ -142,7 +152,10 @@ async function flushOnce() {
       const key = keyFn(item);
       seen.add(key);
       const json = JSON.stringify(item);
-      if (prev.get(key) !== json) upserts.push([coll, key, json]);
+      if (prev.get(key) !== json) {
+        const out = (coll === "profiles" && profileCodec) ? JSON.stringify(profileCodec.encode(item)) : json;
+        upserts.push([coll, key, out, json]);
+      }
     }
     for (const key of prev.keys()) if (!seen.has(key)) deletes.push([coll, key]);
   }
@@ -164,7 +177,7 @@ async function flushOnce() {
       );
     }
     await client.query("COMMIT");
-    for (const [c, k, j] of upserts) persisted[c].set(k, j);
+    for (const [c, k, , plain] of upserts) persisted[c].set(k, plain);
     for (const [c, k] of deletes) persisted[c].delete(k);
     persistedChallenges = chJson;
   } catch (e) {
@@ -198,4 +211,4 @@ async function close() {
   if (pool) { await flush(); await pool.end(); }
 }
 
-module.exports = { init, load, save, flush, close, sessions };
+module.exports = { init, load, save, flush, close, sessions, setProfileCodec };
