@@ -7,7 +7,7 @@
   var SECRET = "7777";
   var TIMERS = [0, 30, 300, 3600];
   var key = null;
-  var S = { profile: null, chats: [], open: null, showHidden: false, serverView: false, query: "", toast: "", scanning: false, err: "" };
+  var S = { view: "chats", vtab: "files", files: [], cipherOn: false, pw: "", p2p: { step: 0, pct: 0 }, once: { step: 0, left: 0 }, call: { step: 0, code: "" }, sec: [true, false, false, false, false], profile: null, chats: [], open: null, showHidden: false, serverView: false, query: "", toast: "", scanning: false, err: "" };
   var tick = null;
 
   function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
@@ -47,7 +47,7 @@
       startTick(); render();
     });
   }
-  function lock() { S.profile = null; S.open = null; S.showHidden = false; S.query = ""; S.toast = ""; stopTick(); render(); }
+  function lock() { S.view = "chats"; S.profile = null; S.open = null; S.showHidden = false; S.query = ""; S.toast = ""; stopTick(); render(); }
 
   function startTick() {
     stopTick();
@@ -116,7 +116,8 @@
       '<div class="ph-bar"><strong>' + esc(T.chatsTitle) + '</strong><button id="ph-lock" class="ph-icon" aria-label="' + esc(T.lockBtn) + '">🔒 ' + esc(T.lockBtn) + "</button></div>" +
       '<input id="ph-search" class="ph-search" type="search" placeholder="' + esc(T.searchPh) + '" value="' + esc(S.query) + '" autocomplete="off" />' +
       '<ul class="ph-list">' + (items || '<li class="ph-empty">' + esc(T.empty) + "</li>") + "</ul>" +
-      '<div class="ph-toast" role="status">' + esc(S.toast) + "</div>";
+      '<div class="ph-toast" role="status">' + esc(S.toast) + "</div>" + navHtml("chats");
+    bindNav();
     document.getElementById("ph-lock").onclick = lock;
     var s = document.getElementById("ph-search");
     s.oninput = function () {
@@ -173,8 +174,103 @@
     };
   }
 
+  // ---------- Cassaforte (demo simulata) ----------
+  var SAMPLES = [{ n: "vacanze.jpg", kb: 2480, img: true }, { n: "contratto.pdf", kb: 312 }, { n: "note.txt", kb: 4 }];
+  function navHtml(active) {
+    return '<nav class="ph-nav"><button data-nav="chats"' + (active === "chats" ? ' class="on"' : "") + ">💬 " + esc(T.sNavChats) + "</button>" +
+      '<button data-nav="vault"' + (active === "vault" ? ' class="on"' : "") + ">🛡️ " + esc(T.sNavVault) + "</button></nav>";
+  }
+  function bindNav() {
+    Array.prototype.forEach.call(root.querySelectorAll("[data-nav]"), function (b) {
+      b.onclick = function () { S.view = b.getAttribute("data-nav"); S.open = null; render(); };
+    });
+  }
+  function randHex(n) { var a = crypto.getRandomValues(new Uint8Array(n)), o = ""; for (var i = 0; i < a.length; i++) o += ("0" + a[i].toString(16)).slice(-2); return o; }
+  function genPw() {
+    var set = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789!@#$%^&*?", a = crypto.getRandomValues(new Uint32Array(18)), o = "";
+    for (var i = 0; i < a.length; i++) o += set.charAt(a[i] % set.length);
+    return o;
+  }
+  var VTABS = [["files", "sTabFiles"], ["pw", "sTabPw"], ["p2p", "sTabP2p"], ["once", "sTabOnce"], ["call", "sTabCall"], ["sec", "sTabSec"]];
+  function vaultBody() {
+    var h = "";
+    if (S.vtab === "files") {
+      h += '<button id="v-add" class="btn btn-primary btn-sm">+ ' + esc(T.sAddFile) + "</button>";
+      if (S.files.length) h += '<label class="ph-sv"><input type="checkbox" id="v-cipher"' + (S.cipherOn ? " checked" : "") + " /> " + esc(T.sShowCipher) + "</label>";
+      h += '<ul class="ph-vlist">' + (S.files.length ? S.files.map(function (f) {
+        return "<li><span>" + (f.img ? "🖼️" : "📄") + " " + esc(f.n) + " <small>(" + f.kb + " KB)</small>" + (f.img ? ' <em class="ph-tag">🧼 ' + esc(T.sStripped) + "</em>" : "") + "</span>" +
+          '<small class="ph-cipher">🔒 ' + esc(T.sEnc) + (S.cipherOn ? ": " + esc(f.c) : "") + "</small></li>";
+      }).join("") : '<li class="ph-empty">' + esc(T.sFilesEmpty) + "</li>") + "</ul>";
+    } else if (S.vtab === "pw") {
+      h += '<button id="v-gen" class="btn btn-primary btn-sm">🎲 ' + esc(T.sGen) + "</button>";
+      if (S.pw) h += '<div class="ph-pw"><code>' + esc(S.pw) + '</code><button id="v-copy" class="btn btn-ghost btn-sm">' + esc(T.sCopy) + "</button></div>" +
+        '<div class="ph-meter" aria-label="' + esc(T.sStrength) + '"><i style="width:96%"></i></div><small>' + esc(T.sStrength) + " 96%</small>";
+    } else if (S.vtab === "p2p") {
+      var st = S.p2p.step;
+      if (st === 0) h += '<button id="v-p2p" class="btn btn-primary btn-sm">🔗 ' + esc(T.sP2pCreate) + "</button>";
+      else {
+        h += '<div class="ph-link">securmy…/app/p2p.html#' + esc(S.p2p.id) + '.<span>••••••••</span></div><small>' + esc(T.sP2pLink) + "</small>";
+        h += "<p>" + esc(st === 1 ? T.sP2pWait : st === 2 ? T.sP2pJoined : st === 3 ? T.sP2pSending + " " + S.p2p.pct + "%" : T.sP2pDone) + "</p>";
+        if (st >= 2) h += '<div class="ph-meter"><i style="width:' + (st === 4 ? 100 : S.p2p.pct) + '%"></i></div>';
+        if (st === 4) h += '<button id="v-p2p" class="btn btn-ghost btn-sm">↻</button>';
+      }
+      h += '<p class="ph-note">' + esc(T.sP2pNote) + "</p>";
+    } else if (S.vtab === "once") {
+      var o = S.once;
+      if (o.step === 0) h += '<button id="v-once" class="btn btn-primary btn-sm">👁️ ' + esc(T.sOnceSend) + "</button>";
+      else if (o.step === 1) h += '<div class="ph-msg them"><button id="v-tap" class="btn btn-ghost btn-sm">👁️ ' + esc(T.sOnceTap) + "</button></div>";
+      else if (o.step === 2) h += '<div class="ph-msg them"><span>' + esc(T.sOnceText) + '</span><small class="ph-exp">⏱ ' + esc(T.sOnceIn.replace("{s}", o.left)) + "</small></div>";
+      else h += '<div class="ph-msg them cipher"><span>🔥 ' + esc(T.sOnceGone) + '</span></div><button id="v-once" class="btn btn-ghost btn-sm">↻</button>';
+    } else if (S.vtab === "call") {
+      var c = S.call;
+      if (c.step === 0) h += '<button id="v-call" class="btn btn-primary btn-sm">📞 ' + esc(T.sCallStart) + "</button>";
+      else if (c.step === 1) h += "<p>" + esc(T.sCallRinging) + "</p>";
+      else h += "<p>🔒 " + esc(T.sCallConnected) + '</p><p>' + esc(T.sCallCode) + '</p><p class="ph-code">' + esc(c.code) + " · " + esc(c.code) + "</p><small>" + esc(T.sCallHint) + '</small><p><button id="v-end" class="btn btn-ghost btn-sm">' + esc(T.sCallEnd) + "</button></p>";
+    } else {
+      var n = S.sec.filter(Boolean).length, pct = Math.round(n * 100 / S.sec.length);
+      h += "<strong>" + esc(T.sSecTitle) + '</strong><div class="ph-meter"><i style="width:' + pct + '%"></i></div><small>' + esc(T.sSecLevel) + ": " + pct + "%</small><ul class=\"ph-vlist\">" +
+        S.sec.map(function (v, i) { return '<li><button class="ph-chk" data-sec="' + i + '">' + (v ? "✅" : "⚠️") + " " + esc(T["sSec" + (i + 1)]) + "</button></li>"; }).join("") + "</ul><small>" + esc(T.sSecTap) + "</small>";
+    }
+    return h;
+  }
+  function renderVault() {
+    var tabs = VTABS.map(function (t) { return '<button data-vt="' + t[0] + '"' + (S.vtab === t[0] ? ' class="on"' : "") + ">" + esc(T[t[1]]) + "</button>"; }).join("");
+    root.innerHTML = '<div class="ph-bar"><strong>🛡️ ' + esc(T.sNavVault) + '</strong><button id="ph-lock" class="ph-icon">🔒 ' + esc(T.lockBtn) + "</button></div>" +
+      '<div class="ph-tabs">' + tabs + '</div><div class="ph-vbody">' + vaultBody() + "</div>" + navHtml("vault");
+    bindNav();
+    document.getElementById("ph-lock").onclick = lock;
+    Array.prototype.forEach.call(root.querySelectorAll("[data-vt]"), function (b) { b.onclick = function () { S.vtab = b.getAttribute("data-vt"); renderVault(); }; });
+    var g = function (id) { return document.getElementById(id); };
+    if (g("v-add")) g("v-add").onclick = function () {
+      var smp = SAMPLES[S.files.length % SAMPLES.length];
+      var f = { n: smp.n, kb: smp.kb, img: !!smp.img, c: "…" }; S.files.push(f); renderVault();
+      encrypt(smp.n + randHex(24)).then(function (x) { f.c = x.slice(0, 44) + "…"; if (S.view === "vault" && S.vtab === "files") renderVault(); });
+    };
+    if (g("v-cipher")) g("v-cipher").onchange = function (e) { S.cipherOn = e.target.checked; renderVault(); };
+    if (g("v-gen")) g("v-gen").onclick = function () { S.pw = genPw(); renderVault(); };
+    if (g("v-copy")) g("v-copy").onclick = function () { g("v-copy").textContent = "✓ " + T.sCopied; };
+    if (g("v-p2p")) g("v-p2p").onclick = function () {
+      S.p2p = { step: 1, pct: 0, id: randHex(11) }; renderVault();
+      setTimeout(function () { S.p2p.step = 2; refreshV("p2p"); }, 1400);
+      setTimeout(function () { S.p2p.step = 3; refreshV("p2p"); var iv = setInterval(function () { S.p2p.pct = Math.min(100, S.p2p.pct + 12); if (S.p2p.pct >= 100) { clearInterval(iv); S.p2p.step = 4; } refreshV("p2p"); }, 300); }, 2600);
+    };
+    if (g("v-once")) g("v-once").onclick = function () { S.once = { step: 1, left: 0 }; renderVault(); };
+    if (g("v-tap")) g("v-tap").onclick = function () {
+      S.once = { step: 2, left: 6 }; renderVault();
+      var iv = setInterval(function () { S.once.left--; if (S.once.left <= 0) { clearInterval(iv); S.once.step = 3; } refreshV("once"); }, 1000);
+    };
+    if (g("v-call")) g("v-call").onclick = function () {
+      S.call = { step: 1, code: String(1000 + (crypto.getRandomValues(new Uint16Array(1))[0] % 9000)) }; renderVault();
+      setTimeout(function () { if (S.call.step === 1) { S.call.step = 2; refreshV("call"); } }, 1400);
+    };
+    if (g("v-end")) g("v-end").onclick = function () { S.call = { step: 0, code: "" }; renderVault(); };
+    Array.prototype.forEach.call(root.querySelectorAll("[data-sec]"), function (b) { b.onclick = function () { var i = +b.getAttribute("data-sec"); S.sec[i] = !S.sec[i]; renderVault(); }; });
+  }
+  function refreshV(tab) { if (S.profile && S.view === "vault" && S.vtab === tab) renderVault(); }
+
   function render() {
     if (!S.profile) renderLogin();
+    else if (S.view === "vault") renderVault();
     else if (S.open) renderChat();
     else renderList();
   }

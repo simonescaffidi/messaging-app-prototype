@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Manuale utente — Messaggistica Privata</title>
+<title>Manuale utente — Securmy</title>
 <meta name="description" content="Guida completa: registrazione, accesso con username e password, chat nascoste, crittografia end-to-end, sblocco biometrico e lingue disponibili." />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
@@ -19,10 +19,13 @@
 <link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/manual.html" />
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
 <meta property="og:type" content="article" />
-<meta property="og:title" content="Manuale utente — Messaggistica Privata" />
+<meta property="og:title" content="Manuale utente — Securmy" />
 <meta property="og:description" content="Guida completa: registrazione, accesso con username e password, chat nascoste, crittografia end-to-end, sblocco biometrico e lingue disponibili." />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
-<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/icon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/icon-512.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/style.css" />
 </head>
@@ -30,7 +33,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/" class="brand"><span class="lock">🔒</span> Messaggistica Privata</a>
+    <a href="/" class="brand"><img class="logo-mark" src="/icon.svg" width="28" height="28" alt="" /> Securmy</a>
     <div class="header-actions">
       <select class="lang-select" aria-label="Lingua" onchange="location.href=this.value"><option value="/manuale.html" selected>Italiano</option><option value="/en/manual.html">English</option><option value="/es/manual.html">Español</option><option value="/fr/manual.html">Français</option><option value="/de/manual.html">Deutsch</option><option value="/pt/manual.html">Português</option><option value="/ar/manual.html">العربية</option><option value="/zh/manual.html">中文</option><option value="/hi/manual.html">हिन्दी</option><option value="/ru/manual.html">Русский</option><option value="/ja/manual.html">日本語</option></select>
       <a href="/manuale.html" class="btn btn-ghost btn-sm">Manuale</a>
@@ -42,7 +45,7 @@
 
 <main>
   <h1>Manuale utente</h1>
-  <p class="lead">Guida completa a Messaggistica Privata: come registrarsi, accedere, usare le funzioni di privacy e capire cosa protegge davvero questo prototipo — e cosa no.</p>
+  <p class="lead">Guida completa a Securmy: come registrarsi, accedere, usare le funzioni di privacy e capire cosa protegge davvero questo prototipo — e cosa no.</p>
 
   <nav class="toc" aria-label="Indice">
     <strong>Indice</strong>
@@ -59,6 +62,7 @@
       <li><a href="#mobile">App mobile native (iOS/Android)</a></li>
       <li><a href="#limits">Limiti di sicurezza dichiarati</a></li>
       <li><a href="#troubleshooting">Risoluzione dei problemi</a></li>
+      <li><a href="#suite">Cassaforte e strumenti Securmy</a></li>
     </ol>
   </nav>
 
@@ -157,6 +161,34 @@
     <p>Richiede un dispositivo con Face ID, Touch ID, impronta o Windows Hello configurato, un browser aggiornato e una connessione HTTPS (la webapp in produzione la usa già). Deve inoltre essere stato attivato almeno una volta dalle impostazioni.</p>
     <h3>«Messaggio non più leggibile»</h3>
     <p>Per sicurezza la chiave di ogni messaggio viene eliminata appena l'hai letto: il testo resta solo nella cache cifrata di questo dispositivo. Se cambi dispositivo, svuoti i dati del browser o reimposti la password via email, i messaggi precedenti non sono più recuperabili. È il prezzo della forward secrecy.</p>
+  </section>
+
+  <section id="suite">
+    <h2>13. Cassaforte e strumenti Securmy</h2>
+    <p>Dal pulsante 🛡️ nella barra laterale apri la Cassaforte. Tutto ciò che contiene è cifrato nel tuo dispositivo con AES-256-GCM, con una chiave custodita nella tua cassaforte e protetta dalla password: il server non riceve mai file, note o password.</p>
+    <h3>Cassaforte file</h3>
+    <p>Aggiungi file (fino a 100 MB ciascuno) dalla scheda File. Se la casella è attiva, le foto vengono ripulite dai metadati prima di essere salvate. Puoi scaricare, inviare via P2P o eliminare ogni file.</p>
+    <h3>Invio P2P via link</h3>
+    <p>Scegli un file e un tempo di scadenza (10 minuti o 1 ora): ottieni un link monouso. Il file viaggia direttamente al destinatario, cifrato con una chiave che sta solo dopo il simbolo # del link e non arriva mai al server. Tieni aperta la pagina finché il trasferimento non è finito.</p>
+    <h3>Pulisci foto</h3>
+    <p>Ridisegna l'immagine eliminando EXIF, posizione GPS e miniature. Funziona con JPEG, PNG e WebP; per gli altri formati la pulizia automatica non è disponibile.</p>
+    <h3>Note e password</h3>
+    <p>Le note e le credenziali restano cifrate nella cassaforte. Il generatore crea password casuali; quando copi una password, gli appunti si svuotano dopo 20 secondi.</p>
+    <h3>Messaggi a visualizzazione singola</h3>
+    <p>Scegli «Visualizzazione singola» accanto al campo del messaggio. Il destinatario tocca per vedere: il testo resta visibile 10 secondi, poi viene distrutto sul suo dispositivo e sul server. Non impedisce a chi legge di fare una foto allo schermo.</p>
+    <h3>Chiamate audio e video</h3>
+    <p>Dai pulsanti 📞 e 🎥 nell'intestazione della chat. Audio e video viaggiano direttamente tra i dispositivi, cifrati. Entrambi vedono un codice di 4 cifre: confrontatelo a voce, se coincide la chiamata non è stata intercettata.</p>
+    <h3>Verifica in due passaggi</h3>
+    <p>In Sicurezza puoi attivare i codici TOTP con un'app di autenticazione (Google Authenticator, Aegis, 1Password…). Dopo l'attivazione, per accedere con la password serve anche il codice a 6 cifre. Lo sblocco biometrico resta un metodo di accesso separato.</p>
+    <h3>Backup e cancellazione di emergenza</h3>
+    <p>Il backup contiene file, note e password cifrati con una frase segreta di almeno 10 caratteri che scegli tu: senza di essa non è recuperabile. I messaggi non sono inclusi. La cancellazione di emergenza rimuove dal dispositivo chiavi, cache dei messaggi, file, note e password e non si può annullare.</p>
+    <h3>Limiti da conoscere</h3>
+    <ul>
+      <li>La cassaforte è locale: file, note e password non si sincronizzano tra dispositivi; usa il backup per spostarli.</li>
+      <li>Nell'invio P2P e nelle chiamate l'altra persona (e un server STUN pubblico) può vedere il tuo indirizzo IP, a meno che il servizio non usi un server TURN; con reti molto restrittive la connessione può fallire.</li>
+      <li>Il gestore di password è essenziale: non compila i moduli da solo e non sostituisce un gestore dedicato per usi professionali.</li>
+      <li>Se perdi la password e la frase del backup, i dati cifrati non sono recuperabili: nessuno, nemmeno noi, può aprirli.</li>
+    </ul>
   </section>
 </main>
 

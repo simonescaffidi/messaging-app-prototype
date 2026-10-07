@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Demo interattiva — Messaggistica Privata</title>
-<meta name="description" content="Prova subito Messaggistica Privata: login per codice, chat nascoste, profilo di copertura, messaggi a tempo e cifratura end-to-end. Simulazione nel browser, nessun account." />
+<title>Demo interattiva — Securmy</title>
+<meta name="description" content="Prova subito Securmy: login per codice, chat nascoste, profilo di copertura, messaggi a tempo e cifratura end-to-end. Simulazione nel browser, nessun account." />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/demo.html" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/demo.html" />
 <link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/demo.html" />
@@ -19,10 +19,13 @@
 <link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/demo.html" />
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/demo.html" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Demo interattiva — Messaggistica Privata" />
-<meta property="og:description" content="Prova subito Messaggistica Privata: login per codice, chat nascoste, profilo di copertura, messaggi a tempo e cifratura end-to-end. Simulazione nel browser, nessun account." />
+<meta property="og:title" content="Demo interattiva — Securmy" />
+<meta property="og:description" content="Prova subito Securmy: login per codice, chat nascoste, profilo di copertura, messaggi a tempo e cifratura end-to-end. Simulazione nel browser, nessun account." />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/demo.html" />
-<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/icon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/icon-512.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/style.css" />
 </head>
@@ -30,7 +33,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/" class="brand"><span class="lock">🔒</span> Messaggistica Privata</a>
+    <a href="/" class="brand"><img class="logo-mark" src="/icon.svg" width="28" height="28" alt="" /> Securmy</a>
     <div class="header-actions">
       <select class="lang-select" aria-label="Lingua" onchange="location.href=this.value"><option value="/demo.html" selected>Italiano</option><option value="/en/demo.html">English</option><option value="/es/demo.html">Español</option><option value="/fr/demo.html">Français</option><option value="/de/demo.html">Deutsch</option><option value="/pt/demo.html">Português</option><option value="/ar/demo.html">العربية</option><option value="/zh/demo.html">中文</option><option value="/hi/demo.html">हिन्दी</option><option value="/ru/demo.html">Русский</option><option value="/ja/demo.html">日本語</option></select>
       <a href="/manuale.html" class="btn btn-ghost btn-sm">Manuale</a>
@@ -54,12 +57,19 @@
         <li>Nascondi una chat dal menu, poi scrivi <strong>7777</strong> nella ricerca per rivederla.</li>
         <li>Blocca e rientra con username <strong>demo</strong> e password <strong>2222</strong>: vedrai solo il profilo di copertura.</li>
       </ol>
+      <h2>Poi prova la Cassaforte</h2>
+      <ol class="demo-try">
+        <li>Dopo il login tocca <strong>Cassaforte</strong> in basso.</li>
+        <li>In <strong>File</strong> aggiungi un file e mostra come lo vedrebbe chi ruba il disco: solo dati cifrati.</li>
+        <li>In <strong>Invia</strong> crea un link P2P monouso e guarda il file arrivare senza passare dal server.</li>
+        <li>In <strong>Una volta</strong> invia un messaggio che si distrugge dopo la lettura, poi attiva i controlli in <strong>Sicurezza</strong>.</li>
+      </ol>
       <p><a href="/app/" class="btn btn-primary">Apri l'app</a></p>
     </div>
     <div id="phone" class="phone" aria-label="Prova la demo"></div>
   </div>
 </main>
-<script>window.__DEMO_I18N={"nav":"Demo","cta":"Prova la demo","title":"Demo interattiva — Messaggistica Privata","description":"Prova subito Messaggistica Privata: login per codice, chat nascoste, profilo di copertura, messaggi a tempo e cifratura end-to-end. Simulazione nel browser, nessun account.","h1":"Prova la demo","lead":"Una simulazione interattiva che gira solo nel tuo browser: nessun account, nessun dato inviato. Per l'app vera usa il pulsante «Apri l'app».","notice":"Demo simulata: i messaggi restano sul tuo dispositivo. La cifratura AES-GCM è reale, ma contatti e risposte sono finti.","tryTitle":"Cosa provare","tryItems":["Entra con username \u003cstrong>demo\u003c/strong> e password \u003cstrong>1111\u003c/strong> (profilo personale) oppure con il pulsante biometrico.","Apri una chat e invia un messaggio con timer di \u003cstrong>30 secondi\u003c/strong>: si autodistrugge.","Attiva «Vista del server» per vedere come appare un messaggio cifrato.","Nascondi una chat dal menu, poi scrivi \u003cstrong>7777\u003c/strong> nella ricerca per rivederla.","Blocca e rientra con username \u003cstrong>demo\u003c/strong> e password \u003cstrong>2222\u003c/strong>: vedrai solo il profilo di copertura."],"userLabel":"Username","codeLabel":"Password","codePh":"Es. 1111","enter":"Entra","bio":"Sblocca con impronta / Face ID","bioScan":"Verifica biometrica…","wrongCode":"Credenziali non valide. Usa demo + 1111 o 2222.","searchPh":"Cerca (o combinazione segreta)","hide":"Nascondi chat","unhide":"Mostra chat","hiddenTag":"nascosta","msgPh":"Scrivi un messaggio…","send":"Invia","timers":["Nessun timer","30 secondi","5 minuti","1 ora"],"serverView":"Vista del server (cifrato)","lockBtn":"Blocca","e2eTag":"Cifrato end-to-end","expiresIn":"si cancella tra {s}s","secretFound":"Chat nascoste mostrate","chatsTitle":"Chat","back":"Indietro","empty":"Nessuna chat","n1":"Anna","m1":"Ci vediamo domani alle 18?","n2":"Marco","m2":"Ti mando i documenti stasera.","n3":"Luca","m3":"Il piano è confermato, non dirlo a nessuno.","nc":"Mamma","mc":"Ricordati di comprare il pane!","replies":["Perfetto, a dopo!","Ricevuto 👍","Va bene, grazie."]};</script>
+<script>window.__DEMO_I18N={"nav":"Demo","cta":"Prova la demo","title":"Demo interattiva — Securmy","description":"Prova subito Securmy: login per codice, chat nascoste, profilo di copertura, messaggi a tempo e cifratura end-to-end. Simulazione nel browser, nessun account.","h1":"Prova la demo","lead":"Una simulazione interattiva che gira solo nel tuo browser: nessun account, nessun dato inviato. Per l'app vera usa il pulsante «Apri l'app».","notice":"Demo simulata: i messaggi restano sul tuo dispositivo. La cifratura AES-GCM è reale, ma contatti e risposte sono finti.","tryTitle":"Cosa provare","tryItems":["Entra con username \u003cstrong>demo\u003c/strong> e password \u003cstrong>1111\u003c/strong> (profilo personale) oppure con il pulsante biometrico.","Apri una chat e invia un messaggio con timer di \u003cstrong>30 secondi\u003c/strong>: si autodistrugge.","Attiva «Vista del server» per vedere come appare un messaggio cifrato.","Nascondi una chat dal menu, poi scrivi \u003cstrong>7777\u003c/strong> nella ricerca per rivederla.","Blocca e rientra con username \u003cstrong>demo\u003c/strong> e password \u003cstrong>2222\u003c/strong>: vedrai solo il profilo di copertura."],"userLabel":"Username","codeLabel":"Password","codePh":"Es. 1111","enter":"Entra","bio":"Sblocca con impronta / Face ID","bioScan":"Verifica biometrica…","wrongCode":"Credenziali non valide. Usa demo + 1111 o 2222.","searchPh":"Cerca (o combinazione segreta)","hide":"Nascondi chat","unhide":"Mostra chat","hiddenTag":"nascosta","msgPh":"Scrivi un messaggio…","send":"Invia","timers":["Nessun timer","30 secondi","5 minuti","1 ora"],"serverView":"Vista del server (cifrato)","lockBtn":"Blocca","e2eTag":"Cifrato end-to-end","expiresIn":"si cancella tra {s}s","secretFound":"Chat nascoste mostrate","chatsTitle":"Chat","back":"Indietro","empty":"Nessuna chat","n1":"Anna","m1":"Ci vediamo domani alle 18?","n2":"Marco","m2":"Ti mando i documenti stasera.","n3":"Luca","m3":"Il piano è confermato, non dirlo a nessuno.","nc":"Mamma","mc":"Ricordati di comprare il pane!","replies":["Perfetto, a dopo!","Ricevuto 👍","Va bene, grazie."],"sNavChats":"Chat","sNavVault":"Cassaforte","sTabFiles":"File","sTabPw":"Password","sTabP2p":"Invia","sTabOnce":"Una volta","sTabCall":"Chiamata","sTabSec":"Sicurezza","sAddFile":"Aggiungi un file di prova","sEnc":"Cifrato","sShowCipher":"Mostra come lo vede il disco","sFilesEmpty":"Nessun file: aggiungine uno.","sStripped":"Metadati rimossi (GPS, fotocamera)","sGen":"Genera password","sCopy":"Copia","sCopied":"Copiato: gli appunti si svuotano tra 20 s","sStrength":"Forza","sP2pCreate":"Crea link per «contratto.pdf»","sP2pLink":"Link monouso, scade tra 10 minuti","sP2pWait":"In attesa del destinatario…","sP2pJoined":"Destinatario collegato","sP2pSending":"Invio diretto, cifrato","sP2pDone":"Consegnato. Il link non funziona più.","sP2pNote":"Nella demo la connessione è simulata; nell'app vera il file viaggia direttamente tra i dispositivi.","sOnceSend":"Invia un messaggio a visualizzazione singola","sOnceTap":"Tocca per vedere (poi si cancella)","sOnceGone":"Messaggio distrutto","sOnceText":"Il codice della cassaforte è 4821","sOnceIn":"si distrugge tra {s}s","sCallStart":"Avvia una chiamata di prova","sCallRinging":"Chiamata in corso…","sCallConnected":"Chiamata cifrata","sCallCode":"Codice di verifica","sCallHint":"Se i due codici coincidono a voce, nessuno intercetta la chiamata.","sCallEnd":"Termina","sSecTitle":"Controllo di sicurezza","sSecLevel":"Livello di sicurezza","sSec1":"Cassaforte sbloccata","sSec2":"Password robusta","sSec3":"Verifica in due passaggi","sSec4":"Backup recente","sSec5":"Chiavi dei contatti verificate","sSecTap":"Tocca una voce per attivarla","suiteTryTitle":"Poi prova la Cassaforte","suiteTry":["Dopo il login tocca \u003cstrong>Cassaforte\u003c/strong> in basso.","In \u003cstrong>File\u003c/strong> aggiungi un file e mostra come lo vedrebbe chi ruba il disco: solo dati cifrati.","In \u003cstrong>Invia\u003c/strong> crea un link P2P monouso e guarda il file arrivare senza passare dal server.","In \u003cstrong>Una volta\u003c/strong> invia un messaggio che si distrugge dopo la lettura, poi attiva i controlli in \u003cstrong>Sicurezza\u003c/strong>."]};</script>
 <script src="/demo.js"></script>
 
 <footer class="site-footer">

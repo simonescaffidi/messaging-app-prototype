@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Privacy Policy — Messaggistica Privata</title>
-<meta name="description" content="Informativa sulla privacy del prototipo Messaggistica Privata: quali dati vengono trattati e come." />
+<title>Privacy Policy — Securmy</title>
+<meta name="description" content="Informativa sulla privacy del prototipo Securmy: quali dati vengono trattati e come." />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/privacy-policy.html" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/privacy-policy.html" />
 <link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/privacy-policy.html" />
@@ -19,10 +19,13 @@
 <link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/privacy-policy.html" />
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/privacy-policy.html" />
 <meta property="og:type" content="article" />
-<meta property="og:title" content="Privacy Policy — Messaggistica Privata" />
-<meta property="og:description" content="Informativa sulla privacy del prototipo Messaggistica Privata: quali dati vengono trattati e come." />
+<meta property="og:title" content="Privacy Policy — Securmy" />
+<meta property="og:description" content="Informativa sulla privacy del prototipo Securmy: quali dati vengono trattati e come." />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/privacy-policy.html" />
-<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/icon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/icon-512.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/style.css" />
 </head>
@@ -30,7 +33,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/" class="brand"><span class="lock">🔒</span> Messaggistica Privata</a>
+    <a href="/" class="brand"><img class="logo-mark" src="/icon.svg" width="28" height="28" alt="" /> Securmy</a>
     <div class="header-actions">
       <select class="lang-select" aria-label="Lingua" onchange="location.href=this.value"><option value="/privacy-policy.html" selected>Italiano</option><option value="/en/privacy-policy.html">English</option><option value="/es/privacy-policy.html">Español</option><option value="/fr/privacy-policy.html">Français</option><option value="/de/privacy-policy.html">Deutsch</option><option value="/pt/privacy-policy.html">Português</option><option value="/ar/privacy-policy.html">العربية</option><option value="/zh/privacy-policy.html">中文</option><option value="/hi/privacy-policy.html">हिन्दी</option><option value="/ru/privacy-policy.html">Русский</option><option value="/ja/privacy-policy.html">日本語</option></select>
       <a href="/manuale.html" class="btn btn-ghost btn-sm">Manuale</a>
@@ -66,6 +69,11 @@
 
   <h2>I tuoi diritti</h2>
   <p>Puoi chiedere in qualsiasi momento la cancellazione dei dati inseriti nel prototipo scrivendo tramite i contatti indicati sopra.</p>
+
+  <h2>Funzioni Securmy: cassaforte, invii P2P e chiamate</h2>
+  <p>Cassaforte file, note, password e backup restano nel tuo dispositivo, cifrati con una chiave che non lasciamo mai uscire: non li riceviamo, non possiamo leggerli né recuperarli.</p>
+  <p>Per gli invii P2P e le chiamate i contenuti viaggiano direttamente tra i dispositivi, cifrati. Il server tratta solo le informazioni di connessione (SDP e candidati ICE), tenute in memoria per al massimo un'ora e poi eliminate; l'altro partecipante e un server STUN pubblico possono vedere il tuo indirizzo IP.</p>
+  <p>Se attivi la verifica in due passaggi conserviamo il segreto TOTP, cifrato a riposo; i messaggi a visualizzazione singola vengono eliminati dal server pochi secondi dopo l'apertura.</p>
 </main>
 
 <footer class="site-footer">

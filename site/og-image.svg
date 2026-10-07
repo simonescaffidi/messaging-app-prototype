@@ -15,18 +15,10 @@
   <circle cx="1000" cy="500" r="5" fill="#5b8cff" opacity="0.4"/>
   <circle cx="90" cy="130" r="3" fill="#8b6bff" opacity="0.4"/>
 
-  <g transform="translate(600,230)">
-    <circle cx="0" cy="0" r="80" fill="url(#accentGrad)" opacity="0.15"/>
-    <g transform="translate(-45,-55)">
-      <rect x="0" y="35" width="90" height="70" rx="12" fill="url(#accentGrad)"/>
-      <path d="M18 35 V20 a27 27 0 0 1 54 0 V35" fill="none" stroke="url(#accentGrad)" stroke-width="10"/>
-      <circle cx="45" cy="68" r="8" fill="#0f1115"/>
-      <rect x="41" y="68" width="8" height="18" rx="3" fill="#0f1115"/>
-    </g>
-  </g>
+  <g transform="translate(520,90) scale(0.3125)"><rect width="512" height="512" rx="112" fill="#0f1115"/><path d="M256 64 L424 124 V252 C424 352 352 420 256 456 C160 420 88 352 88 252 V124 Z" fill="url(#accentGrad)"/><path d="M322 178 C322 150 292 136 256 136 C216 136 190 156 190 186 C190 216 216 226 256 238 C296 250 322 262 322 294 C322 324 296 344 256 344 C220 344 190 330 190 302" fill="none" stroke="#0f1115" stroke-width="36" stroke-linecap="round" stroke-linejoin="round"/></g>
 
-  <text x="600" y="380" font-family="Arial, Helvetica, sans-serif" font-size="56" font-weight="bold" fill="#f5f6fa" text-anchor="middle">Messaggistica Privata</text>
-  <text x="600" y="430" font-family="Arial, Helvetica, sans-serif" font-size="26" fill="#9aa3b5" text-anchor="middle">Nessun numero di telefono · Profili multipli · Chat nascoste</text>
+  <text x="600" y="380" font-family="Arial, Helvetica, sans-serif" font-size="56" font-weight="bold" fill="#f5f6fa" text-anchor="middle">Securmy</text>
+  <text x="600" y="430" font-family="Arial, Helvetica, sans-serif" font-size="26" fill="#9aa3b5" text-anchor="middle">Messaggi · File cifrati · Invio P2P · Zero tracce</text>
 
-  <text x="600" y="560" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#5b8cff" text-anchor="middle">Prototipo demo</text>
+  <text x="600" y="560" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#5b8cff" text-anchor="middle">Sicurezza · Privacy · Riservatezza</text>
 </svg>

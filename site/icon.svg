@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Securmy">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5b8cff"/>
+      <stop offset="1" stop-color="#8b6bff"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="#0f1115"/>
+  <path d="M256 64 L424 124 V252 C424 352 352 420 256 456 C160 420 88 352 88 252 V124 Z" fill="url(#g)"/>
+  <path d="M322 178 C322 150 292 136 256 136 C216 136 190 156 190 186 C190 216 216 226 256 238 C296 250 322 262 322 294 C322 324 296 344 256 344 C220 344 190 330 190 302" fill="none" stroke="#0f1115" stroke-width="36" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
