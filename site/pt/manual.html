@@ -71,7 +71,7 @@
       <li><strong>ID público</strong>: é o que você compartilha com as pessoas que quer adicionar como contatos. Não revela o seu e-mail.</li>
       <li><strong>Combinação secreta</strong>: serve para revelar os chats ocultos (veja a seção dedicada).</li>
     </ul>
-    <p class="warn">Se perder a senha, você perde o acesso ao perfil: ainda não existe recuperação real por e-mail (veja "Limites de segurança declarados").</p>
+    <p class="warn">Se perder a senha, você pode redefini-la por e-mail, mas só se o e-mail do perfil tiver sido verificado. Sem senha e sem e-mail verificado, o perfil não pode ser recuperado.</p>
   </section>
 
   <section id="profiles">
@@ -136,7 +136,7 @@
       <li><strong>Sem ratchet / forward secrecy</strong>: a chave de um chat permanece a mesma até as duas pessoas regenerarem as suas chaves (ao contrário de protocolos como o Signal, que trocam de chave a cada mensagem).</li>
       <li><strong>Sem verificação fora de banda das chaves públicas</strong>: não há um "número de segurança" para comparar de viva voz com o contato. Em teoria, um servidor malicioso poderia substituir uma chave pública pela sua (ataque man-in-the-middle). Num servidor confiável e para um protótipo, serve; antes de um uso de alto risco, essa verificação deveria ser acrescentada.</li>
       <li><strong>Chave privada no navegador</strong>: fica guardada no armazenamento local do navegador (localStorage), não num enclave seguro de hardware. Quem tiver acesso físico ou de software ao dispositivo desbloqueado poderia lê-la.</li>
-      <li><strong>Sem envio real de e-mails</strong>: o cadastro funciona, mas ainda não há um serviço de e-mail ligado para uma eventual recuperação de conta por "magic link".</li>
+      <li><strong>Recuperação só por e-mail</strong>: se perder a senha e o acesso ao e-mail verificado, o perfil não pode ser recuperado. Se usar vários perfis (por exemplo um de cobertura), use e-mails diferentes: um link de recuperação revela a quem controla o e-mail que o perfil existe.</li>
     </ul>
   </section>
 
@@ -145,7 +145,7 @@
     <h3>"Não consigo criptografar: o contato ainda não tem chave pública"</h3>
     <p>Acontece se o seu contato não entrou desde a última atualização do app (a chave é gerada e enviada automaticamente no login). Peça que ele entre uma vez: depois você poderá escrever-lhe normalmente.</p>
     <h3>"Perdi minha senha"</h3>
-    <p>No momento não há recuperação automática: é preciso cadastrar um novo perfil. Guarde sempre a senha em um gerenciador de senhas.</p>
+    <p>Use "Esqueceu a senha?" na tela de acesso e informe e-mail e usuário: se o e-mail do perfil estiver verificado, você recebe um link válido por 1 hora. Caso contrário, o perfil não é recuperável e precisa ser criado de novo. Guarde sempre a senha em um gerenciador de senhas.</p>
     <h3>O desbloqueio biométrico não aparece</h3>
     <p>Requer um dispositivo com Face ID, Touch ID, impressão digital ou Windows Hello configurado, um navegador atualizado e uma conexão HTTPS (a aplicação web em produção já usa uma). Também precisa ter sido ativado pelo menos uma vez nas configurações.</p>
   </section>
