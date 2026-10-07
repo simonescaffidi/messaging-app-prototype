@@ -104,12 +104,18 @@
     <h2>7. Crittografia end-to-end: come funziona davvero</h2>
     <p>Questo non è uno slogan di marketing: ogni messaggio è cifrato <strong>nel tuo browser</strong>, prima di essere inviato al server, con questo schema:</p>
     <ol>
-      <li>Al primo accesso, il tuo dispositivo genera una coppia di chiavi ECDH sulla curva P-256 (una pubblica e una privata). La chiave pubblica viene caricata sul server; la chiave privata resta solo nel tuo browser.</li>
-      <li>Quando scrivi a un contatto, il tuo browser combina la tua chiave privata con la sua chiave pubblica (scambio ECDH) e deriva, tramite HKDF-SHA256, una chiave simmetrica AES-GCM a 256 bit specifica per quella coppia di persone.</li>
-      <li>Ogni messaggio viene cifrato con quella chiave e un numero casuale (IV) diverso ogni volta, poi inviato al server già cifrato.</li>
-      <li>Il server salva e trasmette solo il testo cifrato: non può leggere il contenuto dei messaggi.</li>
+      <li>Al primo accesso il tuo dispositivo genera una coppia di chiavi ECDH (curva P-256): la chiave pubblica va sul server, quella privata resta sul dispositivo, cifrata con la tua password. In più prepara un lotto di chiavi pubbliche monouso («prekey»).</li>
+      <li>Per ogni messaggio, il tuo browser genera una chiave temporanea e preleva dal server UNA prekey monouso del contatto. Combina tre scambi ECDH (la tua identità, la chiave temporanea, la prekey) e deriva con HKDF-SHA256 una chiave AES-GCM a 256 bit valida solo per quel messaggio.</li>
+      <li>Il messaggio viene cifrato con quella chiave e un IV casuale; l'intestazione è autenticata, quindi non può essere alterata. Il server riceve solo testo cifrato.</li>
+      <li>Il destinatario ricostruisce la stessa chiave, legge il messaggio e subito dopo elimina la prekey privata: da quel momento il messaggio non è più decifrabile da nessuno, nemmeno con le tue chiavi di lungo periodo.</li>
     </ol>
     <p>È lo stesso tipo di matematica (ECDH + AES-GCM) usata da molti protocolli sicuri moderni, applicata qui tramite la Web Crypto API nativa del browser, senza librerie esterne.</p>
+    <h3>Forward secrecy: i messaggi passati restano al sicuro</h3>
+    <p>Anche se qualcuno ottenesse le tue chiavi di lungo periodo (ad esempio rubando il dispositivo), non potrebbe decifrare i messaggi che hai già ricevuto, perché le loro chiavi sono state eliminate. Il testo che hai già letto resta solo nella cache locale cifrata del tuo dispositivo.</p>
+    <h3>La cassaforte delle chiavi</h3>
+    <p>Chiavi private, prekey e cache dei messaggi sono salvate nel browser solo in forma cifrata (AES-GCM), con una chiave derivata dalla tua password tramite PBKDF2-SHA256 (310.000 iterazioni). Se accedi con la biometria, ti viene chiesta la password una volta per aprire la cassaforte. Cambiando password, la cassaforte viene ricifrata.</p>
+    <h3>Verifica che sia davvero lui: numero di sicurezza</h3>
+    <p>Nella chat tocca l'icona 🔑: vedi un numero di 60 cifre, uguale per entrambi. Confrontalo con il tuo contatto di persona o a voce: se coincide, nessuno si sta intromettendo. Se la chiave di un contatto cambia (nuovo dispositivo o possibile intercettazione), compare un avviso e l'invio resta bloccato finché non scegli «Accetta nuova chiave».</p>
   </section>
 
   <section id="biometric">
@@ -131,11 +137,12 @@
 
   <section id="limits">
     <h2>11. Limiti di sicurezza dichiarati</h2>
-    <p>Per onestà, ecco cosa questo prototipo <strong>non</strong> fa ancora, anche se la crittografia è reale:</p>
+    <p>Per onestà, ecco i limiti che restano, anche se la crittografia è reale e non solo dichiarata:</p>
     <ul>
-      <li><strong>Nessun ratchet / forward secrecy</strong>: la chiave di una chat resta la stessa finché entrambe le persone non rigenerano le proprie chiavi (diversamente da protocolli come Signal, che cambiano chiave a ogni messaggio).</li>
-      <li><strong>Nessuna verifica fuori banda delle chiavi pubbliche</strong>: non c'è un "numero di sicurezza" da confrontare a voce con il contatto. In teoria, un server malevolo potrebbe sostituire una chiave pubblica con la propria (attacco man-in-the-middle). Su un server fidato per un prototipo va bene; prima di un uso ad alto rischio andrebbe aggiunta questa verifica.</li>
-      <li><strong>Chiave privata nel browser</strong>: è salvata nella memoria locale del browser (localStorage), non in un secure enclave hardware. Chi ha accesso fisico o software al dispositivo sbloccato potrebbe leggerla.</li>
+      <li><strong>Prekey esaurite</strong>: se un contatto resta offline a lungo e finisce le chiavi monouso, il messaggio usa comunque una chiave nuova ma senza l'eliminazione monouso, quindi con una forward secrecy meno forte.</li>
+      <li><strong>Messaggi legati a questo dispositivo</strong>: per progetto, lo storico decifrato non si sposta. Su un nuovo dispositivo o dopo un recupero password via email la cassaforte precedente non è recuperabile: si parte con una nuova identità e i contatti vedono l'avviso di cambio chiave.</li>
+      <li><strong>La cassaforte vale quanto la password</strong>: scegline una lunga e unica. Chi ha il dispositivo già sbloccato con l'app aperta può leggere le chat, come per qualunque app.</li>
+      <li><strong>Metadati visibili al server</strong>: mittente, orario, reazioni e scadenza dei messaggi a tempo non sono cifrati.</li>
       <li><strong>Recupero solo via email</strong>: se perdi sia la password sia l'accesso all'email verificata, il profilo non è recuperabile. Se usi più profili (ad esempio uno di copertura), usa email diverse: un link di recupero rivela a chi controlla l'email che il profilo esiste.</li>
     </ul>
   </section>
@@ -148,6 +155,8 @@
     <p>Vai in «Password dimenticata?» nella schermata di accesso, inserisci email e username: se l'email del profilo è verificata ricevi un link valido 1 ora. Se l'email non era verificata, il profilo non è recuperabile e va creato di nuovo. Conserva sempre la password in un gestore di password.</p>
     <h3>Lo sblocco biometrico non appare</h3>
     <p>Richiede un dispositivo con Face ID, Touch ID, impronta o Windows Hello configurato, un browser aggiornato e una connessione HTTPS (la webapp in produzione la usa già). Deve inoltre essere stato attivato almeno una volta dalle impostazioni.</p>
+    <h3>«Messaggio non più leggibile»</h3>
+    <p>Per sicurezza la chiave di ogni messaggio viene eliminata appena l'hai letto: il testo resta solo nella cache cifrata di questo dispositivo. Se cambi dispositivo, svuoti i dati del browser o reimposti la password via email, i messaggi precedenti non sono più recuperabili. È il prezzo della forward secrecy.</p>
   </section>
 </main>
 

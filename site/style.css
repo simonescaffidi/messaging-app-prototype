@@ -403,3 +403,7 @@ img { max-width: 100%; display: block; }
 .ph-form input[type=text] { flex: 1; min-width: 0; }
 .ph-form select { max-width: 6.5rem; font-size: 0.8rem; }
 @media (max-width: 800px) { .demo-layout { grid-template-columns: 1fr; } .phone { height: 560px; } }
+
+/* Sezione sicurezza (punto di forza) */
+.features.security { background: linear-gradient(180deg, rgba(79,140,255,.08), rgba(79,140,255,0)); border-top: 1px solid rgba(127,127,127,.2); }
+.sec-lead { text-align: center; max-width: 46rem; margin: 0 auto 1.5rem; opacity: .85; }
