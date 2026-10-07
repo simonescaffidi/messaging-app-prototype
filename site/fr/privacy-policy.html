@@ -51,16 +51,16 @@
   <p>Ce site n'utilise aucun outil d'analyse ni de suivi tiers. Seules les préférences de cookies que vous choisissez sont enregistrées (voir la Politique de cookies), en local dans votre navigateur.</p>
 
   <h2>Données collectées par le prototype (/app)</h2>
-  <p>Pour utiliser le prototype de messagerie, vous créez un profil avec e-mail, nom d'utilisateur et mot de passe. Sont enregistrés sur le serveur : e-mail, nom d'utilisateur, hash du mot de passe, ID public, combinaison des discussions masquées, contacts ajoutés, votre clé publique de chiffrement et les messages envoyés.</p>
+  <p>Pour utiliser le prototype de messagerie, vous créez un profil avec e-mail, nom d'utilisateur et mot de passe. Sont enregistrés sur le serveur (base PostgreSQL) : e-mail (chiffré), nom d'utilisateur, hash du mot de passe, ID public, combinaison des discussions masquées, contacts ajoutés, votre clé publique de chiffrement, les sessions actives et les messages envoyés.</p>
   <p><strong>Messages :</strong> le contenu est chiffré de bout en bout dans le navigateur avant l'envoi ; le serveur ne conserve que du texte chiffré et ne peut pas le lire. Les métadonnées (expéditeur, heure, réactions, expiration des messages éphémères) restent non chiffrées.</p>
   <p><strong>Déverrouillage biométrique :</strong> si vous l'activez, seule la clé publique de la passkey (WebAuthn) est enregistrée sur le serveur. Les données biométriques ne quittent jamais votre appareil. Votre clé privée de chiffrement reste dans le navigateur (localStorage).</p>
-  <p><strong>Important :</strong> il s'agit d'un prototype de démonstration : l'e-mail et le nom d'utilisateur sont stockés sans chiffrement et le service n'atteint pas les standards d'un produit en production. Les mots de passe ne sont pas conservés en clair (uniquement un hash scrypt salé) et les tentatives de connexion échouées sont limitées par adresse IP et par identifiant. Ne saisissez pas d'informations sensibles réelles : utilisez des données de test.</p>
+  <p><strong>Important :</strong> il s'agit d'un prototype de démonstration et le service n'atteint pas les standards d'un produit en production. L'e-mail est chiffré au repos (AES-256-GCM) et sert uniquement à la vérification et à la récupération du mot de passe ; le nom d'utilisateur reste en clair car la connexion en a besoin. Les mots de passe ne sont pas conservés en clair (uniquement un hash scrypt salé) et les tentatives échouées sont limitées par adresse IP et par identifiant. Ne saisissez pas d'informations sensibles réelles : utilisez des données de test.</p>
 
   <h2>Finalité du traitement</h2>
   <p>Les données servent uniquement à faire fonctionner la démo (authentification, messagerie, contacts). Elles ne sont pas cédées à des tiers et ne sont pas utilisées pour du profilage publicitaire.</p>
 
   <h2>Conservation</h2>
-  <p>Les données du prototype peuvent être supprimées à tout moment lors de mises à jour ou de réinitialisations de la démo, sans préavis.</p>
+  <p>Les données sont conservées dans une base persistante jusqu'à la suppression du profil ; lors de mises à jour ou de réinitialisations de la démo, elles peuvent toutefois être supprimées sans préavis.</p>
 
   <h2>Vos droits</h2>
   <p>Vous pouvez demander à tout moment la suppression des données saisies dans le prototype en écrivant via les contacts indiqués ci-dessus.</p>
