@@ -50,7 +50,7 @@ module.exports = {
       ["Verstecken, was du willst", "Gib die geheime Kombination in die Suchleiste ein, um versteckte Chats bei Bedarf anzuzeigen."]
     ],
     disclaimerTitle: "Was es ist, was nicht",
-    disclaimerHtml: "<strong>Dies ist ein funktionaler Prototyp</strong>, kein fertiges Produkt. Nachrichten sind Ende-zu-Ende-verschlüsselt (ECDH P-256 + 256-Bit-AES-GCM, Schlüsselableitung per HKDF-SHA256): Der Server sieht nie den Klartext. Die biometrische Entsperrung nutzt echtes WebAuthn/FIDO2. Bekannte Einschränkungen bleiben und werden im <a href=\"{manualUrl}\">Benutzerhandbuch</a> offen benannt: Es gibt noch keinen Ratchet mit Forward Secrecy „wie bei Signal“, keine Out-of-Band-Prüfung der öffentlichen Schlüssel (ein böswilliger Server könnte sie theoretisch austauschen), der private Schlüssel bleibt im Browser ohne Hardware-Secure-Enclave, und der echte E-Mail-Versand zur Kontowiederherstellung ist noch nicht angebunden. Geeignet, um das Nutzungserlebnis mit echter, aber nicht „staatssicherer“ Sicherheit auszuprobieren – noch nicht für Gespräche mit sehr hohem Risiko.",
+    disclaimerHtml: "<strong>Dies ist ein funktionaler Prototyp</strong>, kein fertiges Produkt. Nachrichten sind Ende-zu-Ende-verschlüsselt (ECDH P-256 + 256-Bit-AES-GCM, Schlüsselableitung per HKDF-SHA256): Der Server sieht nie den Klartext. Die biometrische Entsperrung nutzt echtes WebAuthn/FIDO2. Bekannte Einschränkungen bleiben und werden im <a href=\"{manualUrl}\">Benutzerhandbuch</a> offen benannt: Es gibt noch keinen Ratchet mit Forward Secrecy „wie bei Signal“, keine Out-of-Band-Prüfung der öffentlichen Schlüssel (ein böswilliger Server könnte sie theoretisch austauschen), der private Schlüssel bleibt im Browser ohne Hardware-Secure-Enclave, und die Passwort-Wiederherstellung per E-Mail funktioniert nur mit bestätigter E-Mail-Adresse. Geeignet, um das Nutzungserlebnis mit echter, aber nicht „staatssicherer“ Sicherheit auszuprobieren – noch nicht für Gespräche mit sehr hohem Risiko.",
     nativeTitle: "Native iOS- und Android-Apps",
     nativeText: "Das Grundgerüst der nativen App (Expo/React Native, mit biometrischer Systemsperre) liegt im Projektcode bereit. Die Veröffentlichung im App Store und bei Google Play erfordert die Zugangsdaten der Entwicklerkonten (Apple Developer Program und Google Play Console): Bis diese verbunden sind, bleibt die App als Web-App verfügbar, in jedem mobilen Browser nutzbar und per „Zum Home-Bildschirm“ bereits als App installierbar.",
     ctaTitle: "Teste den Prototyp",
@@ -70,7 +70,7 @@ module.exports = {
           "<strong>Öffentliche ID</strong>: die gibst du an Personen weiter, die du als Kontakte hinzufügen möchtest. Sie verrät nicht deine E-Mail.",
           "<strong>Geheime Kombination</strong>: dient dazu, versteckte Chats anzuzeigen (siehe eigener Abschnitt)."
         ]],
-        ["warn", "Wenn du das Passwort verlierst, verlierst du den Zugriff auf das Profil: Eine echte Wiederherstellung per E-Mail gibt es noch nicht (siehe „Deklarierte Sicherheitsgrenzen“)."]
+        ["warn", "Wenn du das Passwort verlierst, kannst du es per E-Mail zurücksetzen, aber nur wenn die E-Mail des Profils bestätigt wurde. Ohne Passwort und ohne bestätigte E-Mail ist das Profil nicht wiederherstellbar."]
       ]},
       { id: "profiles", h: "2. Mehrere Profile auf demselben Gerät", blocks: [
         ["p", "Du kannst mehrere Profile (z. B. ein persönliches und ein Tarnprofil) mit demselben Benutzernamen, aber unterschiedlichen Passwörtern anlegen. Bei Eingabe von Benutzername und Passwort öffnet sich das passende Profil, ohne Auswahlanzeige, die verrät, wie viele Profile existieren. Dasselbe Passwort darf nicht für zwei Profile unter demselben Benutzernamen verwendet werden."]
@@ -115,14 +115,14 @@ module.exports = {
           "<strong>Kein Ratchet / keine Forward Secrecy</strong>: Der Schlüssel eines Chats bleibt gleich, bis beide Personen ihre Schlüssel neu erzeugen (anders als bei Protokollen wie Signal, die den Schlüssel mit jeder Nachricht wechseln).",
           "<strong>Keine Out-of-Band-Prüfung der öffentlichen Schlüssel</strong>: Es gibt keine „Sicherheitsnummer“, die du mündlich mit dem Kontakt vergleichen könntest. Theoretisch könnte ein böswilliger Server einen öffentlichen Schlüssel durch seinen eigenen ersetzen (Man-in-the-Middle-Angriff). Für einen Prototyp auf einem vertrauenswürdigen Server in Ordnung; vor einem Einsatz mit hohem Risiko sollte diese Prüfung ergänzt werden.",
           "<strong>Privater Schlüssel im Browser</strong>: Er liegt im lokalen Speicher des Browsers (localStorage), nicht in einer Hardware-Secure-Enclave. Wer physischen oder softwareseitigen Zugriff auf das entsperrte Gerät hat, könnte ihn lesen.",
-          "<strong>Kein echter E-Mail-Versand</strong>: Die Registrierung funktioniert, aber es ist noch kein E-Mail-Dienst für eine mögliche Kontowiederherstellung per „Magic Link“ angebunden."
+          "<strong>Wiederherstellung nur per E-Mail</strong>: Verlierst du Passwort und Zugriff auf die bestätigte E-Mail, ist das Profil nicht wiederherstellbar. Nutzt du mehrere Profile (z. B. ein Tarnprofil), verwende verschiedene E-Mails: Ein Wiederherstellungslink verrät dem, der die E-Mail kontrolliert, dass das Profil existiert."
         ]]
       ]},
       { id: "troubleshooting", h: "12. Fehlerbehebung", blocks: [
         ["h3", "„Verschlüsselung nicht möglich: Der Kontakt hat noch keinen öffentlichen Schlüssel“"],
         ["p", "Das passiert, wenn sich dein Kontakt seit dem letzten App-Update nicht angemeldet hat (der Schlüssel wird bei der Anmeldung automatisch erzeugt und hochgeladen). Bitte ihn, sich einmal anzumelden – danach kannst du ihm normal schreiben."],
         ["h3", "„Ich habe mein Passwort verloren“"],
-        ["p", "Derzeit gibt es keine automatische Wiederherstellung: Du musst ein neues Profil registrieren. Bewahre das Passwort immer in einem Passwortmanager auf."],
+        ["p", "Nutze „Passwort vergessen?“ auf dem Anmeldebildschirm und gib E-Mail und Benutzernamen ein: Ist die E-Mail des Profils bestätigt, erhältst du einen 1 Stunde gültigen Link. Sonst ist das Profil nicht wiederherstellbar und muss neu angelegt werden. Bewahre das Passwort immer in einem Passwortmanager auf."],
         ["h3", "Die biometrische Entsperrung erscheint nicht"],
         ["p", "Sie erfordert ein Gerät mit eingerichtetem Face ID, Touch ID, Fingerabdruck oder Windows Hello, einen aktuellen Browser und eine HTTPS-Verbindung (die Web-App in Produktion nutzt bereits eine). Außerdem muss sie mindestens einmal in den Einstellungen aktiviert worden sein."]
       ]}
@@ -136,13 +136,13 @@ module.exports = {
       ["Wer die Daten verarbeitet", ["Diese Website und der verknüpfte Prototyp sind ein persönliches Demonstrationsprojekt. Für Anfragen zu Daten kannst du über <a href=\"https://www.simonescaffidi.it\" target=\"_blank\" rel=\"noopener noreferrer\">www.simonescaffidi.it</a> schreiben."]],
       ["Von der Präsentationswebsite erhobene Daten", ["Diese Website verwendet keine Analyse- oder Tracking-Tools von Drittanbietern. Gespeichert werden nur die von dir gewählten Cookie-Einstellungen (siehe Cookie-Richtlinie), lokal in deinem Browser."]],
       ["Vom Prototyp (/app) erhobene Daten", [
-        "Für den Messaging-Prototyp legst du ein Profil mit E-Mail, Benutzername und Passwort an. Auf dem Server gespeichert werden: E-Mail, Benutzername, Passwort-Hash, öffentliche ID, Kombination für versteckte Chats, hinzugefügte Kontakte, dein öffentlicher Verschlüsselungsschlüssel und die gesendeten Nachrichten.",
+        "Für den Messaging-Prototyp legst du ein Profil mit E-Mail, Benutzername und Passwort an. Auf dem Server (PostgreSQL-Datenbank) gespeichert werden: E-Mail (verschlüsselt), Benutzername, Passwort-Hash, öffentliche ID, Kombination für versteckte Chats, hinzugefügte Kontakte, dein öffentlicher Verschlüsselungsschlüssel, aktive Sitzungen und gesendete Nachrichten.",
         "<strong>Nachrichten:</strong> Der Inhalt wird vor dem Senden im Browser Ende-zu-Ende-verschlüsselt; der Server speichert nur Geheimtext und kann ihn nicht lesen. Metadaten (Absender, Uhrzeit, Reaktionen, Ablauf zeitgesteuerter Nachrichten) bleiben unverschlüsselt.",
         "<strong>Biometrische Entsperrung:</strong> Wenn du sie aktivierst, wird auf dem Server nur der öffentliche Schlüssel des Passkeys (WebAuthn) gespeichert. Biometrische Daten verlassen nie dein Gerät. Dein privater Verschlüsselungsschlüssel bleibt im Browser (localStorage).",
-        "<strong>Wichtig:</strong> Dies ist ein Demonstrationsprototyp: E-Mail und Benutzername werden unverschlüsselt gespeichert und der Dienst erreicht nicht den Standard eines Produktivprodukts. Passwörter werden nicht im Klartext gespeichert (nur ein gesalzener scrypt-Hash) und fehlgeschlagene Anmeldeversuche werden pro IP-Adresse und pro Benutzername begrenzt. Gib keine echten sensiblen Informationen ein: Verwende Testdaten."
+        "<strong>Wichtig:</strong> Dies ist ein Demonstrationsprototyp und der Dienst erreicht nicht den Standard eines Produktivprodukts. Die E-Mail wird im Ruhezustand verschlüsselt (AES-256-GCM) und nur für Bestätigung und Passwort-Wiederherstellung genutzt; der Benutzername bleibt im Klartext, weil die Anmeldung ihn braucht. Passwörter werden nicht im Klartext gespeichert (nur ein gesalzener scrypt-Hash) und fehlgeschlagene Anmeldeversuche werden pro IP-Adresse und Benutzername begrenzt. Gib keine echten sensiblen Informationen ein: Verwende Testdaten."
       ]],
       ["Zweck der Verarbeitung", ["Die Daten dienen ausschließlich dazu, die Demo zum Laufen zu bringen (Authentifizierung, Nachrichten, Kontakte). Sie werden nicht an Dritte weitergegeben und nicht für Werbeprofile verwendet."]],
-      ["Speicherdauer", ["Die Daten des Prototyps können jederzeit bei Updates oder Zurücksetzungen der Demo ohne Vorankündigung gelöscht werden."]],
+      ["Speicherdauer", ["Die Daten werden in einer dauerhaften Datenbank gespeichert, bis du das Profil löschst; bei Updates oder Demo-Resets können sie dennoch ohne Vorankündigung gelöscht werden."]],
       ["Deine Rechte", ["Du kannst jederzeit die Löschung der im Prototyp eingegebenen Daten verlangen, indem du über die oben genannten Kontaktmöglichkeiten schreibst."]]
     ]
   },

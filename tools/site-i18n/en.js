@@ -50,7 +50,7 @@ module.exports = {
       ["Hide what you want", "Type the secret combination into the search bar to reveal hidden chats when you need them."]
     ],
     disclaimerTitle: "What it is, what it isn't",
-    disclaimerHtml: "<strong>This is a functional prototype</strong>, not a finished product. Messages are end-to-end encrypted (ECDH P-256 + 256-bit AES-GCM, HKDF-SHA256 key derivation): the server never sees the plaintext. Biometric unlock uses real WebAuthn/FIDO2. Some known limits remain, spelled out plainly in the <a href=\"{manualUrl}\">user manual</a>: there's no Signal-style ratchet with forward secrecy yet, no out-of-band verification of public keys (so in theory a malicious server could swap one), the private key stays in the browser without a hardware secure enclave, and real email sending for account recovery isn't wired up yet. Good for trying the experience with real security that isn't yet \"nation-state proof\" — not yet for extremely high-risk conversations.",
+    disclaimerHtml: "<strong>This is a functional prototype</strong>, not a finished product. Messages are end-to-end encrypted (ECDH P-256 + 256-bit AES-GCM, HKDF-SHA256 key derivation): the server never sees the plaintext. Biometric unlock uses real WebAuthn/FIDO2. Some known limits remain, spelled out plainly in the <a href=\"{manualUrl}\">user manual</a>: there's no Signal-style ratchet with forward secrecy yet, no out-of-band verification of public keys (so in theory a malicious server could swap one), the private key stays in the browser without a hardware secure enclave, and password recovery by email only works with a verified email address. Good for trying the experience with real security that isn't yet \"nation-state proof\" — not yet for extremely high-risk conversations.",
     nativeTitle: "Native iOS and Android apps",
     nativeText: "The native app scaffold (Expo/React Native, with a system-level biometric lock) is ready in the project's code. Publishing to the App Store and Google Play requires the developer account credentials (Apple Developer Program and Google Play Console); until those are connected, the app remains available as a webapp, usable from any mobile browser and already installable via \"Add to Home Screen\".",
     ctaTitle: "Try the prototype",
@@ -70,7 +70,7 @@ module.exports = {
           "<strong>Public ID</strong>: this is what you share with people you want to add as contacts. It never reveals your email.",
           "<strong>Secret combination</strong>: used to reveal hidden chats (see the dedicated section)."
         ]],
-        ["warn", "If you lose your password, you lose access to the profile: there is no real email recovery yet (see \"Declared security limits\")."]
+        ["warn", "If you lose your password you can reset it by email, but only if the profile's email was verified. Without the password and without a verified email the profile cannot be recovered."]
       ]},
       { id: "profiles", h: "2. Multiple profiles on the same device", blocks: [
         ["p", "You can create several profiles (for example a personal one and a cover one) with the same username but different passwords. When you enter your username and password the matching profile opens, with no selection screen that would reveal how many profiles exist. You cannot use the same password for two profiles under the same username."]
@@ -115,14 +115,14 @@ module.exports = {
           "<strong>No ratchet / forward secrecy</strong>: a chat's key stays the same until both people regenerate their keys (unlike protocols such as Signal, which rotate keys with every message).",
           "<strong>No out-of-band verification of public keys</strong>: there's no \"safety number\" to compare out loud with a contact. In theory, a malicious server could swap in its own public key (a man-in-the-middle attack). Fine on a trusted server for a prototype; this verification should be added before any high-risk use.",
           "<strong>Private key lives in the browser</strong>: it's stored in the browser's local storage, not in a hardware secure enclave. Anyone with physical or software access to your unlocked device could read it.",
-          "<strong>No real email sending</strong>: sign-up works, but there's no email service connected yet for a \"magic link\" account-recovery flow."
+          "<strong>Recovery by email only</strong>: if you lose both the password and access to the verified email, the profile cannot be recovered. If you use several profiles (for example a cover one), use different emails: a recovery link reveals to whoever controls the email that the profile exists."
         ]]
       ]},
       { id: "troubleshooting", h: "12. Troubleshooting", blocks: [
         ["h3", "\"Can't encrypt: the contact doesn't have a public key yet\""],
         ["p", "This happens if your contact hasn't logged in since the latest app update (the key is generated and uploaded automatically at login). Ask them to log in once — after that you'll be able to message them normally."],
         ["h3", "\"I lost my password\""],
-        ["p", "There's currently no automatic recovery: you'll need to register a new profile. Always keep your password in a password manager."],
+        ["p", "Use \"Forgot password?\" on the login screen and enter your email and username: if the profile's email is verified you receive a link valid for 1 hour. If the email was not verified the profile cannot be recovered and must be created again. Always keep your password in a password manager."],
         ["h3", "Biometric unlock doesn't show up"],
         ["p", "It requires a device with Face ID, Touch ID, a fingerprint sensor, or Windows Hello set up, an up-to-date browser, and an HTTPS connection (the production webapp already uses one). It also needs to have been enabled at least once from settings."]
       ]}
@@ -136,13 +136,13 @@ module.exports = {
       ["Who processes the data", ["This website and the linked prototype are a personal demonstration project. For any data-related request you can get in touch via <a href=\"https://www.simonescaffidi.it\" target=\"_blank\" rel=\"noopener noreferrer\">www.simonescaffidi.it</a>."]],
       ["Data collected by the presentation website", ["This website does not use third-party analytics or tracking tools. Only the cookie preferences you choose are saved (see Cookie Policy), locally in your browser."]],
       ["Data collected by the prototype (/app)", [
-        "To use the messaging prototype you create a profile with an email, a username and a password. The following is stored on the server: email, username, password hash, public ID, hidden-chat combination, added contacts, your public encryption key and the messages sent.",
+        "To use the messaging prototype you create a profile with an email, a username and a password. The following is stored on the server (PostgreSQL database): email (encrypted), username, password hash, public ID, hidden-chat combination, added contacts, your public encryption key, active sessions and the messages sent.",
         "<strong>Messages:</strong> the content is end-to-end encrypted in the browser before sending; the server keeps only ciphertext and cannot read it. Metadata (sender, time, reactions, expiry of timed messages) remains unencrypted.",
         "<strong>Biometric unlock:</strong> if you enable it, only the passkey's public key (WebAuthn) is stored on the server. Biometric data never leaves your device. Your private encryption key stays in the browser (localStorage).",
-        "<strong>Important:</strong> this is a demonstration prototype: email and username are stored unencrypted and the service does not meet the standards of a production product. Passwords are not kept in plain text (only a salted scrypt hash) and failed login attempts are rate-limited per IP address and per username. Do not enter real sensitive information: use test data."
+        "<strong>Important:</strong> this is a demonstration prototype and the service does not meet the standards of a production product. The email is encrypted at rest (AES-256-GCM) and used only for verification and password recovery; the username stays in plain text because login needs it. Passwords are not kept in plain text (only a salted scrypt hash) and failed login attempts are rate-limited per IP address and per username. Do not enter real sensitive information: use test data."
       ]],
       ["Purpose of processing", ["The data is used solely to make the demo work (authentication, messaging, contacts). It is not shared with third parties and not used for advertising profiling."]],
-      ["Retention", ["Prototype data may be deleted at any time during demo updates or resets, without notice."]],
+      ["Retention", ["Data is kept in a persistent database until you delete the profile; during updates or demo resets it may still be deleted without notice."]],
       ["Your rights", ["You can request deletion of the data entered in the prototype at any time by writing via the contact details above."]]
     ]
   },

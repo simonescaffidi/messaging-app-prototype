@@ -51,7 +51,7 @@ module.exports = {
       ["Nascondi se vuoi", "Digita la combinazione segreta nella barra di ricerca per rivelare le chat nascoste quando serve."]
     ],
     disclaimerTitle: "Cosa è, cosa non è",
-    disclaimerHtml: "<strong>Questo è un prototipo funzionale</strong>, non un prodotto finito. I messaggi sono cifrati end-to-end (ECDH P-256 + AES-GCM 256 bit, derivazione HKDF-SHA256): il server non vede mai il testo in chiaro. Lo sblocco biometrico usa WebAuthn/FIDO2 reale. Restano dei limiti noti, spiegati senza giri di parole nel <a href=\"{manualUrl}\">manuale utente</a>: non c'è ancora un ratchet con forward secrecy \"alla Signal\", non c'è verifica fuori banda delle chiavi pubbliche (quindi in teoria un server malevolo potrebbe sostituirle), la chiave privata resta nel browser senza secure enclave hardware, e l'invio email per il recupero account non è ancora collegato a un servizio reale. Utile per provare l'esperienza d'uso con una sicurezza vera ma non \"a prova di stato\", non ancora per conversazioni ad altissimo rischio.",
+    disclaimerHtml: "<strong>Questo è un prototipo funzionale</strong>, non un prodotto finito. I messaggi sono cifrati end-to-end (ECDH P-256 + AES-GCM 256 bit, derivazione HKDF-SHA256): il server non vede mai il testo in chiaro. Lo sblocco biometrico usa WebAuthn/FIDO2 reale. Restano dei limiti noti, spiegati senza giri di parole nel <a href=\"{manualUrl}\">manuale utente</a>: non c'è ancora un ratchet con forward secrecy \"alla Signal\", non c'è verifica fuori banda delle chiavi pubbliche (quindi in teoria un server malevolo potrebbe sostituirle), la chiave privata resta nel browser senza secure enclave hardware, e il recupero password via email funziona solo con un'email verificata. Utile per provare l'esperienza d'uso con una sicurezza vera ma non \"a prova di stato\", non ancora per conversazioni ad altissimo rischio.",
     nativeTitle: "App native iOS e Android",
     nativeText: "Lo scaffold dell'app nativa (Expo/React Native, con blocco biometrico di sistema) è pronto nel codice del progetto. La pubblicazione su App Store e Google Play richiede le credenziali degli account sviluppatore (Apple Developer Program e Google Play Console): finché non vengono collegate, l'app resta disponibile come webapp, utilizzabile da qualsiasi browser mobile e già installabile come app tramite \"Aggiungi a schermata Home\".",
     ctaTitle: "Prova il prototipo",
@@ -71,7 +71,7 @@ module.exports = {
           "<strong>ID pubblico</strong>: è quello che condividi con le persone che vuoi aggiungere come contatti. Non rivela la tua email.",
           "<strong>Combinazione segreta</strong>: serve per rivelare le chat nascoste (vedi la sezione dedicata)."
         ]],
-        ["warn", "Se perdi la password, perdi l'accesso al profilo: non esiste ancora un recupero via email reale (vedi \"Limiti di sicurezza dichiarati\")."]
+        ["warn", "Se perdi la password puoi reimpostarla via email, ma solo se l'email del profilo è stata verificata. Senza password e senza email verificata il profilo non è recuperabile."]
       ]},
       { id: "profiles", h: "2. Profili multipli sullo stesso dispositivo", blocks: [
         ["p", "Puoi creare più profili (ad esempio uno personale e uno di copertura) con lo stesso username ma password diverse. Quando inserisci username e password si apre il profilo corrispondente, senza una schermata di scelta che riveli quanti profili esistono. Non puoi usare la stessa password per due profili con lo stesso username."]
@@ -116,14 +116,14 @@ module.exports = {
           "<strong>Nessun ratchet / forward secrecy</strong>: la chiave di una chat resta la stessa finché entrambe le persone non rigenerano le proprie chiavi (diversamente da protocolli come Signal, che cambiano chiave a ogni messaggio).",
           "<strong>Nessuna verifica fuori banda delle chiavi pubbliche</strong>: non c'è un \"numero di sicurezza\" da confrontare a voce con il contatto. In teoria, un server malevolo potrebbe sostituire una chiave pubblica con la propria (attacco man-in-the-middle). Su un server fidato per un prototipo va bene; prima di un uso ad alto rischio andrebbe aggiunta questa verifica.",
           "<strong>Chiave privata nel browser</strong>: è salvata nella memoria locale del browser (localStorage), non in un secure enclave hardware. Chi ha accesso fisico o software al dispositivo sbloccato potrebbe leggerla.",
-          "<strong>Nessun invio email reale</strong>: la registrazione funziona, ma non c'è ancora un servizio email collegato per un eventuale recupero account via \"magic link\"."
+          "<strong>Recupero solo via email</strong>: se perdi sia la password sia l'accesso all'email verificata, il profilo non è recuperabile. Se usi più profili (ad esempio uno di copertura), usa email diverse: un link di recupero rivela a chi controlla l'email che il profilo esiste."
         ]]
       ]},
       { id: "troubleshooting", h: "12. Risoluzione dei problemi", blocks: [
         ["h3", "\"Non riesco a cifrare: il contatto non ha ancora una chiave pubblica\""],
         ["p", "Succede se il tuo contatto non ha ancora effettuato l'accesso dopo l'ultimo aggiornamento dell'app (la chiave viene generata e caricata automaticamente al login). Chiedigli di accedere una volta: dopo potrai scrivergli normalmente."],
         ["h3", "\"Ho perso la password\""],
-        ["p", "Al momento non esiste un recupero automatico: è necessario registrare un nuovo profilo. Conserva sempre la password in un gestore di password."],
+        ["p", "Vai in «Password dimenticata?» nella schermata di accesso, inserisci email e username: se l'email del profilo è verificata ricevi un link valido 1 ora. Se l'email non era verificata, il profilo non è recuperabile e va creato di nuovo. Conserva sempre la password in un gestore di password."],
         ["h3", "Lo sblocco biometrico non appare"],
         ["p", "Richiede un dispositivo con Face ID, Touch ID, impronta o Windows Hello configurato, un browser aggiornato e una connessione HTTPS (la webapp in produzione la usa già). Deve inoltre essere stato attivato almeno una volta dalle impostazioni."]
       ]}
@@ -137,13 +137,13 @@ module.exports = {
       ["Chi tratta i dati", ["Questo sito e il prototipo collegato sono un progetto dimostrativo personale. Per qualsiasi richiesta relativa ai dati puoi scrivere tramite <a href=\"https://www.simonescaffidi.it\" target=\"_blank\" rel=\"noopener noreferrer\">www.simonescaffidi.it</a>."]],
       ["Dati raccolti dal sito di presentazione", ["Questo sito non utilizza strumenti di analytics o tracciamento di terze parti. Vengono salvate solo le preferenze cookie che scegli (vedi Cookie Policy), in locale sul tuo browser."]],
       ["Dati raccolti dal prototipo (/app)", [
-        "Per usare il prototipo di messaggistica crei un profilo con email, username e password. Vengono salvati sul server: email, username, hash della password, ID pubblico, combinazione per le chat nascoste, contatti aggiunti, la tua chiave pubblica di cifratura e i messaggi inviati.",
+        "Per usare il prototipo di messaggistica crei un profilo con email, username e password. Vengono salvati sul server (database PostgreSQL): email (cifrata), username, hash della password, ID pubblico, combinazione per le chat nascoste, contatti aggiunti, la tua chiave pubblica di cifratura, le sessioni attive e i messaggi inviati.",
         "<strong>Messaggi:</strong> il contenuto è cifrato end-to-end nel browser prima dell'invio; il server conserva solo testo cifrato e non può leggerlo. Restano invece in chiaro i metadati (mittente, orario, reazioni, scadenza dei messaggi a tempo).",
         "<strong>Sblocco biometrico:</strong> se lo attivi, sul server viene salvata solo la chiave pubblica della passkey (WebAuthn). I dati biometrici non lasciano mai il tuo dispositivo. La tua chiave privata di cifratura resta nel browser (localStorage).",
-        "<strong>Importante:</strong> è un prototipo dimostrativo: email e username sono salvati senza cifratura e il servizio non ha gli standard di un prodotto in produzione. Le password non sono conservate in chiaro (solo un hash con salt, scrypt) e i tentativi errati di accesso sono limitati per indirizzo IP e per username. Non inserire informazioni reali sensibili: usa dati di prova."
+        "<strong>Importante:</strong> è un prototipo dimostrativo e il servizio non ha gli standard di un prodotto in produzione. L'email è cifrata a riposo (AES-256-GCM) e usata solo per verifica e recupero password; lo username resta in chiaro perché serve al login. Le password non sono conservate in chiaro (solo un hash con salt, scrypt) e i tentativi errati di accesso sono limitati per indirizzo IP e per username. Non inserire informazioni reali sensibili: usa dati di prova."
       ]],
       ["Finalità del trattamento", ["I dati servono esclusivamente a far funzionare la demo (autenticazione, messaggistica, contatti). Non vengono ceduti a terzi, non sono usati per profilazione pubblicitaria."]],
-      ["Conservazione", ["I dati del prototipo possono essere cancellati in qualsiasi momento in occasione di aggiornamenti o reset della demo, senza preavviso."]],
+      ["Conservazione", ["I dati sono conservati in un database persistente finché non cancelli il profilo; durante gli aggiornamenti o i reset della demo possono comunque essere cancellati, senza preavviso."]],
       ["I tuoi diritti", ["Puoi chiedere in qualsiasi momento la cancellazione dei dati inseriti nel prototipo scrivendo tramite i contatti indicati sopra."]]
     ]
   },
