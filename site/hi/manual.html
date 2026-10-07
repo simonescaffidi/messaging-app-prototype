@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>उपयोगकर्ता मैनुअल — निजी मैसेजिंग</title>
+<title>उपयोगकर्ता मैनुअल — Securmy</title>
 <meta name="description" content="पूरी गाइड: साइन अप, उपयोगकर्ता नाम और पासवर्ड से लॉगिन, छुपी चैट, एंड-टू-एंड एन्क्रिप्शन, बायोमेट्रिक अनलॉक और उपलब्ध भाषाएँ।" />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/manual.html" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
@@ -19,10 +19,13 @@
 <link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/manual.html" />
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
 <meta property="og:type" content="article" />
-<meta property="og:title" content="उपयोगकर्ता मैनुअल — निजी मैसेजिंग" />
+<meta property="og:title" content="उपयोगकर्ता मैनुअल — Securmy" />
 <meta property="og:description" content="पूरी गाइड: साइन अप, उपयोगकर्ता नाम और पासवर्ड से लॉगिन, छुपी चैट, एंड-टू-एंड एन्क्रिप्शन, बायोमेट्रिक अनलॉक और उपलब्ध भाषाएँ।" />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/manual.html" />
-<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/icon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/icon-512.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/style.css" />
 </head>
@@ -30,7 +33,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/hi/" class="brand"><span class="lock">🔒</span> निजी मैसेजिंग</a>
+    <a href="/hi/" class="brand"><img class="logo-mark" src="/icon.svg" width="28" height="28" alt="" /> Securmy</a>
     <div class="header-actions">
       <select class="lang-select" aria-label="भाषा" onchange="location.href=this.value"><option value="/manuale.html">Italiano</option><option value="/en/manual.html">English</option><option value="/es/manual.html">Español</option><option value="/fr/manual.html">Français</option><option value="/de/manual.html">Deutsch</option><option value="/pt/manual.html">Português</option><option value="/ar/manual.html">العربية</option><option value="/zh/manual.html">中文</option><option value="/hi/manual.html" selected>हिन्दी</option><option value="/ru/manual.html">Русский</option><option value="/ja/manual.html">日本語</option></select>
       <a href="/hi/manual.html" class="btn btn-ghost btn-sm">मैनुअल</a>
@@ -42,7 +45,7 @@
 
 <main>
   <h1>उपयोगकर्ता मैनुअल</h1>
-  <p class="lead">निजी मैसेजिंग की पूरी गाइड: पंजीकरण और लॉगिन कैसे करें, गोपनीयता सुविधाएँ कैसे इस्तेमाल करें, और समझें कि यह प्रोटोटाइप वास्तव में क्या सुरक्षित रखता है — और क्या नहीं।</p>
+  <p class="lead">Securmy की पूरी गाइड: पंजीकरण और लॉगिन कैसे करें, गोपनीयता सुविधाएँ कैसे इस्तेमाल करें, और समझें कि यह प्रोटोटाइप वास्तव में क्या सुरक्षित रखता है — और क्या नहीं।</p>
 
   <nav class="toc" aria-label="विषय-सूची">
     <strong>विषय-सूची</strong>
@@ -59,6 +62,7 @@
       <li><a href="#mobile">नेटिव मोबाइल ऐप (iOS/Android)</a></li>
       <li><a href="#limits">घोषित सुरक्षा सीमाएँ</a></li>
       <li><a href="#troubleshooting">समस्या-निवारण</a></li>
+      <li><a href="#suite">Securmy तिजोरी और उपकरण</a></li>
     </ol>
   </nav>
 
@@ -157,6 +161,34 @@
     <p>इसके लिए Face ID, Touch ID, फ़िंगरप्रिंट या Windows Hello सेट किया हुआ डिवाइस, अपडेटेड ब्राउज़र और HTTPS कनेक्शन चाहिए (प्रोडक्शन वेब ऐप पहले से इसका उपयोग करता है)। साथ ही इसे सेटिंग से कम-से-कम एक बार सक्षम किया गया होना चाहिए।</p>
     <h3>«संदेश अब पढ़ा नहीं जा सकता»</h3>
     <p>सुरक्षा के लिए हर संदेश की कुंजी पढ़ते ही मिटा दी जाती है: पाठ केवल इस डिवाइस की एन्क्रिप्टेड कैश में रहता है। डिवाइस बदलें, ब्राउज़र डेटा मिटाएँ या ईमेल से पासवर्ड रीसेट करें तो पुराने संदेश वापस नहीं मिलते। यही फ़ॉरवर्ड सीक्रेसी की कीमत है।</p>
+  </section>
+
+  <section id="suite">
+    <h2>13. Securmy तिजोरी और उपकरण</h2>
+    <p>साइडबार के 🛡️ बटन से तिजोरी खोलें। इसके अंदर सब कुछ आपके डिवाइस पर AES-256-GCM से एन्क्रिप्टेड है, एक ऐसी कुंजी से जो आपकी तिजोरी में रहती है और आपके पासवर्ड से सुरक्षित है: सर्वर को फ़ाइलें, नोट्स या पासवर्ड कभी नहीं मिलते।</p>
+    <h3>फ़ाइल तिजोरी</h3>
+    <p>फ़ाइलें टैब से फ़ाइलें जोड़ें (प्रत्येक अधिकतम 100 MB)। बॉक्स चुना हो तो फ़ोटो से सहेजने से पहले मेटाडेटा हट जाता है। हर फ़ाइल को डाउनलोड, P2P से भेजा या हटाया जा सकता है।</p>
+    <h3>लिंक से P2P भेजना</h3>
+    <p>फ़ाइल और समाप्ति समय (10 मिनट या 1 घंटा) चुनें: आपको एक बार चलने वाला लिंक मिलता है। फ़ाइल सीधे प्राप्तकर्ता तक जाती है, उस कुंजी से एन्क्रिप्टेड जो केवल लिंक में # के बाद होती है और सर्वर तक कभी नहीं पहुँचती। स्थानांतरण पूरा होने तक पेज खुला रखें।</p>
+    <h3>फ़ोटो साफ़ करें</h3>
+    <p>चित्र को दोबारा बनाकर EXIF, GPS स्थान और थंबनेल हटा देता है। JPEG, PNG और WebP के साथ काम करता है; अन्य फ़ॉर्मैट के लिए स्वचालित सफ़ाई उपलब्ध नहीं।</p>
+    <h3>नोट्स और पासवर्ड</h3>
+    <p>नोट्स और क्रेडेंशियल तिजोरी में एन्क्रिप्टेड रहते हैं। जनरेटर यादृच्छिक पासवर्ड बनाता है; पासवर्ड कॉपी करने पर क्लिपबोर्ड 20 सेकंड बाद साफ़ हो जाता है।</p>
+    <h3>एक बार दिखने वाले संदेश</h3>
+    <p>संदेश बॉक्स के पास “एक बार देखें” चुनें। प्राप्तकर्ता देखने के लिए टैप करता है: पाठ 10 सेकंड दिखता है, फिर उसके डिवाइस और सर्वर पर नष्ट हो जाता है। यह पढ़ने वाले को स्क्रीन की फ़ोटो लेने से नहीं रोकता।</p>
+    <h3>वॉइस और वीडियो कॉल</h3>
+    <p>चैट हेडर के 📞 और 🎥 बटन इस्तेमाल करें। ऑडियो और वीडियो डिवाइसों के बीच सीधे, एन्क्रिप्टेड चलते हैं। दोनों को 4 अंकों का कोड दिखता है: बोलकर मिलाएँ; मेल खाए तो कॉल बीच में नहीं पकड़ी गई।</p>
+    <h3>दो-चरणीय सत्यापन</h3>
+    <p>सुरक्षा में आप ऑथेंटिकेटर ऐप (Google Authenticator, Aegis, 1Password…) से TOTP कोड चालू कर सकते हैं। चालू होने के बाद पासवर्ड से लॉग इन करने पर 6 अंकों का कोड भी चाहिए। बायोमेट्रिक अनलॉक एक अलग प्रवेश विधि बना रहता है।</p>
+    <h3>बैकअप और आपातकालीन मिटाना</h3>
+    <p>बैकअप में फ़ाइलें, नोट्स और पासवर्ड हैं, जो आपके चुने कम से कम 10 अक्षर के गुप्त वाक्यांश से एन्क्रिप्टेड हैं: उसके बिना पुनर्प्राप्ति नहीं होती। संदेश शामिल नहीं हैं। आपातकालीन मिटाना डिवाइस से कुंजियाँ, संदेश कैश, फ़ाइलें, नोट्स और पासवर्ड हटा देता है और वापस नहीं होता।</p>
+    <h3>जानने योग्य सीमाएँ</h3>
+    <ul>
+      <li>तिजोरी स्थानीय है: फ़ाइलें, नोट्स और पासवर्ड डिवाइसों के बीच सिंक नहीं होते; उन्हें ले जाने के लिए बैकअप का उपयोग करें।</li>
+      <li>P2P भेजने और कॉल में दूसरा व्यक्ति (और एक सार्वजनिक STUN सर्वर) आपका IP पता देख सकता है, जब तक सेवा TURN सर्वर इस्तेमाल न करे; बहुत सख़्त नेटवर्क में कनेक्शन विफल हो सकता है।</li>
+      <li>पासवर्ड मैनेजर मूलभूत है: फ़ॉर्म अपने आप नहीं भरता और पेशेवर उपयोग में समर्पित मैनेजर की जगह नहीं लेता।</li>
+      <li>पासवर्ड और बैकअप वाक्यांश दोनों खो जाएँ तो एन्क्रिप्टेड डेटा वापस नहीं मिल सकता: कोई भी, हम भी नहीं, उसे खोल नहीं सकता।</li>
+    </ul>
   </section>
 </main>
 

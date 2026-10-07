@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>निजी मैसेजिंग — कई प्रोफ़ाइल और छिपी चैट वाली चैट</title>
-<meta name="description" content="वास्तविक एंड-टू-एंड एन्क्रिप्शन, बायोमेट्रिक अनलॉक, कई प्रोफ़ाइल और छिपी चैट वाली निजी चैट। 11 भाषाएँ, फ़ोन नंबर नहीं।" />
+<title>Securmy — निजी मैसेजिंग, फ़ाइल तिजोरी और एन्क्रिप्टेड P2P भेजना</title>
+<meta name="description" content="वास्तविक एंड-टू-एंड एन्क्रिप्शन वाली चैट, फ़ाइल तिजोरी, एन्क्रिप्टेड पासवर्ड और नोट्स, लिंक से P2P भेजना, एन्क्रिप्टेड कॉल और दो-चरणीय सत्यापन। 11 भाषाएँ।" />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
 <link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/" />
@@ -19,10 +19,13 @@
 <link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/" />
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="निजी मैसेजिंग — प्रोटोटाइप" />
-<meta property="og:description" content="एंड-टू-एंड एन्क्रिप्शन, बायोमेट्रिक अनलॉक, कई प्रोफ़ाइल, छिपी चैट और कवर प्रोफ़ाइल — 11 भाषाओं में।" />
+<meta property="og:title" content="Securmy — सुरक्षा, गोपनीयता और निजता" />
+<meta property="og:description" content="संदेश, फ़ाइलें, पासवर्ड और कॉल एंड-टू-एंड एन्क्रिप्शन से सुरक्षित: सब कुछ आपके डिवाइस पर एन्क्रिप्टेड, 11 भाषाओं में।" />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/" />
-<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/icon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/icon-512.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/style.css" />
 </head>
@@ -30,7 +33,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/hi/" class="brand"><span class="lock">🔒</span> निजी मैसेजिंग</a>
+    <a href="/hi/" class="brand"><img class="logo-mark" src="/icon.svg" width="28" height="28" alt="" /> Securmy</a>
     <div class="header-actions">
       <select class="lang-select" aria-label="भाषा" onchange="location.href=this.value"><option value="/">Italiano</option><option value="/en/">English</option><option value="/es/">Español</option><option value="/fr/">Français</option><option value="/de/">Deutsch</option><option value="/pt/">Português</option><option value="/ar/">العربية</option><option value="/zh/">中文</option><option value="/hi/" selected>हिन्दी</option><option value="/ru/">Русский</option><option value="/ja/">日本語</option></select>
       <a href="/hi/manual.html" class="btn btn-ghost btn-sm">मैनुअल</a>
@@ -107,6 +110,66 @@
     </div>
   </section>
 
+  <section class="features suite" id="suite">
+    <div class="container">
+      <h2>सिर्फ़ चैट नहीं: आपकी डिजिटल तिजोरी</h2>
+      <p class="sec-lead">Securmy मैसेजिंग से आगे जाता है। आप जो भी सहेजते या साझा करते हैं वह आपके डिवाइस पर एन्क्रिप्ट होता है, उसी तिजोरी से जो आपकी चैट की रक्षा करती है।</p>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="icon">🗄️</div>
+          <h3>फ़ाइल तिजोरी</h3>
+          <p>दस्तावेज़, फ़ोटो और फ़ाइलें छिपाएँ और सुरक्षित रखें: डिवाइस पर AES-256 से एन्क्रिप्टेड, सिर्फ़ आपके पासवर्ड या बायोमेट्रिक से खुलती हैं।</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🔗</div>
+          <h3>लिंक से P2P भेजना</h3>
+          <p>फ़ाइल सीधे एक डिवाइस से दूसरे तक एन्क्रिप्टेड जाती है, सर्वर पर सहेजी नहीं जाती। एक बार चलने वाला लिंक, समय-सीमा के साथ।</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🧼</div>
+          <h3>मेटाडेटा की सफ़ाई</h3>
+          <p>साझा करने से पहले फ़ोटो से GPS स्थान, कैमरा मॉडल और अन्य छिपा डेटा हटाता है।</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🔑</div>
+          <h3>पासवर्ड मैनेजर</h3>
+          <p>तिजोरी में क्रेडेंशियल सहेजें, मज़बूत पासवर्ड बनाएँ और कॉपी करें: क्लिपबोर्ड 20 सेकंड बाद साफ़ हो जाता है।</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">📝</div>
+          <h3>एन्क्रिप्टेड नोट्स</h3>
+          <p>निजी नोट्स आपके डिवाइस पर एन्क्रिप्टेड, किसी सर्वर को कभी नहीं भेजे जाते।</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">👁️</div>
+          <h3>एक बार दिखने वाले संदेश</h3>
+          <p>प्राप्तकर्ता उन्हें सिर्फ़ एक बार खोलता है: कुछ सेकंड बाद वे सर्वर और उसके डिवाइस से मिट जाते हैं।</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">📞</div>
+          <h3>एन्क्रिप्टेड वॉइस और वीडियो कॉल</h3>
+          <p>दोनों डिवाइस के बीच सीधे (DTLS-SRTP), साथ में एक सत्यापन कोड जिसे जासूसी से बचाव के लिए बोलकर मिलाया जाता है।</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🔢</div>
+          <h3>दो-चरणीय सत्यापन</h3>
+          <p>किसी भी ऑथेंटिकेटर ऐप से TOTP कोड: पासवर्ड जान लेने वाला भी अंदर नहीं आ सकता।</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">💾</div>
+          <h3>एन्क्रिप्टेड बैकअप</h3>
+          <p>फ़ाइलें, नोट्स और पासवर्ड एक ही आर्काइव में निर्यात करें, जिसे सिर्फ़ आपका जाना गुप्त वाक्यांश एन्क्रिप्ट करता है।</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🚨</div>
+          <h3>सुरक्षा जाँच और आपातकालीन मिटाना</h3>
+          <p>एक स्कोर बताता है क्या सुधारें; ख़तरे में एक टैप से डिवाइस से कुंजियाँ, फ़ाइलें और पासवर्ड मिट जाते हैं।</p>
+        </article>
+      </div>
+      <p class="sec-lead"><a href="/hi/demo.html" class="btn btn-ghost">डेमो आज़माएँ</a></p>
+    </div>
+  </section>
+
   <section class="features security" id="security">
     <div class="container">
       <h2>सुरक्षा और गोपनीयता: ऐप का मूल</h2>
@@ -166,6 +229,30 @@
           <h3>जो चाहें छिपाएँ</h3>
           <p>ज़रूरत पड़ने पर छिपी चैट दिखाने के लिए खोज बार में गुप्त संयोजन लिखें।</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features roadmap" id="roadmap">
+    <div class="container">
+      <h2>जल्द आ रहा है</h2>
+      <p class="sec-lead">हम क्या योजना बना रहे हैं। यह अभी उपलब्ध नहीं है और इसे किसी तारीख़ का वादा न समझें।</p>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="icon">🧅</div>
+          <h3>Tor नेटवर्क</h3>
+          <p>सेवा का .onion पता और नेटिव ऐप में Tor मोड, ताकि आपकी नेटवर्क लोकेशन भी छिपी रहे। अकेला ब्राउज़र ट्रैफ़िक को Tor से नहीं भेज सकता: Tor Browser या नेटिव ऐप चाहिए।</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">📱</div>
+          <h3>iOS और Android ऐप</h3>
+          <p>बायोमेट्रिक अनलॉक वाले नेटिव ऐप, स्टोर में प्रकाशित, वेबसाइट जैसी ही सुरक्षा और गोपनीयता गारंटी के साथ।</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🛰️</div>
+          <h3>निजी TURN सर्वर</h3>
+          <p>कॉल और P2P भेजने में आपका IP पता छिपाने और बहुत सख़्त नेटवर्क के पीछे भी चलाने के लिए।</p>
+        </article>
       </div>
     </div>
   </section>

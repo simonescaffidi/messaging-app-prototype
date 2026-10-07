@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>इंटरैक्टिव डेमो — निजी मैसेजिंग</title>
-<meta name="description" content="निजी मैसेजिंग अभी आज़माएँ: कोड से लॉगिन, छिपी चैट, कवर प्रोफ़ाइल, समय-सीमित संदेश और एंड-टू-एंड एन्क्रिप्शन। ब्राउज़र में सिमुलेशन, खाता नहीं चाहिए।" />
+<title>इंटरैक्टिव डेमो — Securmy</title>
+<meta name="description" content="Securmy अभी आज़माएँ: कोड से लॉगिन, छिपी चैट, कवर प्रोफ़ाइल, समय-सीमित संदेश और एंड-टू-एंड एन्क्रिप्शन। ब्राउज़र में सिमुलेशन, खाता नहीं चाहिए।" />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/demo.html" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/demo.html" />
 <link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/demo.html" />
@@ -19,10 +19,13 @@
 <link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/demo.html" />
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/demo.html" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="इंटरैक्टिव डेमो — निजी मैसेजिंग" />
-<meta property="og:description" content="निजी मैसेजिंग अभी आज़माएँ: कोड से लॉगिन, छिपी चैट, कवर प्रोफ़ाइल, समय-सीमित संदेश और एंड-टू-एंड एन्क्रिप्शन। ब्राउज़र में सिमुलेशन, खाता नहीं चाहिए।" />
+<meta property="og:title" content="इंटरैक्टिव डेमो — Securmy" />
+<meta property="og:description" content="Securmy अभी आज़माएँ: कोड से लॉगिन, छिपी चैट, कवर प्रोफ़ाइल, समय-सीमित संदेश और एंड-टू-एंड एन्क्रिप्शन। ब्राउज़र में सिमुलेशन, खाता नहीं चाहिए।" />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/demo.html" />
-<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/icon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/icon-512.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/style.css" />
 </head>
@@ -30,7 +33,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/hi/" class="brand"><span class="lock">🔒</span> निजी मैसेजिंग</a>
+    <a href="/hi/" class="brand"><img class="logo-mark" src="/icon.svg" width="28" height="28" alt="" /> Securmy</a>
     <div class="header-actions">
       <select class="lang-select" aria-label="भाषा" onchange="location.href=this.value"><option value="/demo.html">Italiano</option><option value="/en/demo.html">English</option><option value="/es/demo.html">Español</option><option value="/fr/demo.html">Français</option><option value="/de/demo.html">Deutsch</option><option value="/pt/demo.html">Português</option><option value="/ar/demo.html">العربية</option><option value="/zh/demo.html">中文</option><option value="/hi/demo.html" selected>हिन्दी</option><option value="/ru/demo.html">Русский</option><option value="/ja/demo.html">日本語</option></select>
       <a href="/hi/manual.html" class="btn btn-ghost btn-sm">मैनुअल</a>
@@ -54,12 +57,19 @@
         <li>मेन्यू से कोई चैट छिपाएँ, फिर खोज में <strong>7777</strong> लिखकर उसे वापस लाएँ।</li>
         <li>लॉक करें और उपयोगकर्ता नाम <strong>demo</strong> व पासवर्ड <strong>2222</strong> से फिर लॉग इन करें: सिर्फ़ कवर प्रोफ़ाइल दिखेगा।</li>
       </ol>
+      <h2>फिर तिजोरी आज़माएँ</h2>
+      <ol class="demo-try">
+        <li>लॉग इन के बाद नीचे <strong>तिजोरी</strong> पर टैप करें।</li>
+        <li><strong>फ़ाइलें</strong> में एक फ़ाइल जोड़ें और दिखाएँ कि डिस्क चुराने वाले को क्या दिखेगा: सिर्फ़ एन्क्रिप्टेड डेटा।</li>
+        <li><strong>भेजें</strong> में एक बार वाला P2P लिंक बनाएँ और देखें फ़ाइल सर्वर से गुज़रे बिना पहुँचती है।</li>
+        <li><strong>एक बार</strong> में पढ़ने के बाद नष्ट होने वाला संदेश भेजें, फिर <strong>सुरक्षा</strong> की जाँचें चालू करें।</li>
+      </ol>
       <p><a href="/app/" class="btn btn-primary">ऐप खोलें</a></p>
     </div>
     <div id="phone" class="phone" aria-label="डेमो आज़माएँ"></div>
   </div>
 </main>
-<script>window.__DEMO_I18N={"nav":"डेमो","cta":"डेमो आज़माएँ","title":"इंटरैक्टिव डेमो — निजी मैसेजिंग","description":"निजी मैसेजिंग अभी आज़माएँ: कोड से लॉगिन, छिपी चैट, कवर प्रोफ़ाइल, समय-सीमित संदेश और एंड-टू-एंड एन्क्रिप्शन। ब्राउज़र में सिमुलेशन, खाता नहीं चाहिए।","h1":"डेमो आज़माएँ","lead":"एक इंटरैक्टिव सिमुलेशन जो सिर्फ़ आपके ब्राउज़र में चलता है: कोई खाता नहीं, कोई डेटा नहीं भेजा जाता। असली ऐप के लिए “ऐप खोलें” बटन इस्तेमाल करें।","notice":"सिम्युलेटेड डेमो: संदेश आपके डिवाइस पर ही रहते हैं। AES-GCM एन्क्रिप्शन असली है, लेकिन संपर्क और जवाब नकली हैं।","tryTitle":"क्या आज़माएँ","tryItems":["उपयोगकर्ता नाम \u003cstrong>demo\u003c/strong> और पासवर्ड \u003cstrong>1111\u003c/strong> (निजी प्रोफ़ाइल) से या बायोमेट्रिक बटन से लॉग इन करें।","कोई चैट खोलें और \u003cstrong>30 सेकंड\u003c/strong> के टाइमर वाला संदेश भेजें: यह खुद मिट जाता है।","“सर्वर व्यू” चालू करें और देखें कि एन्क्रिप्टेड संदेश कैसा दिखता है।","मेन्यू से कोई चैट छिपाएँ, फिर खोज में \u003cstrong>7777\u003c/strong> लिखकर उसे वापस लाएँ।","लॉक करें और उपयोगकर्ता नाम \u003cstrong>demo\u003c/strong> व पासवर्ड \u003cstrong>2222\u003c/strong> से फिर लॉग इन करें: सिर्फ़ कवर प्रोफ़ाइल दिखेगा।"],"userLabel":"उपयोगकर्ता नाम","codeLabel":"पासवर्ड","codePh":"जैसे 1111","enter":"प्रवेश करें","bio":"फ़िंगरप्रिंट / Face ID से अनलॉक करें","bioScan":"बायोमेट्रिक जाँच हो रही है…","wrongCode":"अमान्य जानकारी। demo + 1111 या 2222 आज़माएँ।","searchPh":"खोजें (या गुप्त संयोजन)","hide":"चैट छिपाएँ","unhide":"चैट दिखाएँ","hiddenTag":"छिपी","msgPh":"संदेश लिखें…","send":"भेजें","timers":["टाइमर नहीं","30 सेकंड","5 मिनट","1 घंटा"],"serverView":"सर्वर व्यू (एन्क्रिप्टेड)","lockBtn":"लॉक","e2eTag":"एंड-टू-एंड एन्क्रिप्टेड","expiresIn":"{s} सेकंड में मिट जाएगा","secretFound":"छिपी चैट दिखाई गईं","chatsTitle":"चैट","back":"वापस","empty":"कोई चैट नहीं","n1":"अन्ना","m1":"कल शाम 6 बजे मिलें?","n2":"मार्को","m2":"आज रात मैं दस्तावेज़ भेजता हूँ।","n3":"लुका","m3":"योजना पक्की है, किसी को मत बताना।","nc":"माँ","mc":"रोटी लाना मत भूलना!","replies":["बढ़िया, बाद में मिलते हैं!","मिल गया 👍","ठीक है, धन्यवाद।"]};</script>
+<script>window.__DEMO_I18N={"nav":"डेमो","cta":"डेमो आज़माएँ","title":"इंटरैक्टिव डेमो — Securmy","description":"Securmy अभी आज़माएँ: कोड से लॉगिन, छिपी चैट, कवर प्रोफ़ाइल, समय-सीमित संदेश और एंड-टू-एंड एन्क्रिप्शन। ब्राउज़र में सिमुलेशन, खाता नहीं चाहिए।","h1":"डेमो आज़माएँ","lead":"एक इंटरैक्टिव सिमुलेशन जो सिर्फ़ आपके ब्राउज़र में चलता है: कोई खाता नहीं, कोई डेटा नहीं भेजा जाता। असली ऐप के लिए “ऐप खोलें” बटन इस्तेमाल करें।","notice":"सिम्युलेटेड डेमो: संदेश आपके डिवाइस पर ही रहते हैं। AES-GCM एन्क्रिप्शन असली है, लेकिन संपर्क और जवाब नकली हैं।","tryTitle":"क्या आज़माएँ","tryItems":["उपयोगकर्ता नाम \u003cstrong>demo\u003c/strong> और पासवर्ड \u003cstrong>1111\u003c/strong> (निजी प्रोफ़ाइल) से या बायोमेट्रिक बटन से लॉग इन करें।","कोई चैट खोलें और \u003cstrong>30 सेकंड\u003c/strong> के टाइमर वाला संदेश भेजें: यह खुद मिट जाता है।","“सर्वर व्यू” चालू करें और देखें कि एन्क्रिप्टेड संदेश कैसा दिखता है।","मेन्यू से कोई चैट छिपाएँ, फिर खोज में \u003cstrong>7777\u003c/strong> लिखकर उसे वापस लाएँ।","लॉक करें और उपयोगकर्ता नाम \u003cstrong>demo\u003c/strong> व पासवर्ड \u003cstrong>2222\u003c/strong> से फिर लॉग इन करें: सिर्फ़ कवर प्रोफ़ाइल दिखेगा।"],"userLabel":"उपयोगकर्ता नाम","codeLabel":"पासवर्ड","codePh":"जैसे 1111","enter":"प्रवेश करें","bio":"फ़िंगरप्रिंट / Face ID से अनलॉक करें","bioScan":"बायोमेट्रिक जाँच हो रही है…","wrongCode":"अमान्य जानकारी। demo + 1111 या 2222 आज़माएँ।","searchPh":"खोजें (या गुप्त संयोजन)","hide":"चैट छिपाएँ","unhide":"चैट दिखाएँ","hiddenTag":"छिपी","msgPh":"संदेश लिखें…","send":"भेजें","timers":["टाइमर नहीं","30 सेकंड","5 मिनट","1 घंटा"],"serverView":"सर्वर व्यू (एन्क्रिप्टेड)","lockBtn":"लॉक","e2eTag":"एंड-टू-एंड एन्क्रिप्टेड","expiresIn":"{s} सेकंड में मिट जाएगा","secretFound":"छिपी चैट दिखाई गईं","chatsTitle":"चैट","back":"वापस","empty":"कोई चैट नहीं","n1":"अन्ना","m1":"कल शाम 6 बजे मिलें?","n2":"मार्को","m2":"आज रात मैं दस्तावेज़ भेजता हूँ।","n3":"लुका","m3":"योजना पक्की है, किसी को मत बताना।","nc":"माँ","mc":"रोटी लाना मत भूलना!","replies":["बढ़िया, बाद में मिलते हैं!","मिल गया 👍","ठीक है, धन्यवाद।"],"sNavChats":"चैट","sNavVault":"तिजोरी","sTabFiles":"फ़ाइलें","sTabPw":"पासवर्ड","sTabP2p":"भेजें","sTabOnce":"एक बार","sTabCall":"कॉल","sTabSec":"सुरक्षा","sAddFile":"एक नमूना फ़ाइल जोड़ें","sEnc":"एन्क्रिप्टेड","sShowCipher":"दिखाएँ डिस्क इसे कैसे देखती है","sFilesEmpty":"कोई फ़ाइल नहीं: एक जोड़ें।","sStripped":"मेटाडेटा हटाया (GPS, कैमरा)","sGen":"पासवर्ड बनाएँ","sCopy":"कॉपी","sCopied":"कॉपी हो गया: क्लिपबोर्ड 20 सेकंड में साफ़","sStrength":"मज़बूती","sP2pCreate":"“contract.pdf” के लिए लिंक बनाएँ","sP2pLink":"एक बार वाला लिंक, 10 मिनट में समाप्त","sP2pWait":"प्राप्तकर्ता की प्रतीक्षा…","sP2pJoined":"प्राप्तकर्ता जुड़ गया","sP2pSending":"सीधा, एन्क्रिप्टेड भेजना","sP2pDone":"पहुँच गई। लिंक अब काम नहीं करता।","sP2pNote":"डेमो में कनेक्शन नकली है; असली ऐप में फ़ाइल सीधे डिवाइसों के बीच जाती है।","sOnceSend":"एक बार दिखने वाला संदेश भेजें","sOnceTap":"देखने के लिए टैप करें (फिर गायब)","sOnceGone":"संदेश नष्ट","sOnceText":"तिजोरी का कोड 4821 है","sOnceIn":"{s} सेकंड में नष्ट","sCallStart":"परीक्षण कॉल शुरू करें","sCallRinging":"कॉल हो रही है…","sCallConnected":"एन्क्रिप्टेड कॉल","sCallCode":"सत्यापन कोड","sCallHint":"दोनों कोड बोलकर मिलें तो कोई कॉल नहीं सुन रहा।","sCallEnd":"समाप्त","sSecTitle":"सुरक्षा जाँच","sSecLevel":"सुरक्षा स्तर","sSec1":"तिजोरी अनलॉक","sSec2":"मज़बूत पासवर्ड","sSec3":"दो-चरणीय सत्यापन","sSec4":"हाल का बैकअप","sSec5":"संपर्कों की कुंजियाँ सत्यापित","sSecTap":"चालू करने के लिए किसी आइटम पर टैप करें","suiteTryTitle":"फिर तिजोरी आज़माएँ","suiteTry":["लॉग इन के बाद नीचे \u003cstrong>तिजोरी\u003c/strong> पर टैप करें।","\u003cstrong>फ़ाइलें\u003c/strong> में एक फ़ाइल जोड़ें और दिखाएँ कि डिस्क चुराने वाले को क्या दिखेगा: सिर्फ़ एन्क्रिप्टेड डेटा।","\u003cstrong>भेजें\u003c/strong> में एक बार वाला P2P लिंक बनाएँ और देखें फ़ाइल सर्वर से गुज़रे बिना पहुँचती है।","\u003cstrong>एक बार\u003c/strong> में पढ़ने के बाद नष्ट होने वाला संदेश भेजें, फिर \u003cstrong>सुरक्षा\u003c/strong> की जाँचें चालू करें।"]};</script>
 <script src="/demo.js"></script>
 
 <footer class="site-footer">

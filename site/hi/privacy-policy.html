@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>गोपनीयता नीति — निजी मैसेजिंग</title>
-<meta name="description" content="निजी मैसेजिंग प्रोटोटाइप की गोपनीयता सूचना: कौन-सा डेटा संसाधित होता है और कैसे।" />
+<title>गोपनीयता नीति — Securmy</title>
+<meta name="description" content="Securmy प्रोटोटाइप की गोपनीयता सूचना: कौन-सा डेटा संसाधित होता है और कैसे।" />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/privacy-policy.html" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/privacy-policy.html" />
 <link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/privacy-policy.html" />
@@ -19,10 +19,13 @@
 <link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/privacy-policy.html" />
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/privacy-policy.html" />
 <meta property="og:type" content="article" />
-<meta property="og:title" content="गोपनीयता नीति — निजी मैसेजिंग" />
-<meta property="og:description" content="निजी मैसेजिंग प्रोटोटाइप की गोपनीयता सूचना: कौन-सा डेटा संसाधित होता है और कैसे।" />
+<meta property="og:title" content="गोपनीयता नीति — Securmy" />
+<meta property="og:description" content="Securmy प्रोटोटाइप की गोपनीयता सूचना: कौन-सा डेटा संसाधित होता है और कैसे।" />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/hi/privacy-policy.html" />
-<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/icon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/icon-512.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/style.css" />
 </head>
@@ -30,7 +33,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/hi/" class="brand"><span class="lock">🔒</span> निजी मैसेजिंग</a>
+    <a href="/hi/" class="brand"><img class="logo-mark" src="/icon.svg" width="28" height="28" alt="" /> Securmy</a>
     <div class="header-actions">
       <select class="lang-select" aria-label="भाषा" onchange="location.href=this.value"><option value="/privacy-policy.html">Italiano</option><option value="/en/privacy-policy.html">English</option><option value="/es/privacy-policy.html">Español</option><option value="/fr/privacy-policy.html">Français</option><option value="/de/privacy-policy.html">Deutsch</option><option value="/pt/privacy-policy.html">Português</option><option value="/ar/privacy-policy.html">العربية</option><option value="/zh/privacy-policy.html">中文</option><option value="/hi/privacy-policy.html" selected>हिन्दी</option><option value="/ru/privacy-policy.html">Русский</option><option value="/ja/privacy-policy.html">日本語</option></select>
       <a href="/hi/manual.html" class="btn btn-ghost btn-sm">मैनुअल</a>
@@ -66,6 +69,11 @@
 
   <h2>आपके अधिकार</h2>
   <p>आप ऊपर दिए संपर्क माध्यम से लिखकर प्रोटोटाइप में डाले गए डेटा को हटाने का अनुरोध कभी भी कर सकते हैं।</p>
+
+  <h2>Securmy की सुविधाएँ: तिजोरी, P2P भेजना और कॉल</h2>
+  <p>तिजोरी की फ़ाइलें, नोट्स, पासवर्ड और बैकअप आपके डिवाइस पर रहते हैं, ऐसी कुंजी से एन्क्रिप्टेड जो डिवाइस से बाहर नहीं जाती: हम उन्हें प्राप्त नहीं करते और न पढ़ सकते हैं न पुनर्प्राप्त कर सकते हैं।</p>
+  <p>P2P भेजने और कॉल में सामग्री डिवाइसों के बीच सीधे, एन्क्रिप्टेड चलती है। सर्वर केवल कनेक्शन जानकारी (SDP और ICE कैंडिडेट) संभालता है, जो अधिकतम एक घंटे स्मृति में रहती है और फिर हटा दी जाती है; दूसरा प्रतिभागी और एक सार्वजनिक STUN सर्वर आपका IP पता देख सकते हैं।</p>
+  <p>दो-चरणीय सत्यापन चालू करने पर हम TOTP गुप्त कुंजी एन्क्रिप्टेड रूप में रखते हैं; एक बार दिखने वाले संदेश खुलने के कुछ सेकंड बाद सर्वर से हटा दिए जाते हैं।</p>
 </main>
 
 <footer class="site-footer">
