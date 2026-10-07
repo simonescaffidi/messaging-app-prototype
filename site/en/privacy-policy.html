@@ -51,16 +51,16 @@
   <p>This website does not use third-party analytics or tracking tools. Only the cookie preferences you choose are saved (see Cookie Policy), locally in your browser.</p>
 
   <h2>Data collected by the prototype (/app)</h2>
-  <p>To use the messaging prototype you create a profile with an email, a username and a password. The following is stored on the server: email, username, password hash, public ID, hidden-chat combination, added contacts, your public encryption key and the messages sent.</p>
+  <p>To use the messaging prototype you create a profile with an email, a username and a password. The following is stored on the server (PostgreSQL database): email (encrypted), username, password hash, public ID, hidden-chat combination, added contacts, your public encryption key, active sessions and the messages sent.</p>
   <p><strong>Messages:</strong> the content is end-to-end encrypted in the browser before sending; the server keeps only ciphertext and cannot read it. Metadata (sender, time, reactions, expiry of timed messages) remains unencrypted.</p>
   <p><strong>Biometric unlock:</strong> if you enable it, only the passkey's public key (WebAuthn) is stored on the server. Biometric data never leaves your device. Your private encryption key stays in the browser (localStorage).</p>
-  <p><strong>Important:</strong> this is a demonstration prototype: email and username are stored unencrypted and the service does not meet the standards of a production product. Passwords are not kept in plain text (only a salted scrypt hash) and failed login attempts are rate-limited per IP address and per username. Do not enter real sensitive information: use test data.</p>
+  <p><strong>Important:</strong> this is a demonstration prototype and the service does not meet the standards of a production product. The email is encrypted at rest (AES-256-GCM) and used only for verification and password recovery; the username stays in plain text because login needs it. Passwords are not kept in plain text (only a salted scrypt hash) and failed login attempts are rate-limited per IP address and per username. Do not enter real sensitive information: use test data.</p>
 
   <h2>Purpose of processing</h2>
   <p>The data is used solely to make the demo work (authentication, messaging, contacts). It is not shared with third parties and not used for advertising profiling.</p>
 
   <h2>Retention</h2>
-  <p>Prototype data may be deleted at any time during demo updates or resets, without notice.</p>
+  <p>Data is kept in a persistent database until you delete the profile; during updates or demo resets it may still be deleted without notice.</p>
 
   <h2>Your rights</h2>
   <p>You can request deletion of the data entered in the prototype at any time by writing via the contact details above.</p>

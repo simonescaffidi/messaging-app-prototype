@@ -71,7 +71,7 @@
       <li><strong>Public ID</strong>: this is what you share with people you want to add as contacts. It never reveals your email.</li>
       <li><strong>Secret combination</strong>: used to reveal hidden chats (see the dedicated section).</li>
     </ul>
-    <p class="warn">If you lose your password, you lose access to the profile: there is no real email recovery yet (see "Declared security limits").</p>
+    <p class="warn">If you lose your password you can reset it by email, but only if the profile's email was verified. Without the password and without a verified email the profile cannot be recovered.</p>
   </section>
 
   <section id="profiles">
@@ -136,7 +136,7 @@
       <li><strong>No ratchet / forward secrecy</strong>: a chat's key stays the same until both people regenerate their keys (unlike protocols such as Signal, which rotate keys with every message).</li>
       <li><strong>No out-of-band verification of public keys</strong>: there's no "safety number" to compare out loud with a contact. In theory, a malicious server could swap in its own public key (a man-in-the-middle attack). Fine on a trusted server for a prototype; this verification should be added before any high-risk use.</li>
       <li><strong>Private key lives in the browser</strong>: it's stored in the browser's local storage, not in a hardware secure enclave. Anyone with physical or software access to your unlocked device could read it.</li>
-      <li><strong>No real email sending</strong>: sign-up works, but there's no email service connected yet for a "magic link" account-recovery flow.</li>
+      <li><strong>Recovery by email only</strong>: if you lose both the password and access to the verified email, the profile cannot be recovered. If you use several profiles (for example a cover one), use different emails: a recovery link reveals to whoever controls the email that the profile exists.</li>
     </ul>
   </section>
 
@@ -145,7 +145,7 @@
     <h3>"Can't encrypt: the contact doesn't have a public key yet"</h3>
     <p>This happens if your contact hasn't logged in since the latest app update (the key is generated and uploaded automatically at login). Ask them to log in once — after that you'll be able to message them normally.</p>
     <h3>"I lost my password"</h3>
-    <p>There's currently no automatic recovery: you'll need to register a new profile. Always keep your password in a password manager.</p>
+    <p>Use "Forgot password?" on the login screen and enter your email and username: if the profile's email is verified you receive a link valid for 1 hour. If the email was not verified the profile cannot be recovered and must be created again. Always keep your password in a password manager.</p>
     <h3>Biometric unlock doesn't show up</h3>
     <p>It requires a device with Face ID, Touch ID, a fingerprint sensor, or Windows Hello set up, an up-to-date browser, and an HTTPS connection (the production webapp already uses one). It also needs to have been enabled at least once from settings.</p>
   </section>
