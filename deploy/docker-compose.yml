@@ -1,0 +1,35 @@
+# Securmy: server TURN (coturn) + servizio onion Tor, da eseguire su una VPS con IP pubblico.
+# Uso: copia .env.example in .env, compila i valori e lancia `docker compose up -d`.
+services:
+  coturn:
+    image: coturn/coturn:latest
+    network_mode: host            # coturn ha bisogno di molte porte UDP
+    restart: unless-stopped
+    command: >
+      -n --log-file=stdout --no-cli --fingerprint
+      --use-auth-secret --static-auth-secret=${TURN_SECRET}
+      --realm=${TURN_REALM} --listening-port=3478
+      --min-port=49160 --max-port=49200
+      --external-ip=${PUBLIC_IP}
+      --no-multicast-peers --denied-peer-ip=10.0.0.0-10.255.255.255
+      --denied-peer-ip=172.16.0.0-172.31.255.255 --denied-peer-ip=192.168.0.0-192.168.255.255
+      --denied-peer-ip=127.0.0.0-127.255.255.255 --no-tcp-relay=false
+
+  onion-proxy:
+    image: nginx:alpine
+    restart: unless-stopped
+    volumes: ["./nginx-onion.conf:/etc/nginx/templates/default.conf.template:ro"]
+    environment: { UPSTREAM_HOST: "${UPSTREAM_HOST}" }
+    networks: [onion]
+
+  tor:
+    build: { context: ., dockerfile: tor.Dockerfile }   # Tor ufficiale dai pacchetti Alpine
+    restart: unless-stopped
+    depends_on: [onion-proxy]
+    volumes:
+      - ./torrc:/etc/tor/torrc:ro
+      - tor-keys:/var/lib/tor/securmy   # contiene la chiave privata dell'indirizzo .onion: fai un backup
+    networks: [onion]
+
+volumes: { tor-keys: {} }
+networks: { onion: {} }

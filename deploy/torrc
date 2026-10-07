@@ -1,0 +1,6 @@
+# Servizio onion v3 per Securmy: inoltra le richieste all'nginx locale, che le gira al server.
+HiddenServiceDir /var/lib/tor/securmy
+HiddenServicePort 80 onion-proxy:8080
+HiddenServiceVersion 3
+SocksPort 0
+Log notice stdout
