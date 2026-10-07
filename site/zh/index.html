@@ -107,6 +107,45 @@
     </div>
   </section>
 
+  <section class="features security" id="security">
+    <div class="container">
+      <h2>安全与隐私：应用的核心</h2>
+      <p class="sec-lead">我们不只说“已加密”。下面具体说明是什么在保护你的对话。</p>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="icon">🔄</div>
+          <h3>每条消息一把新密钥</h3>
+          <p>每条消息都有一次性密钥（前向保密），读后即删除。即使有人拿到你的密钥，也无法解密过去的消息。</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🗝️</div>
+          <h3>用你的密码加密的保险库</h3>
+          <p>私钥和已读消息在设备上用你的密码加密（PBKDF2 + AES-GCM）：没有密码就无法读取。</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🔍</div>
+          <h3>密钥验证与防窃听提醒</h3>
+          <p>与联系人当面或语音核对安全号码。若对方密钥变化，应用会提醒并在你确认前阻止发送。</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🙈</div>
+          <h3>“看不见”的服务器</h3>
+          <p>服务器只保存密文。邮箱和用户名在数据库中加密存放；密码只保存哈希（scrypt）。</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🛡️</div>
+          <h3>防御登录攻击</h3>
+          <p>按 IP 和用户名限制尝试次数，会话可撤销，修改密码时关闭其他会话。</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🫆</div>
+          <h3>生物识别不离开设备</h3>
+          <p>使用 WebAuthn/FIDO2，服务器只收到通行密钥的公钥：生物特征数据永远不会离开你的手机或电脑。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <section class="how" id="how-it-works">
     <div class="container">
       <h2>如何运作</h2>
@@ -135,7 +174,7 @@
     <div class="container">
       <h2>它是什么，不是什么</h2>
       <div class="disclaimer-box">
-        <p><strong>这是一个功能原型</strong>，而不是成品。消息采用端到端加密（ECDH P-256 + 256 位 AES-GCM，密钥由 HKDF-SHA256 派生）：服务器永远看不到明文。生物识别解锁使用真正的 WebAuthn/FIDO2。仍存在一些已知限制，已在<a href="/zh/manual.html">用户手册</a>中坦率说明：目前尚无“类似 Signal”的具备前向保密的棘轮机制；没有对公钥的带外验证（因此理论上恶意服务器可能替换公钥）；私钥保存在浏览器中，没有硬件安全隔区；通过邮件找回密码仅适用于已验证的邮箱。适合体验真实的安全性，但尚不能“抵御国家级对手”——暂不适用于高风险对话。</p>
+        <p><strong>这是一个可运行的原型</strong>，并非成品，但安全是真实的：每条消息有一把读后即删的新密钥（前向保密），私钥存放在用你的密码加密的保险库中，你可以用安全号码验证联系人身份，并在其密钥变化时收到警告。生物识别解锁使用真实的 WebAuthn/FIDO2。仍有已知限制，已在<a href="/zh/manual.html">用户手册</a>中坦率说明（元数据对服务器可见、历史绑定设备、仅能通过邮箱找回）。它尚不适用于极高风险的对话。</p>
       </div>
     </div>
   </section>
