@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Messagerie Privée — Chat à profils multiples et discussions masquées</title>
-<meta name="description" content="Chat privé avec un vrai chiffrement de bout en bout, déverrouillage biométrique, profils multiples et discussions masquées. 11 langues, sans numéro de téléphone." />
+<title>Securmy — Messagerie privée, coffre de fichiers et envoi P2P chiffré</title>
+<meta name="description" content="Chat à chiffrement de bout en bout réel, coffre de fichiers, mots de passe et notes chiffrés, envoi P2P par lien, appels chiffrés et vérification en deux étapes. 11 langues." />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
 <link rel="alternate" hreflang="en" href="https://messaging-app-prototype-production-ecb3.up.railway.app/en/" />
@@ -19,10 +19,13 @@
 <link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/" />
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Messagerie Privée — Prototype" />
-<meta property="og:description" content="Chiffrement de bout en bout, déverrouillage biométrique, profils multiples, discussions masquées et profil de couverture en 11 langues." />
+<meta property="og:title" content="Securmy — Sécurité, confidentialité et discrétion" />
+<meta property="og:description" content="Messages, fichiers, mots de passe et appels protégés par un chiffrement de bout en bout : tout est chiffré sur votre appareil, en 11 langues." />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/" />
-<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/icon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/icon-512.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/style.css" />
 </head>
@@ -30,7 +33,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/fr/" class="brand"><span class="lock">🔒</span> Messagerie Privée</a>
+    <a href="/fr/" class="brand"><img class="logo-mark" src="/icon.svg" width="28" height="28" alt="" /> Securmy</a>
     <div class="header-actions">
       <select class="lang-select" aria-label="Langue" onchange="location.href=this.value"><option value="/">Italiano</option><option value="/en/">English</option><option value="/es/">Español</option><option value="/fr/" selected>Français</option><option value="/de/">Deutsch</option><option value="/pt/">Português</option><option value="/ar/">العربية</option><option value="/zh/">中文</option><option value="/hi/">हिन्दी</option><option value="/ru/">Русский</option><option value="/ja/">日本語</option></select>
       <a href="/fr/manual.html" class="btn btn-ghost btn-sm">Manuel</a>
@@ -107,6 +110,66 @@
     </div>
   </section>
 
+  <section class="features suite" id="suite">
+    <div class="container">
+      <h2>Plus qu'un chat : votre coffre numérique</h2>
+      <p class="sec-lead">Securmy va au-delà de la messagerie. Tout ce que vous enregistrez ou partagez est chiffré sur votre appareil, avec le même coffre qui protège vos discussions.</p>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="icon">🗄️</div>
+          <h3>Coffre de fichiers</h3>
+          <p>Cachez et protégez documents, photos et fichiers : chiffrés sur l'appareil en AES-256 et ouverts uniquement par votre mot de passe ou la biométrie.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🔗</div>
+          <h3>Envoi P2P par lien</h3>
+          <p>Le fichier passe directement d'un appareil à l'autre, chiffré, sans être stocké sur le serveur. Lien à usage unique avec expiration.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🧼</div>
+          <h3>Nettoyage des métadonnées</h3>
+          <p>Supprime la position GPS, le modèle d'appareil et d'autres données cachées des photos avant de les partager.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🔑</div>
+          <h3>Gestionnaire de mots de passe</h3>
+          <p>Enregistrez vos identifiants dans le coffre, générez des mots de passe robustes et copiez-les : le presse-papiers est vidé au bout de 20 secondes.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">📝</div>
+          <h3>Notes chiffrées</h3>
+          <p>Notes privées chiffrées sur votre appareil, jamais envoyées à un serveur.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">👁️</div>
+          <h3>Messages à vue unique</h3>
+          <p>Le destinataire ne les ouvre qu'une fois : quelques secondes après, ils sont supprimés du serveur et de son appareil.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">📞</div>
+          <h3>Appels audio et vidéo chiffrés</h3>
+          <p>Directement entre les deux appareils (DTLS-SRTP), avec un code de vérification à comparer à voix haute contre l'écoute.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🔢</div>
+          <h3>Vérification en deux étapes</h3>
+          <p>Codes TOTP avec n'importe quelle appli d'authentification : même quelqu'un qui découvre votre mot de passe n'entre pas.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">💾</div>
+          <h3>Sauvegarde chiffrée</h3>
+          <p>Exportez fichiers, notes et mots de passe dans une seule archive chiffrée par une phrase secrète que vous seul connaissez.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🚨</div>
+          <h3>Contrôle de sécurité et effacement d'urgence</h3>
+          <p>Un score vous dit quoi améliorer ; en cas de danger, un geste efface de l'appareil clés, fichiers et mots de passe.</p>
+        </article>
+      </div>
+      <p class="sec-lead"><a href="/fr/demo.html" class="btn btn-ghost">Essayer la démo</a></p>
+    </div>
+  </section>
+
   <section class="features security" id="security">
     <div class="container">
       <h2>Sécurité et confidentialité : le cœur de l'appli</h2>
@@ -166,6 +229,30 @@
           <h3>Masquez ce que vous voulez</h3>
           <p>Saisissez la combinaison secrète dans la barre de recherche pour révéler les discussions masquées quand vous en avez besoin.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features roadmap" id="roadmap">
+    <div class="container">
+      <h2>Bientôt</h2>
+      <p class="sec-lead">Ce que nous prévoyons. Ce n'est pas encore disponible et ne constitue pas une date promise.</p>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="icon">🧅</div>
+          <h3>Réseau Tor</h3>
+          <p>Une adresse .onion du service et un mode Tor dans les applis natives, pour masquer aussi votre position réseau. Un navigateur seul ne peut pas faire passer le trafic par Tor : il faut Tor Browser ou l'appli native.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">📱</div>
+          <h3>Applis iOS et Android</h3>
+          <p>Applis natives avec déverrouillage biométrique, publiées sur les stores avec les mêmes garanties de sécurité et de confidentialité que le site.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon">🛰️</div>
+          <h3>Serveur TURN privé</h3>
+          <p>Pour masquer votre adresse IP pendant les appels et envois P2P et les faire fonctionner même derrière des réseaux très restrictifs.</p>
+        </article>
       </div>
     </div>
   </section>

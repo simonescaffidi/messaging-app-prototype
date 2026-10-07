@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Manuel d'utilisation — Messagerie Privée</title>
+<title>Manuel d'utilisation — Securmy</title>
 <meta name="description" content="Guide complet : inscription, connexion par identifiant et mot de passe, discussions masquées, chiffrement de bout en bout, déverrouillage biométrique et langues disponibles." />
 <link rel="canonical" href="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/manual.html" />
 <link rel="alternate" hreflang="it" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
@@ -19,10 +19,13 @@
 <link rel="alternate" hreflang="ja" href="https://messaging-app-prototype-production-ecb3.up.railway.app/ja/manual.html" />
 <link rel="alternate" hreflang="x-default" href="https://messaging-app-prototype-production-ecb3.up.railway.app/manuale.html" />
 <meta property="og:type" content="article" />
-<meta property="og:title" content="Manuel d'utilisation — Messagerie Privée" />
+<meta property="og:title" content="Manuel d'utilisation — Securmy" />
 <meta property="og:description" content="Guide complet : inscription, connexion par identifiant et mot de passe, discussions masquées, chiffrement de bout en bout, déverrouillage biométrique et langues disponibles." />
 <meta property="og:url" content="https://messaging-app-prototype-production-ecb3.up.railway.app/fr/manual.html" />
-<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.svg" />
+<meta property="og:image" content="https://messaging-app-prototype-production-ecb3.up.railway.app/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/icon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/icon-512.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/style.css" />
 </head>
@@ -30,7 +33,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/fr/" class="brand"><span class="lock">🔒</span> Messagerie Privée</a>
+    <a href="/fr/" class="brand"><img class="logo-mark" src="/icon.svg" width="28" height="28" alt="" /> Securmy</a>
     <div class="header-actions">
       <select class="lang-select" aria-label="Langue" onchange="location.href=this.value"><option value="/manuale.html">Italiano</option><option value="/en/manual.html">English</option><option value="/es/manual.html">Español</option><option value="/fr/manual.html" selected>Français</option><option value="/de/manual.html">Deutsch</option><option value="/pt/manual.html">Português</option><option value="/ar/manual.html">العربية</option><option value="/zh/manual.html">中文</option><option value="/hi/manual.html">हिन्दी</option><option value="/ru/manual.html">Русский</option><option value="/ja/manual.html">日本語</option></select>
       <a href="/fr/manual.html" class="btn btn-ghost btn-sm">Manuel</a>
@@ -42,7 +45,7 @@
 
 <main>
   <h1>Manuel d'utilisation</h1>
-  <p class="lead">Guide complet de Messagerie Privée : comment s'inscrire, se connecter, utiliser les fonctions de confidentialité et comprendre ce que ce prototype protège vraiment — et ce qu'il ne protège pas.</p>
+  <p class="lead">Guide complet de Securmy : comment s'inscrire, se connecter, utiliser les fonctions de confidentialité et comprendre ce que ce prototype protège vraiment — et ce qu'il ne protège pas.</p>
 
   <nav class="toc" aria-label="Sommaire">
     <strong>Sommaire</strong>
@@ -59,6 +62,7 @@
       <li><a href="#mobile">Apps mobiles natives (iOS/Android)</a></li>
       <li><a href="#limits">Limites de sécurité déclarées</a></li>
       <li><a href="#troubleshooting">Dépannage</a></li>
+      <li><a href="#suite">Coffre et outils Securmy</a></li>
     </ol>
   </nav>
 
@@ -157,6 +161,34 @@
     <p>Il nécessite un appareil avec Face ID, Touch ID, empreinte ou Windows Hello configuré, un navigateur à jour et une connexion HTTPS (l'application web en production en utilise déjà une). Il doit en outre avoir été activé au moins une fois dans les réglages.</p>
     <h3>« Message illisible »</h3>
     <p>Par sécurité, la clé de chaque message est supprimée dès que vous l'avez lu : le texte ne reste que dans le cache chiffré de cet appareil. Si vous changez d'appareil, effacez les données du navigateur ou réinitialisez le mot de passe par e-mail, les messages précédents sont irrécupérables. C'est le prix de la forward secrecy.</p>
+  </section>
+
+  <section id="suite">
+    <h2>13. Coffre et outils Securmy</h2>
+    <p>Ouvrez le Coffre avec le bouton 🛡️ de la barre latérale. Tout son contenu est chiffré sur votre appareil en AES-256-GCM, avec une clé conservée dans votre coffre et protégée par votre mot de passe : le serveur ne reçoit jamais fichiers, notes ni mots de passe.</p>
+    <h3>Coffre de fichiers</h3>
+    <p>Ajoutez des fichiers (jusqu'à 100 Mo chacun) depuis l'onglet Fichiers. Si la case est cochée, les métadonnées des photos sont supprimées avant l'enregistrement. Vous pouvez télécharger, envoyer en P2P ou supprimer chaque fichier.</p>
+    <h3>Envoi P2P par lien</h3>
+    <p>Choisissez un fichier et une durée de validité (10 minutes ou 1 heure) : vous obtenez un lien à usage unique. Le fichier va directement au destinataire, chiffré avec une clé qui se trouve uniquement après le # du lien et n'atteint jamais le serveur. Gardez la page ouverte jusqu'à la fin du transfert.</p>
+    <h3>Nettoyer les photos</h3>
+    <p>Redessine l'image en supprimant EXIF, position GPS et miniatures. Fonctionne avec JPEG, PNG et WebP ; pour les autres formats, le nettoyage automatique n'est pas disponible.</p>
+    <h3>Notes et mots de passe</h3>
+    <p>Notes et identifiants restent chiffrés dans le coffre. Le générateur crée des mots de passe aléatoires ; quand vous en copiez un, le presse-papiers est vidé au bout de 20 secondes.</p>
+    <h3>Messages à vue unique</h3>
+    <p>Choisissez « Vue unique » à côté du champ de message. Le destinataire touche pour voir : le texte reste visible 10 secondes, puis il est détruit sur son appareil et sur le serveur. Cela n'empêche pas de photographier l'écran.</p>
+    <h3>Appels audio et vidéo</h3>
+    <p>Utilisez les boutons 📞 et 🎥 dans l'en-tête de la discussion. Audio et vidéo circulent directement entre les appareils, chiffrés. Les deux voient un code à 4 chiffres : comparez-le à voix haute ; s'il coïncide, l'appel n'a pas été intercepté.</p>
+    <h3>Vérification en deux étapes</h3>
+    <p>Dans Sécurité, vous pouvez activer les codes TOTP avec une appli d'authentification (Google Authenticator, Aegis, 1Password…). Une fois activés, la connexion par mot de passe exige aussi le code à 6 chiffres. Le déverrouillage biométrique reste une méthode d'accès distincte.</p>
+    <h3>Sauvegarde et effacement d'urgence</h3>
+    <p>La sauvegarde contient fichiers, notes et mots de passe chiffrés avec une phrase secrète d'au moins 10 caractères que vous choisissez : sans elle, elle est irrécupérable. Les messages ne sont pas inclus. L'effacement d'urgence supprime de l'appareil clés, cache des messages, fichiers, notes et mots de passe et est irréversible.</p>
+    <h3>Limites à connaître</h3>
+    <ul>
+      <li>Le coffre est local : fichiers, notes et mots de passe ne se synchronisent pas entre appareils ; utilisez la sauvegarde pour les déplacer.</li>
+      <li>Dans les envois P2P et les appels, l'autre personne (et un serveur STUN public) peut voir votre adresse IP, sauf si le service utilise un serveur TURN ; sur des réseaux très restrictifs, la connexion peut échouer.</li>
+      <li>Le gestionnaire de mots de passe est basique : il ne remplit pas les formulaires seul et ne remplace pas un gestionnaire dédié pour un usage professionnel.</li>
+      <li>Si vous perdez votre mot de passe et la phrase de sauvegarde, les données chiffrées sont irrécupérables : personne, pas même nous, ne peut les ouvrir.</li>
+    </ul>
   </section>
 </main>
 
