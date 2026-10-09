@@ -56,7 +56,7 @@ eas submit --platform android
 
 Il file `eas.json` ha già i profili `development`, `preview` e
 `production` pronti; `app.json` ha già bundle id/package name
-provvisori (`it.simonescaffidi.messaggistica`) da confermare o cambiare.
+confermati (`it.simonescaffidi.securmy`).
 
 ## Test locale (senza pubblicare nulla)
 
@@ -82,7 +82,7 @@ sviluppatore.
 ## Pubblicazione negli store (passi che richiedono le tue credenziali)
 
 1. `npm install -g eas-cli && cd mobile && npm install && eas login` (account Expo gratuito) poi `eas init` (scrive il projectId in `app.json`).
-2. Scegli l'identificativo definitivo (`bundleIdentifier` iOS e `package` Android) prima della prima build: dopo la pubblicazione non cambia più. Oggi è `it.simonescaffidi.messaggistica`.
+2. Scegli l'identificativo definitivo (`bundleIdentifier` iOS e `package` Android) prima della prima build: dopo la pubblicazione non cambia più. Confermato: `it.simonescaffidi.securmy`.
 3. Android: `eas build --platform android --profile production` (AAB), poi crea l'app in Google Play Console (account sviluppatore, 25 USD una tantum) e carica con `eas submit`.
 4. iOS: serve Apple Developer Program (99 USD/anno); `eas build --platform ios`, poi `eas submit`. Compila `appleId`, `ascAppId`, `appleTeamId` in `eas.json`.
 5. Testi per gli store: `STORE-LISTING.md`. Apple richiede un URL di privacy e la dichiarazione "Privacy nutrition label"; Google la scheda "Sicurezza dei dati": usa i contenuti della privacy policy del sito.

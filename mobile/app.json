@@ -14,7 +14,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "it.simonescaffidi.messaggistica",
+      "bundleIdentifier": "it.simonescaffidi.securmy",
       "infoPlist": {
         "NSFaceIDUsageDescription": "Usa Face ID per sbloccare rapidamente i tuoi profili di Securmy.",
         "NSCameraUsageDescription": "La fotocamera serve per le videochiamate cifrate e per scegliere foto da proteggere.",
@@ -23,7 +23,7 @@
       }
     },
     "android": {
-      "package": "it.simonescaffidi.messaggistica",
+      "package": "it.simonescaffidi.securmy",
       "permissions": [
         "USE_BIOMETRIC",
         "USE_FINGERPRINT",
