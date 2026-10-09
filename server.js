@@ -19,6 +19,7 @@ const {
 } = require("@simplewebauthn/server");
 
 const syncMod = require("./sync");
+const pushMod = require("./push");
 const app = express();
 app.set("trust proxy", 1); // dietro il proxy di Railway: req.ip e' l'IP reale del client
 app.use(express.json({ limit: "256kb", verify: (req, _res, buf) => { if (req.url.startsWith("/api/stripe/")) req.rawBody = buf; } }));
@@ -726,6 +727,7 @@ app.post("/api/messages", requireAuth, (req, res) => {
 
   for (const memberId of chat.memberIds) {
     broadcastToProfile(memberId, { type: "message", chatId, message: msg });
+    if (memberId !== req.profileId) pushMod.notifyMessage({ db, chat, recipientId: memberId, isOnline: (id) => !!(sockets.get(id) && sockets.get(id).size), store });
   }
   res.json({ message: msg });
 });
@@ -1096,6 +1098,7 @@ app.get("/api/ice", async (req, res) => {
   const relay = turn && (process.env.TURN_RELAY_ONLY === "1" || req.query.relay === "1");
   res.json({ iceServers: servers, turn, relayOnly: !!relay });
 });
+pushMod.mount(app, { requireAuth, store });
 const syncApi = syncMod.mount(app, { requireAuth, store, rate, baseUrl, express });
 
 // ---------- WEBSOCKET ----------
