@@ -1,31 +1,14 @@
 {
-  "cli": {
-    "version": ">= 12.0.0"
-  },
+  "cli": { "version": ">= 12.0.0", "appVersionSource": "remote" },
   "build": {
-    "development": {
-      "developmentClient": true,
-      "distribution": "internal"
-    },
-    "preview": {
-      "distribution": "internal",
-      "android": { "buildType": "apk" }
-    },
-    "production": {
-      "autoIncrement": true
-    }
+    "development": { "developmentClient": true, "distribution": "internal" },
+    "preview": { "distribution": "internal", "android": { "buildType": "apk" } },
+    "production": { "autoIncrement": true }
   },
   "submit": {
     "production": {
-      "ios": {
-        "appleId": "DA-INSERIRE",
-        "ascAppId": "DA-INSERIRE",
-        "appleTeamId": "DA-INSERIRE"
-      },
-      "android": {
-        "serviceAccountKeyPath": "./google-play-service-account.json",
-        "track": "internal"
-      }
+      "ios": { "appleId": "DA-INSERIRE", "ascAppId": "DA-INSERIRE", "appleTeamId": "DA-INSERIRE" },
+      "android": { "serviceAccountKeyPath": "./google-play-service-account.json", "track": "internal" }
     }
   }
 }

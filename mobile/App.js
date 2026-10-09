@@ -1,133 +1,79 @@
-import React, { useCallback, useRef, useState } from "react";
-import { BackHandler, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator, Text, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import * as LocalAuthentication from "expo-local-authentication";
-import { WebView } from "react-native-webview";
-import { APP_URL } from "./config";
+import { NavigationContainer, DarkTheme } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { THEME as T } from "./src/config";
+import { t, useLang } from "./src/i18n";
+import { S, boot, loginWithBiometrics } from "./src/session";
+import { Button, H1, P, Screen } from "./src/ui";
+import AuthScreen from "./src/screens/AuthScreen";
+import ChatsScreen from "./src/screens/ChatsScreen";
+import ChatScreen from "./src/screens/ChatScreen";
+import VaultScreen from "./src/screens/VaultScreen";
+import SecurityScreen from "./src/screens/SecurityScreen";
+import SettingsScreen from "./src/screens/SettingsScreen";
+import CallOverlay from "./src/screens/CallScreen";
 
-// Wrapper nativo iOS/Android per la webapp "Securmy".
-// La webapp e' gia' completa (login a codice, E2E, WebAuthn, i18n in 11
-// lingue): questo involucro nativo aggiunge solo
-//  1) un blocco biometrico di sistema all'apertura dell'app (facoltativo,
-//     usa Face ID / Touch ID / impronta tramite expo-local-authentication,
-//     separato dal WebAuthn gestito dentro la webview),
-//  2) la gestione del tasto "indietro" Android dentro la WebView,
-//  3) una schermata di errore con "Riprova" se la rete non e' disponibile.
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+const theme = { ...DarkTheme, colors: { ...DarkTheme.colors, background: T.bg, card: T.panel, text: T.text, border: T.border, primary: T.accent } };
 
-export default function App() {
-  const [locked, setLocked] = useState(true);
-  const [authError, setAuthError] = useState(null);
-  const [loadError, setLoadError] = useState(false);
-  const webviewRef = useRef(null);
-  const [canGoBack, setCanGoBack] = useState(false);
-
-  const tryUnlock = useCallback(async () => {
-    setAuthError(null);
-    try {
-      const hasHardware = await LocalAuthentication.hasHardwareAsync();
-      const isEnrolled = await LocalAuthentication.isEnrolledAsync();
-      if (!hasHardware || !isEnrolled) {
-        // Nessun Face ID/Touch ID/impronta configurato sul dispositivo:
-        // si passa direttamente alla webapp, che gestisce il proprio
-        // accesso tramite codice.
-        setLocked(false);
-        return;
-      }
-      const result = await LocalAuthentication.authenticateAsync({
-        promptMessage: "Sblocca Securmy",
-        disableDeviceFallback: false,
-        cancelLabel: "Annulla"
-      });
-      if (result.success) {
-        setLocked(false);
-      } else {
-        setAuthError("Sblocco annullato o non riuscito. Riprova.");
-      }
-    } catch (e) {
-      // In caso di errore del modulo biometrico, non blocchiamo l'accesso:
-      // la webapp ha comunque il proprio login a codice.
-      setLocked(false);
-    }
-  }, []);
-
-  React.useEffect(() => {
-    tryUnlock();
-  }, [tryUnlock]);
-
-  React.useEffect(() => {
-    const onBackPress = () => {
-      if (canGoBack && webviewRef.current) {
-        webviewRef.current.goBack();
-        return true;
-      }
-      return false;
-    };
-    const sub = BackHandler.addEventListener("hardwareBackPress", onBackPress);
-    return () => sub.remove();
-  }, [canGoBack]);
-
-  if (locked) {
-    return (
-      <SafeAreaView style={styles.center}>
-        <StatusBar style="light" />
-        <Text style={styles.title}>🔒 Securmy</Text>
-        {authError ? <Text style={styles.error}>{authError}</Text> : null}
-        <TouchableOpacity style={styles.button} onPress={tryUnlock}>
-          <Text style={styles.buttonText}>Sblocca</Text>
-        </TouchableOpacity>
-      </SafeAreaView>
-    );
-  }
-
-  if (loadError) {
-    return (
-      <SafeAreaView style={styles.center}>
-        <StatusBar style="light" />
-        <Text style={styles.title}>Connessione non disponibile</Text>
-        <Text style={styles.error}>Controlla la connessione internet e riprova.</Text>
-        <TouchableOpacity style={styles.button} onPress={() => setLoadError(false)}>
-          <Text style={styles.buttonText}>Riprova</Text>
-        </TouchableOpacity>
-      </SafeAreaView>
-    );
-  }
-
+function Tabs() {
+  useLang();
+  const icon = (e) => () => <Text style={{ fontSize: 18 }}>{e}</Text>;
   return (
-    <View style={styles.flex}>
-      <StatusBar style="light" />
-      <SafeAreaView style={styles.flex}>
-        <WebView
-          ref={webviewRef}
-          source={{ uri: APP_URL }}
-          style={styles.flex}
-          onNavigationStateChange={(nav) => setCanGoBack(nav.canGoBack)}
-          onError={() => setLoadError(true)}
-          onHttpError={() => setLoadError(true)}
-          startInLoadingState
-          domStorageEnabled
-          javaScriptEnabled
-          // Necessario perche' crypto.js/webauthn.js usano Web Crypto API e
-          // WebAuthn, entrambi richiesti in un contesto sicuro (https).
-          originWhitelist={["https://*"]}
-          allowsBackForwardNavigationGestures
-          // Chiamate cifrate (WebRTC), invio P2P e download della cassaforte
-          allowsInlineMediaPlayback
-          mediaPlaybackRequiresUserAction={false}
-          mediaCapturePermissionGrantType="grant"
-          allowFileAccess={false}
-          setSupportMultipleWindows={false}
-          onShouldStartLoadWithRequest={(r) => r.url.startsWith(new URL(APP_URL).origin) || r.url.startsWith("blob:") || r.url.startsWith("about:")}
-        />
-      </SafeAreaView>
-    </View>
+    <Tab.Navigator screenOptions={{ headerShown: false, tabBarStyle: { backgroundColor: T.panel, borderTopColor: T.border }, tabBarActiveTintColor: T.accent }}>
+      <Tab.Screen name="Chats" component={ChatsScreen} options={{ title: t("mChats"), tabBarIcon: icon("💬") }} />
+      <Tab.Screen name="Vault" component={VaultScreen} options={{ title: t("mVault"), tabBarIcon: icon("🗄️") }} />
+      <Tab.Screen name="Security" component={SecurityScreen} options={{ title: t("mSecurity"), tabBarIcon: icon("🛡️") }} />
+      <Tab.Screen name="Settings" component={SettingsScreen} options={{ title: t("mSettings"), tabBarIcon: icon("⚙️") }} />
+    </Tab.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  flex: { flex: 1, backgroundColor: "#0f1115" },
-  center: { flex: 1, backgroundColor: "#0f1115", alignItems: "center", justifyContent: "center", padding: 24 },
-  title: { color: "#e8e9ec", fontSize: 20, fontWeight: "700", marginBottom: 16, textAlign: "center" },
-  error: { color: "#e05c5c", fontSize: 13, marginBottom: 16, textAlign: "center" },
-  button: { backgroundColor: "#5b8cff", paddingVertical: 12, paddingHorizontal: 28, borderRadius: 10 },
-  buttonText: { color: "white", fontWeight: "700", fontSize: 15 }
-});
+function LockScreen() {
+  useLang();
+  const [err, setErr] = useState("");
+  const unlock = async () => {
+    const r = await loginWithBiometrics();
+    if (r !== "ok") { setErr(String(r)); if (r === "fail") S.set({ appLocked: false, savedLogin: false }); }
+  };
+  useEffect(() => { unlock(); }, []);
+  return (
+    <Screen style={{ justifyContent: "center", padding: 24 }}>
+      <H1 style={{ textAlign: "center" }}>🔒 {t("mLockTitle")}</H1>
+      <Button kind="primary" title={t("mUnlockBio")} onPress={unlock} />
+      <Button title={t("mUsePassword")} onPress={() => S.set({ appLocked: false })} />
+      {err && err !== "fail" ? <P error>{err}</P> : null}
+    </Screen>
+  );
+}
+
+export default function App() {
+  const ready = S.use((s) => s.ready);
+  const token = S.use((s) => s.token);
+  const locked = S.use((s) => s.appLocked);
+  useEffect(() => { boot(); }, []);
+  if (!ready) return <View style={{ flex: 1, backgroundColor: T.bg, justifyContent: "center" }}><ActivityIndicator color={T.accent} /></View>;
+  return (
+    <SafeAreaProvider>
+      <StatusBar style="light" />
+      {locked && !token ? <LockScreen /> : (
+        <NavigationContainer theme={theme}>
+          <Stack.Navigator screenOptions={{ headerStyle: { backgroundColor: T.panel }, headerTintColor: T.text }}>
+            {token ? (
+              <>
+                <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }} />
+                <Stack.Screen name="Chat" component={ChatScreen} options={{ title: "" }} />
+              </>
+            ) : <Stack.Screen name="Auth" component={AuthScreen} options={{ headerShown: false }} />}
+          </Stack.Navigator>
+          {token ? <CallOverlay /> : null}
+        </NavigationContainer>
+      )}
+    </SafeAreaProvider>
+  );
+}

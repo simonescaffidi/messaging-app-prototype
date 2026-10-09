@@ -19,7 +19,12 @@
         "NSFaceIDUsageDescription": "Usa Face ID per sbloccare rapidamente i tuoi profili di Securmy.",
         "NSCameraUsageDescription": "La fotocamera serve per le videochiamate cifrate e per scegliere foto da proteggere.",
         "NSMicrophoneUsageDescription": "Il microfono serve per le chiamate cifrate.",
-        "NSPhotoLibraryUsageDescription": "Serve per aggiungere foto e file alla tua cassaforte."
+        "NSPhotoLibraryUsageDescription": "Serve per aggiungere foto e file alla tua cassaforte.",
+        "UIBackgroundModes": [
+          "audio",
+          "remote-notification"
+        ],
+        "ITSAppUsesNonExemptEncryption": true
       }
     },
     "android": {
@@ -29,20 +34,54 @@
         "USE_FINGERPRINT",
         "CAMERA",
         "RECORD_AUDIO",
-        "MODIFY_AUDIO_SETTINGS"
+        "MODIFY_AUDIO_SETTINGS",
+        "INTERNET",
+        "ACCESS_NETWORK_STATE",
+        "BLUETOOTH",
+        "BLUETOOTH_CONNECT",
+        "POST_NOTIFICATIONS",
+        "WAKE_LOCK"
       ],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#0f1115"
-      }
-    },
-    "extra": {
-      "eas": {
-        "projectId": "DA-IMPOSTARE-DOPO-EAS-INIT"
-      }
+      },
+      "googleServicesFile": "./google-services.json"
     },
     "plugins": [
-      "expo-local-authentication"
-    ]
+      "expo-secure-store",
+      "expo-local-authentication",
+      [
+        "expo-notifications",
+        {
+          "color": "#6d7cff"
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "minSdkVersion": 24
+          },
+          "ios": {
+            "deploymentTarget": "13.4"
+          }
+        }
+      ],
+      [
+        "@config-plugins/react-native-webrtc",
+        {
+          "cameraPermission": "La fotocamera serve per le videochiamate cifrate.",
+          "microphonePermission": "Il microfono serve per le chiamate cifrate."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Serve per aggiungere foto alla tua cassaforte."
+        }
+      ]
+    ],
+    "scheme": "securmy"
   }
 }
