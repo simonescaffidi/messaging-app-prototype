@@ -102,8 +102,8 @@ module.exports = {
     ],
     "disclaimerTitle": "Cosa è, cosa non è",
     "disclaimerHtml": "<strong>Questo è un prototipo funzionale</strong>, non un prodotto finito, ma la sicurezza è reale: ogni messaggio ha una chiave nuova eliminata dopo la lettura (forward secrecy), le chiavi private sono in una cassaforte cifrata con la tua password, puoi verificare l'identità del contatto con un numero di sicurezza e ricevi un avviso se la sua chiave cambia. Lo sblocco biometrico usa WebAuthn/FIDO2 reale. Restano limiti noti, spiegati senza giri di parole nel <a href=\"{manualUrl}\">manuale utente</a> (metadati visibili al server, storico legato al dispositivo, recupero solo via email). Non è ancora pensato per conversazioni ad altissimo rischio.",
-    "nativeTitle": "App native iOS e Android",
-    "nativeText": "Lo scaffold dell'app nativa (Expo/React Native, con blocco biometrico di sistema) è pronto nel codice del progetto. La pubblicazione su App Store e Google Play richiede le credenziali degli account sviluppatore (Apple Developer Program e Google Play Console): finché non vengono collegate, l'app resta disponibile come webapp, utilizzabile da qualsiasi browser mobile e già installabile come app tramite \"Aggiungi a schermata Home\".",
+    "nativeTitle": "App native per iOS e Android",
+    "nativeText": "L'app nativa (React Native/Expo) per iOS e Android è pronta e in fase di test: chat, cassaforte, invio P2P, chiamate, verifica in due passaggi, blocco biometrico e notifiche push senza contenuto, con la stessa crittografia end-to-end della webapp. La pubblicazione su App Store e Google Play è in arrivo; nel frattempo la webapp funziona da qualsiasi browser e si può aggiungere alla schermata Home.",
     "ctaTitle": "Prova il prototipo",
     "ctaText": "Bastano un'email e uno username per creare il tuo primo profilo.",
     "secTitle": "Sicurezza e riservatezza: il cuore dell'app",
@@ -386,7 +386,7 @@ module.exports = {
         "blocks": [
           [
             "p",
-            "È pronto uno scaffold per un'app nativa (basata su Expo/React Native) che aggiunge un blocco biometrico di sistema all'apertura. La pubblicazione reale su App Store e Google Play richiede le credenziali degli account sviluppatore (Apple Developer Program e Google Play Console): una volta collegate, si potrà generare e pubblicare l'app. Fino a quel momento, la webapp resta utilizzabile da qualsiasi browser mobile e può essere \"installata\" sulla schermata Home come se fosse un'app."
+            "L'app nativa (React Native/Expo) per iOS e Android è pronta e in fase di test: chat, cassaforte, invio P2P, chiamate, verifica in due passaggi, blocco biometrico e notifiche push senza contenuto, con la stessa crittografia end-to-end della webapp. La pubblicazione su App Store e Google Play è in arrivo; nel frattempo la webapp funziona da qualsiasi browser e si può aggiungere alla schermata Home."
           ]
         ]
       },

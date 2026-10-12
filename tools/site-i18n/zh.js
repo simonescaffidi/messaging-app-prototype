@@ -102,8 +102,8 @@ module.exports = {
     ],
     "disclaimerTitle": "它是什么，不是什么",
     "disclaimerHtml": "<strong>这是一个可运行的原型</strong>，并非成品，但安全是真实的：每条消息有一把读后即删的新密钥（前向保密），私钥存放在用你的密码加密的保险库中，你可以用安全号码验证联系人身份，并在其密钥变化时收到警告。生物识别解锁使用真实的 WebAuthn/FIDO2。仍有已知限制，已在<a href=\"{manualUrl}\">用户手册</a>中坦率说明（元数据对服务器可见、历史绑定设备、仅能通过邮箱找回）。它尚不适用于极高风险的对话。",
-    "nativeTitle": "iOS 和 Android 原生应用",
-    "nativeText": "原生应用的基础框架（Expo/React Native，带系统级生物识别锁）已在项目代码中就绪。要发布到 App Store 和 Google Play，需要开发者账户凭据（Apple Developer Program 和 Google Play Console）：在关联之前，应用仍以网页应用形式提供，可在任何手机浏览器中使用，并可通过“添加到主屏幕”安装为应用。",
+    "nativeTitle": "原生 iOS 与 Android 应用",
+    "nativeText": "面向 iOS 和 Android 的原生应用（React Native/Expo）已开发完成并在测试中：聊天、保险库、P2P 发送、通话、两步验证、生物识别锁，以及不含内容的推送通知，端到端加密与网页版相同。App Store 和 Google Play 上架即将到来；在此之前，网页版可在任何浏览器中使用，并可添加到主屏幕。",
     "ctaTitle": "试用原型",
     "ctaText": "只需一个邮箱和一个用户名，即可创建你的第一个资料。",
     "secTitle": "安全与隐私：应用的核心",
@@ -386,7 +386,7 @@ module.exports = {
         "blocks": [
           [
             "p",
-            "原生应用的基础框架（基于 Expo/React Native）已就绪，会在启动时增加系统级生物识别锁。真正发布到 App Store 和 Google Play 需要开发者账户凭据（Apple Developer Program 和 Google Play Console）：关联后即可构建并发布应用。在此之前，网页应用可在任何手机浏览器中使用，也可以像应用一样“安装”到主屏幕。"
+            "面向 iOS 和 Android 的原生应用（React Native/Expo）已开发完成并在测试中：聊天、保险库、P2P 发送、通话、两步验证、生物识别锁，以及不含内容的推送通知，端到端加密与网页版相同。App Store 和 Google Play 上架即将到来；在此之前，网页版可在任何浏览器中使用，并可添加到主屏幕。"
           ]
         ]
       },

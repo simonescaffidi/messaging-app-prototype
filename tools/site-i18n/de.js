@@ -103,7 +103,7 @@ module.exports = {
     "disclaimerTitle": "Was es ist, was nicht",
     "disclaimerHtml": "<strong>Dies ist ein funktionsfähiger Prototyp</strong>, kein fertiges Produkt, aber die Sicherheit ist echt: jede Nachricht hat einen neuen Schlüssel, der nach dem Lesen gelöscht wird (Forward Secrecy), private Schlüssel liegen in einem mit deinem Passwort verschlüsselten Tresor, du kannst die Identität des Kontakts per Sicherheitsnummer prüfen und wirst gewarnt, wenn sich sein Schlüssel ändert. Die biometrische Entsperrung nutzt echtes WebAuthn/FIDO2. Bekannte Grenzen bleiben, offen erklärt im <a href=\"{manualUrl}\">Benutzerhandbuch</a> (Metadaten für den Server sichtbar, Verlauf ans Gerät gebunden, Wiederherstellung nur per E-Mail). Für Gespräche mit extrem hohem Risiko ist er noch nicht gedacht.",
     "nativeTitle": "Native iOS- und Android-Apps",
-    "nativeText": "Das Grundgerüst der nativen App (Expo/React Native, mit biometrischer Systemsperre) liegt im Projektcode bereit. Die Veröffentlichung im App Store und bei Google Play erfordert die Zugangsdaten der Entwicklerkonten (Apple Developer Program und Google Play Console): Bis diese verbunden sind, bleibt die App als Web-App verfügbar, in jedem mobilen Browser nutzbar und per „Zum Home-Bildschirm“ bereits als App installierbar.",
+    "nativeText": "Die native App (React Native/Expo) für iOS und Android ist fertig und im Test: Chat, Tresor, P2P-Versand, Anrufe, Zwei-Schritt-Verifizierung, biometrische Sperre und Push-Benachrichtigungen ohne Inhalt, mit derselben Ende-zu-Ende-Verschlüsselung wie die Webapp. Die Veröffentlichung im App Store und bei Google Play folgt; bis dahin läuft die Webapp in jedem Browser und lässt sich zum Home-Bildschirm hinzufügen.",
     "ctaTitle": "Teste den Prototyp",
     "ctaText": "Eine E-Mail und ein Benutzername genügen, um dein erstes Profil zu erstellen.",
     "secTitle": "Sicherheit und Privatsphäre: das Herz der App",
@@ -386,7 +386,7 @@ module.exports = {
         "blocks": [
           [
             "p",
-            "Ein Grundgerüst für eine native App (auf Basis von Expo/React Native) ist fertig und fügt beim Start eine biometrische Systemsperre hinzu. Die tatsächliche Veröffentlichung im App Store und bei Google Play erfordert die Zugangsdaten der Entwicklerkonten (Apple Developer Program und Google Play Console): Sobald diese verbunden sind, kann die App gebaut und veröffentlicht werden. Bis dahin bleibt die Web-App in jedem mobilen Browser nutzbar und lässt sich wie eine App auf dem Home-Bildschirm „installieren“."
+            "Die native App (React Native/Expo) für iOS und Android ist fertig und im Test: Chat, Tresor, P2P-Versand, Anrufe, Zwei-Schritt-Verifizierung, biometrische Sperre und Push-Benachrichtigungen ohne Inhalt, mit derselben Ende-zu-Ende-Verschlüsselung wie die Webapp. Die Veröffentlichung im App Store und bei Google Play folgt; bis dahin läuft die Webapp in jedem Browser und lässt sich zum Home-Bildschirm hinzufügen."
           ]
         ]
       },

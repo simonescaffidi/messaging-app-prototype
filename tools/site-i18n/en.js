@@ -103,7 +103,7 @@ module.exports = {
     "disclaimerTitle": "What it is, what it isn't",
     "disclaimerHtml": "<strong>This is a working prototype</strong>, not a finished product, but the security is real: every message has a new key deleted after reading (forward secrecy), private keys sit in a vault encrypted with your password, you can verify your contact's identity with a safety number and you get a warning if their key changes. Biometric unlock uses real WebAuthn/FIDO2. Known limits remain, explained plainly in the <a href=\"{manualUrl}\">user manual</a> (metadata visible to the server, history tied to the device, email-only recovery). It is not yet meant for extremely high-risk conversations.",
     "nativeTitle": "Native iOS and Android apps",
-    "nativeText": "The native app scaffold (Expo/React Native, with a system-level biometric lock) is ready in the project's code. Publishing to the App Store and Google Play requires the developer account credentials (Apple Developer Program and Google Play Console); until those are connected, the app remains available as a webapp, usable from any mobile browser and already installable via \"Add to Home Screen\".",
+    "nativeText": "The native app (React Native/Expo) for iOS and Android is built and in testing: chat, vault, P2P sending, calls, two-step verification, biometric lock and content-free push notifications, with the same end-to-end encryption as the webapp. Publication on the App Store and Google Play is coming; meanwhile the webapp works in any browser and can be added to the Home Screen.",
     "ctaTitle": "Try the prototype",
     "ctaText": "All you need is an email and a username to create your first profile.",
     "secTitle": "Security and privacy: the heart of the app",
@@ -386,7 +386,7 @@ module.exports = {
         "blocks": [
           [
             "p",
-            "A native app scaffold (built on Expo/React Native) is ready, adding a system-level biometric lock on launch. Actually publishing to the App Store and Google Play requires the developer account credentials (Apple Developer Program and Google Play Console); once those are connected, the app can be built and published. Until then, the webapp remains usable from any mobile browser and can already be \"installed\" to the home screen like an app."
+            "The native app (React Native/Expo) for iOS and Android is built and in testing: chat, vault, P2P sending, calls, two-step verification, biometric lock and content-free push notifications, with the same end-to-end encryption as the webapp. Publication on the App Store and Google Play is coming; meanwhile the webapp works in any browser and can be added to the Home Screen."
           ]
         ]
       },

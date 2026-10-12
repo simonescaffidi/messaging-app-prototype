@@ -102,8 +102,8 @@ module.exports = {
     ],
     "disclaimerTitle": "Ce que c'est, ce que ce n'est pas",
     "disclaimerHtml": "<strong>Ceci est un prototype fonctionnel</strong>, pas un produit fini, mais la sécurité est réelle : chaque message a une nouvelle clé supprimée après lecture (forward secrecy), les clés privées sont dans un coffre chiffré avec votre mot de passe, vous pouvez vérifier l'identité du contact avec un numéro de sécurité et vous êtes averti si sa clé change. Le déverrouillage biométrique utilise un vrai WebAuthn/FIDO2. Des limites connues subsistent, expliquées sans détour dans le <a href=\"{manualUrl}\">manuel utilisateur</a> (métadonnées visibles du serveur, historique lié à l'appareil, récupération par e-mail uniquement). Il n'est pas encore conçu pour des conversations à très haut risque.",
-    "nativeTitle": "Apps natives iOS et Android",
-    "nativeText": "La base de l'app native (Expo/React Native, avec verrouillage biométrique du système) est prête dans le code du projet. La publication sur l'App Store et Google Play nécessite les identifiants des comptes développeur (Apple Developer Program et Google Play Console) : tant qu'ils ne sont pas reliés, l'app reste disponible comme application web, utilisable depuis n'importe quel navigateur mobile et déjà installable via « Ajouter à l'écran d'accueil ».",
+    "nativeTitle": "Applications natives iOS et Android",
+    "nativeText": "L'application native (React Native/Expo) pour iOS et Android est prête et en phase de test : discussions, coffre, envoi P2P, appels, vérification en deux étapes, verrouillage biométrique et notifications push sans contenu, avec le même chiffrement de bout en bout que la webapp. La publication sur l'App Store et Google Play arrive bientôt ; en attendant, la webapp fonctionne dans tout navigateur et peut être ajoutée à l'écran d'accueil.",
     "ctaTitle": "Essayez le prototype",
     "ctaText": "Un e-mail et un nom d'utilisateur suffisent pour créer votre premier profil.",
     "secTitle": "Sécurité et confidentialité : le cœur de l'appli",
@@ -386,7 +386,7 @@ module.exports = {
         "blocks": [
           [
             "p",
-            "Une base d'app native (reposant sur Expo/React Native) est prête et ajoute un verrouillage biométrique du système à l'ouverture. La publication effective sur l'App Store et Google Play nécessite les identifiants des comptes développeur (Apple Developer Program et Google Play Console) : une fois reliés, l'app pourra être générée et publiée. D'ici là, l'application web reste utilisable depuis n'importe quel navigateur mobile et peut être « installée » sur l'écran d'accueil comme une app."
+            "L'application native (React Native/Expo) pour iOS et Android est prête et en phase de test : discussions, coffre, envoi P2P, appels, vérification en deux étapes, verrouillage biométrique et notifications push sans contenu, avec le même chiffrement de bout en bout que la webapp. La publication sur l'App Store et Google Play arrive bientôt ; en attendant, la webapp fonctionne dans tout navigateur et peut être ajoutée à l'écran d'accueil."
           ]
         ]
       },
