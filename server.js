@@ -20,6 +20,7 @@ const {
 
 const syncMod = require("./sync");
 const pushMod = require("./push");
+const alertMod = require("./alert");
 const app = express();
 app.set("trust proxy", 1); // dietro il proxy di Railway: req.ip e' l'IP reale del client
 app.use(express.json({ limit: "256kb", verify: (req, _res, buf) => { if (req.url.startsWith("/api/stripe/")) req.rawBody = buf; } }));
@@ -1141,6 +1142,9 @@ wss.on("connection", (ws) => {
     }
   });
 });
+
+alertMod.install(app, { store, db: require("./db") });
+app.use(alertMod.errorHandler);
 
 const PORT = process.env.PORT || 3000;
 store.init().then(() => {
