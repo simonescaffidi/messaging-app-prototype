@@ -45,8 +45,7 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#0f1115"
-      },
-      "googleServicesFile": "./google-services.json"
+      }
     },
     "plugins": [
       "expo-secure-store",
@@ -82,6 +81,11 @@
         }
       ]
     ],
-    "scheme": "securmy"
+    "scheme": "securmy",
+    "extra": {
+      "eas": {
+        "projectId": "7927881a-4290-4c32-9f84-4634e161a65f"
+      }
+    }
   }
 }
