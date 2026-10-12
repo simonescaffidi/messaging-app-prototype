@@ -1093,7 +1093,14 @@ app.post("/api/p2p/:id/answer", (req, res) => {
 
 // Server ICE per P2P e chiamate. STUN pubblico di default; un TURN proprio (TURN_URL,
 // TURN_USER, TURN_PASS) nasconde l'IP dei partecipanti e funziona anche dietro NAT rigidi.
+// Anti-abuso: le credenziali TURN sono consegnate anche a chi riceve un link P2P (senza account),
+// quindi si limitano le richieste per IP (60/ora) per non consumare la quota del relay.
+const iceHits = new Map();
 app.get("/api/ice", async (req, res) => {
+  const now = Date.now(), list = (iceHits.get(req.ip) || []).filter((t) => now - t < 3600 * 1000);
+  list.push(now); iceHits.set(req.ip, list);
+  if (iceHits.size > 5000) iceHits.clear();
+  if (list.length > 60) return res.status(429).json({ error: "troppe richieste" });
   const { servers, turn } = await syncMod.iceServers();
   res.set("Cache-Control", "no-store");
   const relay = turn && (process.env.TURN_RELAY_ONLY === "1" || req.query.relay === "1");
