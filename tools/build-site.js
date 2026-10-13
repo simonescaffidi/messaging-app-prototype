@@ -21,6 +21,8 @@ const PAGES = ["index", "manual", "demo", "privacy", "cookie", "terms"];
 const OWNER = "Simone Scaffidi Domianello — Piazza Merendino 6, 98071 Capo d'Orlando (ME), Italia — P.IVA IT03507360836 — C.F. SCFSMN83R25G377C — info@simonescaffidi.it — PEC: simone.scaffididomianello@widipec.it";
 const DEMO = require("./site-i18n/demo.js");
 
+const DL = {"it": ["Scarica per Android (APK)", "Versione di prova: se Android lo chiede, consenti l'installazione da questa fonte.", "iPhone: in arrivo su App Store."], "en": ["Download for Android (APK)", "Test version: if Android asks, allow installing from this source.", "iPhone: coming soon on the App Store."], "es": ["Descargar para Android (APK)", "Versión de prueba: si Android lo pide, permite instalar desde esta fuente.", "iPhone: próximamente en App Store."], "fr": ["Télécharger pour Android (APK)", "Version de test : si Android le demande, autorisez l'installation depuis cette source.", "iPhone : bientôt sur l'App Store."], "de": ["Für Android herunterladen (APK)", "Testversion: Wenn Android fragt, erlaube die Installation aus dieser Quelle.", "iPhone: bald im App Store."], "pt": ["Transferir para Android (APK)", "Versão de teste: se o Android pedir, permita a instalação a partir desta fonte.", "iPhone: em breve na App Store."], "ar": ["تنزيل لأندرويد (APK)", "نسخة تجريبية: إذا طلب أندرويد ذلك، اسمح بالتثبيت من هذا المصدر.", "آيفون: قريبًا على App Store."], "zh": ["下载 Android 版 (APK)", "测试版：如果 Android 提示，请允许从此来源安装。", "iPhone：即将登陆 App Store。"], "hi": ["Android के लिए डाउनलोड करें (APK)", "टेस्ट संस्करण: अगर Android पूछे, तो इस स्रोत से इंस्टॉल की अनुमति दें।", "iPhone: जल्द ही App Store पर।"], "ru": ["Скачать для Android (APK)", "Тестовая версия: если Android спросит, разрешите установку из этого источника.", "iPhone: скоро в App Store."], "ja": ["Android 版をダウンロード (APK)", "テスト版です。Android から確認された場合は、このソースからのインストールを許可してください。", "iPhone：App Store で近日公開。"]};
+
 const prefix = (l) => (l === "it" ? "" : "/" + l);
 function fileName(l, page) {
   if (page === "index") return "index.html";
@@ -280,6 +282,8 @@ function landing(l) {
     "      <h2>" + L.nativeTitle + "</h2>",
     '      <div class="disclaimer-box">',
     "        <p>" + L.nativeText + "</p>",
+    '        <p><a href="/download/android" class="btn btn-primary" rel="noopener">' + DL[l][0] + "</a></p>",
+    '        <p class="hint">' + DL[l][1] + " " + DL[l][2] + "</p>",
     "      </div>",
     "    </div>",
     "  </section>",
