@@ -1,7 +1,9 @@
 // Alert via email al gestore quando qualcosa non funziona (crash, errori 5xx, DB giu').
-// Destinatario: ALERT_EMAIL (default info@simonescaffidi.it). Invio con Resend (RESEND_API_KEY).
+// Destinatario: ALERT_EMAIL (default info@simonescaffidi.it). Invio tramite mailer.js (API Brevo;
+// Resend solo come fallback se BREVO_API_KEY manca). Senza chiavi l'alert resta nei log ([ALERT]).
 // Il contenuto NON include dati degli utenti: solo tipo di errore, messaggio tecnico e stack sintetico.
 // Anti-spam: una mail per tipo di errore ogni 30 minuti.
+const mailer = require("./mailer");
 const TO = process.env.ALERT_EMAIL || "info@simonescaffidi.it";
 const SLUG = "securmy";
 const WINDOW = 30 * 60 * 1000;
@@ -13,23 +15,16 @@ async function sendAlert(type, message, stack) {
   const now = Date.now();
   if (now - (last.get(type) || 0) < WINDOW) return false;
   last.set(type, now);
-  const key = process.env.RESEND_API_KEY;
   console.error("[ALERT] " + type + ": " + message);
-  if (!key) return false; // in attesa delle credenziali: resta nei log
+  if (!mailer.configurato()) return false; // in attesa delle credenziali: resta nei log
   const body = [
     "Servizio: " + SLUG, "Quando (Europe/Rome): " + when(), "Tipo: " + type, "",
     "Messaggio: " + String(message).slice(0, 500), "",
     stack ? "Stack:\n" + String(stack).split("\n").slice(0, 6).join("\n") : "",
     "", "Railway: https://railway.app/dashboard"
   ].join("\n");
-  try {
-    const r = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: { Authorization: "Bearer " + key, "Content-Type": "application/json" },
-      body: JSON.stringify({ from: process.env.EMAIL_FROM || "Securmy <onboarding@resend.dev>", to: [TO], subject: "[ALERT] " + SLUG + " – " + type, text: body })
-    });
-    return r.ok;
-  } catch { return false; }
+  const r = await mailer.invia({ to: TO, subject: "[ALERT] " + SLUG + " – " + type, text: body });
+  return r.inviata;
 }
 
 function install(app, { store, db }) {

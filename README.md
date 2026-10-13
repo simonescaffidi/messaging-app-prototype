@@ -34,7 +34,7 @@ Apri `http://localhost:3000` in due schede/browser diversi per simulare due uten
 - Metadati (mittente, orario, reazioni, scadenze) visibili al server.
 - Storico decifrato legato al dispositivo; dopo il recupero password via email la cassaforte precedente non e' recuperabile.
 - Se un contatto esaurisce le prekey, si usa la sua identita' al posto della prekey (forward secrecy piu' debole).
-- Recupero account solo via email verificata (serve `RESEND_API_KEY` su Railway).
+- Recupero account solo via email verificata (serve `BREVO_API_KEY` su Railway; `RESEND_API_KEY` resta come fallback temporaneo).
 - Prototipo: non ancora pensato per conversazioni ad altissimo rischio.
 
 ## Prossimi passi ragionevoli
