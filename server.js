@@ -1095,6 +1095,10 @@ app.post("/api/p2p/:id/answer", (req, res) => {
 // TURN_USER, TURN_PASS) nasconde l'IP dei partecipanti e funziona anche dietro NAT rigidi.
 // Anti-abuso: le credenziali TURN sono consegnate anche a chi riceve un link P2P (senza account),
 // quindi si limitano le richieste per IP (60/ora) per non consumare la quota del relay.
+// Link stabile di download Android: la destinazione si cambia con ANDROID_APK_URL (senza ripubblicare il sito).
+app.get("/download/android", (_req, res) => {
+  res.redirect(302, process.env.ANDROID_APK_URL || "https://expo.dev/artifacts/eas/DcxVva-Abu6HOKr6uCgME7kMlJj79PwmaG_MK_ODOHY.apk");
+});
 const iceHits = new Map();
 app.get("/api/ice", async (req, res) => {
   const now = Date.now(), list = (iceHits.get(req.ip) || []).filter((t) => now - t < 3600 * 1000);
