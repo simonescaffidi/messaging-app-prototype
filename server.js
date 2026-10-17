@@ -21,8 +21,22 @@ const {
 const syncMod = require("./sync");
 const pushMod = require("./push");
 const alertMod = require("./alert");
+const mailer = require("./mailer");
 const app = express();
 app.set("trust proxy", 1); // dietro il proxy di Railway: req.ip e' l'IP reale del client
+app.disable("x-powered-by");
+// Header di sicurezza (equivalente helmet, senza dipendenze). Niente CSP restrittiva:
+// WebRTC (STUN/TURN), WebSocket e WebAuthn vanno lasciati liberi. Solo frame-ancestors per il clickjacking.
+app.use((req, res, next) => {
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  res.setHeader("X-Frame-Options", "DENY");
+  res.setHeader("Content-Security-Policy", "frame-ancestors 'none'");
+  res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+  res.setHeader("Cross-Origin-Opener-Policy", "same-origin-allow-popups");
+  res.setHeader("Permissions-Policy", "camera=(self), microphone=(self), geolocation=(), payment=(), publickey-credentials-get=(self), publickey-credentials-create=(self)");
+  if (req.secure) res.setHeader("Strict-Transport-Security", "max-age=15552000; includeSubDomains");
+  next();
+});
 app.use(express.json({ limit: "256kb", verify: (req, _res, buf) => { if (req.url.startsWith("/api/stripe/")) req.rawBody = buf; } }));
 
 // Sito di presentazione (landing IT/EN) servito sulla root.
@@ -101,7 +115,7 @@ function registerThrottle(req, res, next) {
 }
 
 
-// ---------- EMAIL: cifratura a riposo, invio (Resend), token ----------
+// ---------- EMAIL: cifratura a riposo, invio (mailer.js: Brevo, fallback Resend), token ----------
 // L'email e' cifrata con AES-256-GCM (chiave DATA_KEY, variabile d'ambiente segreta) e
 // indicizzata con un HMAC (emailHash) per poterla cercare senza conservarla in chiaro.
 const DATA_KEY_RAW = process.env.DATA_KEY || "";
@@ -144,24 +158,14 @@ const MAIL_TEXT = {
 };
 async function sendMail(to, kind, link, label) {
   const t = MAIL_TEXT[kind];
-  const key = process.env.RESEND_API_KEY;
-  if (!key) {
-    console.warn("Email non inviata (RESEND_API_KEY mancante): tipo " + kind);
+  if (!mailer.configurato()) {
+    console.warn("[MAIL] email non inviata (BREVO_API_KEY mancante): tipo " + kind);
     if (!process.env.RAILWAY_ENVIRONMENT) console.log("[dev] link " + kind + ": " + link);
     return false;
   }
-  try {
-    const r = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: { "Authorization": "Bearer " + key, "Content-Type": "application/json" },
-      body: JSON.stringify({
-        from: process.env.EMAIL_FROM || "Securmy <onboarding@resend.dev>",
-        to: [to], subject: t.subject, text: t.body(link, label)
-      })
-    });
-    if (!r.ok) console.error("Resend errore " + r.status + ": " + (await r.text()).slice(0, 200));
-    return r.ok;
-  } catch (e) { console.error("Resend:", e.message); return false; }
+  const r = await mailer.invia({ to, subject: t.subject, text: t.body(link, label) });
+  if (!r.inviata) alertMod.sendAlert("email-" + kind + " (" + (r.provider || "nessun provider") + ")", "invio email fallito" + (r.status ? " HTTP " + r.status : ""));
+  return r.inviata;
 }
 async function sendVerification(profile) {
   const token = newToken();
