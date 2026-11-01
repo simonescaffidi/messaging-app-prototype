@@ -9,7 +9,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const BASE = "https://messaging-app-prototype-production-ecb3.up.railway.app";
+const BASE = "https://securmy.com";
 const LANGS = ["it", "en", "es", "fr", "de", "pt", "ar", "zh", "hi", "ru", "ja"];
 const NAMES = {
   it: "Italiano", en: "English", es: "Español", fr: "Français", de: "Deutsch",
