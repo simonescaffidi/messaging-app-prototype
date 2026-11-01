@@ -9,7 +9,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const BASE = "https://securmy.com";
+const BASE = "https://securmy.net";
 const LANGS = ["it", "en", "es", "fr", "de", "pt", "ar", "zh", "hi", "ru", "ja"];
 const NAMES = {
   it: "Italiano", en: "English", es: "Español", fr: "Français", de: "Deutsch",

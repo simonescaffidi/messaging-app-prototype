@@ -23,11 +23,11 @@ const pushMod = require("./push");
 const alertMod = require("./alert");
 const app = express();
 app.set("trust proxy", 1); // dietro il proxy di Railway: req.ip e' l'IP reale del client
-// Dominio principale: securmy.com. securmy.net (e www) reindirizzano li'.
+// Dominio principale: securmy.net. securmy.com, securmy.it (e www) reindirizzano li'.
 app.use((req, res, next) => {
   const h = String(req.headers.host || "").toLowerCase().split(":")[0];
-  if (h === "securmy.net" || h === "www.securmy.net" || h === "securmy.it" || h === "www.securmy.it" || h === "www.securmy.com") {
-    return res.redirect(301, "https://securmy.com" + req.originalUrl);
+  if (h === "securmy.com" || h === "www.securmy.com" || h === "securmy.it" || h === "www.securmy.it" || h === "www.securmy.net") {
+    return res.redirect(301, "https://securmy.net" + req.originalUrl);
   }
   next();
 });
