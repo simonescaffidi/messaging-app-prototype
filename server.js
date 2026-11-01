@@ -26,7 +26,7 @@ app.set("trust proxy", 1); // dietro il proxy di Railway: req.ip e' l'IP reale d
 // Dominio principale: securmy.com. securmy.net (e www) reindirizzano li'.
 app.use((req, res, next) => {
   const h = String(req.headers.host || "").toLowerCase().split(":")[0];
-  if (h === "securmy.net" || h === "www.securmy.net" || h === "www.securmy.com") {
+  if (h === "securmy.net" || h === "www.securmy.net" || h === "securmy.it" || h === "www.securmy.it" || h === "www.securmy.com") {
     return res.redirect(301, "https://securmy.com" + req.originalUrl);
   }
   next();
