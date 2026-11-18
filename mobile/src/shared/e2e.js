@@ -14,6 +14,13 @@
 // - Cassaforte (vault): identita' privata, prekey private e cache dei messaggi
 //   sono cifrate nel dispositivo con AES-GCM; la chiave deriva dalla PASSWORD
 //   (PBKDF2-SHA256). Senza password il contenuto di localStorage e' illeggibile.
+// - Double Ratchet (v3, dal 2026-11): dopo il primo messaggio (che usa X3DH + prekey
+//   monouso come sopra) ogni conversazione prosegue con un ratchet: una chiave nuova
+//   per OGNI messaggio (catena simmetrica, forward secrecy) e un nuovo scambio DH ad
+//   ogni cambio di direzione (post-compromise security: se uno stato viene rubato, la
+//   conversazione "guarisce" appena i due si scambiano un nuovo messaggio). Le sessioni
+//   sono nella cassaforte cifrata; i messaggi v1/v2 restano leggibili. Il protocollo
+//   usato con un contatto si negozia: il server conosce solo il numero di versione.
 // - Verifica: "numero di sicurezza" confrontabile a voce + avviso se la chiave
 //   di un contatto cambia (TOFU), contro attacchi man-in-the-middle.
 //
@@ -241,20 +248,47 @@ const E2E = (() => {
     }
   }
 
+  // ---------------- accesso esclusivo alla cassaforte (stessa scheda + altre schede) ----------------
+  // Le operazioni che modificano ratchet e prekey leggono lo stato piu' recente dal
+  // dispositivo, lo aggiornano e lo risalvano in un'unica sezione esclusiva: due schede
+  // aperte sullo stesso profilo non si sovrascrivono a vicenda.
+  let lockQueue = Promise.resolve();
+  function locked(fn) {
+    const pid = S && S.pid;
+    const run = lockQueue.then(() => (typeof navigator !== "undefined" && navigator.locks && pid
+      ? navigator.locks.request("securmy-vault-" + pid, fn) : fn()));
+    lockQueue = run.catch(() => {});
+    return run;
+  }
+  async function reloadData() {
+    const raw = S && ls.get(vaultKeyName(S.pid));
+    if (!raw) return;
+    try {
+      const meta = JSON.parse(raw);
+      if (!meta.iv || !meta.ct) return;
+      const pt = await crypto.subtle.decrypt({ name: "AES-GCM", iv: unb64(meta.iv) }, S.key, unb64(meta.ct));
+      S.data = JSON.parse(dec.decode(pt));
+    } catch { /* password cambiata da un'altra scheda: si tiene lo stato in memoria */ }
+  }
+
   // ---------------- prekey ----------------
   async function ensurePrekeys(api) {
     if (!S) return;
     let count = 0;
     try { count = (await api("/api/prekeys/count")).count; } catch { return; }
     if (count >= 40) return;
-    const batch = [];
-    for (let i = 0; i < 100 - count; i++) {
-      const pair = await crypto.subtle.generateKey(ECDH, true, ["deriveBits"]);
-      const id = Array.from(crypto.getRandomValues(new Uint8Array(8)), (b) => b.toString(16).padStart(2, "0")).join("");
-      S.data.prekeys[id] = await crypto.subtle.exportKey("jwk", pair.privateKey);
-      batch.push({ id, pub: pubOnly(await crypto.subtle.exportKey("jwk", pair.publicKey)) });
-    }
-    await persistVault(); // prima salva le private, poi pubblica le pubbliche
+    const batch = await locked(async () => {
+      await reloadData();
+      const out = [];
+      for (let i = 0; i < 100 - count; i++) {
+        const pair = await crypto.subtle.generateKey(ECDH, true, ["deriveBits"]);
+        const id = Array.from(crypto.getRandomValues(new Uint8Array(8)), (b) => b.toString(16).padStart(2, "0")).join("");
+        S.data.prekeys[id] = await crypto.subtle.exportKey("jwk", pair.privateKey);
+        out.push({ id, pub: pubOnly(await crypto.subtle.exportKey("jwk", pair.publicKey)) });
+      }
+      await persistVault(); // prima salva le private, poi pubblica le pubbliche
+      return out;
+    });
     try { await api("/api/prekeys", { method: "POST", body: JSON.stringify({ keys: batch }) }); } catch {}
   }
 
@@ -273,7 +307,13 @@ const E2E = (() => {
   }
 
   // Cifra un messaggio per il contatto. claim(): preleva una prekey monouso dal server.
-  async function encryptMessage({ peerIdentity, myId, peerId, plaintext, claim }) {
+  // peerProto: versione del protocollo dichiarata dal contatto (3 = Double Ratchet, altrimenti v2).
+  async function encryptMessage(args) {
+    if (!S) throw new Error("locked");
+    if ((args.peerProto || 2) >= 3) return encryptV3(args);
+    return encryptV2(args);
+  }
+  async function encryptV2({ peerIdentity, myId, peerId, plaintext, claim }) {
     if (!S) throw new Error("locked");
     let opk = null;
     try { opk = await claim(); } catch {}
@@ -319,10 +359,13 @@ const E2E = (() => {
         return { text, state: "ok" };
       } catch { return { text: null, state: "gone" }; }
     }
-    if (mine) return { text: null, state: "gone" }; // i miei v2 si leggono solo dalla cache
+    if (mine) return { text: null, state: "gone" }; // i miei messaggi v2/v3 si leggono solo dalla cache
     if (!peerIdentity) return { text: null, state: "nokey" };
+    let h0 = null;
+    try { h0 = JSON.parse(m.hdr); } catch { return { text: null, state: "gone" }; }
+    if (h0 && h0.v === 3) return decryptV3({ m, peerIdentity, myId, peerId, exp });
     try {
-      const h = JSON.parse(m.hdr);
+      const h = h0;
       const parts = [];
       let usedId = null;
       if (h.opk) {
@@ -347,6 +390,167 @@ const E2E = (() => {
   }
 
   async function rememberSent(mid, text, exp) { await cachePut(mid, text, exp); }
+
+  // ---------------- Double Ratchet (v3) ----------------
+  const PROTO = 3;
+  const SALT_V3 = new TextEncoder().encode("securmy-e2e-v3-salt");
+  const ZERO32 = new Uint8Array(32);
+  const DR_MAX_SKIP = 500;             // messaggi saltati accettati in un colpo
+  const DR_MAX_SKIPPED = 2000;         // chiavi saltate conservate (totale per sessione)
+  const DR_SKIPPED_TTL = 14 * 24 * 3600 * 1000;
+  const DR_MAX_SESSIONS = 4;           // sessioni conservate per contatto
+
+  const cat = (parts) => { const out = new Uint8Array(parts.reduce((n, p) => n + p.length, 0)); let o = 0; for (const p of parts) { out.set(p, o); o += p.length; } return out; };
+  async function hkdfBits(ikm, salt, info, bytes) {
+    const base = await crypto.subtle.importKey("raw", ikm, "HKDF", false, ["deriveBits"]);
+    return new Uint8Array(await crypto.subtle.deriveBits({ name: "HKDF", hash: "SHA-256", salt, info: enc.encode(info) }, base, bytes * 8));
+  }
+  async function kdfRK(rk, dhOut) { const o = await hkdfBits(dhOut, rk, "rk-v3", 64); return [o.slice(0, 32), o.slice(32)]; }
+  async function kdfCK(ck) { return { ck: await hkdfBits(ck, ZERO32, "ck-v3", 32), mk: await hkdfBits(ck, ZERO32, "mk-v3", 32) }; }
+  const aesKey = (mk) => crypto.subtle.importKey("raw", mk, "AES-GCM", false, ["encrypt", "decrypt"]);
+  const clone = (o) => JSON.parse(JSON.stringify(o));
+  async function newDhPair() {
+    const pair = await crypto.subtle.generateKey(ECDH, true, ["deriveBits"]);
+    return {
+      priv: await crypto.subtle.exportKey("jwk", pair.privateKey),
+      pub: pubOnly(await crypto.subtle.exportKey("jwk", pair.publicKey))
+    };
+  }
+  const dhPriv = (jwk) => crypto.subtle.importKey("jwk", jwk, ECDH, false, ["deriveBits"]);
+  const dhIdSort = (a, b) => [a, b].sort().join(":");
+  const sidOf = async (ek) => b64(await sha256(canon(ek))).slice(0, 16);
+  const aadOf = (hdr, myId, peerId) => enc.encode(hdr + "|" + dhIdSort(myId, peerId));
+
+  function pruneSkipped(st) {
+    const now = Date.now();
+    let keys = Object.keys(st.skipped);
+    for (const k of keys) if (now - st.skipped[k].t > DR_SKIPPED_TTL) delete st.skipped[k];
+    keys = Object.keys(st.skipped);
+    if (keys.length > DR_MAX_SKIPPED) {
+      keys.sort((a, b) => st.skipped[a].t - st.skipped[b].t);
+      for (const k of keys.slice(0, keys.length - DR_MAX_SKIPPED)) delete st.skipped[k];
+    }
+  }
+  async function skipTo(st, until) {
+    if (!st.ckr) return;
+    if (until - st.nr > DR_MAX_SKIP) throw new Error("too-many-skipped");
+    while (st.nr < until) {
+      const { ck, mk } = await kdfCK(unb64(st.ckr));
+      st.skipped[canon(st.dhr) + ":" + st.nr] = { k: b64(mk), t: Date.now() };
+      st.ckr = b64(ck); st.nr++;
+    }
+  }
+  async function dhRatchet(st, theirDh) {
+    st.pn = st.ns; st.ns = 0; st.nr = 0;
+    st.dhr = pubOnly(theirDh);
+    const [rk1, ckr] = await kdfRK(unb64(st.rk), await dh(await dhPriv(st.dhs.priv), st.dhr));
+    st.dhs = await newDhPair();
+    const [rk2, cks] = await kdfRK(rk1, await dh(await dhPriv(st.dhs.priv), st.dhr));
+    st.rk = b64(rk2); st.ckr = b64(ckr); st.cks = b64(cks);
+  }
+  // Segreto iniziale X3DH condiviso (stesse parti di v2, ma l'output alimenta la radice del ratchet).
+  async function initialSecret(parts, myId, peerId) { return hkdfBits(cat(parts), SALT_V3, "sk-v3:" + dhIdSort(myId, peerId), 32); }
+
+  const sessionsOf = (peerId) => ((S.data.ratchets = S.data.ratchets || {})[peerId] = S.data.ratchets[peerId] || []);
+  function storeSession(peerId, st) {
+    const list = sessionsOf(peerId).filter((x) => x.sid !== st.sid);
+    list.unshift(st); // la piu' recente e' quella attiva per l'invio
+    S.data.ratchets[peerId] = list.slice(0, DR_MAX_SESSIONS);
+  }
+
+  async function encryptV3({ peerIdentity, myId, peerId, plaintext, claim }) {
+    return locked(async () => {
+      await reloadData();
+      const fp = canon(peerIdentity);
+      let st = sessionsOf(peerId).find((x) => x.ik === fp);
+      st = st ? clone(st) : null;
+      if (!st) {
+        // nuova sessione: X3DH con una prekey monouso del contatto (se disponibile)
+        let opk = null;
+        try { opk = await claim(); } catch {}
+        const eph = await newDhPair();
+        const ephPriv = await dhPriv(eph.priv);
+        const parts = [await dh(ephPriv, peerIdentity)];
+        if (opk) {
+          parts.unshift(await dh(S.identity.privateKey, opk.pub));
+          parts.push(await dh(ephPriv, opk.pub));
+        } else {
+          parts.unshift(await dh(S.identity.privateKey, peerIdentity));
+        }
+        const sk = await initialSecret(parts, myId, peerId);
+        const [rk, cks] = await kdfRK(sk, await dh(ephPriv, peerIdentity));
+        st = { sid: await sidOf(eph.pub), ik: fp, rk: b64(rk), dhs: eph, dhr: pubOnly(peerIdentity), cks: b64(cks), ckr: null,
+               ns: 0, nr: 0, pn: 0, skipped: {}, init: { ek: eph.pub, opk: opk ? opk.id : null }, fs: !!opk, t: Date.now() };
+      }
+      const { ck, mk } = await kdfCK(unb64(st.cks));
+      const hdrObj = { v: 3, sid: st.sid, dh: st.dhs.pub, pn: st.pn, n: st.ns };
+      if (st.init) hdrObj.init = st.init;      // finche' il contatto non ha risposto, il primo scambio resta ricostruibile
+      const hdr = JSON.stringify(hdrObj);
+      st.cks = b64(ck); st.ns++; st.t = Date.now();
+      const iv = crypto.getRandomValues(new Uint8Array(12));
+      const ct = await crypto.subtle.encrypt({ name: "AES-GCM", iv, additionalData: aadOf(hdr, myId, peerId) }, await aesKey(mk), enc.encode(plaintext));
+      storeSession(peerId, st);
+      await persistVault();
+      return { iv: b64(iv), ciphertext: b64(ct), hdr, forwardSecret: st.init ? !!st.fs : true };
+    });
+  }
+
+  async function decryptV3({ m, peerIdentity, myId, peerId, exp }) {
+    try {
+      return await locked(async () => {
+        await reloadData();
+        const again = await cacheGet(m.id); // un'altra scheda potrebbe averlo gia' decifrato
+        if (again !== undefined) return { text: again, state: "ok" };
+        const h = JSON.parse(m.hdr);
+        if (!h.sid || !h.dh || typeof h.n !== "number" || typeof h.pn !== "number") return { text: null, state: "gone" };
+        const fp = canon(peerIdentity);
+        let st = sessionsOf(peerId).find((x) => x.sid === h.sid && x.ik === fp);
+        let usedOpk = null;
+        if (st) st = clone(st);
+        else {
+          // sessione nuova avviata dal contatto: serve l'intestazione di avvio
+          if (!h.init || !h.init.ek || (await sidOf(h.init.ek)) !== h.sid) return { text: null, state: "gone" };
+          const ek = pubOnly(h.init.ek);
+          const parts = [];
+          if (h.init.opk) {
+            const opkPriv = S.data.prekeys[h.init.opk];
+            if (!opkPriv) return { text: null, state: "gone" }; // prekey gia' eliminata
+            const opk = await dhPriv(opkPriv);
+            parts.push(await dh(opk, peerIdentity), await dh(S.identity.privateKey, ek), await dh(opk, ek));
+            usedOpk = h.init.opk;
+          } else {
+            parts.push(await dh(S.identity.privateKey, peerIdentity), await dh(S.identity.privateKey, ek));
+          }
+          const sk = await initialSecret(parts, myId, peerId);
+          const [rk1, ckr] = await kdfRK(sk, await dh(S.identity.privateKey, ek));
+          const mine = await newDhPair();
+          const [rk2, cks] = await kdfRK(rk1, await dh(await dhPriv(mine.priv), ek));
+          st = { sid: h.sid, ik: fp, rk: b64(rk2), dhs: mine, dhr: ek, cks: b64(cks), ckr: b64(ckr), ns: 0, nr: 0, pn: 0, skipped: {}, init: null, fs: true, t: Date.now() };
+        }
+        // chiave del messaggio: gia' saltata, oppure avanzando la catena
+        let mk = null;
+        const sk0 = canon(h.dh) + ":" + h.n;
+        if (st.skipped[sk0]) { mk = unb64(st.skipped[sk0].k); delete st.skipped[sk0]; }
+        else {
+          if (canon(h.dh) !== canon(st.dhr || { x: "", y: "" })) { await skipTo(st, h.pn); await dhRatchet(st, h.dh); }
+          if (h.n < st.nr) return { text: null, state: "gone" }; // gia' consumato (ripetizione)
+          await skipTo(st, h.n);
+          const next = await kdfCK(unb64(st.ckr));
+          st.ckr = b64(next.ck); st.nr++; mk = next.mk;
+        }
+        const pt = await crypto.subtle.decrypt({ name: "AES-GCM", iv: unb64(m.iv), additionalData: aadOf(m.hdr, myId, peerId) }, await aesKey(mk), unb64(m.ciphertext));
+        const text = dec.decode(pt);
+        // da qui il messaggio e' autentico: si conferma la sessione e si salva lo stato
+        st.init = null; st.t = Date.now();
+        pruneSkipped(st);
+        await cachePut(m.id, text, exp);          // prima la cache, poi si consuma la chiave
+        storeSession(peerId, st);
+        if (usedOpk) delete S.data.prekeys[usedOpk];
+        await persistVault();
+        return { text, state: "ok" };
+      });
+    } catch { return { text: null, state: "gone" }; }
+  }
 
   // ---------------- verifica identita' (numero di sicurezza + TOFU) ----------------
   async function sha256(str) { return new Uint8Array(await crypto.subtle.digest("SHA-256", enc.encode(str))); }
@@ -376,7 +580,7 @@ const E2E = (() => {
   async function markVerified(myPid, peerPid, jwk) { ls.set("peerfp_" + myPid + "_" + peerPid, JSON.stringify({ fp: await fingerprint(jwk), verified: true })); }
 
   return {
-    unlock, resetVault, rewrap, hasVault, isUnlocked, lock, myPublicJwk,
+    PROTO, unlock, resetVault, rewrap, hasVault, isUnlocked, lock, myPublicJwk,
     ensurePrekeys, encryptMessage, decryptMessage, rememberSent,
     safetyNumber, checkPeer, acceptPeer, markVerified,
     vaultSeal, vaultOpen, sealBytes, openBytes, wrapDataKey, unwrapDataKey,

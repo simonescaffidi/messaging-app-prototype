@@ -332,7 +332,7 @@ module.exports = {
           ],
           [
             "p",
-            "Selbst wenn jemand deine Langzeitschlüssel erlangt (z. B. durch Diebstahl des Geräts), kann er bereits empfangene Nachrichten nicht entschlüsseln, denn deren Schlüssel wurden gelöscht. Bereits gelesener Text bleibt nur im verschlüsselten lokalen Cache deines Geräts."
+            "Selbst wenn jemand deine Langzeitschlüssel erlangt (z. B. durch Diebstahl des Geräts), kann er bereits empfangene Nachrichten nicht entschlüsseln, denn deren Schlüssel wurden gelöscht. Bereits gelesener Text bleibt nur im verschlüsselten lokalen Cache deines Geräts. Mit dem Double Ratchet (v3) hat nach der ersten Nachricht jede Nachricht eines Gesprächs einen eigenen neuen Schlüssel, und die Schlüssel erneuern sich bei jedem Richtungswechsel: Würde ein Schlüssel gestohlen, heilt sich das Gespräch selbst, sobald ihr die nächsten Nachrichten austauscht."
           ],
           [
             "h3",
@@ -401,7 +401,7 @@ module.exports = {
           [
             "ul",
             [
-              "<strong>Prekeys aufgebraucht</strong>: Ist ein Kontakt lange offline und hat keine Einmalschlüssel mehr, nutzt die Nachricht trotzdem einen neuen Schlüssel, aber ohne Einmal-Löschung – die Forward Secrecy ist dann schwächer. Um das Risiko zu verringern, füllt die App die Schlüssel automatisch nach, warnt den Kontakt, sobald er online ist und der Vorrat knapp wird, und zeigt dir an, wenn eine Nachricht ohne Einmalschlüssel gesendet wird.",
+              "<strong>Prekeys aufgebraucht</strong>: Ist ein Kontakt lange offline und hat keine Einmalschlüssel mehr, nutzt die Nachricht trotzdem einen neuen Schlüssel, aber ohne Einmal-Löschung – die Forward Secrecy ist dann schwächer. Um das Risiko zu verringern, füllt die App die Schlüssel automatisch nach, warnt den Kontakt, sobald er online ist und der Vorrat knapp wird, und zeigt dir an, wenn eine Nachricht ohne Einmalschlüssel gesendet wird. Mit dem Double Ratchet braucht nur die erste Nachricht eines Gesprächs einen Einmalschlüssel.",
               "<strong>Nachrichten an dieses Gerät gebunden</strong>: Der entschlüsselte Verlauf wandert bewusst nicht mit. Auf einem neuen Gerät oder nach einer Passwort-Wiederherstellung per E-Mail ist der frühere Tresor nicht wiederherstellbar: du startest mit neuer Identität, deine Kontakte sehen die Warnung zum Schlüsselwechsel.",
               "<strong>Der Tresor ist so stark wie das Passwort</strong>: Wähle ein langes, einzigartiges. Wer dein bereits entsperrtes Gerät mit geöffneter App hat, kann die Chats lesen – wie bei jeder App.",
               "<strong>Metadaten für den Server sichtbar</strong>: Absender, Zeit, Reaktionen und Ablauf zeitlich begrenzter Nachrichten sind nicht verschlüsselt.",

@@ -332,7 +332,7 @@ module.exports = {
           ],
           [
             "p",
-            "Mesmo que alguém obtivesse suas chaves de longo prazo (por exemplo, roubando o dispositivo), não conseguiria decifrar as mensagens já recebidas, pois as chaves foram apagadas. O texto já lido fica apenas no cache local cifrado do seu dispositivo."
+            "Mesmo que alguém obtivesse suas chaves de longo prazo (por exemplo, roubando o dispositivo), não conseguiria decifrar as mensagens já recebidas, pois as chaves foram apagadas. O texto já lido fica apenas no cache local cifrado do seu dispositivo. Com o Double Ratchet (v3), depois da primeira mensagem cada mensagem de uma conversa tem a sua própria chave nova e as chaves renovam-se a cada mudança de sentido: se uma chave fosse roubada, a conversa recupera sozinha assim que trocarem as mensagens seguintes."
           ],
           [
             "h3",
@@ -401,7 +401,7 @@ module.exports = {
           [
             "ul",
             [
-              "<strong>Prekeys esgotadas</strong>: se um contato fica muito tempo offline e acaba as chaves de uso único, a mensagem ainda usa uma chave nova, mas sem exclusão única — forward secrecy mais fraca. Para reduzir o risco, a app repõe as chaves automaticamente, avisa o contacto quando está online e restam poucas, e avisa-o quando uma mensagem sai sem chave de uso único.",
+              "<strong>Prekeys esgotadas</strong>: se um contato fica muito tempo offline e acaba as chaves de uso único, a mensagem ainda usa uma chave nova, mas sem exclusão única — forward secrecy mais fraca. Para reduzir o risco, a app repõe as chaves automaticamente, avisa o contacto quando está online e restam poucas, e avisa-o quando uma mensagem sai sem chave de uso único. Com o Double Ratchet, só a primeira mensagem de uma conversa precisa de uma chave de uso único.",
               "<strong>Mensagens ligadas a este dispositivo</strong>: por projeto, o histórico decifrado não se move. Em um novo dispositivo ou após recuperar a senha por e-mail, o cofre anterior não é recuperável: você recomeça com nova identidade e os contatos veem o aviso de troca de chave.",
               "<strong>O cofre vale o que vale a senha</strong>: escolha uma longa e única. Quem tiver seu dispositivo já desbloqueado com o app aberto pode ler os chats, como em qualquer app.",
               "<strong>Metadados visíveis ao servidor</strong>: remetente, horário, reações e expiração das mensagens temporárias não são cifrados.",

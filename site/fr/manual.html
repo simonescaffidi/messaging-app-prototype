@@ -115,7 +115,7 @@
     </ol>
     <p>C'est le même type de mathématiques (ECDH + AES-GCM) que celui de nombreux protocoles sécurisés modernes, appliqué ici via la Web Crypto API native du navigateur, sans bibliothèque externe.</p>
     <h3>Forward secrecy : les messages passés restent protégés</h3>
-    <p>Même si quelqu'un obtenait vos clés à long terme (par exemple en volant votre appareil), il ne pourrait pas déchiffrer les messages déjà reçus, car leurs clés ont été supprimées. Le texte déjà lu ne subsiste que dans le cache local chiffré de votre appareil.</p>
+    <p>Même si quelqu'un obtenait vos clés à long terme (par exemple en volant votre appareil), il ne pourrait pas déchiffrer les messages déjà reçus, car leurs clés ont été supprimées. Le texte déjà lu ne subsiste que dans le cache local chiffré de votre appareil. Avec le Double Ratchet (v3), après le premier message chaque message d'une conversation a sa propre clé et les clés se renouvellent à chaque changement de sens : si une clé était volée, la conversation se répare d'elle-même dès que vous échangez les messages suivants.</p>
     <h3>Le coffre des clés</h3>
     <p>Les clés privées, les prekeys et le cache des messages ne sont stockés dans le navigateur que sous forme chiffrée (AES-GCM), avec une clé dérivée de votre mot de passe par PBKDF2-SHA256 (310 000 itérations). Si vous vous connectez par biométrie, le mot de passe est demandé une fois pour ouvrir le coffre. Quand vous changez de mot de passe, le coffre est rechiffré.</p>
     <h3>Vérifier que c'est bien lui : numéro de sécurité</h3>
@@ -143,7 +143,7 @@
     <h2>11. Limites de sécurité déclarées</h2>
     <p>Par honnêteté, voici les limites qui subsistent, même si le chiffrement est réel et pas seulement annoncé :</p>
     <ul>
-      <li><strong>Prekeys épuisées</strong> : si un contact reste longtemps hors ligne et n'a plus de clés à usage unique, le message utilise quand même une clé nouvelle mais sans suppression unique, donc avec une forward secrecy plus faible. Pour réduire ce risque, l'app recharge les clés automatiquement, prévient le contact lorsqu'il est en ligne et qu'il en reste peu, et vous signale quand un message part sans clé à usage unique.</li>
+      <li><strong>Prekeys épuisées</strong> : si un contact reste longtemps hors ligne et n'a plus de clés à usage unique, le message utilise quand même une clé nouvelle mais sans suppression unique, donc avec une forward secrecy plus faible. Pour réduire ce risque, l'app recharge les clés automatiquement, prévient le contact lorsqu'il est en ligne et qu'il en reste peu, et vous signale quand un message part sans clé à usage unique. Avec le Double Ratchet, seul le premier message d'une conversation nécessite une clé à usage unique.</li>
       <li><strong>Messages liés à cet appareil</strong> : par conception, l'historique déchiffré ne se transfère pas. Sur un nouvel appareil ou après une récupération du mot de passe par e-mail, l'ancien coffre est irrécupérable : vous repartez avec une nouvelle identité et vos contacts voient l'avertissement de changement de clé.</li>
       <li><strong>Le coffre vaut ce que vaut le mot de passe</strong> : choisissez-en un long et unique. Quiconque a votre appareil déjà déverrouillé avec l'appli ouverte peut lire les discussions, comme avec toute appli.</li>
       <li><strong>Métadonnées visibles du serveur</strong> : expéditeur, heure, réactions et expiration des messages éphémères ne sont pas chiffrés.</li>

@@ -115,7 +115,7 @@
     </ol>
     <p>This is the same type of math (ECDH + AES-GCM) used by many modern secure protocols, applied here through the browser's native Web Crypto API, with no external libraries.</p>
     <h3>Forward secrecy: past messages stay safe</h3>
-    <p>Even if someone obtained your long-term keys (for example by stealing your device), they couldn't decrypt messages you have already received, because their keys were deleted. Text you have already read stays only in your device's encrypted local cache.</p>
+    <p>Even if someone obtained your long-term keys (for example by stealing your device), they couldn't decrypt messages you have already received, because their keys were deleted. Text you have already read stays only in your device's encrypted local cache. Since the Double Ratchet (v3), after the first message every message in a conversation has its own new key, and the keys renew every time the conversation changes direction: if a key were ever stolen, the conversation heals itself as soon as you exchange the next messages.</p>
     <h3>The key vault</h3>
     <p>Private keys, prekeys and the message cache are stored in the browser only in encrypted form (AES-GCM), using a key derived from your password with PBKDF2-SHA256 (310,000 iterations). If you sign in with biometrics, you are asked for your password once to open the vault. When you change your password, the vault is re-encrypted.</p>
     <h3>Check it's really them: safety number</h3>
@@ -143,7 +143,7 @@
     <h2>11. Stated security limits</h2>
     <p>For honesty, here are the limits that remain, even though the encryption is real and not just claimed:</p>
     <ul>
-      <li><strong>Prekeys running out</strong>: if a contact stays offline for long and runs out of one-time keys, the message still uses a new key but without one-time deletion, so forward secrecy is weaker. To reduce the risk, the app refills keys automatically, alerts the contact when they are online and running low, and tells you when a message goes out without a one-time key.</li>
+      <li><strong>Prekeys running out</strong>: if a contact stays offline for long and runs out of one-time keys, the message still uses a new key but without one-time deletion, so forward secrecy is weaker. To reduce the risk, the app refills keys automatically, alerts the contact when they are online and running low, and tells you when a message goes out without a one-time key. With the Double Ratchet only the first message of a conversation needs a one-time key.</li>
       <li><strong>Messages tied to this device</strong>: by design, decrypted history doesn't move. On a new device or after an email password recovery the previous vault can't be recovered: you start with a new identity and contacts see the key-change warning.</li>
       <li><strong>The vault is only as strong as the password</strong>: choose a long, unique one. Anyone with your already unlocked device and the app open can read chats, as with any app.</li>
       <li><strong>Metadata visible to the server</strong>: sender, time, reactions and expiry of timed messages are not encrypted.</li>

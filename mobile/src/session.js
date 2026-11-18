@@ -90,7 +90,7 @@ async function openVault(password) {
     if (e.message !== "bad-password") throw e;
     r = await E2E.resetVault(me.publicId, password); // cassaforte non apribile (es. dopo recupero password): nuova identita'
   }
-  try { await api("/api/me/publickey", { method: "POST", body: JSON.stringify({ publicKeyJwk: r.publicJwk }) }); } catch {}
+  try { await api("/api/me/publickey", { method: "POST", body: JSON.stringify({ publicKeyJwk: r.publicJwk, proto: E2E.PROTO }) }); } catch {}
   await E2E.ensurePrekeys(api);
   S.set({ vaultOpen: true });
 }
@@ -195,7 +195,7 @@ export async function sendText(chat, text, mode, replyTo) {
   if (st.status === "changed") throw new Error(t("keyChangedBanner"));
   const plaintext = once ? ONCE + text : text;
   const { iv, ciphertext, hdr, forwardSecret } = await E2E.encryptMessage({
-    peerIdentity: chat.with.publicKey, myId: me.publicId, peerId: chat.with.publicId, plaintext,
+    peerIdentity: chat.with.publicKey, peerProto: chat.with.proto, myId: me.publicId, peerId: chat.with.publicId, plaintext,
     claim: async () => (await api("/api/prekeys/claim/" + chat.with.profileId, { method: "POST", body: "{}" })).prekey
   });
   const data = await api("/api/messages", { method: "POST", body: JSON.stringify({ chatId: chat.id, iv, ciphertext, hdr, replyTo: replyTo || null, selfDestructSeconds }) });

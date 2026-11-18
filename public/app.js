@@ -179,7 +179,7 @@ async function openVault(password) {
     // password valida sul server ma cassaforte non apribile (es. dopo il recupero password): nuova identita'
     r = await E2E.resetVault(state.me.publicId, password);
   }
-  try { await api("/api/me/publickey", { method: "POST", body: JSON.stringify({ publicKeyJwk: r.publicJwk }) }); } catch {}
+  try { await api("/api/me/publickey", { method: "POST", body: JSON.stringify({ publicKeyJwk: r.publicJwk, proto: E2E.PROTO }) }); } catch {}
   await E2E.ensurePrekeys(api);
 }
 
@@ -202,7 +202,7 @@ async function ensureMyKeys(password) {
           await openVault(pw);
         } else {
           await E2E.unlock(state.me.publicId, pw);
-          try { await api("/api/me/publickey", { method: "POST", body: JSON.stringify({ publicKeyJwk: E2E.myPublicJwk() }) }); } catch {}
+          try { await api("/api/me/publickey", { method: "POST", body: JSON.stringify({ publicKeyJwk: E2E.myPublicJwk(), proto: E2E.PROTO }) }); } catch {}
           await E2E.ensurePrekeys(api);
         }
         $("#unlock-modal").classList.add("hidden");
@@ -552,7 +552,7 @@ async function sendText(text, mode) {
   if (state.peerStatus[chat.id].status === "changed") { renderKeyBanner(chat); return false; }
   const plaintext = once ? ONCE + text : text;
   const { iv, ciphertext, hdr, forwardSecret } = await E2E.encryptMessage({
-    peerIdentity: chat.with.publicKey, myId: state.me.publicId, peerId: chat.with.publicId, plaintext,
+    peerIdentity: chat.with.publicKey, peerProto: chat.with.proto, myId: state.me.publicId, peerId: chat.with.publicId, plaintext,
     claim: async () => (await api("/api/prekeys/claim/" + chat.with.profileId, { method: "POST", body: "{}" })).prekey
   });
   const data = await api("/api/messages", {
