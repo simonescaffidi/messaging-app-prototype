@@ -19,6 +19,10 @@
 // LIMITI RESIDUI (dichiarati nel manuale e sul sito):
 // - Se un contatto non ha prekey disponibili si usa l'identita' al posto della
 //   prekey: resta una chiave nuova per messaggio, ma senza cancellazione monouso.
+//   Mitigazioni: scorta ampia (fino a 200, ricarica sotto 40), avviso immediato al
+//   destinatario online quando scende sotto 30 (evento WS "prekeys-low"), tetto di
+//   prelievi per coppia di contatti e avviso al mittente quando il messaggio parte
+//   senza chiave monouso.
 // - La cassaforte e' protetta dalla forza della password scelta.
 // - Dopo un reset password (link via email) la cassaforte precedente non e'
 //   recuperabile: nasce una nuova identita' e lo storico locale va perso.
@@ -241,9 +245,9 @@ const E2E = (() => {
     if (!S) return;
     let count = 0;
     try { count = (await api("/api/prekeys/count")).count; } catch { return; }
-    if (count >= 20) return;
+    if (count >= 40) return;
     const batch = [];
-    for (let i = 0; i < 50 - count; i++) {
+    for (let i = 0; i < 100 - count; i++) {
       const pair = await crypto.subtle.generateKey(ECDH, true, ["deriveBits"]);
       const id = Array.from(crypto.getRandomValues(new Uint8Array(8)), (b) => b.toString(16).padStart(2, "0")).join("");
       S.data.prekeys[id] = await crypto.subtle.exportKey("jwk", pair.privateKey);

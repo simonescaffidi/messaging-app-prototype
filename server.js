@@ -558,7 +558,9 @@ app.get("/api/profile/:profileId/publickey", requireAuth, (req, res) => {
 // chiave nuova con X3DH (3 scambi ECDH). Il destinatario, dopo aver decifrato,
 // cancella la corrispondente chiave privata: il messaggio non e' piu' decifrabile
 // nemmeno con le chiavi di lungo periodo.
-const PREKEY_MAX = 100;
+const PREKEY_MAX = 200;      // scorta massima per profilo
+const PREKEY_LOW = 30;       // sotto questa soglia il profilo online viene avvisato di ricaricare
+const PREKEY_PAIR_HOURLY = 60; // tetto di prelievi per coppia (mittente, destinatario) all'ora: impedisce a un contatto di svuotare la scorta altrui
 app.post("/api/prekeys", requireAuth, (req, res) => {
   const keys = Array.isArray(req.body.keys) ? req.body.keys : [];
   const db = store.load();
@@ -586,8 +588,14 @@ app.post("/api/prekeys/claim/:profileId", requireAuth, (req, res) => {
   if (!shares) return res.status(403).json({ error: "non autorizzato" });
   const target = db.profiles.find((x) => x.id === req.params.profileId);
   if (!target) return res.status(404).json({ error: "profilo non trovato" });
+  // un contatto non puo' esaurire la scorta di prekey di un altro (indebolirebbe la forward secrecy dei suoi messaggi)
+  if (!rate("claimpair:" + req.profileId + ":" + target.id, PREKEY_PAIR_HOURLY, 3600 * 1000)) return res.status(429).json({ error: "troppe richieste" });
   const k = (target.prekeys || []).shift() || null; // monouso: rimossa alla consegna
   if (k) store.save(db);
+  // scorta in esaurimento: avvisa il destinatario (se online) di ricaricarla subito, al massimo ogni 5 minuti
+  if ((target.prekeys || []).length < PREKEY_LOW && rate("pklow:" + target.id, 1, 5 * 60 * 1000)) {
+    broadcastToProfile(target.id, { type: "prekeys-low" });
+  }
   res.json({ prekey: k });
 });
 

@@ -401,7 +401,7 @@ module.exports = {
           [
             "ul",
             [
-              "<strong>Prekeys épuisées</strong> : si un contact reste longtemps hors ligne et n'a plus de clés à usage unique, le message utilise quand même une clé nouvelle mais sans suppression unique, donc avec une forward secrecy plus faible.",
+              "<strong>Prekeys épuisées</strong> : si un contact reste longtemps hors ligne et n'a plus de clés à usage unique, le message utilise quand même une clé nouvelle mais sans suppression unique, donc avec une forward secrecy plus faible. Pour réduire ce risque, l'app recharge les clés automatiquement, prévient le contact lorsqu'il est en ligne et qu'il en reste peu, et vous signale quand un message part sans clé à usage unique.",
               "<strong>Messages liés à cet appareil</strong> : par conception, l'historique déchiffré ne se transfère pas. Sur un nouvel appareil ou après une récupération du mot de passe par e-mail, l'ancien coffre est irrécupérable : vous repartez avec une nouvelle identité et vos contacts voient l'avertissement de changement de clé.",
               "<strong>Le coffre vaut ce que vaut le mot de passe</strong> : choisissez-en un long et unique. Quiconque a votre appareil déjà déverrouillé avec l'appli ouverte peut lire les discussions, comme avec toute appli.",
               "<strong>Métadonnées visibles du serveur</strong> : expéditeur, heure, réactions et expiration des messages éphémères ne sont pas chiffrés.",

@@ -109,6 +109,7 @@ export default function ChatScreen({ route, navigation }) {
     try {
       const m = await sendText(chat, v, mode, reply && reply.id);
       if (m) setMsgs((l) => [...l, m]);
+      if (m && m._weakFs) setInfo(t("weakFs"));
       setText(""); setReply(null);
     } catch (e) { setInfo(e.message); }
     setSending(false);

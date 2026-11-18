@@ -281,6 +281,8 @@ function connectWs() {
       updateReactionsUI(data.messageId, data.reactions);
     } else if (data.type === "burn") {
       onBurn(data);
+    } else if (data.type === "prekeys-low") {
+      if (E2E.isUnlocked()) E2E.ensurePrekeys(api).catch(() => {});
     } else if (typeof data.type === "string" && data.type.startsWith("call-")) {
       Calls.onSignal(data);
     }
@@ -523,6 +525,20 @@ $("#btn-cancel-reply").addEventListener("click", () => {
   $("#reply-preview").classList.add("hidden");
 });
 
+// Avviso discreto (non bloccante) in basso, per 8 secondi.
+function showNotice(text) {
+  let el = document.getElementById("app-notice");
+  if (!el) {
+    el = document.createElement("div"); el.id = "app-notice"; el.setAttribute("role", "status");
+    el.style.cssText = "position:fixed;left:50%;bottom:24px;transform:translateX(-50%);max-width:90vw;padding:10px 14px;border-radius:10px;background:#1f2937;color:#fff;font-size:13px;z-index:9999;box-shadow:0 4px 14px rgba(0,0,0,.35)";
+    document.body.appendChild(el);
+  }
+  el.textContent = text; el.style.display = "block";
+  clearTimeout(showNotice._t); showNotice._t = setTimeout(() => { el.style.display = "none"; }, 8000);
+}
+// Ricarica periodica della scorta di prekey mentre l'app e' aperta e sbloccata.
+setInterval(() => { if (E2E.isUnlocked() && state.token) E2E.ensurePrekeys(api).catch(() => {}); }, 10 * 60 * 1000);
+
 // ---------- INVIO MESSAGGIO (cifrato end-to-end) ----------
 const ONCE = "\u0001ONCE\u0001"; // marcatore (dentro il testo cifrato) dei messaggi a visualizzazione singola
 async function sendText(text, mode) {
@@ -535,7 +551,7 @@ async function sendText(text, mode) {
   await refreshPeerStatus(chat);
   if (state.peerStatus[chat.id].status === "changed") { renderKeyBanner(chat); return false; }
   const plaintext = once ? ONCE + text : text;
-  const { iv, ciphertext, hdr } = await E2E.encryptMessage({
+  const { iv, ciphertext, hdr, forwardSecret } = await E2E.encryptMessage({
     peerIdentity: chat.with.publicKey, myId: state.me.publicId, peerId: chat.with.publicId, plaintext,
     claim: async () => (await api("/api/prekeys/claim/" + chat.with.profileId, { method: "POST", body: "{}" })).prekey
   });
@@ -543,6 +559,7 @@ async function sendText(text, mode) {
     method: "POST",
     body: JSON.stringify({ chatId: state.activeChatId, iv, ciphertext, hdr, replyTo: state.replyTo, selfDestructSeconds })
   });
+  if (!forwardSecret) showNotice(I18N.t("weakFs"));
   await E2E.rememberSent(data.message.id, plaintext, selfDestructSeconds ? Date.now() + selfDestructSeconds * 1000 : 0);
   data.message._plain = plaintext; // evita di dover decifrare il proprio messaggio appena inviato
   await appendMessage(data.message, true, chat);

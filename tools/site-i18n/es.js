@@ -401,7 +401,7 @@ module.exports = {
           [
             "ul",
             [
-              "<strong>Prekeys agotadas</strong>: si un contacto está mucho tiempo sin conexión y se queda sin claves de un solo uso, el mensaje usa igualmente una clave nueva pero sin eliminación única, con una forward secrecy más débil.",
+              "<strong>Prekeys agotadas</strong>: si un contacto está mucho tiempo sin conexión y se queda sin claves de un solo uso, el mensaje usa igualmente una clave nueva pero sin eliminación única, con una forward secrecy más débil. Para reducir el riesgo, la app repone las claves automáticamente, avisa al contacto cuando está en línea y le quedan pocas, y te avisa cuando un mensaje sale sin clave de un solo uso.",
               "<strong>Mensajes ligados a este dispositivo</strong>: por diseño, el historial descifrado no se traslada. En un dispositivo nuevo o tras recuperar la contraseña por correo, la caja fuerte anterior no se recupera: empiezas con una identidad nueva y los contactos ven el aviso de cambio de clave.",
               "<strong>La caja fuerte vale lo que vale la contraseña</strong>: elige una larga y única. Quien tenga tu dispositivo ya desbloqueado con la app abierta puede leer los chats, como en cualquier app.",
               "<strong>Metadatos visibles para el servidor</strong>: remitente, hora, reacciones y caducidad de los mensajes temporales no están cifrados.",

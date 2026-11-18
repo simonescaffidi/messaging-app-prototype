@@ -401,7 +401,7 @@ module.exports = {
           [
             "ul",
             [
-              "<strong>Prekeys running out</strong>: if a contact stays offline for long and runs out of one-time keys, the message still uses a new key but without one-time deletion, so forward secrecy is weaker.",
+              "<strong>Prekeys running out</strong>: if a contact stays offline for long and runs out of one-time keys, the message still uses a new key but without one-time deletion, so forward secrecy is weaker. To reduce the risk, the app refills keys automatically, alerts the contact when they are online and running low, and tells you when a message goes out without a one-time key.",
               "<strong>Messages tied to this device</strong>: by design, decrypted history doesn't move. On a new device or after an email password recovery the previous vault can't be recovered: you start with a new identity and contacts see the key-change warning.",
               "<strong>The vault is only as strong as the password</strong>: choose a long, unique one. Anyone with your already unlocked device and the app open can read chats, as with any app.",
               "<strong>Metadata visible to the server</strong>: sender, time, reactions and expiry of timed messages are not encrypted.",

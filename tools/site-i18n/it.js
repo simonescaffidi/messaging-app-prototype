@@ -401,7 +401,7 @@ module.exports = {
           [
             "ul",
             [
-              "<strong>Prekey esaurite</strong>: se un contatto resta offline a lungo e finisce le chiavi monouso, il messaggio usa comunque una chiave nuova ma senza l'eliminazione monouso, quindi con una forward secrecy meno forte.",
+              "<strong>Prekey esaurite</strong>: se un contatto resta offline a lungo e finisce le chiavi monouso, il messaggio usa comunque una chiave nuova ma senza l'eliminazione monouso, quindi con una forward secrecy meno forte. Per ridurre il rischio l'app ricarica le chiavi in automatico, avvisa il contatto online quando la scorta scende e ti segnala quando un messaggio parte senza chiave monouso.",
               "<strong>Messaggi legati a questo dispositivo</strong>: per progetto, lo storico decifrato non si sposta. Su un nuovo dispositivo o dopo un recupero password via email la cassaforte precedente non è recuperabile: si parte con una nuova identità e i contatti vedono l'avviso di cambio chiave.",
               "<strong>La cassaforte vale quanto la password</strong>: scegline una lunga e unica. Chi ha il dispositivo già sbloccato con l'app aperta può leggere le chat, come per qualunque app.",
               "<strong>Metadati visibili al server</strong>: mittente, orario, reazioni e scadenza dei messaggi a tempo non sono cifrati.",

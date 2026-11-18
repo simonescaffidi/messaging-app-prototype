@@ -401,7 +401,7 @@ module.exports = {
           [
             "ul",
             [
-              "<strong>Prekeys aufgebraucht</strong>: Ist ein Kontakt lange offline und hat keine Einmalschlüssel mehr, nutzt die Nachricht trotzdem einen neuen Schlüssel, aber ohne Einmal-Löschung – die Forward Secrecy ist dann schwächer.",
+              "<strong>Prekeys aufgebraucht</strong>: Ist ein Kontakt lange offline und hat keine Einmalschlüssel mehr, nutzt die Nachricht trotzdem einen neuen Schlüssel, aber ohne Einmal-Löschung – die Forward Secrecy ist dann schwächer. Um das Risiko zu verringern, füllt die App die Schlüssel automatisch nach, warnt den Kontakt, sobald er online ist und der Vorrat knapp wird, und zeigt dir an, wenn eine Nachricht ohne Einmalschlüssel gesendet wird.",
               "<strong>Nachrichten an dieses Gerät gebunden</strong>: Der entschlüsselte Verlauf wandert bewusst nicht mit. Auf einem neuen Gerät oder nach einer Passwort-Wiederherstellung per E-Mail ist der frühere Tresor nicht wiederherstellbar: du startest mit neuer Identität, deine Kontakte sehen die Warnung zum Schlüsselwechsel.",
               "<strong>Der Tresor ist so stark wie das Passwort</strong>: Wähle ein langes, einzigartiges. Wer dein bereits entsperrtes Gerät mit geöffneter App hat, kann die Chats lesen – wie bei jeder App.",
               "<strong>Metadaten für den Server sichtbar</strong>: Absender, Zeit, Reaktionen und Ablauf zeitlich begrenzter Nachrichten sind nicht verschlüsselt.",

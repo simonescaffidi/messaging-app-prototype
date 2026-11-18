@@ -127,6 +127,7 @@ function connectWs() {
     let d; try { d = JSON.parse(evt.data); } catch { return; }
     if (d.type === "message" || d.type === "reaction" || d.type === "burn") bus.emit(d.type, d);
     if (d.type === "message") loadChats().catch(() => {});
+    if (d.type === "prekeys-low" && E2E.isUnlocked()) E2E.ensurePrekeys(api).catch(() => {});
     if (typeof d.type === "string" && d.type.startsWith("call-")) bus.emit("call", d);
   };
   ws.onclose = () => {
@@ -193,7 +194,7 @@ export async function sendText(chat, text, mode, replyTo) {
   const st = await refreshPeerStatus(chat);
   if (st.status === "changed") throw new Error(t("keyChangedBanner"));
   const plaintext = once ? ONCE + text : text;
-  const { iv, ciphertext, hdr } = await E2E.encryptMessage({
+  const { iv, ciphertext, hdr, forwardSecret } = await E2E.encryptMessage({
     peerIdentity: chat.with.publicKey, myId: me.publicId, peerId: chat.with.publicId, plaintext,
     claim: async () => (await api("/api/prekeys/claim/" + chat.with.profileId, { method: "POST", body: "{}" })).prekey
   });
@@ -201,7 +202,7 @@ export async function sendText(chat, text, mode, replyTo) {
   await E2E.rememberSent(data.message.id, plaintext, selfDestructSeconds ? Date.now() + selfDestructSeconds * 1000 : 0);
   plain.set(data.message.id, plaintext);
   loadChats().catch(() => {});
-  return data.message;
+  return forwardSecret ? data.message : { ...data.message, _weakFs: true };
 }
 export const react = (id, emoji) => api(`/api/messages/${id}/react`, { method: "POST", body: JSON.stringify({ emoji }) });
 export const burn = (id) => api(`/api/messages/${id}/burn`, { method: "POST", body: JSON.stringify({ seconds: 10 }) });

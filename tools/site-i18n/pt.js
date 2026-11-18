@@ -401,7 +401,7 @@ module.exports = {
           [
             "ul",
             [
-              "<strong>Prekeys esgotadas</strong>: se um contato fica muito tempo offline e acaba as chaves de uso único, a mensagem ainda usa uma chave nova, mas sem exclusão única — forward secrecy mais fraca.",
+              "<strong>Prekeys esgotadas</strong>: se um contato fica muito tempo offline e acaba as chaves de uso único, a mensagem ainda usa uma chave nova, mas sem exclusão única — forward secrecy mais fraca. Para reduzir o risco, a app repõe as chaves automaticamente, avisa o contacto quando está online e restam poucas, e avisa-o quando uma mensagem sai sem chave de uso único.",
               "<strong>Mensagens ligadas a este dispositivo</strong>: por projeto, o histórico decifrado não se move. Em um novo dispositivo ou após recuperar a senha por e-mail, o cofre anterior não é recuperável: você recomeça com nova identidade e os contatos veem o aviso de troca de chave.",
               "<strong>O cofre vale o que vale a senha</strong>: escolha uma longa e única. Quem tiver seu dispositivo já desbloqueado com o app aberto pode ler os chats, como em qualquer app.",
               "<strong>Metadados visíveis ao servidor</strong>: remetente, horário, reações e expiração das mensagens temporárias não são cifrados.",

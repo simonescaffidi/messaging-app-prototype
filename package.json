@@ -4,7 +4,8 @@
   "description": "Prototipo webapp - messaggistica privata con profili multipli e chat nascoste",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "node --test tests/prekeys.test.mjs"
   },
   "dependencies": {
     "express": "^4.19.2",
