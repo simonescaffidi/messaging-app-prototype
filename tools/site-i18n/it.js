@@ -332,7 +332,7 @@ module.exports = {
           ],
           [
             "p",
-            "Anche se qualcuno ottenesse le tue chiavi di lungo periodo (ad esempio rubando il dispositivo), non potrebbe decifrare i messaggi che hai già ricevuto, perché le loro chiavi sono state eliminate. Il testo che hai già letto resta solo nella cache locale cifrata del tuo dispositivo."
+            "Anche se qualcuno ottenesse le tue chiavi di lungo periodo (ad esempio rubando il dispositivo), non potrebbe decifrare i messaggi che hai già ricevuto, perché le loro chiavi sono state eliminate. Il testo che hai già letto resta solo nella cache locale cifrata del tuo dispositivo. Con il Double Ratchet (v3), dopo il primo messaggio ogni messaggio di una conversazione ha una chiave nuova e le chiavi si rinnovano a ogni cambio di direzione: se una chiave venisse rubata, la conversazione si \"ripara\" da sola appena vi scambiate i messaggi successivi."
           ],
           [
             "h3",
@@ -401,7 +401,7 @@ module.exports = {
           [
             "ul",
             [
-              "<strong>Prekey esaurite</strong>: se un contatto resta offline a lungo e finisce le chiavi monouso, il messaggio usa comunque una chiave nuova ma senza l'eliminazione monouso, quindi con una forward secrecy meno forte. Per ridurre il rischio l'app ricarica le chiavi in automatico, avvisa il contatto online quando la scorta scende e ti segnala quando un messaggio parte senza chiave monouso.",
+              "<strong>Prekey esaurite</strong>: se un contatto resta offline a lungo e finisce le chiavi monouso, il messaggio usa comunque una chiave nuova ma senza l'eliminazione monouso, quindi con una forward secrecy meno forte. Per ridurre il rischio l'app ricarica le chiavi in automatico, avvisa il contatto online quando la scorta scende e ti segnala quando un messaggio parte senza chiave monouso. Con il Double Ratchet solo il primo messaggio di una conversazione richiede una chiave monouso.",
               "<strong>Messaggi legati a questo dispositivo</strong>: per progetto, lo storico decifrato non si sposta. Su un nuovo dispositivo o dopo un recupero password via email la cassaforte precedente non è recuperabile: si parte con una nuova identità e i contatti vedono l'avviso di cambio chiave.",
               "<strong>La cassaforte vale quanto la password</strong>: scegline una lunga e unica. Chi ha il dispositivo già sbloccato con l'app aperta può leggere le chat, come per qualunque app.",
               "<strong>Metadati visibili al server</strong>: mittente, orario, reazioni e scadenza dei messaggi a tempo non sono cifrati.",

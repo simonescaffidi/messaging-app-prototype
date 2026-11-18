@@ -115,7 +115,7 @@
     </ol>
     <p>Das ist dieselbe Art von Mathematik (ECDH + AES-GCM), die viele moderne sichere Protokolle nutzen – hier über die native Web Crypto API des Browsers angewendet, ohne externe Bibliotheken.</p>
     <h3>Forward Secrecy: vergangene Nachrichten bleiben sicher</h3>
-    <p>Selbst wenn jemand deine Langzeitschlüssel erlangt (z. B. durch Diebstahl des Geräts), kann er bereits empfangene Nachrichten nicht entschlüsseln, denn deren Schlüssel wurden gelöscht. Bereits gelesener Text bleibt nur im verschlüsselten lokalen Cache deines Geräts.</p>
+    <p>Selbst wenn jemand deine Langzeitschlüssel erlangt (z. B. durch Diebstahl des Geräts), kann er bereits empfangene Nachrichten nicht entschlüsseln, denn deren Schlüssel wurden gelöscht. Bereits gelesener Text bleibt nur im verschlüsselten lokalen Cache deines Geräts. Mit dem Double Ratchet (v3) hat nach der ersten Nachricht jede Nachricht eines Gesprächs einen eigenen neuen Schlüssel, und die Schlüssel erneuern sich bei jedem Richtungswechsel: Würde ein Schlüssel gestohlen, heilt sich das Gespräch selbst, sobald ihr die nächsten Nachrichten austauscht.</p>
     <h3>Der Schlüsseltresor</h3>
     <p>Private Schlüssel, Prekeys und der Nachrichten-Cache werden im Browser nur verschlüsselt (AES-GCM) gespeichert, mit einem aus deinem Passwort per PBKDF2-SHA256 (310.000 Iterationen) abgeleiteten Schlüssel. Meldest du dich per Biometrie an, wirst du einmal nach dem Passwort gefragt, um den Tresor zu öffnen. Bei einer Passwortänderung wird der Tresor neu verschlüsselt.</p>
     <h3>Prüfen, ob er es wirklich ist: Sicherheitsnummer</h3>
@@ -143,7 +143,7 @@
     <h2>11. Erklärte Sicherheitsgrenzen</h2>
     <p>Der Ehrlichkeit halber die Grenzen, die bleiben – obwohl die Verschlüsselung echt und nicht nur behauptet ist:</p>
     <ul>
-      <li><strong>Prekeys aufgebraucht</strong>: Ist ein Kontakt lange offline und hat keine Einmalschlüssel mehr, nutzt die Nachricht trotzdem einen neuen Schlüssel, aber ohne Einmal-Löschung – die Forward Secrecy ist dann schwächer. Um das Risiko zu verringern, füllt die App die Schlüssel automatisch nach, warnt den Kontakt, sobald er online ist und der Vorrat knapp wird, und zeigt dir an, wenn eine Nachricht ohne Einmalschlüssel gesendet wird.</li>
+      <li><strong>Prekeys aufgebraucht</strong>: Ist ein Kontakt lange offline und hat keine Einmalschlüssel mehr, nutzt die Nachricht trotzdem einen neuen Schlüssel, aber ohne Einmal-Löschung – die Forward Secrecy ist dann schwächer. Um das Risiko zu verringern, füllt die App die Schlüssel automatisch nach, warnt den Kontakt, sobald er online ist und der Vorrat knapp wird, und zeigt dir an, wenn eine Nachricht ohne Einmalschlüssel gesendet wird. Mit dem Double Ratchet braucht nur die erste Nachricht eines Gesprächs einen Einmalschlüssel.</li>
       <li><strong>Nachrichten an dieses Gerät gebunden</strong>: Der entschlüsselte Verlauf wandert bewusst nicht mit. Auf einem neuen Gerät oder nach einer Passwort-Wiederherstellung per E-Mail ist der frühere Tresor nicht wiederherstellbar: du startest mit neuer Identität, deine Kontakte sehen die Warnung zum Schlüsselwechsel.</li>
       <li><strong>Der Tresor ist so stark wie das Passwort</strong>: Wähle ein langes, einzigartiges. Wer dein bereits entsperrtes Gerät mit geöffneter App hat, kann die Chats lesen – wie bei jeder App.</li>
       <li><strong>Metadaten für den Server sichtbar</strong>: Absender, Zeit, Reaktionen und Ablauf zeitlich begrenzter Nachrichten sind nicht verschlüsselt.</li>

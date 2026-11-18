@@ -71,3 +71,21 @@ test("un contatto non puo' svuotare la scorta prekey; il destinatario online ric
   assert.equal(r.status, 200);
   assert.ok(r.json.prekey);
 });
+
+test("cambio di identita': le prekey vecchie vengono azzerate; la versione protocollo e' esposta ai contatti", async () => {
+  const a = await user("dave"), b = await user("erin");
+  await post("/api/contacts/add", { publicId: b.publicId }, a.token);
+  const k1 = { kty: "EC", crv: "P-256", x: "AAA", y: "BBB" }, k2 = { kty: "EC", crv: "P-256", x: "CCC", y: "DDD" };
+  await post("/api/me/publickey", { publicKeyJwk: k1, proto: 3 }, b.token);
+  await post("/api/prekeys", { keys: Array.from({ length: 10 }, (_, i) => jwk(i)) }, b.token);
+  const chats1 = await fetch(base + "/api/chats", { headers: { Authorization: "Bearer " + a.token } }).then((r) => r.json());
+  assert.equal(chats1.chats[0].with.proto, 3);
+  // stessa identita' ripubblicata (ogni login): le prekey restano
+  await post("/api/me/publickey", { publicKeyJwk: k1, proto: 3 }, b.token);
+  assert.equal((await fetch(base + "/api/prekeys/count", { headers: { Authorization: "Bearer " + b.token } }).then((r) => r.json())).count, 10);
+  // nuova identita': prekey azzerate; un client vecchio (senza proto) torna a v2
+  await post("/api/me/publickey", { publicKeyJwk: k2 }, b.token);
+  assert.equal((await fetch(base + "/api/prekeys/count", { headers: { Authorization: "Bearer " + b.token } }).then((r) => r.json())).count, 0);
+  const chats2 = await fetch(base + "/api/chats", { headers: { Authorization: "Bearer " + a.token } }).then((r) => r.json());
+  assert.equal(chats2.chats[0].with.proto, 2);
+});

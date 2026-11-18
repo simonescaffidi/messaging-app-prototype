@@ -29,6 +29,10 @@ Apri `http://localhost:3000` in due schede/browser diversi per simulare due uten
 - **Server cieco**: solo testo cifrato; email e username cifrati a riposo (AES-256-GCM) in Postgres; password con hash scrypt; limiti di tentativi per IP e username.
 - **Biometria WebAuthn/FIDO2**: il server vede solo la chiave pubblica della passkey.
 
+## Double Ratchet (E2E v3)
+
+Dal 2026-11 le conversazioni usano un Double Ratchet: il primo messaggio parte con X3DH + prekey monouso come prima; poi ogni messaggio ha una chiave nuova (catena simmetrica, HKDF-SHA256) e a ogni cambio di direzione si rinnova lo scambio DH (post-compromise security). Sessioni, chiavi saltate (max 500 per salto, 2000 totali, scadenza 14 giorni) e ratchet stanno nella cassaforte cifrata, con accesso esclusivo tra schede (Web Locks). Il protocollo si negozia: i client dichiarano `proto: 3` in `/api/me/publickey` e i mittenti lo leggono da `with.proto`; con client vecchi si resta su v2, e i messaggi v1/v2 restano sempre leggibili. Test: `npm test` (13 test Node: ordine, perdite, avvio simultaneo, riavvio, manomissione, compromissione dello stato, compatibilita', due schede) e `tests/e2e-browser.mjs` (due Chromium veri, richiede `playwright`).
+
 ## Limiti dichiarati
 
 - Metadati (mittente, orario, reazioni, scadenze) visibili al server.

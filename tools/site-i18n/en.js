@@ -332,7 +332,7 @@ module.exports = {
           ],
           [
             "p",
-            "Even if someone obtained your long-term keys (for example by stealing your device), they couldn't decrypt messages you have already received, because their keys were deleted. Text you have already read stays only in your device's encrypted local cache."
+            "Even if someone obtained your long-term keys (for example by stealing your device), they couldn't decrypt messages you have already received, because their keys were deleted. Text you have already read stays only in your device's encrypted local cache. Since the Double Ratchet (v3), after the first message every message in a conversation has its own new key, and the keys renew every time the conversation changes direction: if a key were ever stolen, the conversation heals itself as soon as you exchange the next messages."
           ],
           [
             "h3",
@@ -401,7 +401,7 @@ module.exports = {
           [
             "ul",
             [
-              "<strong>Prekeys running out</strong>: if a contact stays offline for long and runs out of one-time keys, the message still uses a new key but without one-time deletion, so forward secrecy is weaker. To reduce the risk, the app refills keys automatically, alerts the contact when they are online and running low, and tells you when a message goes out without a one-time key.",
+              "<strong>Prekeys running out</strong>: if a contact stays offline for long and runs out of one-time keys, the message still uses a new key but without one-time deletion, so forward secrecy is weaker. To reduce the risk, the app refills keys automatically, alerts the contact when they are online and running low, and tells you when a message goes out without a one-time key. With the Double Ratchet only the first message of a conversation needs a one-time key.",
               "<strong>Messages tied to this device</strong>: by design, decrypted history doesn't move. On a new device or after an email password recovery the previous vault can't be recovered: you start with a new identity and contacts see the key-change warning.",
               "<strong>The vault is only as strong as the password</strong>: choose a long, unique one. Anyone with your already unlocked device and the app open can read chats, as with any app.",
               "<strong>Metadata visible to the server</strong>: sender, time, reactions and expiry of timed messages are not encrypted.",

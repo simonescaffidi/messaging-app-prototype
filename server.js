@@ -539,7 +539,12 @@ app.post("/api/me/publickey", requireAuth, (req, res) => {
   }
   const db = store.load();
   const profile = db.profiles.find((p) => p.id === req.profileId);
+  const changed = profile.publicKey && (profile.publicKey.x !== publicKeyJwk.x || profile.publicKey.y !== publicKeyJwk.y);
+  // nuova identita' (es. reset password o reinstallazione): le prekey pubblicate appartengono alla vecchia cassaforte, i cui segreti non esistono piu'
+  if (changed) profile.prekeys = [];
   profile.publicKey = publicKeyJwk;
+  // versione del protocollo E2E supportata da questo client (3 = Double Ratchet); i mittenti la leggono per scegliere il formato
+  profile.proto = Number(req.body.proto) >= 3 ? 3 : 2;
   store.save(db);
   res.json({ ok: true });
 });
@@ -607,7 +612,7 @@ app.get("/api/contacts", requireAuth, (req, res) => {
   const mine = db.contacts.filter((c) => c.profileId === req.profileId);
   const result = mine.map((c) => {
     const p = db.profiles.find((pr) => pr.id === c.contactProfileId);
-    return { profileId: p.id, username: p.username, publicId: p.publicId, publicKey: p.publicKey || null, blocked: c.blocked, muted: c.muted };
+    return { profileId: p.id, username: p.username, publicId: p.publicId, publicKey: p.publicKey || null, proto: p.proto || 2, blocked: c.blocked, muted: c.muted };
   });
   res.json(result);
 });
@@ -638,7 +643,7 @@ app.post("/api/contacts/add", requireAuth, (req, res) => {
   }
   store.save(db);
   res.json({
-    contact: { profileId: target.id, username: target.username, publicId: target.publicId, publicKey: target.publicKey || null },
+    contact: { profileId: target.id, username: target.username, publicId: target.publicId, publicKey: target.publicKey || null, proto: target.proto || 2 },
     chatId: chat.id
   });
 });
@@ -682,7 +687,7 @@ app.get("/api/chats", requireAuth, (req, res) => {
     const last = msgs[msgs.length - 1];
     return {
       id: c.id,
-      with: { profileId: other.id, username: other.username, publicId: other.publicId, publicKey: other.publicKey || null },
+      with: { profileId: other.id, username: other.username, publicId: other.publicId, publicKey: other.publicKey || null, proto: other.proto || 2 },
       hidden: !!c.hiddenFor[req.profileId],
       blockedByMe: db.contacts.some((x) => x.profileId === req.profileId && x.contactProfileId === other.id && x.blocked),
       lastMessage: last ? { id: last.id, senderProfileId: last.senderProfileId, iv: last.iv, ciphertext: last.ciphertext, hdr: last.hdr || null, createdAt: last.createdAt } : null

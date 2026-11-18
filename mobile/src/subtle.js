@@ -61,6 +61,9 @@ export const subtle = {
     return { privateKey: key("private", "ECDH", extractable, usages, { _d: d, _pub: pub }), publicKey: key("public", "ECDH", true, [], { _pub: pub }) };
   },
   async deriveBits(algorithm, base, length) {
+    if (algName(algorithm) === "HKDF") {
+      return toAB(hkdf(sha256, base._raw, u8(algorithm.salt), u8(algorithm.info), length / 8));
+    }
     if (algName(algorithm) !== "ECDH") throw new Error("deriveBits non supportata");
     const shared = p256.getSharedSecret(base._d, algorithm.public._pub, true).slice(1); // solo la coordinata x
     return toAB(shared.slice(0, length / 8));

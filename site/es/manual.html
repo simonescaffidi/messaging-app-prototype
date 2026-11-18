@@ -115,7 +115,7 @@
     </ol>
     <p>Es el mismo tipo de matemáticas (ECDH + AES-GCM) que usan muchos protocolos seguros modernos, aplicado aquí mediante la Web Crypto API nativa del navegador, sin librerías externas.</p>
     <h3>Forward secrecy: los mensajes pasados siguen a salvo</h3>
-    <p>Aunque alguien obtuviera tus claves de largo plazo (por ejemplo robando tu dispositivo), no podría descifrar los mensajes ya recibidos, porque sus claves fueron eliminadas. El texto que ya leíste solo queda en la caché local cifrada de tu dispositivo.</p>
+    <p>Aunque alguien obtuviera tus claves de largo plazo (por ejemplo robando tu dispositivo), no podría descifrar los mensajes ya recibidos, porque sus claves fueron eliminadas. El texto que ya leíste solo queda en la caché local cifrada de tu dispositivo. Con el Double Ratchet (v3), después del primer mensaje cada mensaje de una conversación tiene su propia clave nueva y las claves se renuevan cada vez que cambia el sentido: si una clave fuera robada, la conversación se repara sola en cuanto intercambiáis los mensajes siguientes.</p>
     <h3>La caja fuerte de claves</h3>
     <p>Las claves privadas, las prekeys y la caché de mensajes se guardan en el navegador solo cifradas (AES-GCM), con una clave derivada de tu contraseña mediante PBKDF2-SHA256 (310.000 iteraciones). Si entras con biometría, se te pide la contraseña una vez para abrir la caja fuerte. Al cambiar la contraseña, la caja se vuelve a cifrar.</p>
     <h3>Comprueba que es realmente él: número de seguridad</h3>
@@ -143,7 +143,7 @@
     <h2>11. Límites de seguridad declarados</h2>
     <p>Por honestidad, estos son los límites que quedan, aunque el cifrado sea real y no solo declarado:</p>
     <ul>
-      <li><strong>Prekeys agotadas</strong>: si un contacto está mucho tiempo sin conexión y se queda sin claves de un solo uso, el mensaje usa igualmente una clave nueva pero sin eliminación única, con una forward secrecy más débil. Para reducir el riesgo, la app repone las claves automáticamente, avisa al contacto cuando está en línea y le quedan pocas, y te avisa cuando un mensaje sale sin clave de un solo uso.</li>
+      <li><strong>Prekeys agotadas</strong>: si un contacto está mucho tiempo sin conexión y se queda sin claves de un solo uso, el mensaje usa igualmente una clave nueva pero sin eliminación única, con una forward secrecy más débil. Para reducir el riesgo, la app repone las claves automáticamente, avisa al contacto cuando está en línea y le quedan pocas, y te avisa cuando un mensaje sale sin clave de un solo uso. Con el Double Ratchet solo el primer mensaje de una conversación necesita una clave de un solo uso.</li>
       <li><strong>Mensajes ligados a este dispositivo</strong>: por diseño, el historial descifrado no se traslada. En un dispositivo nuevo o tras recuperar la contraseña por correo, la caja fuerte anterior no se recupera: empiezas con una identidad nueva y los contactos ven el aviso de cambio de clave.</li>
       <li><strong>La caja fuerte vale lo que vale la contraseña</strong>: elige una larga y única. Quien tenga tu dispositivo ya desbloqueado con la app abierta puede leer los chats, como en cualquier app.</li>
       <li><strong>Metadatos visibles para el servidor</strong>: remitente, hora, reacciones y caducidad de los mensajes temporales no están cifrados.</li>
