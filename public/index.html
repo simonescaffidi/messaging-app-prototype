@@ -2,15 +2,34 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>Securmy — Messaggistica privata e cassaforte cifrata</title>
 <link rel="icon" type="image/svg+xml" href="icon.svg" />
 <link rel="icon" type="image/png" sizes="48x48" href="favicon.png" />
 <link rel="apple-touch-icon" href="icon-512.png" />
-<meta name="theme-color" content="#0f1115" />
+<meta name="theme-color" content="#0b0e14" media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content="#f3f5fa" media="(prefers-color-scheme: light)" />
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="m22 8-6 4 6 4V8z"/></symbol>
+  <symbol id="i-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="4.9" y1="4.9" x2="19.1" y2="19.1"/></symbol>
+  <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="M10.85 12.15 19 4"/><path d="m18 5 3 3"/><path d="m15 8 3 3"/></symbol>
+  <symbol id="i-shield-check" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+</svg>
+
 
 <!-- SELETTORE LINGUA (visibile ovunque) -->
 <div id="lang-switcher" class="lang-switcher">
@@ -22,6 +41,7 @@
   <div class="auth-card">
     <img src="icon.svg" alt="Securmy" width="64" height="64" class="auth-logo" />
     <h1 data-i18n="appTitle">Securmy</h1>
+    <p class="e2e-badge"><svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg><span data-i18n="e2eBadge">Cifrata end-to-end</span></p>
     <p class="subtitle" data-i18n="subtitle">Prototipo — nessuna crittografia reale, solo demo funzionale</p>
 
     <div class="tabs">
@@ -83,6 +103,11 @@
       <p id="register-error" class="error"></p>
     </div>
   </div>
+
+  <footer class="auth-foot">
+    <div><a href="/terms.html" target="_blank" rel="noopener" data-i18n="termsLinkText">Termini di servizio</a> · <a href="/privacy-policy.html" target="_blank" rel="noopener" data-i18n="privacyLinkText">Privacy Policy</a></div>
+    <p class="powered-by">Powered by <a href="https://www.simonescaffidi.it" target="_blank" rel="noopener noreferrer">www.simonescaffidi.it</a></p>
+  </footer>
 </div>
 
 <!-- MODALE CREDENZIALI (mostrate una sola volta) -->
@@ -104,7 +129,7 @@
         <strong id="me-username"></strong>
         <div class="me-publicid" id="me-publicid"></div>
       </div>
-      <button id="btn-logout" data-i18n-title="btnLogoutTitle" title="Blocca / Esci">🔓</button>
+      <button id="btn-logout" class="icon-btn bordered" data-i18n-title="btnLogoutTitle" title="Blocca / Esci" aria-label="Blocca / Esci"><svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg></button>
     </div>
 
     <input id="search-box" type="text" data-i18n-placeholder="searchPlaceholder" placeholder="Cerca... (o combinazione segreta)" autocomplete="off" />
@@ -112,43 +137,56 @@
 
     <div class="sidebar-actions">
       <button id="btn-add-contact" data-i18n="btnAddContact">+ Aggiungi contatto</button>
-      <button id="btn-suite" data-i18n-title="suiteTitle" title="Cassaforte Securmy">🛡️</button>
-      <button id="btn-settings">⚙️</button>
+      <button id="btn-suite" class="icon-btn" data-i18n-title="suiteTitle" title="Cassaforte Securmy" aria-label="Cassaforte Securmy"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg></button>
+      <button id="btn-settings" class="icon-btn" data-i18n-title="settingsTitle" title="Impostazioni" aria-label="Impostazioni"><svg class="ic" aria-hidden="true"><use href="#i-sliders"/></svg></button>
     </div>
 
     <div id="chat-list" class="chat-list"></div>
+
+    <div class="sidebar-foot">
+      <div id="sidebar-lang"></div>
+      <div><a href="/terms.html" target="_blank" rel="noopener" data-i18n="termsLinkText">Termini di servizio</a> · <a href="/privacy-policy.html" target="_blank" rel="noopener" data-i18n="privacyLinkText">Privacy Policy</a></div>
+      <p class="powered-by">Powered by <a href="https://www.simonescaffidi.it" target="_blank" rel="noopener noreferrer">www.simonescaffidi.it</a></p>
+    </div>
   </aside>
 
   <main class="chat-main">
-    <div id="chat-empty" class="chat-empty" data-i18n="chatEmpty">Seleziona una chat oppure aggiungi un contatto per iniziare</div>
+    <div id="chat-empty" class="chat-empty"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg><span data-i18n="chatEmpty">Seleziona una chat oppure aggiungi un contatto per iniziare</span><span class="e2e-badge"><svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg><span data-i18n="e2eBadge">Cifrata end-to-end</span></span></div>
 
     <div id="chat-view" class="chat-view hidden">
       <div class="chat-header">
-        <strong id="chat-with-name"></strong>
+        <button id="btn-back" class="icon-btn only-mobile" data-i18n-title="btnBack" title="Indietro" aria-label="Indietro"><svg class="ic" aria-hidden="true"><use href="#i-back"/></svg></button>
+        <span id="chat-avatar" class="avatar sm" aria-hidden="true"></span>
+        <div class="chat-title">
+          <strong id="chat-with-name"></strong>
+          <span class="e2e-badge"><svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg><span data-i18n="e2eBadge">Cifrata end-to-end</span></span>
+        </div>
         <div class="chat-header-actions">
-          <button id="btn-call-audio" data-i18n-title="callAudio" title="Chiamata audio cifrata">📞</button>
-          <button id="btn-call-video" data-i18n-title="callVideo" title="Videochiamata cifrata">🎥</button>
-          <button id="btn-block" data-i18n-title="blockTitle" title="Blocca o segnala">🚫</button>
-          <button id="btn-verify" data-i18n-title="verifyTitle" title="Verifica chiave">🔑</button>
-          <button id="btn-toggle-hide" data-i18n-title="chatHideTitle" title="Nascondi/mostra questa chat">🙈</button>
+          <button id="btn-call-audio" class="icon-btn" data-i18n-title="callAudio" title="Chiamata audio cifrata" aria-label="Chiamata audio cifrata"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg></button>
+          <button id="btn-call-video" class="icon-btn" data-i18n-title="callVideo" title="Videochiamata cifrata" aria-label="Videochiamata cifrata"><svg class="ic" aria-hidden="true"><use href="#i-video"/></svg></button>
+          <button id="btn-block" class="icon-btn" data-i18n-title="blockTitle" title="Blocca o segnala" aria-label="Blocca o segnala"><svg class="ic" aria-hidden="true"><use href="#i-ban"/></svg></button>
+          <button id="btn-verify" class="icon-btn" data-i18n-title="verifyTitle" title="Verifica chiave" aria-label="Verifica chiave"><svg class="ic" aria-hidden="true"><use href="#i-key"/></svg></button>
+          <button id="btn-toggle-hide" class="icon-btn" data-i18n-title="chatHideTitle" title="Nascondi/mostra questa chat" aria-label="Nascondi/mostra questa chat"><svg class="ic" aria-hidden="true"><use href="#i-eye-off"/></svg></button>
         </div>
       </div>
       <div id="key-banner" class="key-banner hidden"></div>
       <div id="messages" class="messages"></div>
       <div id="reply-preview" class="reply-preview hidden">
         <span id="reply-preview-text"></span>
-        <button id="btn-cancel-reply">✕</button>
+        <button id="btn-cancel-reply" type="button" aria-label="✕"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button>
       </div>
       <form id="message-form" class="message-form">
-        <select id="destruct-select">
-          <option value="" data-i18n="destructNormal">Normale</option>
-          <option value="30" data-i18n="destruct30">Autodistrutto 30s</option>
-          <option value="300" data-i18n="destruct300">Autodistrutto 5m</option>
-          <option value="3600" data-i18n="destruct3600">Autodistrutto 1h</option>
-          <option value="once" data-i18n="destructOnce">👁 Visualizzazione singola</option>
-        </select>
-        <input id="message-input" type="text" data-i18n-placeholder="messagePlaceholder" placeholder="Scrivi un messaggio..." autocomplete="off" />
-        <button type="submit" class="primary" data-i18n="btnSend">Invia</button>
+        <label class="timer-wrap" id="timer-wrap" data-i18n-title="timerTitle" title="Autodistruzione"><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg>
+          <select id="destruct-select" aria-label="Autodistruzione">
+            <option value="" data-i18n="destructNormal">Normale</option>
+            <option value="30" data-i18n="destruct30">Autodistrutto 30s</option>
+            <option value="300" data-i18n="destruct300">Autodistrutto 5m</option>
+            <option value="3600" data-i18n="destruct3600">Autodistrutto 1h</option>
+            <option value="once" data-i18n="destructOnce">Visualizzazione singola</option>
+          </select>
+        </label>
+        <input id="message-input" type="text" data-i18n-placeholder="messagePlaceholder" placeholder="Scrivi un messaggio..." autocomplete="off" enterkeyhint="send" />
+        <button type="submit" class="send-btn" data-i18n-title="btnSend" title="Invia" aria-label="Invia"><svg class="ic" aria-hidden="true"><use href="#i-send"/></svg></button>
       </form>
     </div>
   </main>
@@ -157,7 +195,7 @@
 <!-- SUITE: cassaforte file, note, password, P2P, sicurezza, backup -->
 <div id="suite-modal" class="modal hidden">
   <div class="modal-card suite-card">
-    <div class="suite-head"><h2 data-i18n="suiteTitle">Cassaforte Securmy</h2><button id="suite-close" type="button">✕</button></div>
+    <div class="suite-head"><h2 data-i18n="suiteTitle">Cassaforte Securmy</h2><button id="suite-close" type="button" aria-label="✕"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button></div>
     <div id="suite-tabs" class="suite-tabs"></div>
     <div id="suite-body"></div>
   </div>
