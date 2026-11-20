@@ -3,7 +3,7 @@ import { FlatList, Pressable, RefreshControl, Text, View } from "react-native";
 import { Button, H1, Input, P, Row, Screen, Sheet } from "../ui";
 import { t, useLang } from "../i18n";
 import { THEME as T } from "../config";
-import { ONCE, S, addContact, bus, decryptMessage, loadChats } from "../session";
+import { ONCE, REKEY, S, addContact, bus, decryptMessage, loadChats } from "../session";
 
 function Preview({ chat }) {
   const [txt, setTxt] = useState("");
@@ -11,7 +11,7 @@ function Preview({ chat }) {
   useEffect(() => {
     let alive = true;
     if (!last) { setTxt(t("chatEmpty")); return; }
-    decryptMessage(chat, last).then((p) => { if (alive) setTxt(typeof p === "string" && p.startsWith(ONCE) ? t("onceSent") : p); });
+    decryptMessage(chat, last).then((p) => { if (alive) setTxt(typeof p === "string" && p.startsWith(ONCE) ? t("onceSent") : typeof p === "string" && p.startsWith(REKEY) ? "—" : p); });
     return () => { alive = false; };
   }, [last && last.id, chat.id]);
   return <Text numberOfLines={1} style={{ color: T.dim, marginTop: 2 }}>{last ? txt : "—"}</Text>;

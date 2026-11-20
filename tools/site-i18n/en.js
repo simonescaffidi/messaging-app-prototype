@@ -402,7 +402,7 @@ module.exports = {
             "ul",
             [
               "<strong>Prekeys running out</strong>: if a contact stays offline for long and runs out of one-time keys, the message still uses a new key but without one-time deletion, so forward secrecy is weaker. To reduce the risk, the app refills keys automatically, alerts the contact when they are online and running low, and tells you when a message goes out without a one-time key. With the Double Ratchet only the first message of a conversation needs a one-time key.",
-              "<strong>Messages tied to this device</strong>: by design, decrypted history doesn't move. On a new device or after an email password recovery the previous vault can't be recovered: you start with a new identity and contacts see the key-change warning.",
+              "<strong>Messages tied to this device</strong>: by design, decrypted history doesn't move. On a new device or after an email password recovery the previous vault can't be recovered: you start with a new identity and contacts see the key-change warning. You can now change phone without losing your identity and history anyway: from the Vault, “New device” tab, with a direct transfer (code or QR) or an encrypted full backup.",
               "<strong>The vault is only as strong as the password</strong>: choose a long, unique one. Anyone with your already unlocked device and the app open can read chats, as with any app.",
               "<strong>Metadata visible to the server</strong>: sender, time, reactions and expiry of timed messages are not encrypted.",
               "<strong>Email-only recovery</strong>: if you lose both the password and access to the verified email, the profile can't be recovered. If you use several profiles (e.g. a cover one), use different emails: a recovery link reveals to whoever controls the email that the profile exists."
@@ -518,7 +518,7 @@ module.exports = {
           ],
           [
             "p",
-            "The backup holds files, notes and passwords encrypted with a passphrase of at least 10 characters that you choose: without it, it cannot be recovered. Messages are not included. The emergency wipe removes keys, message cache, files, notes and passwords from the device and cannot be undone."
+            "The backup holds files, notes and passwords encrypted with a passphrase of at least 10 characters that you choose: without it, it cannot be recovered. Messages are not included. The emergency wipe removes keys, message cache, files, notes and passwords from the device and cannot be undone. To change phone, “New device” offers a direct transfer (the old device locks and erases itself when it ends; the package goes through the server only encrypted, is deleted after download, and the key stays in the code/QR) or a full backup with your identity and the history you have already read. After restoring from a backup, conversations restart with new keys and your contacts get an invisible technical message; hidden chats restart with the first message you send. Use one device at a time per profile."
           ],
           [
             "h3",

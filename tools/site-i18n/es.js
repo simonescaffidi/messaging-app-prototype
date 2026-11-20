@@ -402,7 +402,7 @@ module.exports = {
             "ul",
             [
               "<strong>Prekeys agotadas</strong>: si un contacto está mucho tiempo sin conexión y se queda sin claves de un solo uso, el mensaje usa igualmente una clave nueva pero sin eliminación única, con una forward secrecy más débil. Para reducir el riesgo, la app repone las claves automáticamente, avisa al contacto cuando está en línea y le quedan pocas, y te avisa cuando un mensaje sale sin clave de un solo uso. Con el Double Ratchet solo el primer mensaje de una conversación necesita una clave de un solo uso.",
-              "<strong>Mensajes ligados a este dispositivo</strong>: por diseño, el historial descifrado no se traslada. En un dispositivo nuevo o tras recuperar la contraseña por correo, la caja fuerte anterior no se recupera: empiezas con una identidad nueva y los contactos ven el aviso de cambio de clave.",
+              "<strong>Mensajes ligados a este dispositivo</strong>: por diseño, el historial descifrado no se traslada. En un dispositivo nuevo o tras recuperar la contraseña por correo, la caja fuerte anterior no se recupera: empiezas con una identidad nueva y los contactos ven el aviso de cambio de clave. Ahora puedes cambiar de teléfono sin perder identidad ni historial: desde la Caja fuerte, pestaña «Nuevo dispositivo», con una transferencia directa (código o QR) o una copia completa cifrada.",
               "<strong>La caja fuerte vale lo que vale la contraseña</strong>: elige una larga y única. Quien tenga tu dispositivo ya desbloqueado con la app abierta puede leer los chats, como en cualquier app.",
               "<strong>Metadatos visibles para el servidor</strong>: remitente, hora, reacciones y caducidad de los mensajes temporales no están cifrados.",
               "<strong>Recuperación solo por correo</strong>: si pierdes la contraseña y el acceso al correo verificado, el perfil no se recupera. Si usas varios perfiles (por ejemplo uno de cobertura), usa correos distintos: un enlace de recuperación revela a quien controla el correo que el perfil existe."
@@ -518,7 +518,7 @@ module.exports = {
           ],
           [
             "p",
-            "La copia contiene archivos, notas y contraseñas cifrados con una frase secreta de al menos 10 caracteres que eliges tú: sin ella no se puede recuperar. Los mensajes no se incluyen. El borrado de emergencia elimina del dispositivo claves, caché de mensajes, archivos, notas y contraseñas y no se puede deshacer."
+            "La copia contiene archivos, notas y contraseñas cifrados con una frase secreta de al menos 10 caracteres que eliges tú: sin ella no se puede recuperar. Los mensajes no se incluyen. El borrado de emergencia elimina del dispositivo claves, caché de mensajes, archivos, notas y contraseñas y no se puede deshacer. Para cambiar de teléfono, «Nuevo dispositivo» ofrece la transferencia directa (el dispositivo antiguo se bloquea y se borra al terminar; el paquete pasa por el servidor solo cifrado, se elimina tras la descarga y la clave queda en el código/QR) o la copia completa, con identidad e historial ya leído. Tras restaurar una copia, las conversaciones reinician con claves nuevas y tus contactos reciben un mensaje técnico invisible; los chats ocultos reinician con el primer mensaje que envíes. Usa un solo dispositivo a la vez por perfil."
           ],
           [
             "h3",

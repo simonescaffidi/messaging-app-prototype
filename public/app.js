@@ -245,7 +245,42 @@ async function enterApp(password) {
   await ensureMyKeys(password);
   connectWs();
   await loadChats();
+  if (E2E.needsRekey()) sendRekeyAll().catch(() => {}); // ripristino da backup non ancora comunicato ai contatti
+  try { if (sessionStorage.getItem("pendingTransfer")) Suite.open("device"); } catch {} // aperto da QR/link di trasferimento
 }
+
+// ---------- NUOVO DISPOSITIVO / RIPRISTINO ----------
+// Il link del QR di trasferimento porta il codice nel frammento (#transfer=...): non arriva mai al server.
+(function () {
+  const m = /^#transfer=([A-Za-z0-9_.-]+)$/.exec(location.hash);
+  if (m) { try { sessionStorage.setItem("pendingTransfer", m[1]); } catch {} history.replaceState(null, "", location.pathname + location.search); }
+})();
+async function republishKeys() {
+  try { await api("/api/me/publickey", { method: "POST", body: JSON.stringify({ publicKeyJwk: E2E.myPublicJwk(), proto: E2E.PROTO }) }); } catch {}
+  await E2E.ensurePrekeys(api);
+}
+// Dopo il ripristino da backup le sessioni ratchet sono nuove: un messaggio tecnico nascosto a ogni contatto le fa ripartire.
+async function sendRekeyAll() {
+  if (!E2E.isUnlocked()) return;
+  await loadChats(false);
+  let ok = 0, tot = 0;
+  for (const chat of state.chats) {
+    if (!chat.with.publicKey) continue;
+    tot++;
+    try {
+      const { iv, ciphertext, hdr } = await E2E.encryptMessage({
+        peerIdentity: chat.with.publicKey, peerProto: chat.with.proto, myId: state.me.publicId, peerId: chat.with.publicId, plaintext: REKEY,
+        claim: async () => (await api("/api/prekeys/claim/" + chat.with.profileId, { method: "POST", body: "{}" })).prekey
+      });
+      const data = await api("/api/messages", { method: "POST", body: JSON.stringify({ chatId: chat.id, iv, ciphertext, hdr, replyTo: null, selfDestructSeconds: null }) });
+      await E2E.rememberSent(data.message.id, REKEY, 0);
+      ok++;
+    } catch {}
+  }
+  if (ok === tot) await E2E.clearRekey();
+  await loadChats(true);
+}
+window.SecurmyApp = { republishKeys, sendRekeyAll, reload: () => loadChats(true) };
 
 // ---------- LOGOUT / BLOCCO ----------
 $("#btn-logout").addEventListener("click", () => {
@@ -318,6 +353,7 @@ async function renderChatList() {
     if (c.lastMessage) {
       previewText = await decryptMessage(c, c.lastMessage);
       if (typeof previewText === "string" && previewText.startsWith(ONCE)) previewText = I18N.t("onceSent");
+      if (typeof previewText === "string" && previewText.startsWith(REKEY)) previewText = "—";
     }
     const el = document.createElement("div");
     el.className = "chat-item" + (c.id === state.activeChatId ? " active" : "");
@@ -459,6 +495,7 @@ async function appendMessage(m, scroll = true, chatOverride = null) {
   row.dataset.id = m.id;
 
   const plainText = chat ? await decryptMessage(chat, m) : (m.text || "");
+  if (typeof plainText === "string" && plainText.startsWith(REKEY)) return; // messaggio tecnico: non si mostra
 
   let replyHtml = "";
   if (m.replyTo) {
@@ -540,6 +577,7 @@ function showNotice(text) {
 setInterval(() => { if (E2E.isUnlocked() && state.token) E2E.ensurePrekeys(api).catch(() => {}); }, 10 * 60 * 1000);
 
 // ---------- INVIO MESSAGGIO (cifrato end-to-end) ----------
+const REKEY = "\u0001REKEY\u0001"; // messaggio tecnico (invisibile): dopo un ripristino da backup fa ripartire la sessione cifrata
 const ONCE = "\u0001ONCE\u0001"; // marcatore (dentro il testo cifrato) dei messaggi a visualizzazione singola
 async function sendText(text, mode) {
   if (!text || !state.activeChatId) return false;

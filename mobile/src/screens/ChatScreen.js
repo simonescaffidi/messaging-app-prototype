@@ -5,7 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Button, H2, Input, P, Row, Sheet } from "../ui";
 import { t, useLang } from "../i18n";
 import { THEME as T } from "../config";
-import { ONCE, S, acceptKey, burn, bus, decryptMessage, forgetPlain, hideChat, markVerified, openChat, react, reportContact, safetyNumber, sendText, setBlocked, loadChats } from "../session";
+import { ONCE, REKEY, S, acceptKey, burn, bus, decryptMessage, forgetPlain, hideChat, markVerified, openChat, react, reportContact, safetyNumber, sendText, setBlocked, loadChats } from "../session";
 import { startCall } from "../calls";
 
 const MODES = [["", "destructNormal"], ["30", "destruct30"], ["300", "destruct300"], ["3600", "destruct3600"], ["once", "destructOnce"]];
@@ -28,6 +28,7 @@ function Bubble({ chat, m, mine, onLongPress, onRemove, replyText }) {
   }, [once.open, once.gone]);
   useEffect(() => { if (once.gone) { const id = setTimeout(() => onRemove(m.id), 1500); return () => clearTimeout(id); } }, [once.gone]);
 
+  if (typeof txt === "string" && txt.startsWith(REKEY)) return null; // messaggio tecnico: non si mostra
   const isOnce = typeof txt === "string" && txt.startsWith(ONCE);
   let body = txt == null ? "…" : txt;
   let tap = null;

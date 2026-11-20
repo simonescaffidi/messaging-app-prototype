@@ -402,7 +402,7 @@ module.exports = {
             "ul",
             [
               "<strong>Prekeys épuisées</strong> : si un contact reste longtemps hors ligne et n'a plus de clés à usage unique, le message utilise quand même une clé nouvelle mais sans suppression unique, donc avec une forward secrecy plus faible. Pour réduire ce risque, l'app recharge les clés automatiquement, prévient le contact lorsqu'il est en ligne et qu'il en reste peu, et vous signale quand un message part sans clé à usage unique. Avec le Double Ratchet, seul le premier message d'une conversation nécessite une clé à usage unique.",
-              "<strong>Messages liés à cet appareil</strong> : par conception, l'historique déchiffré ne se transfère pas. Sur un nouvel appareil ou après une récupération du mot de passe par e-mail, l'ancien coffre est irrécupérable : vous repartez avec une nouvelle identité et vos contacts voient l'avertissement de changement de clé.",
+              "<strong>Messages liés à cet appareil</strong> : par conception, l'historique déchiffré ne se transfère pas. Sur un nouvel appareil ou après une récupération du mot de passe par e-mail, l'ancien coffre est irrécupérable : vous repartez avec une nouvelle identité et vos contacts voient l'avertissement de changement de clé. Vous pouvez désormais changer de téléphone sans perdre identité ni historique : depuis le Coffre, onglet « Nouvel appareil », par transfert direct (code ou QR) ou par sauvegarde complète chiffrée.",
               "<strong>Le coffre vaut ce que vaut le mot de passe</strong> : choisissez-en un long et unique. Quiconque a votre appareil déjà déverrouillé avec l'appli ouverte peut lire les discussions, comme avec toute appli.",
               "<strong>Métadonnées visibles du serveur</strong> : expéditeur, heure, réactions et expiration des messages éphémères ne sont pas chiffrés.",
               "<strong>Récupération par e-mail uniquement</strong> : si vous perdez le mot de passe et l'accès à l'e-mail vérifié, le profil est irrécupérable. Si vous utilisez plusieurs profils (par ex. un de couverture), utilisez des e-mails différents : un lien de récupération révèle à qui contrôle l'e-mail que le profil existe."
@@ -518,7 +518,7 @@ module.exports = {
           ],
           [
             "p",
-            "La sauvegarde contient fichiers, notes et mots de passe chiffrés avec une phrase secrète d'au moins 10 caractères que vous choisissez : sans elle, elle est irrécupérable. Les messages ne sont pas inclus. L'effacement d'urgence supprime de l'appareil clés, cache des messages, fichiers, notes et mots de passe et est irréversible."
+            "La sauvegarde contient fichiers, notes et mots de passe chiffrés avec une phrase secrète d'au moins 10 caractères que vous choisissez : sans elle, elle est irrécupérable. Les messages ne sont pas inclus. L'effacement d'urgence supprime de l'appareil clés, cache des messages, fichiers, notes et mots de passe et est irréversible. Pour changer de téléphone, « Nouvel appareil » propose le transfert direct (l'ancien appareil se bloque et s'efface à la fin ; le paquet transite par le serveur uniquement chiffré, est supprimé après téléchargement et la clé reste dans le code/QR) ou la sauvegarde complète, avec identité et historique déjà lu. Après une restauration, les conversations repartent avec de nouvelles clés et vos contacts reçoivent un message technique invisible ; les discussions masquées repartent au premier message que vous envoyez. Un seul appareil à la fois par profil."
           ],
           [
             "h3",
