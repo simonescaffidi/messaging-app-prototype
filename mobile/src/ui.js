@@ -50,6 +50,16 @@ export const Segments = ({ items, value, onChange }) => (
 export const Bar = ({ pct }) => (
   <View style={s.bar}><View style={[s.barFill, { width: Math.max(0, Math.min(100, pct)) + "%" }]} /></View>
 );
+// Avatar tondo con l'iniziale e un colore stabile ricavato dal nome.
+export function Avatar({ name, size = 44 }) {
+  let h = 0; for (const ch of String(name || "?")) h = (h * 31 + ch.codePointAt(0)) % 360;
+  const ini = ([...String(name || "?").trim()][0] || "?").toUpperCase();
+  return (
+    <View style={{ width: size, height: size, borderRadius: size / 2, backgroundColor: "hsl(" + h + ", 52%, 46%)", alignItems: "center", justifyContent: "center" }}>
+      <Text style={{ color: "#fff", fontWeight: "700", fontSize: Math.round(size * 0.4) }}>{ini}</Text>
+    </View>
+  );
+}
 export function ask(title, message, okLabel, cancelLabel) {
   return new Promise((res) => Alert.alert(title, message, [{ text: cancelLabel, style: "cancel", onPress: () => res(false) }, { text: okLabel, style: "destructive", onPress: () => res(true) }], { cancelable: true, onDismiss: () => res(false) }));
 }

@@ -242,6 +242,7 @@ async function enterApp(password) {
   $("#app-screen").classList.remove("hidden");
   $("#me-username").textContent = state.me.username + (state.me.isCover ? " (copertura)" : "");
   $("#me-publicid").textContent = state.me.publicId;
+  placeLangSwitcher(true);
   await ensureMyKeys(password);
   connectWs();
   await loadChats();
@@ -282,6 +283,50 @@ async function sendRekeyAll() {
 }
 window.SecurmyApp = { republishKeys, sendRekeyAll, reload: () => loadChats(true) };
 
+// ---------- UI: avatar, orari, icone, navigazione mobile ----------
+function avatarColor(name) { let h = 0; for (const ch of String(name)) h = (h * 31 + ch.codePointAt(0)) % 360; return `hsl(${h} 52% 46%)`; }
+function avatarHtml(name, cls = "") { const ini = escapeHtml(([...String(name).trim()][0] || "?")); return `<span class="avatar ${cls}" style="background:${avatarColor(name)}" aria-hidden="true">${ini}</span>`; }
+function fmtListTime(ts) {
+  const d = new Date(ts), n = new Date();
+  return d.toDateString() === n.toDateString() ? d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : d.toLocaleDateString([], { day: "numeric", month: "short" });
+}
+function dayLabel(ts) {
+  const d = new Date(ts), lang = document.documentElement.lang || undefined, now = new Date();
+  const days = Math.round((new Date(now.getFullYear(), now.getMonth(), now.getDate()) - new Date(d.getFullYear(), d.getMonth(), d.getDate())) / 86400000);
+  if (days === 0 || days === 1) { try { const s = new Intl.RelativeTimeFormat(lang, { numeric: "auto" }).format(-days, "day"); return s.charAt(0).toUpperCase() + s.slice(1); } catch {} }
+  return d.toLocaleDateString(lang, { weekday: "long", day: "numeric", month: "long", ...(d.getFullYear() !== now.getFullYear() ? { year: "numeric" } : {}) });
+}
+function setHideIcon(hidden) { const u = document.querySelector("#btn-toggle-hide use"); if (u) u.setAttribute("href", hidden ? "#i-eye" : "#i-eye-off"); }
+function showChatPane(on) { document.body.classList.toggle("chat-open", on); }
+function placeLangSwitcher(inSidebar) {
+  const el = $("#lang-switcher"); if (!el) return;
+  if (inSidebar) { $("#sidebar-lang").appendChild(el); el.classList.add("in-sidebar"); }
+  else { document.body.insertBefore(el, $("#auth-screen")); el.classList.remove("in-sidebar"); }
+}
+// occhio per mostrare/nascondere la password
+function addPasswordToggles() {
+  for (const id of ["login-password", "reg-password", "reset-password", "unlock-password", "old-password", "new-password"]) {
+    const input = document.getElementById(id); if (!input || input.parentElement.classList.contains("pw-wrap")) continue;
+    const wrap = document.createElement("div"); wrap.className = "pw-wrap";
+    input.parentNode.insertBefore(wrap, input); wrap.appendChild(input);
+    const b = document.createElement("button"); b.type = "button"; b.className = "icon-btn pw-toggle";
+    b.innerHTML = '<svg class="ic" aria-hidden="true"><use href="#i-eye"/></svg>';
+    const sync = () => { const show = input.type === "text"; b.setAttribute("aria-label", I18N.t(show ? "hidePassword" : "showPassword")); b.title = b.getAttribute("aria-label"); b.querySelector("use").setAttribute("href", show ? "#i-eye-off" : "#i-eye"); };
+    b.addEventListener("click", () => { input.type = input.type === "password" ? "text" : "password"; sync(); input.focus(); });
+    sync(); wrap.appendChild(b);
+  }
+}
+addPasswordToggles();
+// su touch le azioni di un messaggio (rispondi, reagisci) compaiono toccandolo
+$("#messages").addEventListener("click", (e) => {
+  const row = e.target.closest(".msg-row");
+  if (!row || e.target.closest(".msg-actions button, .once-btn, .reaction-chip")) return;
+  $("#messages").querySelectorAll(".msg-row.show-actions").forEach((r) => { if (r !== row) r.classList.remove("show-actions"); });
+  row.classList.toggle("show-actions");
+});
+$("#destruct-select").addEventListener("change", (e) => $("#timer-wrap").classList.toggle("active", !!e.target.value));
+$("#btn-back").addEventListener("click", () => { showChatPane(false); state.activeChatId = null; $("#chat-view").classList.add("hidden"); $("#chat-empty").classList.remove("hidden"); renderChatList(); });
+
 // ---------- LOGOUT / BLOCCO ----------
 $("#btn-logout").addEventListener("click", () => {
   state.token = null;
@@ -289,6 +334,7 @@ $("#btn-logout").addEventListener("click", () => {
   state.chats = [];
   state.activeChatId = null;
   state.peerStatus = {};
+  showChatPane(false); placeLangSwitcher(false);
   Suite.reset(); Calls.hangup(false);
   E2E.lock();
   if (state.ws) state.ws.close();
@@ -358,8 +404,14 @@ async function renderChatList() {
     const el = document.createElement("div");
     el.className = "chat-item" + (c.id === state.activeChatId ? " active" : "");
     el.innerHTML = `
-      <div class="chat-item-name">${escapeHtml(c.with.username)} ${c.hidden ? '<span class="hidden-badge">nascosta</span>' : ""}</div>
-      <div class="chat-item-preview">${c.lastMessage ? escapeHtml(previewText) : "—"}</div>
+      ${avatarHtml(c.with.username)}
+      <div class="chat-item-body">
+        <div class="chat-item-top">
+          <span class="chat-item-name">${escapeHtml(c.with.username)} ${c.hidden ? '<span class="hidden-badge">nascosta</span>' : ""}</span>
+          <span class="chat-item-time">${c.lastMessage ? escapeHtml(fmtListTime(c.lastMessage.createdAt)) : ""}</span>
+        </div>
+        <div class="chat-item-preview">${c.lastMessage ? escapeHtml(previewText) : "—"}</div>
+      </div>
     `;
     el.addEventListener("click", () => openChat(c.id));
     list.appendChild(el);
@@ -462,14 +514,15 @@ async function openChat(chatId) {
   $("#chat-empty").classList.add("hidden");
   $("#chat-view").classList.remove("hidden");
   $("#chat-with-name").textContent = chat.with.username;
-  $("#btn-toggle-hide").textContent = chat.hidden ? "👁️" : "🙈";
+  const av = $("#chat-avatar"); av.textContent = ([...chat.with.username.trim()][0] || "?").toUpperCase(); av.style.background = avatarColor(chat.with.username);
+  setHideIcon(chat.hidden); showChatPane(true);
   await refreshPeerStatus(chat);
   renderKeyBanner(chat);
   refreshBlockUI(chat);
 
   const data = await api(`/api/chats/${chatId}/messages`);
   const container = $("#messages");
-  container.innerHTML = "";
+  container.innerHTML = ""; container.dataset.lastDay = "";
   for (const m of data.messages) {
     await appendMessage(m, false, chat);
   }
@@ -481,7 +534,7 @@ $("#btn-toggle-hide").addEventListener("click", async () => {
   if (!chat) return;
   await api(`/api/chats/${chat.id}/hide`, { method: "POST", body: JSON.stringify({ hidden: !chat.hidden }) });
   await loadChats();
-  $("#btn-toggle-hide").textContent = !chat.hidden ? "👁️" : "🙈";
+  setHideIcon(!chat.hidden);
 });
 
 async function appendMessage(m, scroll = true, chatOverride = null) {
@@ -490,6 +543,11 @@ async function appendMessage(m, scroll = true, chatOverride = null) {
   const container = $("#messages");
   if ([...container.children].some((r) => r.dataset && r.dataset.id === m.id)) return; // gia' presente
   const mine = m.senderProfileId === state.me.id;
+  const dayKey = new Date(m.createdAt).toDateString();
+  if (container.dataset.lastDay !== dayKey) {
+    container.dataset.lastDay = dayKey;
+    const sep = document.createElement("div"); sep.className = "day-sep"; sep.textContent = dayLabel(m.createdAt); container.appendChild(sep);
+  }
   const row = document.createElement("div");
   row.className = "msg-row " + (mine ? "me" : "other");
   row.dataset.id = m.id;
@@ -660,7 +718,7 @@ function renderKeyBanner(chat) {
     });
     b.appendChild(t); b.appendChild(btn);
   } else { b.classList.add("hidden"); b.innerHTML = ""; }
-  $("#btn-verify").textContent = st.verified ? "✅" : "🔑";
+  { const vb = $("#btn-verify"); vb.querySelector("use").setAttribute("href", st.verified ? "#i-shield-check" : "#i-key"); vb.classList.toggle("verified", !!st.verified); }
 }
 
 $("#btn-verify").addEventListener("click", async () => {

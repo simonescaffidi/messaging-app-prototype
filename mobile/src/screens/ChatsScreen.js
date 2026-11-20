@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { FlatList, Pressable, RefreshControl, Text, View } from "react-native";
-import { Button, H1, Input, P, Row, Screen, Sheet } from "../ui";
+import { Avatar, Button, H1, Input, P, Row, Screen, Sheet } from "../ui";
 import { t, useLang } from "../i18n";
 import { THEME as T } from "../config";
 import { ONCE, REKEY, S, addContact, bus, decryptMessage, loadChats } from "../session";
@@ -58,11 +58,16 @@ export default function ChatsScreen({ navigation }) {
         ListEmptyComponent={<P dim style={{ textAlign: "center", marginTop: 40, paddingHorizontal: 24 }}>{t("mNoChats")}</P>}
         renderItem={({ item: c }) => (
           <Pressable onPress={() => navigation.navigate("Chat", { chatId: c.id })} style={({ pressed }) => ({ paddingHorizontal: 16, paddingVertical: 12, borderBottomColor: T.border, borderBottomWidth: 1, backgroundColor: pressed ? T.panel : "transparent" })}>
-            <Row style={{ justifyContent: "space-between" }}>
-              <Text style={{ color: T.text, fontSize: 17, fontWeight: "600" }}>{c.with.username}{c.hidden ? "  🙈" : ""}</Text>
-              {c.lastMessage ? <Text style={{ color: T.dim, fontSize: 12 }}>{new Date(c.lastMessage.createdAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</Text> : null}
+            <Row style={{ alignItems: "center" }}>
+              <Avatar name={c.with.username} />
+              <View style={{ flex: 1, marginLeft: 12, minWidth: 0 }}>
+                <Row style={{ justifyContent: "space-between" }}>
+                  <Text numberOfLines={1} style={{ color: T.text, fontSize: 17, fontWeight: "600", flexShrink: 1 }}>{c.with.username}{c.hidden ? "  🙈" : ""}</Text>
+                  {c.lastMessage ? <Text style={{ color: T.dim, fontSize: 12, marginLeft: 8 }}>{new Date(c.lastMessage.createdAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</Text> : null}
+                </Row>
+                <Preview chat={c} />
+              </View>
             </Row>
-            <Preview chat={c} />
           </Pressable>
         )}
       />
