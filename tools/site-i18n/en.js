@@ -402,7 +402,7 @@ module.exports = {
             "ul",
             [
               "<strong>Prekeys running out</strong>: if a contact stays offline for long and runs out of one-time keys, the message still uses a new key but without one-time deletion, so forward secrecy is weaker. To reduce the risk, the app refills keys automatically, alerts the contact when they are online and running low, and tells you when a message goes out without a one-time key. With the Double Ratchet only the first message of a conversation needs a one-time key.",
-              "<strong>Messages tied to this device</strong>: by design, decrypted history doesn't move. On a new device or after an email password recovery the previous vault can't be recovered: you start with a new identity and contacts see the key-change warning. You can now change phone without losing your identity and history anyway: from the Vault, “New device” tab, with a direct transfer (code or QR) or an encrypted full backup.",
+              "<strong>Messages and device</strong>: the decrypted history stays on the device. To change phone use direct transfer or the full backup (section 14); after a plain password reset by email, without a backup, the previous vault cannot be recovered.",
               "<strong>The vault is only as strong as the password</strong>: choose a long, unique one. Anyone with your already unlocked device and the app open can read chats, as with any app.",
               "<strong>Metadata visible to the server</strong>: sender, time, reactions and expiry of timed messages are not encrypted.",
               "<strong>Email-only recovery</strong>: if you lose both the password and access to the verified email, the profile can't be recovered. If you use several profiles (e.g. a cover one), use different emails: a recovery link reveals to whoever controls the email that the profile exists."
@@ -531,6 +531,42 @@ module.exports = {
               "To hide your IP in P2P transfers and calls, turn on Security → IP protection (encrypted relay), where the service has a TURN server. Without a relay the other person can see your IP, and on very restrictive networks the connection may fail.",
               "The password manager is basic: it does not fill in forms by itself and does not replace a dedicated manager for professional use.",
               "If you lose your password and the backup passphrase, the encrypted data cannot be recovered: nobody, not even us, can open it."
+            ]
+          ]
+        ]
+      },
+      {
+        "id": "device",
+        "h": "14. Changing phone",
+        "blocks": [
+          [
+            "p",
+            "To move your profile to a new phone, open Vault → Device tab. You have two options; pick the one you prefer."
+          ],
+          [
+            "ul",
+            [
+              "<strong>Direct transfer</strong>: on the old phone you generate a code (or QR) valid for 10 minutes and scan or paste it on the new one. Identity, keys and encryption sessions move over, so conversations continue without interruption. The old device is locked and wiped.",
+              "<strong>Full backup</strong>: you export a .securmy-full file protected by a passphrase (at least 10 characters) containing your identity and read history. Import it on the new phone with the same passphrase; your contacts automatically receive an invisible message that realigns the keys."
+            ]
+          ],
+          [
+            "warn",
+            "A profile is active on one device at a time. Keep the backup file and the passphrase safe: without the passphrase it cannot be recovered."
+          ]
+        ]
+      },
+      {
+        "id": "newui",
+        "h": "15. Interface and protection updates",
+        "blocks": [
+          [
+            "ul",
+            [
+              "<strong>Continuous protection</strong>: messages use a Double Ratchet, with a different key for every message. A stolen key opens neither past nor future messages.",
+              "<strong>Light and dark theme</strong>: follows your phone or computer settings automatically.",
+              "<strong>On phones</strong>: chat list and conversation are separate screens with a back button; tap a message to show its actions (reply, react, delete).",
+              "<strong>Avatars and days</strong>: each contact has a colored avatar and the conversation is split by day. The language selector is in the side menu and the password can be shown or hidden with the eye icon."
             ]
           ]
         ]

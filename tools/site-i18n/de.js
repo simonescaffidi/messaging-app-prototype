@@ -402,7 +402,7 @@ module.exports = {
             "ul",
             [
               "<strong>Prekeys aufgebraucht</strong>: Ist ein Kontakt lange offline und hat keine Einmalschlüssel mehr, nutzt die Nachricht trotzdem einen neuen Schlüssel, aber ohne Einmal-Löschung – die Forward Secrecy ist dann schwächer. Um das Risiko zu verringern, füllt die App die Schlüssel automatisch nach, warnt den Kontakt, sobald er online ist und der Vorrat knapp wird, und zeigt dir an, wenn eine Nachricht ohne Einmalschlüssel gesendet wird. Mit dem Double Ratchet braucht nur die erste Nachricht eines Gesprächs einen Einmalschlüssel.",
-              "<strong>Nachrichten an dieses Gerät gebunden</strong>: Der entschlüsselte Verlauf wandert bewusst nicht mit. Auf einem neuen Gerät oder nach einer Passwort-Wiederherstellung per E-Mail ist der frühere Tresor nicht wiederherstellbar: du startest mit neuer Identität, deine Kontakte sehen die Warnung zum Schlüsselwechsel. Du kannst das Handy jetzt wechseln, ohne Identität und Verlauf zu verlieren: im Tresor, Reiter „Neues Gerät“, per direkter Übertragung (Code oder QR) oder mit einem verschlüsselten Komplett-Backup.",
+              "<strong>Nachrichten und Gerät</strong>: Der entschlüsselte Verlauf bleibt auf dem Gerät. Für einen Telefonwechsel nutze die direkte Übertragung oder das vollständige Backup (Abschnitt 14); nach einem einfachen Passwort-Reset per E-Mail ohne Backup ist der frühere Tresor nicht wiederherstellbar.",
               "<strong>Der Tresor ist so stark wie das Passwort</strong>: Wähle ein langes, einzigartiges. Wer dein bereits entsperrtes Gerät mit geöffneter App hat, kann die Chats lesen – wie bei jeder App.",
               "<strong>Metadaten für den Server sichtbar</strong>: Absender, Zeit, Reaktionen und Ablauf zeitlich begrenzter Nachrichten sind nicht verschlüsselt.",
               "<strong>Wiederherstellung nur per E-Mail</strong>: Verlierst du Passwort und Zugang zur bestätigten E-Mail, ist das Profil nicht wiederherstellbar. Nutzt du mehrere Profile (z. B. ein Tarnprofil), verwende verschiedene E-Mails: Ein Wiederherstellungslink verrät dem E-Mail-Inhaber, dass das Profil existiert."
@@ -531,6 +531,42 @@ module.exports = {
               "Um deine IP bei P2P-Übertragungen und Anrufen zu verbergen, aktiviere Sicherheit → IP-Schutz (verschlüsseltes Relay), sofern der Dienst einen TURN-Server hat. Ohne Relay kann die andere Person deine IP sehen, und in sehr restriktiven Netzwerken kann die Verbindung scheitern.",
               "Der Passwort-Manager ist schlicht: Er füllt keine Formulare selbst aus und ersetzt für berufliche Zwecke keinen spezialisierten Manager.",
               "Verlierst du Passwort und Backup-Passphrase, sind die verschlüsselten Daten nicht wiederherstellbar: Niemand, auch wir nicht, kann sie öffnen."
+            ]
+          ]
+        ]
+      },
+      {
+        "id": "device",
+        "h": "14. Telefon wechseln",
+        "blocks": [
+          [
+            "p",
+            "Um dein Profil auf ein neues Telefon zu übertragen, öffne Tresor → Tab Gerät. Du hast zwei Möglichkeiten."
+          ],
+          [
+            "ul",
+            [
+              "<strong>Direkte Übertragung</strong>: Auf dem alten Telefon erzeugst du einen 10 Minuten gültigen Code (oder QR), den du auf dem neuen scannst oder einfügst. Identität, Schlüssel und Verschlüsselungssitzungen werden übertragen, die Unterhaltungen laufen ohne Unterbrechung weiter. Das alte Gerät wird gesperrt und gelöscht.",
+              "<strong>Vollständiges Backup</strong>: Du exportierst eine .securmy-full-Datei, geschützt durch eine Passphrase (mindestens 10 Zeichen), mit Identität und gelesenem Verlauf. Auf dem neuen Telefon importierst du sie mit derselben Passphrase; deine Kontakte erhalten automatisch eine unsichtbare Nachricht, die die Schlüssel abgleicht."
+            ]
+          ],
+          [
+            "warn",
+            "Ein Profil ist immer nur auf einem Gerät aktiv. Bewahre Backup-Datei und Passphrase sicher auf: Ohne Passphrase ist sie nicht wiederherstellbar."
+          ]
+        ]
+      },
+      {
+        "id": "newui",
+        "h": "15. Neues bei Oberfläche und Schutz",
+        "blocks": [
+          [
+            "ul",
+            [
+              "<strong>Fortlaufender Schutz</strong>: Nachrichten nutzen einen Double Ratchet mit einem anderen Schlüssel pro Nachricht. Ein gestohlener Schlüssel öffnet weder vergangene noch künftige Nachrichten.",
+              "<strong>Helles und dunkles Design</strong>: folgt automatisch den Einstellungen von Telefon oder Computer.",
+              "<strong>Am Telefon</strong>: Chatliste und Unterhaltung sind getrennte Ansichten mit Zurück-Taste; tippe auf eine Nachricht, um ihre Aktionen anzuzeigen (antworten, reagieren, löschen).",
+              "<strong>Avatare und Tage</strong>: Jeder Kontakt hat einen farbigen Avatar, die Unterhaltung ist nach Tagen gegliedert. Die Sprachauswahl befindet sich im Seitenmenü, das Passwort lässt sich über das Augen-Symbol ein- oder ausblenden."
             ]
           ]
         ]

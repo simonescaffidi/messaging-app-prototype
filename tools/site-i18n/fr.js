@@ -402,7 +402,7 @@ module.exports = {
             "ul",
             [
               "<strong>Prekeys épuisées</strong> : si un contact reste longtemps hors ligne et n'a plus de clés à usage unique, le message utilise quand même une clé nouvelle mais sans suppression unique, donc avec une forward secrecy plus faible. Pour réduire ce risque, l'app recharge les clés automatiquement, prévient le contact lorsqu'il est en ligne et qu'il en reste peu, et vous signale quand un message part sans clé à usage unique. Avec le Double Ratchet, seul le premier message d'une conversation nécessite une clé à usage unique.",
-              "<strong>Messages liés à cet appareil</strong> : par conception, l'historique déchiffré ne se transfère pas. Sur un nouvel appareil ou après une récupération du mot de passe par e-mail, l'ancien coffre est irrécupérable : vous repartez avec une nouvelle identité et vos contacts voient l'avertissement de changement de clé. Vous pouvez désormais changer de téléphone sans perdre identité ni historique : depuis le Coffre, onglet « Nouvel appareil », par transfert direct (code ou QR) ou par sauvegarde complète chiffrée.",
+              "<strong>Messages et appareil</strong> : l'historique déchiffré reste sur l'appareil. Pour changer de téléphone, utilisez le transfert direct ou la sauvegarde complète (section 14) ; après une simple réinitialisation du mot de passe par e-mail, sans sauvegarde, l'ancien coffre-fort est irrécupérable.",
               "<strong>Le coffre vaut ce que vaut le mot de passe</strong> : choisissez-en un long et unique. Quiconque a votre appareil déjà déverrouillé avec l'appli ouverte peut lire les discussions, comme avec toute appli.",
               "<strong>Métadonnées visibles du serveur</strong> : expéditeur, heure, réactions et expiration des messages éphémères ne sont pas chiffrés.",
               "<strong>Récupération par e-mail uniquement</strong> : si vous perdez le mot de passe et l'accès à l'e-mail vérifié, le profil est irrécupérable. Si vous utilisez plusieurs profils (par ex. un de couverture), utilisez des e-mails différents : un lien de récupération révèle à qui contrôle l'e-mail que le profil existe."
@@ -531,6 +531,42 @@ module.exports = {
               "Pour masquer votre IP lors des envois P2P et des appels, activez Sécurité → Protection de l'IP (relais chiffré), là où le service dispose d'un serveur TURN. Sans relais, l'autre personne peut voir votre IP et, sur des réseaux très restrictifs, la connexion peut échouer.",
               "Le gestionnaire de mots de passe est basique : il ne remplit pas les formulaires seul et ne remplace pas un gestionnaire dédié pour un usage professionnel.",
               "Si vous perdez votre mot de passe et la phrase de sauvegarde, les données chiffrées sont irrécupérables : personne, pas même nous, ne peut les ouvrir."
+            ]
+          ]
+        ]
+      },
+      {
+        "id": "device",
+        "h": "14. Changer de téléphone",
+        "blocks": [
+          [
+            "p",
+            "Pour déplacer votre profil vers un nouveau téléphone, ouvrez Coffre-fort → onglet Appareil. Deux options s'offrent à vous."
+          ],
+          [
+            "ul",
+            [
+              "<strong>Transfert direct</strong> : sur l'ancien téléphone, vous générez un code (ou un QR) valable 10 minutes, puis vous le scannez ou le collez sur le nouveau. L'identité, les clés et les sessions de chiffrement sont transférées : les conversations continuent sans interruption. L'ancien appareil est verrouillé puis effacé.",
+              "<strong>Sauvegarde complète</strong> : vous exportez un fichier .securmy-full protégé par une phrase secrète (10 caractères minimum) contenant votre identité et l'historique lu. Sur le nouveau téléphone, importez-le avec la même phrase ; vos contacts reçoivent automatiquement un message invisible qui réaligne les clés."
+            ]
+          ],
+          [
+            "warn",
+            "Un profil n'est actif que sur un seul appareil à la fois. Conservez le fichier de sauvegarde et la phrase secrète : sans la phrase, il est irrécupérable."
+          ]
+        ]
+      },
+      {
+        "id": "newui",
+        "h": "15. Nouveautés d'interface et de protection",
+        "blocks": [
+          [
+            "ul",
+            [
+              "<strong>Protection continue</strong> : les messages utilisent un Double Ratchet, avec une clé différente à chaque message. Une clé volée n'ouvre ni les messages passés ni les futurs.",
+              "<strong>Thème clair et sombre</strong> : suit automatiquement les réglages du téléphone ou de l'ordinateur.",
+              "<strong>Sur téléphone</strong> : la liste des discussions et la conversation sont des écrans séparés avec un bouton retour ; touchez un message pour afficher ses actions (répondre, réagir, supprimer).",
+              "<strong>Avatars et jours</strong> : chaque contact a un avatar coloré et la conversation est découpée par jour. Le sélecteur de langue se trouve dans le menu latéral et le mot de passe s'affiche ou se masque avec l'icône en forme d'œil."
             ]
           ]
         ]

@@ -402,7 +402,7 @@ module.exports = {
             "ul",
             [
               "<strong>Prekeys esgotadas</strong>: se um contato fica muito tempo offline e acaba as chaves de uso único, a mensagem ainda usa uma chave nova, mas sem exclusão única — forward secrecy mais fraca. Para reduzir o risco, a app repõe as chaves automaticamente, avisa o contacto quando está online e restam poucas, e avisa-o quando uma mensagem sai sem chave de uso único. Com o Double Ratchet, só a primeira mensagem de uma conversa precisa de uma chave de uso único.",
-              "<strong>Mensagens ligadas a este dispositivo</strong>: por projeto, o histórico decifrado não se move. Em um novo dispositivo ou após recuperar a senha por e-mail, o cofre anterior não é recuperável: você recomeça com nova identidade e os contatos veem o aviso de troca de chave. Agora pode mudar de telemóvel sem perder identidade e histórico: no Cofre, separador «Novo dispositivo», com uma transferência direta (código ou QR) ou uma cópia completa cifrada.",
+              "<strong>Mensagens e dispositivo</strong>: o histórico decifrado fica no dispositivo. Para trocar de telemóvel usa a transferência direta ou a cópia completa (secção 14); após uma simples recuperação de palavra-passe por e-mail, sem cópia, o cofre anterior não é recuperável.",
               "<strong>O cofre vale o que vale a senha</strong>: escolha uma longa e única. Quem tiver seu dispositivo já desbloqueado com o app aberto pode ler os chats, como em qualquer app.",
               "<strong>Metadados visíveis ao servidor</strong>: remetente, horário, reações e expiração das mensagens temporárias não são cifrados.",
               "<strong>Recuperação só por e-mail</strong>: se perder a senha e o acesso ao e-mail verificado, o perfil não é recuperável. Se usar vários perfis (por exemplo, um de cobertura), use e-mails diferentes: um link de recuperação revela a quem controla o e-mail que o perfil existe."
@@ -531,6 +531,42 @@ module.exports = {
               "Para ocultar o seu IP em envios P2P e chamadas, ative Segurança → Proteção de IP (relay cifrado), onde o serviço tenha um servidor TURN. Sem relay, a outra pessoa pode ver o seu IP e, em redes muito restritivas, a ligação pode falhar.",
               "O gerenciador de senhas é básico: não preenche formulários sozinho e não substitui um gerenciador dedicado para uso profissional.",
               "Se perder a senha e a frase do backup, os dados cifrados não são recuperáveis: ninguém, nem nós, consegue abri-los."
+            ]
+          ]
+        ]
+      },
+      {
+        "id": "device",
+        "h": "14. Trocar de telemóvel",
+        "blocks": [
+          [
+            "p",
+            "Para passar o teu perfil para um telemóvel novo, abre Cofre → separador Dispositivo. Tens duas opções."
+          ],
+          [
+            "ul",
+            [
+              "<strong>Transferência direta</strong>: no telemóvel antigo geras um código (ou QR) válido por 10 minutos e lês ou colas no novo. Passam a identidade, as chaves e as sessões de cifragem, por isso as conversas continuam sem interrupções. O dispositivo antigo fica bloqueado e é apagado.",
+              "<strong>Cópia completa</strong>: exportas um ficheiro .securmy-full protegido por uma frase secreta (mínimo 10 caracteres) com a tua identidade e o histórico lido. No telemóvel novo importas com a mesma frase; os teus contactos recebem automaticamente uma mensagem invisível que realinha as chaves."
+            ]
+          ],
+          [
+            "warn",
+            "Um perfil está ativo num só dispositivo de cada vez. Guarda o ficheiro de cópia e a frase secreta: sem a frase não é recuperável."
+          ]
+        ]
+      },
+      {
+        "id": "newui",
+        "h": "15. Novidades de interface e proteção",
+        "blocks": [
+          [
+            "ul",
+            [
+              "<strong>Proteção contínua</strong>: as mensagens usam um Double Ratchet, com uma chave diferente em cada mensagem. Uma chave roubada não abre mensagens passadas nem futuras.",
+              "<strong>Tema claro e escuro</strong>: segue automaticamente as definições do telemóvel ou do computador.",
+              "<strong>No telemóvel</strong>: a lista de conversas e a conversa são ecrãs separados com botão de voltar; toca numa mensagem para ver as ações (responder, reagir, eliminar).",
+              "<strong>Avatares e dias</strong>: cada contacto tem um avatar colorido e a conversa é dividida por dia. O seletor de idioma está no menu lateral e a palavra-passe mostra-se ou esconde-se com o ícone do olho."
             ]
           ]
         ]

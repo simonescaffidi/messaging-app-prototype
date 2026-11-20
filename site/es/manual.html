@@ -63,6 +63,8 @@
       <li><a href="#limits">Límites de seguridad declarados</a></li>
       <li><a href="#troubleshooting">Solución de problemas</a></li>
       <li><a href="#suite">Caja fuerte y herramientas de Securmy</a></li>
+      <li><a href="#device">Cambiar de teléfono</a></li>
+      <li><a href="#newui">Novedades de interfaz y protección</a></li>
     </ol>
   </nav>
 
@@ -144,7 +146,7 @@
     <p>Por honestidad, estos son los límites que quedan, aunque el cifrado sea real y no solo declarado:</p>
     <ul>
       <li><strong>Prekeys agotadas</strong>: si un contacto está mucho tiempo sin conexión y se queda sin claves de un solo uso, el mensaje usa igualmente una clave nueva pero sin eliminación única, con una forward secrecy más débil. Para reducir el riesgo, la app repone las claves automáticamente, avisa al contacto cuando está en línea y le quedan pocas, y te avisa cuando un mensaje sale sin clave de un solo uso. Con el Double Ratchet solo el primer mensaje de una conversación necesita una clave de un solo uso.</li>
-      <li><strong>Mensajes ligados a este dispositivo</strong>: por diseño, el historial descifrado no se traslada. En un dispositivo nuevo o tras recuperar la contraseña por correo, la caja fuerte anterior no se recupera: empiezas con una identidad nueva y los contactos ven el aviso de cambio de clave. Ahora puedes cambiar de teléfono sin perder identidad ni historial: desde la Caja fuerte, pestaña «Nuevo dispositivo», con una transferencia directa (código o QR) o una copia completa cifrada.</li>
+      <li><strong>Mensajes y dispositivo</strong>: el historial descifrado se queda en el dispositivo. Para cambiar de teléfono usa la transferencia directa o la copia completa (sección 14); tras un simple restablecimiento de contraseña por correo, sin copia, la caja fuerte anterior no es recuperable.</li>
       <li><strong>La caja fuerte vale lo que vale la contraseña</strong>: elige una larga y única. Quien tenga tu dispositivo ya desbloqueado con la app abierta puede leer los chats, como en cualquier app.</li>
       <li><strong>Metadatos visibles para el servidor</strong>: remitente, hora, reacciones y caducidad de los mensajes temporales no están cifrados.</li>
       <li><strong>Recuperación solo por correo</strong>: si pierdes la contraseña y el acceso al correo verificado, el perfil no se recupera. Si usas varios perfiles (por ejemplo uno de cobertura), usa correos distintos: un enlace de recuperación revela a quien controla el correo que el perfil existe.</li>
@@ -188,6 +190,26 @@
       <li>Para ocultar tu IP en envíos P2P y llamadas activa Seguridad → Protección de IP (relay cifrado), donde el servicio tenga un servidor TURN. Sin relay la otra persona puede ver tu IP y en redes muy restrictivas la conexión puede fallar.</li>
       <li>El gestor de contraseñas es básico: no rellena formularios por sí solo y no sustituye a un gestor dedicado para uso profesional.</li>
       <li>Si pierdes la contraseña y la frase de la copia, los datos cifrados no se pueden recuperar: nadie, ni siquiera nosotros, puede abrirlos.</li>
+    </ul>
+  </section>
+
+  <section id="device">
+    <h2>14. Cambiar de teléfono</h2>
+    <p>Para pasar tu perfil a un teléfono nuevo, abre Caja fuerte → pestaña Dispositivo. Tienes dos opciones; elige la que prefieras.</p>
+    <ul>
+      <li><strong>Transferencia directa</strong>: en el teléfono antiguo generas un código (o QR) válido 10 minutos y lo escaneas o pegas en el nuevo. Pasan la identidad, las claves y las sesiones de cifrado, así que las conversaciones continúan sin interrupciones. El dispositivo antiguo se bloquea y se borra.</li>
+      <li><strong>Copia completa</strong>: exportas un archivo .securmy-full protegido con una frase secreta (mínimo 10 caracteres) con tu identidad y el historial leído. En el teléfono nuevo lo importas con la misma frase; tus contactos reciben automáticamente un mensaje invisible que realinea las claves.</li>
+    </ul>
+    <p class="warn">Un perfil está activo en un solo dispositivo a la vez. Guarda el archivo de copia y la frase secreta: sin la frase no se puede recuperar.</p>
+  </section>
+
+  <section id="newui">
+    <h2>15. Novedades de interfaz y protección</h2>
+    <ul>
+      <li><strong>Protección continua</strong>: los mensajes usan un Double Ratchet, con una clave distinta en cada mensaje. Una clave robada no abre ni los mensajes pasados ni los futuros.</li>
+      <li><strong>Tema claro y oscuro</strong>: sigue automáticamente los ajustes del teléfono o del ordenador.</li>
+      <li><strong>En el teléfono</strong>: la lista de chats y la conversación son pantallas separadas con botón de volver; toca un mensaje para ver sus acciones (responder, reaccionar, eliminar).</li>
+      <li><strong>Avatares y días</strong>: cada contacto tiene un avatar de color y la conversación se divide por día. El selector de idioma está en el menú lateral y la contraseña se muestra u oculta con el icono del ojo.</li>
     </ul>
   </section>
 </main>
