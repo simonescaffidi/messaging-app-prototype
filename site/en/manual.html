@@ -63,6 +63,8 @@
       <li><a href="#limits">Stated security limits</a></li>
       <li><a href="#troubleshooting">Troubleshooting</a></li>
       <li><a href="#suite">Securmy vault and tools</a></li>
+      <li><a href="#device">Changing phone</a></li>
+      <li><a href="#newui">Interface and protection updates</a></li>
     </ol>
   </nav>
 
@@ -144,7 +146,7 @@
     <p>For honesty, here are the limits that remain, even though the encryption is real and not just claimed:</p>
     <ul>
       <li><strong>Prekeys running out</strong>: if a contact stays offline for long and runs out of one-time keys, the message still uses a new key but without one-time deletion, so forward secrecy is weaker. To reduce the risk, the app refills keys automatically, alerts the contact when they are online and running low, and tells you when a message goes out without a one-time key. With the Double Ratchet only the first message of a conversation needs a one-time key.</li>
-      <li><strong>Messages tied to this device</strong>: by design, decrypted history doesn't move. On a new device or after an email password recovery the previous vault can't be recovered: you start with a new identity and contacts see the key-change warning. You can now change phone without losing your identity and history anyway: from the Vault, “New device” tab, with a direct transfer (code or QR) or an encrypted full backup.</li>
+      <li><strong>Messages and device</strong>: the decrypted history stays on the device. To change phone use direct transfer or the full backup (section 14); after a plain password reset by email, without a backup, the previous vault cannot be recovered.</li>
       <li><strong>The vault is only as strong as the password</strong>: choose a long, unique one. Anyone with your already unlocked device and the app open can read chats, as with any app.</li>
       <li><strong>Metadata visible to the server</strong>: sender, time, reactions and expiry of timed messages are not encrypted.</li>
       <li><strong>Email-only recovery</strong>: if you lose both the password and access to the verified email, the profile can't be recovered. If you use several profiles (e.g. a cover one), use different emails: a recovery link reveals to whoever controls the email that the profile exists.</li>
@@ -188,6 +190,26 @@
       <li>To hide your IP in P2P transfers and calls, turn on Security → IP protection (encrypted relay), where the service has a TURN server. Without a relay the other person can see your IP, and on very restrictive networks the connection may fail.</li>
       <li>The password manager is basic: it does not fill in forms by itself and does not replace a dedicated manager for professional use.</li>
       <li>If you lose your password and the backup passphrase, the encrypted data cannot be recovered: nobody, not even us, can open it.</li>
+    </ul>
+  </section>
+
+  <section id="device">
+    <h2>14. Changing phone</h2>
+    <p>To move your profile to a new phone, open Vault → Device tab. You have two options; pick the one you prefer.</p>
+    <ul>
+      <li><strong>Direct transfer</strong>: on the old phone you generate a code (or QR) valid for 10 minutes and scan or paste it on the new one. Identity, keys and encryption sessions move over, so conversations continue without interruption. The old device is locked and wiped.</li>
+      <li><strong>Full backup</strong>: you export a .securmy-full file protected by a passphrase (at least 10 characters) containing your identity and read history. Import it on the new phone with the same passphrase; your contacts automatically receive an invisible message that realigns the keys.</li>
+    </ul>
+    <p class="warn">A profile is active on one device at a time. Keep the backup file and the passphrase safe: without the passphrase it cannot be recovered.</p>
+  </section>
+
+  <section id="newui">
+    <h2>15. Interface and protection updates</h2>
+    <ul>
+      <li><strong>Continuous protection</strong>: messages use a Double Ratchet, with a different key for every message. A stolen key opens neither past nor future messages.</li>
+      <li><strong>Light and dark theme</strong>: follows your phone or computer settings automatically.</li>
+      <li><strong>On phones</strong>: chat list and conversation are separate screens with a back button; tap a message to show its actions (reply, react, delete).</li>
+      <li><strong>Avatars and days</strong>: each contact has a colored avatar and the conversation is split by day. The language selector is in the side menu and the password can be shown or hidden with the eye icon.</li>
     </ul>
   </section>
 </main>

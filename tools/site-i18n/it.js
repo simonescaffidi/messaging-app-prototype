@@ -402,7 +402,7 @@ module.exports = {
             "ul",
             [
               "<strong>Prekey esaurite</strong>: se un contatto resta offline a lungo e finisce le chiavi monouso, il messaggio usa comunque una chiave nuova ma senza l'eliminazione monouso, quindi con una forward secrecy meno forte. Per ridurre il rischio l'app ricarica le chiavi in automatico, avvisa il contatto online quando la scorta scende e ti segnala quando un messaggio parte senza chiave monouso. Con il Double Ratchet solo il primo messaggio di una conversazione richiede una chiave monouso.",
-              "<strong>Messaggi legati a questo dispositivo</strong>: per progetto, lo storico decifrato non si sposta. Su un nuovo dispositivo o dopo un recupero password via email la cassaforte precedente non è recuperabile: si parte con una nuova identità e i contatti vedono l'avviso di cambio chiave. Ora puoi comunque cambiare telefono senza perdere identità e cronologia: dalla Cassaforte, scheda «Nuovo dispositivo», con un trasferimento diretto (codice o QR) oppure con un backup completo cifrato.",
+              "<strong>Messaggi e dispositivo</strong>: lo storico decifrato resta sul dispositivo. Per cambiare telefono usa il trasferimento diretto o il backup completo (sezione 14); dopo un semplice recupero password via email, senza backup, la cassaforte precedente non è recuperabile.",
               "<strong>La cassaforte vale quanto la password</strong>: scegline una lunga e unica. Chi ha il dispositivo già sbloccato con l'app aperta può leggere le chat, come per qualunque app.",
               "<strong>Metadati visibili al server</strong>: mittente, orario, reazioni e scadenza dei messaggi a tempo non sono cifrati.",
               "<strong>Recupero solo via email</strong>: se perdi sia la password sia l'accesso all'email verificata, il profilo non è recuperabile. Se usi più profili (ad esempio uno di copertura), usa email diverse: un link di recupero rivela a chi controlla l'email che il profilo esiste."
@@ -531,6 +531,42 @@ module.exports = {
               "Per nascondere il tuo IP in invii P2P e chiamate attiva Sicurezza → Protezione IP (relay cifrato), dove il servizio ha un server TURN. Senza relay l'altra persona può vedere il tuo IP e su reti molto restrittive la connessione può fallire.",
               "Il gestore di password è essenziale: non compila i moduli da solo e non sostituisce un gestore dedicato per usi professionali.",
               "Se perdi la password e la frase del backup, i dati cifrati non sono recuperabili: nessuno, nemmeno noi, può aprirli."
+            ]
+          ]
+        ]
+      },
+      {
+        "id": "device",
+        "h": "14. Cambiare telefono",
+        "blocks": [
+          [
+            "p",
+            "Per spostare il tuo profilo su un nuovo telefono apri Cassaforte → scheda Dispositivo. Hai due strade, scegli quella che preferisci."
+          ],
+          [
+            "ul",
+            [
+              "<strong>Trasferimento diretto</strong>: sul vecchio telefono generi un codice (o un QR) valido 10 minuti e lo inquadri o incolli sul nuovo. Passano identità, chiavi e sessioni di cifratura, quindi le conversazioni continuano senza interruzioni. Il vecchio dispositivo viene bloccato e cancellato.",
+              "<strong>Backup completo</strong>: esporti un file .securmy-full protetto da una frase segreta (almeno 10 caratteri) con identità e cronologia letta. Sul nuovo telefono lo importi con la stessa frase; i tuoi contatti ricevono in automatico un messaggio invisibile che riallinea le chiavi."
+            ]
+          ],
+          [
+            "warn",
+            "Un profilo è attivo su un solo dispositivo alla volta. Conserva il file di backup e la frase segreta: senza frase non è recuperabile."
+          ]
+        ]
+      },
+      {
+        "id": "newui",
+        "h": "15. Novità di interfaccia e protezione",
+        "blocks": [
+          [
+            "ul",
+            [
+              "<strong>Protezione continua</strong>: i messaggi usano un Double Ratchet, con una chiave diversa a ogni messaggio. Una chiave rubata non apre né i messaggi passati né quelli futuri.",
+              "<strong>Tema chiaro e scuro</strong>: segue in automatico le impostazioni del telefono o del computer.",
+              "<strong>Su telefono</strong>: elenco chat e conversazione sono schermate separate con tasto indietro; tocca un messaggio per mostrare le azioni (rispondi, reagisci, elimina).",
+              "<strong>Avatar e giorni</strong>: ogni contatto ha un avatar colorato e la conversazione è divisa per giorno. Il selettore lingua è nel menu laterale e la password si mostra o nasconde con l'icona a occhio."
             ]
           ]
         ]
