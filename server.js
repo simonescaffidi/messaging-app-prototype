@@ -1066,6 +1066,44 @@ setInterval(() => {
   for (const [id, s] of p2pSessions) if (s.expires < now) p2pSessions.delete(id);
   for (const k of rateHits.keys()) rate(k, Infinity, 3600 * 1000);
 }, 60 * 1000).unref();
+// ---------- TRASFERIMENTO A UN NUOVO DISPOSITIVO ----------
+// Cassetta temporanea per il pacchetto di trasferimento. Il server vede SOLO testo cifrato (la chiave e' nel codice/QR
+// mostrato dal vecchio dispositivo e non lo attraversa mai). Solo lo STESSO account puo' scaricarlo, una volta sola;
+// scade in 10 minuti ed e' tenuto in memoria (non va su disco ne' nel database).
+const TRANSFER_TTL = 10 * 60 * 1000;
+const TRANSFER_MAX = 8 * 1024 * 1024;
+const transfers = new Map(); // id -> { pid, blob|null, state, expires }
+setInterval(() => { const now = Date.now(); for (const [id, t] of transfers) if (t.expires < now) transfers.delete(id); }, 60 * 1000).unref();
+app.post("/api/transfer", requireAuth, express.raw({ type: "application/octet-stream", limit: TRANSFER_MAX + 1024 }), (req, res) => {
+  if (!rate("xfer:" + req.profileId, 10, 3600 * 1000)) return res.status(429).json({ error: "troppe richieste" });
+  if (!Buffer.isBuffer(req.body) || req.body.length < 40 || req.body.length > TRANSFER_MAX) return res.status(400).json({ error: "pacchetto non valido" });
+  for (const [id, t] of transfers) if (t.pid === req.profileId) transfers.delete(id); // uno solo alla volta per profilo
+  const id = crypto.randomBytes(16).toString("base64url");
+  transfers.set(id, { pid: req.profileId, blob: req.body, state: "waiting", expires: Date.now() + TRANSFER_TTL });
+  res.json({ id, expires: Date.now() + TRANSFER_TTL });
+});
+function getTransfer(req, res) {
+  const t = transfers.get(req.params.id);
+  if (!t || t.expires < Date.now() || t.pid !== req.profileId) { res.status(404).json({ error: "codice scaduto o non valido" }); return null; }
+  return t;
+}
+app.get("/api/transfer/:id", requireAuth, (req, res) => {
+  if (!rate("xfer-get:" + req.profileId, 20, 3600 * 1000)) return res.status(429).json({ error: "troppe richieste" });
+  const t = getTransfer(req, res); if (!t) return;
+  if (t.state !== "waiting" || !t.blob) return res.status(410).json({ error: "pacchetto gia' scaricato" });
+  const blob = t.blob; t.blob = null; t.state = "downloaded"; // monouso: il contenuto sparisce subito dal server
+  res.set("Content-Type", "application/octet-stream").send(blob);
+});
+app.get("/api/transfer/:id/status", requireAuth, (req, res) => {
+  const t = getTransfer(req, res); if (!t) return;
+  res.json({ state: t.state });
+});
+app.delete("/api/transfer/:id", requireAuth, (req, res) => {
+  const t = getTransfer(req, res); if (!t) return;
+  transfers.delete(req.params.id);
+  res.json({ ok: true });
+});
+
 const P2P_ID = /^[A-Za-z0-9_-]{22}$/;
 app.post("/api/p2p", requireAuth, (req, res) => {
   const mine = [...p2pSessions.values()].filter((s) => s.owner === req.profileId && s.expires > Date.now()).length;

@@ -5,7 +5,7 @@ import * as FileSystem from "expo-file-system";
 import * as Sharing from "expo-sharing";
 import * as DocumentPicker from "expo-document-picker";
 import E2E from "./shared/e2e";
-import { S } from "./session";
+import { S, republishKeys, sendRekeyAll, loadChats } from "./session";
 import { storage } from "./storage";
 import { api, authFetch } from "./api";
 import { toBase64, fromBase64, utf8, fromUtf8, rid } from "./bytes";
@@ -122,6 +122,43 @@ export async function restoreBackup(pass) {
   }
   return n;
 }
+// ------------------------------------------------------------ nuovo dispositivo + backup completo (come sul web)
+export async function createFullBackup(pass) {
+  const file = await E2E.exportFullBackup(pass);
+  const path = FileSystem.cacheDirectory + "securmy-completo-" + new Date().toISOString().slice(0, 10) + ".securmy-full";
+  await FileSystem.writeAsStringAsync(path, JSON.stringify(file));
+  storage.setItem("sm_" + pid() + "_backup", String(Date.now()));
+  try { if (await Sharing.isAvailableAsync()) await Sharing.shareAsync(path, { mimeType: "application/json", dialogTitle: "Securmy" }); }
+  finally { setTimeout(() => FileSystem.deleteAsync(path, { idempotent: true }).catch(() => {}), 120000); }
+}
+export async function restoreFullBackup(pass) {
+  const r = await DocumentPicker.getDocumentAsync({ copyToCacheDirectory: true, multiple: false, type: "*/*" });
+  if (r.canceled || !r.assets || !r.assets[0]) return false;
+  const text = await FileSystem.readAsStringAsync(r.assets[0].uri);
+  await FileSystem.deleteAsync(r.assets[0].uri, { idempotent: true }).catch(() => {});
+  await E2E.importFullBackup(pass, JSON.parse(text));
+  await republishKeys(); await loadChats(); await sendRekeyAll();
+  return true;
+}
+export const isFrozen = () => E2E.isFrozen();
+export async function prepareTransfer() {
+  const { key, blob } = await E2E.transferExport();
+  let up;
+  try { up = await (await authFetch("/api/transfer", { method: "POST", headers: { "Content-Type": "application/octet-stream" }, body: blob })).json(); }
+  catch (e) { await E2E.transferAbort(); throw e; }
+  return { id: up.id, code: up.id + "." + key };
+}
+export async function transferStatus(id) { return (await (await authFetch("/api/transfer/" + id + "/status")).json()).state; }
+export async function cancelTransfer(id) { await E2E.transferAbort(); if (id) authFetch("/api/transfer/" + id, { method: "DELETE" }).catch(() => {}); }
+export async function finishTransfer(id) { if (id) authFetch("/api/transfer/" + id, { method: "DELETE" }).catch(() => {}); await panicWipe(); }
+export async function receiveTransfer(code) {
+  const m = /([A-Za-z0-9_-]{16,})\.([A-Za-z0-9_-]{40,})\s*$/.exec(String(code).trim());
+  if (!m) throw new Error("bad-code");
+  const buf = new Uint8Array(await (await authFetch("/api/transfer/" + m[1])).arrayBuffer());
+  await E2E.transferImport(m[2], buf);
+  await republishKeys(); await loadChats();
+}
+
 export const lastBackup = () => Number(storage.getItem("sm_" + pid() + "_backup") || 0);
 
 // ------------------------------------------------------------ sync cifrata (a pagamento)

@@ -58,4 +58,32 @@ try { A.lock(); await A.unlock("pidA", "sbagliata"); } catch (e) { console.log("
   }
   console.log("double ratchet interop true");
 }
+
+// Backup completo e trasferimento tra implementazione JS pura (telefono) e WebCrypto (browser)
+{
+  const ck = (cond, msg) => { if (!cond) { console.error("FALLITO:", msg); process.exit(1); } };
+  const P = nodeCrypto.webcrypto;
+  const S1 = make(shimCrypto), N1 = make(P); // stesso account "pidZ": telefono (shim) -> browser (nativo)
+  const r1 = await S1.unlock("pidZ", "password-z-lunga");
+  const peer = make(P); const rp = await peer.unlock("pidP", "password-p-lunga");
+  prekeys.P = []; const apiP = apiFor("P"); await peer.ensurePrekeys(apiP);
+  const e1 = await S1.encryptMessage({ peerIdentity: rp.publicJwk, peerProto: 3, myId: "pidZ", peerId: "pidP", plaintext: "storico dal telefono", claim: async () => prekeys.P.shift() });
+  await S1.rememberSent("mz1", "storico dal telefono", 0);
+  const file = await S1.exportFullBackup("frase-backup-molto-lunga");
+  await N1.unlock("pidZ", "password-z-lunga");
+  const rr = await N1.importFullBackup("frase-backup-molto-lunga", file);
+  ck(rr.publicJwk.x === r1.publicJwk.x, "stessa identita' dopo il ripristino");
+  ck((await N1.decryptMessage({ m: { id: "mz1", iv: e1.iv, ciphertext: e1.ciphertext, hdr: e1.hdr }, mine: true, peerIdentity: rp.publicJwk, myId: "pidZ", peerId: "pidP", exp: 0 })).text === "storico dal telefono", "cronologia del telefono letta dal browser");
+  // trasferimento live: ratchet attivo, telefono (shim) -> browser (nativo)
+  const rep = await peer.decryptMessage({ m: { id: "mz1", iv: e1.iv, ciphertext: e1.ciphertext, hdr: e1.hdr }, mine: false, peerIdentity: r1.publicJwk, myId: "pidP", peerId: "pidZ", exp: 0 });
+  ck(rep.text === "storico dal telefono", "peer legge");
+  const back = await peer.encryptMessage({ peerIdentity: r1.publicJwk, peerProto: 3, myId: "pidP", peerId: "pidZ", plaintext: "risposta", claim: async () => null });
+  ck((await S1.decryptMessage({ m: { id: "mz2", ...back }, mine: false, peerIdentity: rp.publicJwk, myId: "pidZ", peerId: "pidP", exp: 0 })).text === "risposta", "telefono legge la risposta");
+  const { key, blob } = await S1.transferExport();
+  const N2 = make(P); await N2.unlock("pidZ", "password-z-lunga"); await N2.transferImport(key, blob);
+  const e3 = await N2.encryptMessage({ peerIdentity: rp.publicJwk, peerProto: 3, myId: "pidZ", peerId: "pidP", plaintext: "dal nuovo browser", claim: async () => null });
+  ck(JSON.parse(e3.hdr).init === undefined, "stessa sessione dopo il trasferimento");
+  ck((await peer.decryptMessage({ m: { id: "mz3", ...e3 }, mine: false, peerIdentity: r1.publicJwk, myId: "pidP", peerId: "pidZ", exp: 0 })).text === "dal nuovo browser", "peer legge dal nuovo dispositivo");
+  console.log("backup e trasferimento interop true");
+}
 console.log("TUTTI I TEST COMPLETATI");

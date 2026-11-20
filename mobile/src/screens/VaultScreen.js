@@ -9,7 +9,7 @@ import * as Sharing from "expo-sharing";
 import { Bar, Button, Card, H2, Input, P, Row, Screen, Segments, ask } from "../ui";
 import { t, useLang, getLang } from "../i18n";
 import { THEME as T } from "../config";
-import { S } from "../session";
+import { S, logout } from "../session";
 import * as V from "../vault";
 import { P as P2P, startSend, stopSend } from "../p2psend";
 import { toBase64 } from "../bytes";
@@ -270,6 +270,70 @@ function Backup() {
   );
 }
 
+// ------------------------------------------------------------------ Nuovo dispositivo + backup completo
+const devErr = (e) => {
+  const m = String((e && e.message) || e);
+  if (m.includes("wrong-account")) return t("devWrongAccount");
+  if (m.includes("bad-password") || m.includes("bad-file")) return t("devBadPass");
+  if (m.includes("bad-code") || (e && (e.status === 404 || e.status === 410))) return t("devBadCode");
+  return m;
+};
+function Device() {
+  const [frozen, setFrozen] = useState(V.isFrozen());
+  const [xfer, setXfer] = useState(null); // { id, code }
+  const [code, setCode] = useState("");
+  const [pass, setPass] = useState("");
+  const [msg, setMsg] = useState("");
+  const [busy, setBusy] = useState(false);
+  useEffect(() => {
+    if (!xfer) return;
+    const timer = setInterval(async () => {
+      try {
+        if ((await V.transferStatus(xfer.id)) === "downloaded") {
+          clearInterval(timer);
+          await V.finishTransfer(xfer.id);
+          Alert.alert(t("devSendDone"));
+          await logout();
+        }
+      } catch (e) { if (e && e.status === 404) { clearInterval(timer); await V.cancelTransfer(null); setXfer(null); setFrozen(false); setMsg(t("devBadCode")); } }
+    }, 2500);
+    return () => clearInterval(timer);
+  }, [xfer && xfer.id]);
+  const run = async (fn) => { setBusy(true); setMsg(""); try { await fn(); } catch (e) { setMsg(devErr(e)); } setBusy(false); };
+  return (
+    <>
+      <H2 style={{ fontSize: 18 }}>{t("devSendTitle")}</H2>
+      <P dim>{t("devSendHint")}</P>
+      {xfer ? (
+        <>
+          <P dim>{t("devCodeLabel")}</P>
+          <Text selectable style={{ color: T.text, fontFamily: "monospace", fontSize: 12 }}>{xfer.code}</Text>
+          <Button title={t("devCopy")} onPress={async () => { await Clipboard.setStringAsync(xfer.code); setMsg(t("devCopied")); }} />
+          <P dim>{t("devWait")}</P>
+          <Button kind="danger" title={t("devCancel")} onPress={() => run(async () => { await V.cancelTransfer(xfer.id); setXfer(null); setFrozen(false); })} />
+        </>
+      ) : frozen ? (
+        <>
+          <P error>{t("devFrozen")}</P>
+          <Button kind="danger" title={t("devCancel")} onPress={() => run(async () => { await V.cancelTransfer(null); setFrozen(false); })} />
+        </>
+      ) : (
+        <Button kind="primary" busy={busy} title={t("devSendBtn")} onPress={async () => { if (await ask(t("devSendConfirm"), "", "OK", t("btnCancel"))) run(async () => { setXfer(await V.prepareTransfer()); setFrozen(true); }); }} />
+      )}
+      <H2 style={{ fontSize: 18, marginTop: 18 }}>{t("devRecvTitle")}</H2>
+      <P dim>{t("devRecvHint")}</P>
+      <Input placeholder={t("devRecvPlaceholder")} value={code} onChangeText={setCode} autoCapitalize="none" autoCorrect={false} />
+      <Button kind="primary" busy={busy} title={t("devRecvBtn")} onPress={() => run(async () => { await V.receiveTransfer(code); setCode(""); setMsg("✓ " + t("devRecvDone")); })} />
+      <H2 style={{ fontSize: 18, marginTop: 18 }}>{t("devFullTitle")}</H2>
+      <P dim>{t("devFullHint")}</P>
+      <Input placeholder={t("backupPass")} value={pass} onChangeText={setPass} secureTextEntry />
+      <Button kind="primary" busy={busy} title={t("devFullExport")} onPress={() => run(async () => { if (pass.length < 10) throw new Error(t("backupPass")); await V.createFullBackup(pass); setMsg("✓ " + t("devFullDone")); })} />
+      <Button busy={busy} title={t("devFullImport")} onPress={() => run(async () => { if (await V.restoreFullBackup(pass)) setMsg("✓ " + t("devFullRestored")); })} />
+      {msg ? <P ok={msg.startsWith("✓")} error={!msg.startsWith("✓")}>{msg}</P> : null}
+    </>
+  );
+}
+
 // ------------------------------------------------------------------ Sync
 function Sync() {
   const [st, setSt] = useState(null);
@@ -337,7 +401,7 @@ export default function VaultScreen() {
   const [tab, setTab] = useState("files");
   const [pending, setPending] = useState(null);
   const vaultOpen = S.use((s) => s.vaultOpen);
-  const tabs = [["files", t("tabFiles")], ["notes", t("tabNotes")], ["pw", t("tabPw")], ["send", t("tabSend")], ["clean", t("tabClean")], ["sync", t("syncTab")], ["backup", t("tabBackup")]];
+  const tabs = [["files", t("tabFiles")], ["notes", t("tabNotes")], ["pw", t("tabPw")], ["send", t("tabSend")], ["clean", t("tabClean")], ["sync", t("syncTab")], ["backup", t("tabBackup")], ["device", t("devTab")]];
   return (
     <Screen scroll>
       <H2 style={{ fontSize: 24 }}>{t("suiteTitle")}</H2>
@@ -351,6 +415,7 @@ export default function VaultScreen() {
           {tab === "clean" ? <Clean /> : null}
           {tab === "sync" ? <Sync /> : null}
           {tab === "backup" ? <Backup /> : null}
+          {tab === "device" ? <Device /> : null}
         </>
       )}
     </Screen>

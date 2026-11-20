@@ -89,3 +89,26 @@ test("cambio di identita': le prekey vecchie vengono azzerate; la versione proto
   const chats2 = await fetch(base + "/api/chats", { headers: { Authorization: "Bearer " + a.token } }).then((r) => r.json());
   assert.equal(chats2.chats[0].with.proto, 2);
 });
+
+test("trasferimento: monouso, solo stesso account, il server tiene solo testo cifrato e lo cancella dopo il download", async () => {
+  const a = await user("frank"), other = await user("gina");
+  const put = (token, bytes) => fetch(base + "/api/transfer", { method: "POST", headers: { Authorization: "Bearer " + token, "Content-Type": "application/octet-stream" }, body: bytes });
+  const blob = new Uint8Array(200).fill(7);
+  assert.equal((await put(a.token, new Uint8Array(10))).status, 400, "troppo corto");
+  const up = await (await put(a.token, blob)).json();
+  assert.ok(up.id && up.id.length >= 22);
+  const get = (token, id) => fetch(base + "/api/transfer/" + id, { headers: { Authorization: "Bearer " + token } });
+  const st = (token, id) => fetch(base + "/api/transfer/" + id + "/status", { headers: { Authorization: "Bearer " + token } }).then((r) => r.json());
+  assert.equal((await get(other.token, up.id)).status, 404, "un altro account non lo vede");
+  assert.equal((await st(a.token, up.id)).state, "waiting");
+  const dl = await get(a.token, up.id);
+  assert.equal(dl.status, 200);
+  assert.deepEqual(new Uint8Array(await dl.arrayBuffer()), blob);
+  assert.equal((await get(a.token, up.id)).status, 410, "monouso");
+  assert.equal((await st(a.token, up.id)).state, "downloaded");
+  // un nuovo pacchetto sostituisce il precedente (uno solo per profilo)
+  const up2 = await (await put(a.token, blob)).json();
+  assert.equal((await st(a.token, up.id).catch(() => ({}))).state, undefined);
+  assert.equal((await fetch(base + "/api/transfer/" + up2.id, { method: "DELETE", headers: { Authorization: "Bearer " + a.token } })).status, 200);
+  assert.equal((await get(a.token, up2.id)).status, 404);
+});

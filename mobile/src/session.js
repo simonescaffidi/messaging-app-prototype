@@ -9,6 +9,7 @@ import { createStore, createBus } from "./store";
 import { hydrate, storage } from "./storage";
 import { initLang, t } from "./i18n";
 
+export const REKEY = "\u0001REKEY\u0001"; // messaggio tecnico (invisibile) che fa ripartire le sessioni dopo un ripristino da backup
 export const ONCE = "\u0001ONCE\u0001"; // marcatore dei messaggi a visualizzazione singola (come sul web)
 export const bus = createBus();
 export const S = createStore({
@@ -99,9 +100,38 @@ async function enterApp(password) {
   await openVault(password);
   connectWs();
   await loadChats();
+  if (E2E.needsRekey()) sendRekeyAll().catch(() => {}); // ripristino da backup non ancora comunicato ai contatti
   try { require("./push").registerPush(); } catch {}
   try { require("./calls"); } catch {}
   bus.emit("entered");
+}
+
+// Nuovo dispositivo / ripristino: ripubblica la chiave (con la versione del protocollo) e ricarica le prekey.
+export async function republishKeys() {
+  try { await api("/api/me/publickey", { method: "POST", body: JSON.stringify({ publicKeyJwk: E2E.myPublicJwk(), proto: E2E.PROTO }) }); } catch {}
+  await E2E.ensurePrekeys(api);
+}
+// Dopo il ripristino da backup le sessioni sono nuove: un messaggio tecnico nascosto a ogni contatto le fa ripartire.
+export async function sendRekeyAll() {
+  if (!E2E.isUnlocked()) return;
+  const me = S.get().me;
+  await loadChats();
+  let ok = 0, tot = 0;
+  for (const chat of S.get().chats) {
+    if (!chat.with.publicKey) continue;
+    tot++;
+    try {
+      const { iv, ciphertext, hdr } = await E2E.encryptMessage({
+        peerIdentity: chat.with.publicKey, peerProto: chat.with.proto, myId: me.publicId, peerId: chat.with.publicId, plaintext: REKEY,
+        claim: async () => (await api("/api/prekeys/claim/" + chat.with.profileId, { method: "POST", body: "{}" })).prekey
+      });
+      const data = await api("/api/messages", { method: "POST", body: JSON.stringify({ chatId: chat.id, iv, ciphertext, hdr, replyTo: null, selfDestructSeconds: null }) });
+      await E2E.rememberSent(data.message.id, REKEY, 0);
+      ok++;
+    } catch {}
+  }
+  if (ok === tot) await E2E.clearRekey();
+  await loadChats();
 }
 
 export async function logout() {

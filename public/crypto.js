@@ -222,6 +222,95 @@ const E2E = (() => {
     S = null;
   }
 
+
+  // ---------------- backup completo e trasferimento a un nuovo dispositivo ----------------
+  // Due strade per cambiare telefono senza perdere identita' e cronologia:
+  // 1) backup completo: file cifrato con una passphrase (identita', cronologia gia' letta, verifiche dei contatti);
+  //    le sessioni ratchet NON sono incluse (sarebbero in ritardo rispetto ai contatti): dopo il ripristino
+  //    si riparte con sessioni nuove e i contatti vengono avvisati con un messaggio tecnico nascosto.
+  // 2) trasferimento diretto: pacchetto cifrato con una chiave casuale che vive solo nel codice/QR mostrato dal
+  //    vecchio dispositivo; include anche i ratchet, cosi' le conversazioni proseguono senza interruzioni.
+  //    Il vecchio dispositivo si blocca all'esportazione e si cancella a trasferimento concluso.
+  const b64u = (u8) => b64(u8).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  const unb64u = (str) => unb64(str.replace(/-/g, "+").replace(/_/g, "/") + "=".repeat((4 - (str.length % 4)) % 4));
+
+  async function snapshot(withRatchets) {
+    const pid = S.pid, prefix = "pc_" + pid + "_", fpPrefix = "peerfp_" + pid + "_";
+    const keys = [];
+    for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k) keys.push(k); }
+    const cache = [], peerfp = [];
+    for (const k of keys) {
+      if (k.startsWith(prefix)) {
+        try { const o = await openWith(S.key, ls.get(k)); if (!o.e || o.e > Date.now()) cache.push([k.slice(prefix.length), o]); } catch {}
+      } else if (k.startsWith(fpPrefix)) peerfp.push([k.slice(fpPrefix.length), ls.get(k)]);
+    }
+    const data = { identity: S.data.identity, prekeys: S.data.prekeys || {} };
+    if (withRatchets) data.ratchets = S.data.ratchets || {};
+    return { v: 1, pid, t: Date.now(), data, cache, peerfp };
+  }
+  async function applySnapshot(snap, keepRatchets) {
+    if (!S) throw new Error("locked");
+    if (!snap || snap.pid !== S.pid || !snap.data || !snap.data.identity) throw new Error("wrong-account");
+    return locked(async () => {
+      await reloadData();
+      S.data.identity = snap.data.identity;               // la chiave dati (dk) resta quella di questo dispositivo
+      S.data.prekeys = snap.data.prekeys || {};
+      S.data.ratchets = keepRatchets ? (snap.data.ratchets || {}) : {};
+      if (keepRatchets) delete S.data.needRekey; else S.data.needRekey = true;
+      await persistVault();
+      await loadIdentity();
+      for (const [mid, o] of snap.cache || []) ls.set(cacheName(S.pid, mid), await sealWith(S.key, o));
+      for (const [pp, v] of snap.peerfp || []) ls.set("peerfp_" + S.pid + "_" + pp, v);
+      return { publicJwk: S.identity.publicJwk };
+    });
+  }
+
+  async function exportFullBackup(pass) {
+    if (!S) throw new Error("locked");
+    if (!pass || pass.length < 10) throw new Error("short-passphrase");
+    const snap = await locked(async () => { await reloadData(); return snapshot(false); });
+    const salt = crypto.getRandomValues(new Uint8Array(16));
+    const k = await deriveVaultKey(pass, salt, PBKDF2_ITER);
+    return { app: "securmy-full-backup", v: 1, salt: b64(salt), iter: PBKDF2_ITER, ct: await sealWith(k, snap) };
+  }
+  async function importFullBackup(pass, file) {
+    if (!file || file.app !== "securmy-full-backup") throw new Error("bad-file");
+    const k = await deriveVaultKey(pass, unb64(file.salt), file.iter || PBKDF2_ITER);
+    let snap;
+    try { snap = await openWith(k, file.ct); } catch { throw new Error("bad-password"); }
+    return applySnapshot(snap, false);
+  }
+  const needsRekey = () => !!(S && S.data.needRekey);
+  async function clearRekey() { if (!S) return; await locked(async () => { await reloadData(); delete S.data.needRekey; await persistVault(); }); }
+
+  async function transferExport() {
+    if (!S) throw new Error("locked");
+    return locked(async () => {
+      await reloadData();
+      const snap = await snapshot(true);
+      const tk = crypto.getRandomValues(new Uint8Array(32));
+      const iv = crypto.getRandomValues(new Uint8Array(12));
+      const key = await crypto.subtle.importKey("raw", tk, "AES-GCM", false, ["encrypt"]);
+      const ct = new Uint8Array(await crypto.subtle.encrypt({ name: "AES-GCM", iv }, key, enc.encode(JSON.stringify(snap))));
+      const blob = new Uint8Array(12 + ct.length); blob.set(iv, 0); blob.set(ct, 12);
+      S.data.frozen = true; // da qui questo dispositivo non cifra ne' decifra piu' (anche dopo un riavvio): lo stato non puo' divergere
+      await persistVault();
+      return { key: b64u(tk), blob };
+    });
+  }
+  async function transferAbort() { if (!S) return; await locked(async () => { await reloadData(); delete S.data.frozen; await persistVault(); }); }
+  const isFrozen = () => !!(S && S.data.frozen);
+  async function transferImport(keyStr, blob) {
+    const u = new Uint8Array(blob);
+    let snap;
+    try {
+      const key = await crypto.subtle.importKey("raw", unb64u(keyStr), "AES-GCM", false, ["decrypt"]);
+      snap = JSON.parse(dec.decode(await crypto.subtle.decrypt({ name: "AES-GCM", iv: u.slice(0, 12) }, key, u.slice(12))));
+    } catch { throw new Error("bad-code"); }
+    return applySnapshot(snap, true);
+  }
+  function transferFinish() { if (S) wipeLocal(S.pid); }
+
   const hasVault = (pid) => !!ls.get(vaultKeyName(pid));
   const isUnlocked = () => !!S;
   function lock() { S = null; }
@@ -272,7 +361,7 @@ const E2E = (() => {
 
   // ---------------- prekey ----------------
   async function ensurePrekeys(api) {
-    if (!S) return;
+    if (!S || S.data.frozen) return;
     let count = 0;
     try { count = (await api("/api/prekeys/count")).count; } catch { return; }
     if (count >= 40) return;
@@ -309,6 +398,7 @@ const E2E = (() => {
   // peerProto: versione del protocollo dichiarata dal contatto (3 = Double Ratchet, altrimenti v2).
   async function encryptMessage(args) {
     if (!S) throw new Error("locked");
+    if (S.data.frozen) throw new Error("frozen"); // trasferimento a un nuovo dispositivo in corso
     if ((args.peerProto || 2) >= 3) return encryptV3(args);
     return encryptV2(args);
   }
@@ -358,6 +448,7 @@ const E2E = (() => {
         return { text, state: "ok" };
       } catch { return { text: null, state: "gone" }; }
     }
+    if (S.data.frozen) return { text: null, state: "locked" };
     if (mine) return { text: null, state: "gone" }; // i miei messaggi v2/v3 si leggono solo dalla cache
     if (!peerIdentity) return { text: null, state: "nokey" };
     let h0 = null;
@@ -579,6 +670,7 @@ const E2E = (() => {
   async function markVerified(myPid, peerPid, jwk) { ls.set("peerfp_" + myPid + "_" + peerPid, JSON.stringify({ fp: await fingerprint(jwk), verified: true })); }
 
   return {
+    exportFullBackup, importFullBackup, isFrozen, needsRekey, clearRekey, transferExport, transferAbort, transferImport, transferFinish,
     PROTO, unlock, resetVault, rewrap, hasVault, isUnlocked, lock, myPublicJwk,
     ensurePrekeys, encryptMessage, decryptMessage, rememberSent,
     safetyNumber, checkPeer, acceptPeer, markVerified,

@@ -402,7 +402,7 @@ module.exports = {
             "ul",
             [
               "<strong>Prekey esaurite</strong>: se un contatto resta offline a lungo e finisce le chiavi monouso, il messaggio usa comunque una chiave nuova ma senza l'eliminazione monouso, quindi con una forward secrecy meno forte. Per ridurre il rischio l'app ricarica le chiavi in automatico, avvisa il contatto online quando la scorta scende e ti segnala quando un messaggio parte senza chiave monouso. Con il Double Ratchet solo il primo messaggio di una conversazione richiede una chiave monouso.",
-              "<strong>Messaggi legati a questo dispositivo</strong>: per progetto, lo storico decifrato non si sposta. Su un nuovo dispositivo o dopo un recupero password via email la cassaforte precedente non è recuperabile: si parte con una nuova identità e i contatti vedono l'avviso di cambio chiave.",
+              "<strong>Messaggi legati a questo dispositivo</strong>: per progetto, lo storico decifrato non si sposta. Su un nuovo dispositivo o dopo un recupero password via email la cassaforte precedente non è recuperabile: si parte con una nuova identità e i contatti vedono l'avviso di cambio chiave. Ora puoi comunque cambiare telefono senza perdere identità e cronologia: dalla Cassaforte, scheda «Nuovo dispositivo», con un trasferimento diretto (codice o QR) oppure con un backup completo cifrato.",
               "<strong>La cassaforte vale quanto la password</strong>: scegline una lunga e unica. Chi ha il dispositivo già sbloccato con l'app aperta può leggere le chat, come per qualunque app.",
               "<strong>Metadati visibili al server</strong>: mittente, orario, reazioni e scadenza dei messaggi a tempo non sono cifrati.",
               "<strong>Recupero solo via email</strong>: se perdi sia la password sia l'accesso all'email verificata, il profilo non è recuperabile. Se usi più profili (ad esempio uno di copertura), usa email diverse: un link di recupero rivela a chi controlla l'email che il profilo esiste."
@@ -518,7 +518,7 @@ module.exports = {
           ],
           [
             "p",
-            "Il backup contiene file, note e password cifrati con una frase segreta di almeno 10 caratteri che scegli tu: senza di essa non è recuperabile. I messaggi non sono inclusi. La cancellazione di emergenza rimuove dal dispositivo chiavi, cache dei messaggi, file, note e password e non si può annullare."
+            "Il backup contiene file, note e password cifrati con una frase segreta di almeno 10 caratteri che scegli tu: senza di essa non è recuperabile. I messaggi non sono inclusi. La cancellazione di emergenza rimuove dal dispositivo chiavi, cache dei messaggi, file, note e password e non si può annullare. Per cambiare telefono: «Nuovo dispositivo» offre il trasferimento diretto (il vecchio dispositivo si blocca e si cancella a fine trasferimento; il pacchetto passa dal server solo cifrato, si cancella dopo il download e la chiave resta nel codice/QR) oppure il backup completo, con identità e cronologia già letta. Dopo un ripristino da backup le conversazioni ripartono con chiavi nuove e i contatti ricevono un messaggio tecnico invisibile; le chat nascoste ripartono al primo messaggio che invii. Usa un solo dispositivo alla volta per profilo."
           ],
           [
             "h3",

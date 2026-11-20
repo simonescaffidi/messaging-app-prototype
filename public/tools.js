@@ -84,7 +84,7 @@ const Suite = (() => {
   function locked() { return !E2E.isUnlocked(); }
 
   // ------------------------------------------------------------------ pannello
-  const TABS = [["files", "tabFiles"], ["notes", "tabNotes"], ["pw", "tabPw"], ["send", "tabSend"], ["clean", "tabClean"], ["sec", "tabSec"], ["sync", "syncTab"], ["backup", "tabBackup"]];
+  const TABS = [["files", "tabFiles"], ["notes", "tabNotes"], ["pw", "tabPw"], ["send", "tabSend"], ["clean", "tabClean"], ["sec", "tabSec"], ["sync", "syncTab"], ["backup", "tabBackup"], ["device", "devTab"]];
   function open(which) {
     if (which) tab = which;
     $("#suite-modal").classList.remove("hidden");
@@ -96,7 +96,7 @@ const Suite = (() => {
     for (const [id, key] of TABS) tabs.append(h("button", { class: id === tab ? "active" : "", onclick: () => { tab = id; render(); } }, t(key)));
     const body = $("#suite-body"); body.innerHTML = "";
     if (locked() && tab !== "sec") { body.append(h("p", { class: "error" }, t("vaultLockedMsg"))); return; }
-    ({ files: tFiles, notes: tNotes, pw: tPw, send: tSend, clean: tClean, sec: tSec, sync: tSync, backup: tBackup })[tab](body);
+    ({ files: tFiles, notes: tNotes, pw: tPw, send: tSend, clean: tClean, sec: tSec, sync: tSync, backup: tBackup, device: tDevice })[tab](body);
   }
 
   // ------------------------------------------------------------------ File
@@ -468,11 +468,117 @@ const Suite = (() => {
         } }))), msg);
   }
 
+
+  // ------------------------------------------------------------------ Nuovo dispositivo + backup completo
+  // Due strade per cambiare telefono: trasferimento diretto (codice/QR, il vecchio dispositivo si blocca e si cancella)
+  // e backup completo con cronologia (file cifrato con passphrase). Vedi i commenti in crypto.js.
+  let xfer = null; // trasferimento in corso su questo dispositivo: { id, timer }
+  function xferStop() { if (xfer && xfer.timer) clearInterval(xfer.timer); xfer = null; }
+  function qrSvg(text) {
+    const q = qrcode(0, "M"); q.addData(text); q.make();
+    const wrap = h("div", { class: "qr-box", style: "background:#fff;padding:8px;display:inline-block;border-radius:8px;line-height:0" });
+    wrap.innerHTML = q.createSvgTag({ cellSize: 4, margin: 0, scalable: true }); // SVG generato qui dal nostro testo
+    const svg = wrap.querySelector("svg"); if (svg) { svg.setAttribute("width", "220"); svg.setAttribute("height", "220"); }
+    return wrap;
+  }
+  async function wipeThisDevice() {
+    try { const d = await db(); d.close(); dbp = null; await new Promise((res) => { const r = indexedDB.deleteDatabase("securmy"); r.onsuccess = r.onerror = r.onblocked = () => res(); }); } catch {}
+    E2E.transferFinish();
+    try { localStorage.removeItem("webauthn_enrolled"); } catch {}
+  }
+  function devError(e) {
+    const m = String((e && e.message) || e);
+    if (m.includes("wrong-account")) return t("devWrongAccount");
+    if (m.includes("bad-password") || m.includes("bad-file")) return t("devBadPass");
+    if (m.includes("bad-code") || (e && (e.status === 404 || e.status === 410))) return t("devBadCode");
+    return m;
+  }
+  function tDevice(body) {
+    const msg = h("p", { class: "hint" }), msg2 = h("p", { class: "hint" }), msg3 = h("p", { class: "hint" });
+    // --- 1) passare a un nuovo dispositivo (dal vecchio)
+    const sendBox = h("div", {});
+    body.append(h("h3", {}, t("devSendTitle")), h("p", { class: "hint" }, t("devSendHint")), sendBox, msg);
+    if (E2E.isFrozen()) {
+      sendBox.append(h("p", { class: "error" }, t("devFrozen")),
+        h("button", { onclick: async () => { await E2E.transferAbort(); if (xfer && xfer.id) rawApi("/api/transfer/" + xfer.id, { method: "DELETE" }).catch(() => {}); xferStop(); render(); } }, t("devCancel")));
+    } else {
+      sendBox.append(h("button", { class: "primary", onclick: async (ev) => {
+        if (!confirm(t("devSendConfirm"))) return;
+        ev.target.disabled = true; msg.textContent = "…";
+        try {
+          const { key, blob } = await E2E.transferExport();
+          let up;
+          try { up = await (await rawApi("/api/transfer", { method: "POST", headers: { "Content-Type": "application/octet-stream" }, body: blob })).json(); }
+          catch (e) { await E2E.transferAbort(); throw e; }
+          const code = up.id + "." + key;
+          const link = location.origin + "/app/#transfer=" + code;
+          xferStop(); xfer = { id: up.id, timer: null };
+          sendBox.innerHTML = "";
+          const ta = h("textarea", { readonly: true, rows: 3, style: "width:100%;font-family:monospace;font-size:12px", "aria-label": t("devCodeLabel") }, code);
+          sendBox.append(qrSvg(link), h("p", { class: "small" }, t("devCodeLabel")), ta,
+            h("div", { class: "suite-row" },
+              h("button", { onclick: async () => { try { await navigator.clipboard.writeText(code); } catch { ta.select(); document.execCommand("copy"); } msg.textContent = t("devCopied"); } }, t("devCopy")),
+              h("button", { onclick: async () => { await E2E.transferAbort(); rawApi("/api/transfer/" + up.id, { method: "DELETE" }).catch(() => {}); xferStop(); render(); } }, t("devCancel"))));
+          msg.textContent = t("devWait");
+          xfer.timer = setInterval(async () => {
+            try {
+              const st = await (await rawApi("/api/transfer/" + up.id + "/status")).json();
+              if (st.state === "downloaded") {
+                xferStop(); msg.textContent = t("devSendDone");
+                rawApi("/api/transfer/" + up.id, { method: "DELETE" }).catch(() => {});
+                await wipeThisDevice(); alert(t("devSendDone")); location.reload();
+              }
+            } catch (e) { if (e.status === 404) { xferStop(); msg.textContent = t("devBadCode"); await E2E.transferAbort(); render(); } }
+          }, 2500);
+        } catch (e) { msg.textContent = devError(e); ev.target.disabled = false; }
+      } }, t("devSendBtn")));
+    }
+    // --- 2) ricevere da un altro dispositivo (sul nuovo)
+    let pending = ""; try { pending = sessionStorage.getItem("pendingTransfer") || ""; } catch {}
+    const input = h("input", { type: "text", placeholder: t("devRecvPlaceholder"), autocomplete: "off", spellcheck: "false", value: pending });
+    body.append(h("hr"), h("h3", {}, t("devRecvTitle")), h("p", { class: "hint" }, t("devRecvHint")), input,
+      h("button", { class: "primary", onclick: async (ev) => {
+        const m = /([A-Za-z0-9_-]{16,})\.([A-Za-z0-9_-]{40,})\s*$/.exec(input.value.trim());
+        if (!m) { msg2.textContent = t("devBadCode"); return; }
+        ev.target.disabled = true; msg2.textContent = "…";
+        try {
+          const blob = await (await rawApi("/api/transfer/" + m[1])).arrayBuffer();
+          await E2E.transferImport(m[2], blob);
+          try { sessionStorage.removeItem("pendingTransfer"); } catch {}
+          if (window.SecurmyApp) { await window.SecurmyApp.republishKeys(); await window.SecurmyApp.reload(); }
+          msg2.textContent = "✓ " + t("devRecvDone"); input.value = "";
+        } catch (e) { msg2.textContent = devError(e); }
+        ev.target.disabled = false;
+      } }, t("devRecvBtn")), msg2);
+    // --- 3) backup completo con cronologia
+    const pass = h("input", { type: "password", minlength: 10, maxlength: 128, placeholder: t("backupPass"), autocomplete: "new-password" });
+    body.append(h("hr"), h("h3", {}, t("devFullTitle")), h("p", { class: "hint" }, t("devFullHint")), pass,
+      h("div", { class: "suite-row" },
+        h("button", { class: "primary", onclick: async () => {
+          if (pass.value.length < 10) { msg3.textContent = t("backupPass"); return; }
+          try {
+            const file = await E2E.exportFullBackup(pass.value);
+            download(new Blob([JSON.stringify(file)], { type: "application/json" }), "securmy-completo-" + new Date().toISOString().slice(0, 10) + ".securmy-full");
+            localStorage.setItem("sm_" + pid() + "_backup", String(Date.now()));
+            msg3.textContent = "✓ " + t("devFullDone");
+          } catch (e) { msg3.textContent = devError(e); }
+        } }, t("devFullExport")),
+        h("label", { class: "small" }, t("devFullImport"), h("input", { type: "file", accept: ".securmy-full,application/json", style: "display:none", onchange: async (e) => {
+          const f = e.target.files[0]; e.target.value = ""; if (!f) return;
+          try {
+            msg3.textContent = "…";
+            await E2E.importFullBackup(pass.value, JSON.parse(await f.text()));
+            if (window.SecurmyApp) { await window.SecurmyApp.republishKeys(); await window.SecurmyApp.reload(); await window.SecurmyApp.sendRekeyAll(); }
+            msg3.textContent = "✓ " + t("devFullRestored");
+          } catch (er) { msg3.textContent = devError(er); }
+        } }))), msg3);
+  }
+
   function init(h2) {
     hooks = Object.assign(hooks, h2 || {});
     $("#btn-suite").addEventListener("click", () => open());
     $("#suite-close").addEventListener("click", close);
   }
-  function reset() { stopSend(true); tab = "files"; }
+  function reset() { stopSend(true); xferStop(); tab = "files"; }
   return { init, open, close, reset, render };
 })();
