@@ -376,7 +376,7 @@ module.exports = {
         "blocks": [
           [
             "p",
-            "Oben in jedem App-Bildschirm findest du eine Sprachauswahl. Auch diese Website gibt es in denselben 11 Sprachen: Italienisch, Englisch, Spanisch, Französisch, Deutsch, Portugiesisch, Arabisch, Chinesisch, Hindi, Russisch und Japanisch. Die in der App gewählte Sprache wird auf dem Gerät gespeichert."
+            "In der App findest du die Sprachauswahl im Seitenmenü (und auf dem Anmeldebildschirm). Auch diese Website gibt es in denselben 11 Sprachen: Italienisch, Englisch, Spanisch, Französisch, Deutsch, Portugiesisch, Arabisch, Chinesisch, Hindi, Russisch und Japanisch. Die in der App gewählte Sprache wird auf dem Gerät gespeichert."
           ]
         ]
       },
