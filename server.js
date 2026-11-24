@@ -1156,7 +1156,7 @@ app.post("/api/p2p/:id/answer", (req, res) => {
 // quindi si limitano le richieste per IP (60/ora) per non consumare la quota del relay.
 // Link stabile di download Android: la destinazione si cambia con ANDROID_APK_URL (senza ripubblicare il sito).
 app.get("/download/android", (_req, res) => {
-  res.redirect(302, process.env.ANDROID_APK_URL || "https://expo.dev/artifacts/eas/DcxVva-Abu6HOKr6uCgME7kMlJj79PwmaG_MK_ODOHY.apk");
+  res.redirect(302, process.env.ANDROID_APK_URL || "https://expo.dev/artifacts/eas/xF8Nmks-C7SAItaNIJQtJryUEjz2t3f1C7TnKY3HEGE.apk");
 });
 const iceHits = new Map();
 app.get("/api/ice", async (req, res) => {

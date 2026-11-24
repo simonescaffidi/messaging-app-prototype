@@ -376,7 +376,7 @@ module.exports = {
         "blocks": [
           [
             "p",
-            "In alto a destra, in ogni schermata dell'app, trovi un selettore di lingua. Anche questo sito è disponibile nelle stesse 11 lingue: italiano, inglese, spagnolo, francese, tedesco, portoghese, arabo, cinese, hindi, russo e giapponese. La lingua scelta nell'app viene ricordata sul dispositivo."
+            "Nell'app trovi un selettore di lingua nel menu laterale (e nella schermata di accesso). Anche questo sito è disponibile nelle stesse 11 lingue: italiano, inglese, spagnolo, francese, tedesco, portoghese, arabo, cinese, hindi, russo e giapponese. La lingua scelta nell'app viene ricordata sul dispositivo."
           ]
         ]
       },
