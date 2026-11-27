@@ -4,7 +4,7 @@ import * as Clipboard from "expo-clipboard";
 import * as ImagePicker from "expo-image-picker";
 import * as ImageManipulator from "expo-image-manipulator";
 import * as DocumentPicker from "expo-document-picker";
-import * as FileSystem from "expo-file-system";
+import * as FileSystem from "expo-file-system/legacy";
 import * as Sharing from "expo-sharing";
 import { Bar, Button, Card, H2, Input, P, Row, Screen, Segments, ask } from "../ui";
 import { t, useLang, getLang } from "../i18n";

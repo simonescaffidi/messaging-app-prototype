@@ -1,7 +1,7 @@
 // Invio file peer-to-peer (stesso protocollo di public/p2pcore.js): il file viaggia cifrato
 // direttamente tra i dispositivi; la chiave AES sta solo nel frammento (#) del link.
 // Il destinatario apre il link in un browser (pagina /app/p2p.html), senza account.
-import * as FileSystem from "expo-file-system";
+import * as FileSystem from "expo-file-system/legacy";
 import { api } from "./api";
 import { ORIGIN } from "./config";
 import { createStore } from "./store";
