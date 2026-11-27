@@ -1,7 +1,7 @@
 // Cassaforte nativa: file, note, password cifrati sul dispositivo con la chiave dati (AES-256-GCM).
 // Il formato di metadati, backup (.securmy) e sync e' IDENTICO alla webapp: gli archivi si
 // scambiano tra web e app.
-import * as FileSystem from "expo-file-system";
+import * as FileSystem from "expo-file-system/legacy";
 import * as Sharing from "expo-sharing";
 import * as DocumentPicker from "expo-document-picker";
 import E2E from "./shared/e2e";
