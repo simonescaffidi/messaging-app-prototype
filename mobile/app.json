@@ -24,7 +24,7 @@
           "audio",
           "remote-notification"
         ],
-        "ITSAppUsesNonExemptEncryption": true
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
